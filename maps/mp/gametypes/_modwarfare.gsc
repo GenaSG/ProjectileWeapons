@@ -170,7 +170,7 @@ init()
 	setDvarDefault( "class_heavygunner_secondary_attachment", "none" );
 	setDvarDefault( "class_heavygunner_perk1", "specialty_specialgrenade" );
 	setDvarDefault( "class_heavygunner_perk2", "specialty_armorvest" );
-	setDvarDefault( "class_heavygunner_perk3", "specialty_bulletpenetration" );
+	setDvarDefault( "class_heavygunner_perk3", "specialty_longersprint" );
 	setDvarDefault( "class_heavygunner_grenade", "concussion_grenade" );
 	setDvarDefault( "class_heavygunner_camo", "camo_none" );
 	setDvarDefault( "class_heavygunner_frags", 1, 0, 4 );
