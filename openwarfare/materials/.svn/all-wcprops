@@ -1,0 +1,335 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn_openwarfare_cod4mw/!svn/ver/2480/materials
+END
+hud_blood_stain_3
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1/materials/hud_blood_stain_3
+END
+hud_blood_stain_4
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1/materials/hud_blood_stain_4
+END
+objpoint_flag_russian
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/777/materials/objpoint_flag_russian
+END
+hud_status_bomb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/414/materials/hud_status_bomb
+END
+allies_custom_logo
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1451/materials/allies_custom_logo
+END
+icon_singleshot
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2369/materials/icon_singleshot
+END
+hud_status_notready
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/45/materials/hud_status_notready
+END
+hud_fznred
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn_openwarfare_cod4mw/!svn/ver/1517/materials/hud_fznred
+END
+compass_waypoint_extraction_zone
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn_openwarfare_cod4mw/!svn/ver/1507/materials/compass_waypoint_extraction_zone
+END
+headicon_props
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2412/materials/headicon_props
+END
+hud_status_vip
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1507/materials/hud_status_vip
+END
+icon_3roundburst
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2369/materials/icon_3roundburst
+END
+sponsor_logo1
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/1186/materials/sponsor_logo1
+END
+sponsor_logo2
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/1186/materials/sponsor_logo2
+END
+icon_redbinder
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2055/materials/icon_redbinder
+END
+icon_vip
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn_openwarfare_cod4mw/!svn/ver/1507/materials/icon_vip
+END
+hud_status_ready
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/45/materials/hud_status_ready
+END
+bleeding
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn_openwarfare_cod4mw/!svn/ver/667/materials/bleeding
+END
+bandaging
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn_openwarfare_cod4mw/!svn/ver/703/materials/bandaging
+END
+health_obj_tx
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/1658/materials/health_obj_tx
+END
+loadingmap
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn_openwarfare_cod4mw/!svn/ver/1864/materials/loadingmap
+END
+icon_unfreeze_beam
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1935/materials/icon_unfreeze_beam
+END
+hud_status_clan
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2241/materials/hud_status_clan
+END
+iceberg_inred
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/1517/materials/iceberg_inred
+END
+objpoint_flag_opfor
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/777/materials/objpoint_flag_opfor
+END
+hp_medium_tex
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/870/materials/hp_medium_tex
+END
+hud_status_marshal
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2234/materials/hud_status_marshal
+END
+iceberg_inner
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/1156/materials/iceberg_inner
+END
+hud_status_snowflake
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/1649/materials/hud_status_snowflake
+END
+hud_status_broadcaster
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/2343/materials/hud_status_broadcaster
+END
+icon_unfreeze_heat
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1935/materials/icon_unfreeze_heat
+END
+jammed
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn_openwarfare_cod4mw/!svn/ver/960/materials/jammed
+END
+clanlogo
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn_openwarfare_cod4mw/!svn/ver/1886/materials/clanlogo
+END
+faction_128_props
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2412/materials/faction_128_props
+END
+icon_snowflake
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1649/materials/icon_snowflake
+END
+objpoint_flag_british
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/777/materials/objpoint_flag_british
+END
+hud_frozen
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn_openwarfare_cod4mw/!svn/ver/1156/materials/hud_frozen
+END
+icon_fullauto
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/2369/materials/icon_fullauto
+END
+death_headshot
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2222/materials/death_headshot
+END
+dogtag
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn_openwarfare_cod4mw/!svn/ver/2480/materials/dogtag
+END
+waypoint_extraction_zone
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/1507/materials/waypoint_extraction_zone
+END
+weapon_knife
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/1612/materials/weapon_knife
+END
+hud_knife_kill
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn_openwarfare_cod4mw/!svn/ver/1/materials/hud_knife_kill
+END
+lb_healthbar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/2343/materials/lb_healthbar
+END
+shield
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn_openwarfare_cod4mw/!svn/ver/1/materials/shield
+END
+openwarfare
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn_openwarfare_cod4mw/!svn/ver/162/materials/openwarfare
+END
+hud_headshot_kill
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/219/materials/hud_headshot_kill
+END
+hud_us_bandages
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/1444/materials/hud_us_bandages
+END
+hud_status_flag
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/777/materials/hud_status_flag
+END
+objpoint_flag_american
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/777/materials/objpoint_flag_american
+END
+hud_healthbar_heart
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/2161/materials/hud_healthbar_heart
+END
+hud_blood_stain_1
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1/materials/hud_blood_stain_1
+END
+axis_custom_logo
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/1451/materials/axis_custom_logo
+END
+camping
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn_openwarfare_cod4mw/!svn/ver/856/materials/camping
+END
+hud_blood_stain_2
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1/materials/hud_blood_stain_2
+END

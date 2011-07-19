@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2481/rulesets/openwarfare/common
+END
+tactical.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn_openwarfare_cod4mw/!svn/ver/2236/rulesets/openwarfare/common/tactical.gsc
+END
+snipersonly.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn_openwarfare_cod4mw/!svn/ver/2479/rulesets/openwarfare/common/snipersonly.gsc
+END
+server.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn_openwarfare_cod4mw/!svn/ver/2479/rulesets/openwarfare/common/server.gsc
+END
+hardcore.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn_openwarfare_cod4mw/!svn/ver/2236/rulesets/openwarfare/common/hardcore.gsc
+END
+common.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn_openwarfare_cod4mw/!svn/ver/1917/rulesets/openwarfare/common/common.gsc
+END
+shotgunsonly.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn_openwarfare_cod4mw/!svn/ver/2479/rulesets/openwarfare/common/shotgunsonly.gsc
+END
+gametypes.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn_openwarfare_cod4mw/!svn/ver/2481/rulesets/openwarfare/common/gametypes.gsc
+END
+gameplay.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn_openwarfare_cod4mw/!svn/ver/2236/rulesets/openwarfare/common/gameplay.gsc
+END
+pistolsonly.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn_openwarfare_cod4mw/!svn/ver/2479/rulesets/openwarfare/common/pistolsonly.gsc
+END

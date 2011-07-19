@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn_openwarfare_cod4mw/!svn/ver/2423/ui_mp/scriptmenus
+END
+changeclass_mw.menu
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/changeclass_mw.menu
+END
+serverinfo.menu
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/serverinfo.menu
+END
+scoreboard.menu
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2218/ui_mp/scriptmenus/scoreboard.menu
+END
+changeclass_opfor_mw.menu
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/changeclass_opfor_mw.menu
+END
+eog_statistics.menu
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/2267/ui_mp/scriptmenus/eog_statistics.menu
+END
+advancedacp.menu
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/advancedacp.menu
+END
+advancedmvs.menu
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/2155/ui_mp/scriptmenus/advancedmvs.menu
+END
+changeclass_marines_mw.menu
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/changeclass_marines_mw.menu
+END
+callvote_buttons.inc
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/callvote_buttons.inc
+END
+changeclass_props.menu
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn_openwarfare_cod4mw/!svn/ver/2423/ui_mp/scriptmenus/changeclass_props.menu
+END
+ow_cac_editor.menu
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn_openwarfare_cod4mw/!svn/ver/2333/ui_mp/scriptmenus/ow_cac_editor.menu
+END
+clientcmd.menu
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/clientcmd.menu
+END
+class.menu
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/class.menu
+END
+callvote.menu
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/callvote.menu
+END
+team_marinesopfor.menu
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn_openwarfare_cod4mw/!svn/ver/2349/ui_mp/scriptmenus/team_marinesopfor.menu
+END
+popup_addfavorite.menu
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/scriptmenus/popup_addfavorite.menu
+END

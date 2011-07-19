@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn_openwarfare_cod4mw/!svn/ver/2482/ui_mp
+END
+controls_multi.menu
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2382/ui_mp/controls_multi.menu
+END
+hud.menu
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn_openwarfare_cod4mw/!svn/ver/2377/ui_mp/hud.menu
+END
+cac_loadout_ingame.inc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/cac_loadout_ingame.inc
+END
+main.menu
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn_openwarfare_cod4mw/!svn/ver/2482/ui_mp/main.menu
+END
+teamicon.inc
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn_openwarfare_cod4mw/!svn/ver/2412/ui_mp/teamicon.inc
+END
+tactical_map.inc
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/tactical_map.inc
+END
+ow_cac_loadout.inc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1917/ui_mp/ow_cac_loadout.inc
+END
+connect.menu
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn_openwarfare_cod4mw/!svn/ver/2147/ui_mp/connect.menu
+END
+cac_ingame.inc
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn_openwarfare_cod4mw/!svn/ver/1989/ui_mp/cac_ingame.inc
+END

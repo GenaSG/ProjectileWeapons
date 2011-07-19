@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn_openwarfare_cod4mw/!svn/ver/2482/packages
+END
+_buildFF.bat
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn_openwarfare_cod4mw/!svn/ver/2392/packages/_buildFF.bat
+END
+_buildPackage.bat
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2392/packages/_buildPackage.bat
+END
+_extras_readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2391/packages/_extras_readme.txt
+END
+_buildCopyFiles.bat
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2392/packages/_buildCopyFiles.bat
+END
+buildDistributionPackages.bat
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn_openwarfare_cod4mw/!svn/ver/2392/packages/buildDistributionPackages.bat
+END
+_buildIWD.bat
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/2394/packages/_buildIWD.bat
+END
+_buildCreateStructure.bat
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/2392/packages/_buildCreateStructure.bat
+END
+_buildCopySourceCode.bat
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2392/packages/_buildCopySourceCode.bat
+END

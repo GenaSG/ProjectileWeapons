@@ -1,0 +1,485 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn_openwarfare_cod4mw/!svn/ver/2481/openwarfare
+END
+_sniperzoom.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_sniperzoom.gsc
+END
+_strategyperiod.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/2412/openwarfare/_strategyperiod.gsc
+END
+_capeditor.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2390/openwarfare/_capeditor.gsc
+END
+_visualmover.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2472/openwarfare/_visualmover.gsc
+END
+_guidcs.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/2297/openwarfare/_guidcs.gsc
+END
+_scorebot.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2331/openwarfare/_scorebot.gsc
+END
+_bodyremoval.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_bodyremoval.gsc
+END
+_registerdvars.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2299/openwarfare/_registerdvars.gsc
+END
+_weaponrangemodifier.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_weaponrangemodifier.gsc
+END
+_anticamping.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_anticamping.gsc
+END
+_rotateifempty.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2419/openwarfare/_rotateifempty.gsc
+END
+_playerdvars.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2343/openwarfare/_playerdvars.gsc
+END
+_bigbrotherbot.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2412/openwarfare/_bigbrotherbot.gsc
+END
+_quickactions.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/1943/openwarfare/_quickactions.gsc
+END
+_disarmexplosives.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2410/openwarfare/_disarmexplosives.gsc
+END
+_bloodsplatters.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_bloodsplatters.gsc
+END
+_thirdperson.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_thirdperson.gsc
+END
+_servercheck.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2341/openwarfare/_servercheck.gsc
+END
+_reservedslots.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2296/openwarfare/_reservedslots.gsc
+END
+_powerrank.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_powerrank.gsc
+END
+_blackscreen.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2314/openwarfare/_blackscreen.gsc
+END
+_players.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2462/openwarfare/_players.gsc
+END
+_clanvsall.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_clanvsall.gsc
+END
+_realtimestats.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2275/openwarfare/_realtimestats.gsc
+END
+_firingmode.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2371/openwarfare/_firingmode.gsc
+END
+_globalinit.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2480/openwarfare/_globalinit.gsc
+END
+_timeout.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2412/openwarfare/_timeout.gsc
+END
+_dogtags.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2280/openwarfare/_dogtags.gsc
+END
+_overtime.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2218/openwarfare/_overtime.gsc
+END
+_teamstatus.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_teamstatus.gsc
+END
+_damageeffect.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/1943/openwarfare/_damageeffect.gsc
+END
+_caceditor.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2332/openwarfare/_caceditor.gsc
+END
+_limitexplosives.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_limitexplosives.gsc
+END
+_binoculars.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_binoculars.gsc
+END
+_fitnesscs.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2221/openwarfare/_fitnesscs.gsc
+END
+_weaponlocationmodifier.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_weaponlocationmodifier.gsc
+END
+_numlives.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2408/openwarfare/_numlives.gsc
+END
+_serverload.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/1962/openwarfare/_serverload.gsc
+END
+_testbots.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2412/openwarfare/_testbots.gsc
+END
+_weapondamagemodifier.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_weapondamagemodifier.gsc
+END
+_healthsystem.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/2412/openwarfare/_healthsystem.gsc
+END
+_resetvariables.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/2481/openwarfare/_resetvariables.gsc
+END
+_eventmanager.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_eventmanager.gsc
+END
+_serverbanners.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_serverbanners.gsc
+END
+_scoresystem.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2374/openwarfare/_scoresystem.gsc
+END
+_weaponjam.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_weaponjam.gsc
+END
+_livebroadcast.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2347/openwarfare/_livebroadcast.gsc
+END
+_sponsors.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_sponsors.gsc
+END
+_rng.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_rng.gsc
+END
+_paindeathsounds.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_paindeathsounds.gsc
+END
+_advancedacp.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2473/openwarfare/_advancedacp.gsc
+END
+_advancedmvs.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2282/openwarfare/_advancedmvs.gsc
+END
+_owbattlechatter.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_owbattlechatter.gsc
+END
+_antibunnyhopping.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_antibunnyhopping.gsc
+END
+_servermessages.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_servermessages.gsc
+END
+_globalchat.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_globalchat.gsc
+END
+_dvarmonitor.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2329/openwarfare/_dvarmonitor.gsc
+END
+_keybinds.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2447/openwarfare/_keybinds.gsc
+END
+_readyupperiod.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2480/openwarfare/_readyupperiod.gsc
+END
+_martyrdom.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2410/openwarfare/_martyrdom.gsc
+END
+_dynamicattachments.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn_openwarfare_cod4mw/!svn/ver/2369/openwarfare/_dynamicattachments.gsc
+END
+_timer.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_timer.gsc
+END
+_weaponweightmodifier.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_weaponweightmodifier.gsc
+END
+_welcomerulesinfo.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_welcomerulesinfo.gsc
+END
+_maprotationcs.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2335/openwarfare/_maprotationcs.gsc
+END
+_rangefinder.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2391/openwarfare/_rangefinder.gsc
+END
+_idlemonitor.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2260/openwarfare/_idlemonitor.gsc
+END
+_virtualranks.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/2479/openwarfare/_virtualranks.gsc
+END
+_stationaryturrets.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_stationaryturrets.gsc
+END
+_objoptions.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2289/openwarfare/_objoptions.gsc
+END
+_tkmonitor.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2412/openwarfare/_tkmonitor.gsc
+END
+_extendedobituaries.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn_openwarfare_cod4mw/!svn/ver/2323/openwarfare/_extendedobituaries.gsc
+END
+_hidescores.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/1972/openwarfare/_hidescores.gsc
+END
+_killingspree.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/2342/openwarfare/_killingspree.gsc
+END
+_rsmonitor.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2182/openwarfare/_rsmonitor.gsc
+END
+_cyclefpslag.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2130/openwarfare/_cyclefpslag.gsc
+END
+_spawnprotection.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/2211/openwarfare/_spawnprotection.gsc
+END
+_utils.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn_openwarfare_cod4mw/!svn/ver/2476/openwarfare/_utils.gsc
+END
+_speedcontrol.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn_openwarfare_cod4mw/!svn/ver/1917/openwarfare/_speedcontrol.gsc
+END
+_daycyclesystem.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/2105/openwarfare/_daycyclesystem.gsc
+END

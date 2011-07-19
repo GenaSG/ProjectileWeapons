@@ -1,0 +1,383 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn_openwarfare_cod4mw/!svn/ver/2483/maps/mp/gametypes
+END
+sd.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2216/maps/mp/gametypes/sd.gsc
+END
+_healthoverlay.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/_healthoverlay.gsc
+END
+gr.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/gr.gsc
+END
+gr.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/gr.txt
+END
+_menus_unranked.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/2412/maps/mp/gametypes/_menus_unranked.gsc
+END
+_globallogic.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/2482/maps/mp/gametypes/_globallogic.gsc
+END
+_persistence.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/2479/maps/mp/gametypes/_persistence.gsc
+END
+ss.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/ss.gsc
+END
+ss.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2372/maps/mp/gametypes/ss.txt
+END
+_rank.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn_openwarfare_cod4mw/!svn/ver/2479/maps/mp/gametypes/_rank.gsc
+END
+dm.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1979/maps/mp/gametypes/dm.gsc
+END
+_gametypes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/_gametypes.txt
+END
+_spectating.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2141/maps/mp/gametypes/_spectating.gsc
+END
+lts.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2205/maps/mp/gametypes/lts.gsc
+END
+_friendicons.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/_friendicons.gsc
+END
+bel.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2229/maps/mp/gametypes/bel.gsc
+END
+lts.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/1972/maps/mp/gametypes/lts.txt
+END
+bel.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2218/maps/mp/gametypes/bel.txt
+END
+_weapons.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn_openwarfare_cod4mw/!svn/ver/2470/maps/mp/gametypes/_weapons.gsc
+END
+_dev.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2203/maps/mp/gametypes/_dev.gsc
+END
+_hud.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/_hud.gsc
+END
+_gameobjects.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/_gameobjects.gsc
+END
+_hud_message.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn_openwarfare_cod4mw/!svn/ver/2374/maps/mp/gametypes/_hud_message.gsc
+END
+_menus.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2412/maps/mp/gametypes/_menus.gsc
+END
+ass.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2360/maps/mp/gametypes/ass.gsc
+END
+ass.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/1507/maps/mp/gametypes/ass.txt
+END
+lms.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2460/maps/mp/gametypes/lms.gsc
+END
+lms.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/1972/maps/mp/gametypes/lms.txt
+END
+_class.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2479/maps/mp/gametypes/_class.gsc
+END
+_hardpoints.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2219/maps/mp/gametypes/_hardpoints.gsc
+END
+ctf.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/ctf.gsc
+END
+_hud_util.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/2202/maps/mp/gametypes/_hud_util.gsc
+END
+ctf.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/740/maps/mp/gametypes/ctf.txt
+END
+ftag.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2403/maps/mp/gametypes/ftag.gsc
+END
+_scoreboard.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2412/maps/mp/gametypes/_scoreboard.gsc
+END
+ftag.txt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/1649/maps/mp/gametypes/ftag.txt
+END
+_modwarfare.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/2483/maps/mp/gametypes/_modwarfare.gsc
+END
+_serversettings.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/2096/maps/mp/gametypes/_serversettings.gsc
+END
+hns.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2443/maps/mp/gametypes/hns.gsc
+END
+hns.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2412/maps/mp/gametypes/hns.txt
+END
+_class_unranked.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/2239/maps/mp/gametypes/_class_unranked.gsc
+END
+oitc.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2460/maps/mp/gametypes/oitc.gsc
+END
+oitc.txt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2374/maps/mp/gametypes/oitc.txt
+END
+sab.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2118/maps/mp/gametypes/sab.gsc
+END
+koth.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/koth.gsc
+END
+_spawnlogic.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/_spawnlogic.gsc
+END
+re.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2259/maps/mp/gametypes/re.gsc
+END
+_teams.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn_openwarfare_cod4mw/!svn/ver/2148/maps/mp/gametypes/_teams.gsc
+END
+re.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2055/maps/mp/gametypes/re.txt
+END
+vg.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2472/maps/mp/gametypes/vg.gsc
+END
+vg.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2291/maps/mp/gametypes/vg.txt
+END
+dom.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2118/maps/mp/gametypes/dom.gsc
+END
+_battlechatter_mp.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/_battlechatter_mp.gsc
+END
+_tweakables.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn_openwarfare_cod4mw/!svn/ver/1998/maps/mp/gametypes/_tweakables.gsc
+END
+_damagefeedback.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/_damagefeedback.gsc
+END
+war.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/1917/maps/mp/gametypes/war.gsc
+END
+ch.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/ch.gsc
+END
+tgr.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/tgr.gsc
+END
+gg.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/2380/maps/mp/gametypes/gg.gsc
+END
+ch.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn_openwarfare_cod4mw/!svn/ver/929/maps/mp/gametypes/ch.txt
+END
+tgr.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn_openwarfare_cod4mw/!svn/ver/2480/maps/mp/gametypes/tgr.txt
+END
+gg.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn_openwarfare_cod4mw/!svn/ver/1612/maps/mp/gametypes/gg.txt
+END
+_missions.gsc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn_openwarfare_cod4mw/!svn/ver/2479/maps/mp/gametypes/_missions.gsc
+END
