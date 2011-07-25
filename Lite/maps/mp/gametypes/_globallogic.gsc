@@ -4082,7 +4082,7 @@ removePlayerOnDisconnect()
 
 isHeadShot( sWeapon, sHitLoc, sMeansOfDeath )
 {
-	return (sHitLoc == "head" || sHitLoc == "helmet") && sMeansOfDeath != "MOD_MELEE" && sMeansOfDeath != "MOD_IMPACT" && !isMG( sWeapon );
+	return (sHitLoc == "head" || sHitLoc == "helmet") && sMeansOfDeath != "MOD_MELEE";
 }
 
 
@@ -4118,9 +4118,17 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 		self.attackers = [];
 		self.attackerData = [];
 	}
-
+	
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
+		iDamage = 150;
+	}	
+	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	{
+		sMeansOfDeath = "MOD_RIFLE_BULLET";
+	}
+
 	
 	if ( maps\mp\gametypes\_tweakables::getTweakableValue( "game", "onlyheadshots" ) )
 	{
@@ -4487,8 +4495,17 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 		self.lastStandParams = undefined;
 	}
 
-	if( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	
+	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
+		iDamage = 150;
+	}	
+	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	{
+		sMeansOfDeath = "MOD_RIFLE_BULLET";
+	}
+
 	
 	if( attacker.classname == "script_vehicle" && isDefined( attacker.owner ) )
 		attacker = attacker.owner;
@@ -5160,7 +5177,7 @@ mayDoLastStand( sWeapon, sMeansOfDeath, sHitLoc )
 	if ( sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_FALLING" )
 		return false;
 	
-	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ))
 		return false;
 	
 	return true;
@@ -5541,5 +5558,3 @@ getMostKilled()
 	
 	return mostKilled;
 }
-
-
