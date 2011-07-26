@@ -4476,7 +4476,7 @@ removePlayerOnDisconnect()
 
 isHeadShot( sWeapon, sHitLoc, sMeansOfDeath )
 {
-	return (sHitLoc == "head" || sHitLoc == "helmet") && sMeansOfDeath != "MOD_MELEE";
+	return (sHitLoc == "head" || sHitLoc == "helmet");
 }
 
 
