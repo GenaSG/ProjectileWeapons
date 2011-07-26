@@ -5,7 +5,8 @@
 \deftab560
 \pard\tx560\pardeftab560\ql\qnatural\pardirnatural
 
-\f0\fs22 \cf0 \CocoaLigature0 ./maps/mp/gametypes/_globallogic.gsc\
+\f0\fs22 \cf0 \CocoaLigature0 //headshots and correct kill icons\
+./maps/mp/gametypes/_globallogic.gsc\
 isHeadShot( sWeapon, sHitLoc, sMeansOfDeath )\
 \{\
 	return (sHitLoc == "head" || sHitLoc == "helmet") && sMeansOfDeath != "MOD_MELEE";\
@@ -21,4 +22,13 @@ if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )\
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )\
 	\{\
 		sMeansOfDeath = "MOD_RIFLE_BULLET";\
-	\}}
+	\}\
+\
+//Stopping power perk\
+isPrimaryDamage( meansofdeath )\
+\{\
+	// including pistols as well since sometimes they share ammo\
+	if( meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_IMPACT" )\
+		return true;\
+	return false;\
+\}}
