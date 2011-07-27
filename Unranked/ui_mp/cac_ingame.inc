@@ -671,12 +671,12 @@
 		IMPROVED_POPUP_SETUP_ONOPEN( "ocd_popup_cac_perk2", 6, (CHOICE_X( 5 )-2), (CHOICE_Y( 5 )+22), ;, execnow "set "UI_FOCUSFIRST" "REF_BULLETDAMAGE"; set ui_inside_popup perk2";, 1 )
 		onClose{ execnow "set ui_inside_popup 0"; }
 		LOCAL_PERK_INFO_WINDOW( "ui_perk_highlighted" )
-		//LOCAL_PERK_ITEM( 1, "@PERKS_STOPPING_POWER", "loadout_perk2", REF_BULLETDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 1, "@PERKS_JUGGERNAUT", "loadout_perk2", REF_ARMORVEST, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 2, "@PERKS_SLEIGHT_OF_HAND", "loadout_perk2", REF_FASTRELOAD, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 3, "@PERKS_DOUBLE_TAP", "loadout_perk2", REF_ROF, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 4, "@PERKS_UAV_JAMMER", "loadout_perk2", REF_GPSJAMMER, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 5, "@PERKS_SONIC_BOOM", "loadout_perk2", REF_EXPLOSIVEDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 1, "@PERKS_STOPPING_POWER", "loadout_perk2", REF_BULLETDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 2, "@PERKS_JUGGERNAUT", "loadout_perk2", REF_ARMORVEST, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 3, "@PERKS_SLEIGHT_OF_HAND", "loadout_perk2", REF_FASTRELOAD, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 4, "@PERKS_DOUBLE_TAP", "loadout_perk2", REF_ROF, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 5, "@PERKS_UAV_JAMMER", "loadout_perk2", REF_GPSJAMMER, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 6, "@PERKS_SONIC_BOOM", "loadout_perk2", REF_EXPLOSIVEDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
 	}
 				
 	// perk3 selection for primary weapon popup menu
@@ -689,8 +689,8 @@
 		LOCAL_PERK_ITEM( 2, "@PERKS_STEADY_AIM", "loadout_perk3", REF_BULLETACCURACY, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 3, "@PERKS_LAST_STAND", "loadout_perk3", REF_PISTOLDEATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 4, "@PERKS_MARTYRDOM", "loadout_perk3", REF_GRENADEPULLDEATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		//LOCAL_PERK_ITEM( 5, "@PERKS_DEEP_IMPACT", "loadout_perk3", REF_BULLETPENETRATION, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 5, "@PERKS_IRON_LUNGS", "loadout_perk3", REF_HOLDBREATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 6, "@PERKS_DEAD_SILENCE", "loadout_perk3", REF_QUIETER, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 7, "@PERKS_EAVESDROP", "loadout_perk3", REF_PARABOLIC, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 5, "@PERKS_DEEP_IMPACT", "loadout_perk3", REF_BULLETPENETRATION, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 6, "@PERKS_IRON_LUNGS", "loadout_perk3", REF_HOLDBREATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 7, "@PERKS_DEAD_SILENCE", "loadout_perk3", REF_QUIETER, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 8, "@PERKS_EAVESDROP", "loadout_perk3", REF_PARABOLIC, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 	}

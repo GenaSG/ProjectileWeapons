@@ -112,8 +112,8 @@ init()
 	setServerDvarDefault( "perk_allow_specialty_explosivedamage", 1, 0, 1 );
 	setServerDvarDefault( "perk_allow_specialty_pistoldeath", 1, 0, 1 );
 	setServerDvarDefault( "perk_allow_specialty_grenadepulldeath", 1, 0, 1 );
-	setServerDvarDefault( "perk_allow_specialty_bulletdamage", 0, 0, 1 );
-	setServerDvarDefault( "perk_allow_specialty_bulletpenetration", 0, 0, 1 );
+	setServerDvarDefault( "perk_allow_specialty_bulletdamage", 1, 0, 1 );
+	setServerDvarDefault( "perk_allow_specialty_bulletpenetration", 1, 0, 1 );
 	setServerDvarDefault( "perk_allow_specialty_bulletaccuracy", 1, 0, 1 );
 	setServerDvarDefault( "perk_allow_specialty_rof", 1, 0, 1 );
 	setServerDvarDefault( "perk_allow_specialty_fastreload", 1, 0, 1 );
@@ -143,7 +143,7 @@ init()
 	setDvarDefault( "class_assault_secondary", "beretta" );
 	setDvarDefault( "class_assault_secondary_attachment", "none" );
 	setDvarDefault( "class_assault_perk1", "specialty_null" );
-	setDvarDefault( "class_assault_perk2", "specialty_explosivedamage" );
+	setDvarDefault( "class_assault_perk2", "specialty_bulletdamage" );
 	setDvarDefault( "class_assault_perk3", "specialty_longersprint" );
 	setDvarDefault( "class_assault_grenade", "concussion_grenade" );
 	setDvarDefault( "class_assault_camo", "camo_none" );
@@ -170,7 +170,7 @@ init()
 	setDvarDefault( "class_heavygunner_secondary_attachment", "none" );
 	setDvarDefault( "class_heavygunner_perk1", "specialty_specialgrenade" );
 	setDvarDefault( "class_heavygunner_perk2", "specialty_armorvest" );
-	setDvarDefault( "class_heavygunner_perk3", "specialty_longersprint" );
+	setDvarDefault( "class_heavygunner_perk3", "specialty_bulletpenetration" );
 	setDvarDefault( "class_heavygunner_grenade", "concussion_grenade" );
 	setDvarDefault( "class_heavygunner_camo", "camo_none" );
 	setDvarDefault( "class_heavygunner_frags", 1, 0, 4 );
@@ -195,8 +195,8 @@ init()
 	setDvarDefault( "class_sniper_secondary", "beretta" );
 	setDvarDefault( "class_sniper_secondary_attachment", "silencer" );
 	setDvarDefault( "class_sniper_perk1", "specialty_specialgrenade" );
-	setDvarDefault( "class_sniper_perk2", "specialty_explosivedamage" );
-	setDvarDefault( "class_sniper_perk3", "specialty_quieter" );
+	setDvarDefault( "class_sniper_perk2", "specialty_bulletdamage" );
+	setDvarDefault( "class_sniper_perk3", "specialty_bulletpenetration" );
 	setDvarDefault( "class_sniper_grenade", "flash_grenade" );
 	setDvarDefault( "class_sniper_camo", "camo_none" );
 	setDvarDefault( "class_sniper_frags", 1, 0, 4 );
