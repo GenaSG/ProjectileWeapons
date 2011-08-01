@@ -561,10 +561,12 @@ spawnPlayer()
 	self.archivetime = 0;
 	self.psoffsettime = 0;
 	self.statusicon = "";
-	if ( getDvarInt( "scr_csmode" ) > 0 )
-		self.maxhealth = getDvarInt( "scr_csmode" );
+	if ( level.hardcoreMode )
+		self.maxhealth = 30;
+	else if ( level.oldschool )
+		self.maxhealth = 200;
 	else
-		self.maxhealth = maps\mp\gametypes\_tweakables::getTweakableValue( "player", "maxhealth" );
+		self.maxhealth = 100;
 	self.health = self.maxhealth;
 	self.friendlydamage = undefined;
 	self.hasSpawned = true;
