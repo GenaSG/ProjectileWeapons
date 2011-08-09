@@ -4,8 +4,10 @@
 
 init()
 {
+	//ProjectileWeapons mod
 	thread maps\mp\gametypes\_wdrmod::loadWdrMod();
 	thread maps\mp\gametypes\_tweakables::wdrModTweaks();
+	//
 	// hack to allow maps with no scripts to run correctly
 	if ( !isDefined( level.tweakablesInitialized ) )
 		maps\mp\gametypes\_tweakables::init();

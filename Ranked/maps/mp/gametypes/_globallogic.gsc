@@ -4,6 +4,10 @@
 
 init()
 {
+	//ProjectileWeapons mod
+	thread maps\mp\gametypes\_wdrmod::loadWdrMod();
+	thread maps\mp\gametypes\_tweakables::wdrModTweaks();
+	//
 	// hack to allow maps with no scripts to run correctly
 	if ( !isDefined( level.tweakablesInitialized ) )
 		maps\mp\gametypes\_tweakables::init();
@@ -4430,6 +4434,7 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
 		sMeansOfDeath = "MOD_RIFLE_BULLET";
+		iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
 	}
 	
 	// explosive barrel/car detection
