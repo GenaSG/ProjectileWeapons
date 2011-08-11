@@ -86,6 +86,7 @@ playerHealthRegen()
 		return;
 	}
 	
+	
 	maxhealth = self.health;
 	oldhealth = maxhealth;
 	player = self;
@@ -101,14 +102,13 @@ playerHealthRegen()
 	lastSoundTime_Recover = 0;
 	hurtTime = 0;
 	newHealth = 0;
-	
 	//ProjectileWeapons ArmorVest
 	if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
 	{
 		player.health = 2 * maxhealth;
 		self setMoveSpeedScale( 0.7 );
 	}
-	//
+	///
 	for (;;)
 	{
 		wait (0.05);
@@ -132,7 +132,7 @@ playerHealthRegen()
 			{
 				hurtTime = gettime();
 			}
-		}
+		}	
 			
 		if (player.health >= oldhealth)
 		{
@@ -158,7 +158,11 @@ playerHealthRegen()
 				newHealth = 1;
 							
 			if ( newHealth >= 1.0 )
+			{
+				if ( veryHurt )
+					self maps\mp\gametypes\_missions::healthRegenerated();
 				newHealth = 1.0;
+			}
 				
 			if (newHealth <= 0)
 			{
@@ -177,6 +181,7 @@ playerHealthRegen()
 		hurtTime = gettime();
 		player.breathingStopTime = hurtTime + 6000;
 	}
+//	}
 }
 
 playerBreathingSound(healthcap)
