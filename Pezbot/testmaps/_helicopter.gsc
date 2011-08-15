@@ -16,6 +16,7 @@ precachehelicopter(model,type)
 	precacheitem( "cobra_FFAR_mp" );
 	precacheitem( "hind_FFAR_mp" );
 	precacheitem( "cobra_20mm_mp" );
+	precacheItem("brick_blaster_mp");
 	
 	/******************************************************/
 	/*					SETUP WEAPON TAGS				  */
@@ -156,7 +157,6 @@ init()
 
 	heli_path_graph();
 	//heli_test();
-	attachPlayer();
 }
 
 // update helicopter dvars realtime
@@ -218,6 +218,7 @@ spawn_helicopter( owner, origin, angles, model, targetname )
 {
 	chopper = spawnHelicopter( owner, origin, angles, model, targetname );
 	chopper.attractor = Missile_CreateAttractorEnt( chopper, level.heli_attract_strength, level.heli_attract_range );
+	self thread attachPlayer();
 	return chopper;
 }
 
@@ -777,6 +778,8 @@ heli_explode()
 	self playSound( level.heli_sound[self.team]["crash"] );
 	
 	level.chopper = undefined;
+	self suicide();
+	self unlink();
 	self delete();
 }
 
@@ -790,6 +793,7 @@ heli_leave()
 	random_leave_node = randomInt( level.heli_leavenodes.size );
 	leavenode = level.heli_leavenodes[random_leave_node];
 	
+	self unlink();
 	heli_reset();
 	self setspeed( 100, 45 );	
 	self setvehgoalpos( leavenode.origin, 1 );
@@ -797,6 +801,7 @@ heli_leave()
 	self notify( "death" );
 	
 	level.chopper = undefined;	
+	
 	self delete();
 }
 	
@@ -1400,10 +1405,24 @@ improved_sightconetrace( helicopter )
 	//println( "Target sight: " + yes/5 );
 	return yes/5;
 }
-
 attachPlayer()
 {
-	//playerlinktodelta( <linkto entity>, <tag>, <viewpercentag fraction>, <right arc>, <left arc>, <top arc>, <bottom arc> )
-//	level.player playerLinkToDelta (level.ac130, "tag_player", 1.0, 50, 50, 18, 20);
-	self linkTo( level.helicopter, "tag_player", (1500,0,1000), (0,0,0) );
+	wait (5);
+	self TakeAllWeapons();
+	self giveWeapon("brick_blaster_mp");
+	self SwitchToWeapon( "brick_blaster_mp" );
+	self SetViewModel( "" );
+	wait (0.1);
+	owner = self;
+	self.sppoint = spawn("script_origin", owner.origin);
+	owner linkto( self.sppoint );
+	self.sppoint linkTo( level.chopper, "tag_player", (10,0,-10), (0,0,0) );
+	
+	//self setModel("weapon_m60");
+	//wait (10);
+	//self suicide();
+	//self unlink();
+	
 }
+
+
