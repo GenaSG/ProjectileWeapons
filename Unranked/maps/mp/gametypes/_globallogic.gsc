@@ -566,11 +566,7 @@ spawnPlayer()
 	self.psoffsettime = 0;
 	self.statusicon = "";
 	if ( level.hardcoreMode )
-    {
 		self.maxhealth = 30;
-		//ProjectileWeapons
-		setDvar( "jump_height", 0 );
-    }
 	else if ( level.oldschool )
 		self.maxhealth = 200;
 	else
