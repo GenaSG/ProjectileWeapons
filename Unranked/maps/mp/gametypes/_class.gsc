@@ -413,66 +413,22 @@ cac_modified_damage( victim, attacker, damage, meansofdeath )
 	===============================*/
 	
 	// if attacker has bullet damage then increase bullet damage
-	if( attacker cac_hasSpecialty( "specialty_bulletdamage" ) && isPrimaryDamage( meansofdeath ) )
-	{
-		// if victim has armor then do not change damage, it is cancelled out, else damage is increased
-
-		if( isdefined( victim ) && isPlayer( victim ) && victim cac_hasSpecialty( "specialty_armorvest" ) )
-		{
-			final_damage = old_damage;
-			/#
-			if ( getdvarint("scr_perkdebug") )
-				println( "Perk/> " + victim.name + "'s armor countered " + attacker.name + "'s increased bullet damage" );
-			#/
-		}
-		else
-		{
-			final_damage = damage*(100+level.cac_bulletdamage_data)/100;
-			/#
-			if ( getdvarint("scr_perkdebug") )
-				println( "Perk/> " + attacker.name + "'s bullet damage did extra damage to " + victim.name );
-			#/
-		}
-	}
-	else if( attacker cac_hasSpecialty( "specialty_explosivedamage" ) && isExplosiveDamage( meansofdeath ) )
-	{
-		// if victim has armor then do not change damage, it is cancelled out, else damage is increased
-
-		if( isdefined( victim ) && isPlayer( victim ) && victim cac_hasSpecialty( "specialty_armorvest" ) )
-		{
-			final_damage = old_damage;
-			/#
-			if ( getdvarint("scr_perkdebug") )
-				println( "Perk/> " + victim.name + "'s armor countered " + attacker.name + "'s increased explosive damage" );
-			#/
-		}
-		else
-		{
-			final_damage = damage*(100+level.cac_explosivedamage_data)/100;
-			/#
-			if ( getdvarint("scr_perkdebug") )
-				println( "Perk/> " + attacker.name + "'s explosive damage did extra damage to " + victim.name );
-			#/
-		}
-	}
-	else
-	{	
-		// if attacker has no bullet damage then check if victim has armor
-		// if victim has armor then less damage is taken, else damage unchanged
-		
-		if( isdefined( victim ) && isPlayer( victim ) && victim cac_hasSpecialty( "specialty_armorvest" ) )
-		{
-			final_damage = old_damage*(level.cac_armorvest_data/100);
-			/#
-			if ( getdvarint("scr_perkdebug") )
-				println( "Perk/> " + victim.name + "'s armor decreased " + attacker.name + "'s damage" );
-			#/
-		}
-		else
-		{
-			final_damage = old_damage;
-		}	
-	}
+    if( attacker cac_hasSpecialty( "specialty_bulletdamage" ) && isPrimaryDamage( meansofdeath ) )
+    {
+        final_damage = damage*(100+level.cac_bulletdamage_data)/100;
+    /#
+        if ( getdvarint("scr_perkdebug") )
+        println( "Perk/> " + attacker.name + "'s bullet damage did extra damage to " + victim.name );
+    #/
+    }
+    else if( attacker cac_hasSpecialty( "specialty_explosivedamage" ) && isExplosiveDamage( meansofdeath ) )
+    {
+        final_damage = damage*(100+level.cac_explosivedamage_data)/100;
+    /#
+        if ( getdvarint("scr_perkdebug") )
+        println( "Perk/> " + attacker.name + "'s explosive damage did extra damage to " + victim.name );
+    #/
+    }
 	
 	// debug
 	/#
