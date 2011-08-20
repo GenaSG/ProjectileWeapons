@@ -4128,7 +4128,7 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		iDamage = 150;
+		iDamage = 10 * iDamage;
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
@@ -4142,7 +4142,7 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 		if ( sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET" )
 			return;
 		else if ( sMeansOfDeath == "MOD_HEAD_SHOT" )
-			iDamage = 150;
+			iDamage = 10 * iDamage;
 	}
 
 	// explosive barrel/car detection
@@ -4506,7 +4506,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		iDamage = 150;
+		iDamage = 10 * iDamage;
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{

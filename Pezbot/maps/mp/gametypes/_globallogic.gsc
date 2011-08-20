@@ -4527,7 +4527,7 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		iDamage = 150;
+		iDamage = 10 * iDamage;
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
@@ -4910,7 +4910,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		iDamage = 150;
+		iDamage = 10 * iDamage;
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
