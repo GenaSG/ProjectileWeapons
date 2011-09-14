@@ -4429,7 +4429,9 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		iDamage = 10 * iDamage;
+        time = 5;
+        self shellShock( "concussion_grenade_mp", time );
+        iDamage = 2 * iDamage;
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
