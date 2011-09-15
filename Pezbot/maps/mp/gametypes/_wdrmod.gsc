@@ -1,3 +1,7 @@
+init()
+{
+    thread loadWdrMod();
+}
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
 	if ( sMeansOfDeath != "MOD_MELEE" ) 
@@ -7,15 +11,49 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 		{
 			rangeMod = getDvarfloat( level.wdr[ sWeapon ] );
 			targetDist = distance(eAttacker.origin, self.origin)* 0.0254;
-			iDamage = iDamage/(1+rangeMod*targetDist);
-		}
+			//iDamage = iDamage/(1+rangeMod*targetDist);
+            //ProjectileWeapons ARMOR
+            if(sHitLoc == "torso_upper" || sHitLoc == "torso_lower")
+            {
+                if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
+                {
+                    iDamage = 0.5 * iDamage/(1+rangeMod*targetDist);
+                }
+                else
+                {
+                    iDamage = 0.75 * iDamage/(1+rangeMod*targetDist);
+                }
+            }
+            else if(sHitLoc == "head" || sHitLoc == "helmet")
+            {
+                time = 5;
+                thread hitShellShock(iDamage);
+                iDamage = 2 * iDamage/(1+rangeMod*targetDist);
+            }
+            else
+            {
+                iDamage = iDamage/(1+rangeMod*targetDist);
+            }
+            if(iDamage >= 60)
+            {
+               thread hitShellShock(iDamage); 
+            }
+        }
+
 	}
 	
 	return int(iDamage);
 }
 
+hitShellShock(iDamage)
+{
+     time = iDamage * 0.1;   
+     self shellShock( "frag_grenade_mp", time );
+}
+
 loadWdrMod()
 {
+     
 	// Load all the weapons with their corresponding dvar controlling it
 	level.wdr = [];
 

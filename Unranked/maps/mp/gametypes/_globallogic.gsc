@@ -5,7 +5,7 @@
 init()
 {
 	//ProjectileWeapons mod
-	thread maps\mp\gametypes\_wdrmod::loadWdrMod();
+	thread maps\mp\gametypes\_wdrmod::init();
 	thread maps\mp\gametypes\_tweakables::wdrModTweaks();
 	//
 	// hack to allow maps with no scripts to run correctly
@@ -4125,18 +4125,16 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 		self.attackerData = [];
 	}
 	
-	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
-	{
-		sMeansOfDeath = "MOD_HEAD_SHOT";
-        time = 5;
-        self shellShock( "concussion_grenade_mp", time );
-        iDamage = 2 * iDamage;
-	}	
-	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
-	{
-		sMeansOfDeath = "MOD_RIFLE_BULLET";
-		iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
-	}
+    if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+    {
+        sMeansOfDeath = "MOD_HEAD_SHOT";
+        iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
+    }	
+    else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
+    {
+        sMeansOfDeath = "MOD_RIFLE_BULLET";
+        iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
+    }
 
 	
 	if ( maps\mp\gametypes\_tweakables::getTweakableValue( "game", "onlyheadshots" ) )

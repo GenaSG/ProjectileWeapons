@@ -5,7 +5,7 @@
 init()
 {
 	//ProjectileWeapons mod
-	thread maps\mp\gametypes\_wdrmod::loadWdrMod();
+	thread maps\mp\gametypes\_wdrmod::init();
 	thread maps\mp\gametypes\_tweakables::wdrModTweaks();
 	//
 	// hack to allow maps with no scripts to run correctly
@@ -4503,12 +4503,6 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 	if ( isDefined( eAttacker ) && isPlayer( eAttacker ) && isDefined( eAttacker.canDoCombat ) && !eAttacker.canDoCombat )
 		return;
 	
-	//if ( level.scr_wrm_enabled == 1 ) 
-	//{
-	//	iDamage = maps\mp\gametypes\_weaponrangemodifier::wrmDamage( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
-	//	if ( iDamage == 0 )
-	//			return;			
-	//}
 	
 	prof_begin( "Callback_PlayerDamage flags/tweaks" );
 	
@@ -4527,14 +4521,12 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		time = 5;
-        self shellShock( "concussion_grenade_mp", time );
-        iDamage = 2 * iDamage;
+        iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
 		sMeansOfDeath = "MOD_RIFLE_BULLET";
-		iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
+        iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
 	}
 	
 	// explosive barrel/car detection

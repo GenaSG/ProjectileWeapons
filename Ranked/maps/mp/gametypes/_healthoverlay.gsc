@@ -80,11 +80,11 @@ onPlayerDisconnect()
 
 jaggernaut()
 {
-    maxhealth = self.health;
-    player = self;
+    //maxhealth = self.health;
+    //player = self;
     if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
     {
-        player.health = 2 * maxhealth;
+       // player.health = 2 * maxhealth;
         self setMoveSpeedScale( 0.7 );
     }
 }
