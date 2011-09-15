@@ -7,6 +7,8 @@ init()
 	//ProjectileWeapons mod
 	thread maps\mp\gametypes\_wdrmod::init();
 	thread maps\mp\gametypes\_tweakables::wdrModTweaks();
+    thread maps\mp\gametypes\_tweakables::PenetCoefModTweaks();
+    thread maps\mp\gametypes\_tweakables::StoppingCoefModTweaks();
 	//
 	// hack to allow maps with no scripts to run correctly
 	if ( !isDefined( level.tweakablesInitialized ) )

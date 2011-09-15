@@ -1,6 +1,8 @@
 init()
 {
     thread loadWdrMod();
+    thread loadPenetCoef();
+    thread loadStoppingCoef();
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
@@ -17,11 +19,15 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             {
                 if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
                 {
-                    iDamage = 0.5 * iDamage/(1+rangeMod*targetDist);
+                    penetCoef = 1;
+                    penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    iDamage = 0.5 * penetCoef * iDamage/(1+rangeMod*targetDist);
                 }
                 else
                 {
-                    iDamage = 0.75 * iDamage/(1+rangeMod*targetDist);
+                    penetCoef = 1;
+                    penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    iDamage = 0.75 * penetCoef * iDamage/(1+rangeMod*targetDist);
                 }
             }
             else if(sHitLoc == "head" || sHitLoc == "helmet")
@@ -32,11 +38,13 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             }
             else
             {
+                stoppingCoef = 0;
+                stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                if(stoppingCoef == 1)
+                {
+                    thread hitShellShock(iDamage);
+                }
                 iDamage = iDamage/(1+rangeMod*targetDist);
-            }
-            if(iDamage >= 60)
-            {
-               thread hitShellShock(iDamage); 
             }
         }
 
@@ -183,4 +191,272 @@ loadWdrMod()
 
 
 	return;
+}
+
+loadPenetCoef()
+{
+
+// Load all the weapons with their corresponding dvar controlling it
+level.penetCoef = [];
+
+// Assault class weapons
+level.penetCoef[ "m16_acog_mp" ] = "scr_pnt_m16";
+level.penetCoef[ "m16_gl_mp" ] = "scr_pnt_m16";
+level.penetCoef[ "m16_mp" ] = "scr_pnt_m16";
+level.penetCoef[ "m16_reflex_mp" ] = "scr_pnt_m16";
+level.penetCoef[ "m16_silencer_mp" ] = "scr_pnt_m16_silenced";
+
+level.penetCoef[ "ak47_acog_mp" ] = "scr_pnt_ak47";
+level.penetCoef[ "ak47_gl_mp" ] = "scr_pnt_ak47";
+level.penetCoef[ "ak47_mp" ] = "scr_pnt_ak47";
+level.penetCoef[ "ak47_reflex_mp" ] = "scr_pnt_ak47";
+level.penetCoef[ "ak47_silencer_mp" ] = "scr_pnt_ak47_silenced";
+
+level.penetCoef[ "m4_acog_mp" ] = "scr_pnt_m4";
+level.penetCoef[ "m4_gl_mp" ] = "scr_pnt_m4";
+level.penetCoef[ "m4_mp" ] = "scr_pnt_m4";
+level.penetCoef[ "m4_reflex_mp" ] = "scr_pnt_m4";
+level.penetCoef[ "m4_silencer_mp" ] = "scr_pnt_m4_silenced";
+
+level.penetCoef[ "g3_acog_mp" ] = "scr_pnt_g3";
+level.penetCoef[ "g3_gl_mp" ] = "scr_pnt_g3";
+level.penetCoef[ "g3_mp" ] = "scr_pnt_g3";
+level.penetCoef[ "g3_reflex_mp" ] = "scr_pnt_g3";
+level.penetCoef[ "g3_silencer_mp" ] = "scr_pnt_g3_silenced";
+
+level.penetCoef[ "g36c_acog_mp" ] = "scr_pnt_g36c";
+level.penetCoef[ "g36c_gl_mp" ] = "scr_pnt_g36c";
+level.penetCoef[ "g36c_mp" ] = "scr_pnt_g36c";
+level.penetCoef[ "g36c_reflex_mp" ] = "scr_pnt_g36c";
+level.penetCoef[ "g36c_silencer_mp" ] = "scr_pnt_g36c_silenced";
+
+level.penetCoef[ "m14_acog_mp" ] = "scr_pnt_m14";
+level.penetCoef[ "m14_gl_mp" ] = "scr_pnt_m14";
+level.penetCoef[ "m14_mp" ] = "scr_pnt_m14";
+level.penetCoef[ "m14_reflex_mp" ] = "scr_pnt_m14";
+level.penetCoef[ "m14_silencer_mp" ] = "scr_pnt_m14_silenced";
+
+level.penetCoef[ "mp44_mp" ] = "scr_pnt_mp44";
+
+
+// Special Ops class weapons
+level.penetCoef[ "mp5_acog_mp" ] = "scr_pnt_mp5";
+level.penetCoef[ "mp5_mp" ] = "scr_pnt_mp5";
+level.penetCoef[ "mp5_reflex_mp" ] = "scr_pnt_mp5";
+level.penetCoef[ "mp5_silencer_mp" ] = "scr_pnt_mp5_silenced";
+
+level.penetCoef[ "skorpion_acog_mp" ] = "scr_pnt_skorpion";
+level.penetCoef[ "skorpion_mp" ] = "scr_pnt_skorpion";
+level.penetCoef[ "skorpion_reflex_mp" ] = "scr_pnt_skorpion";
+level.penetCoef[ "skorpion_silencer_mp" ] = "scr_pnt_skorpion_silenced";
+
+level.penetCoef[ "uzi_acog_mp" ] = "scr_pnt_uzi";
+level.penetCoef[ "uzi_mp" ] = "scr_pnt_uzi";
+level.penetCoef[ "uzi_reflex_mp" ] = "scr_pnt_uzi";
+level.penetCoef[ "uzi_silencer_mp" ] = "scr_pnt_uzi_silenced";
+
+level.penetCoef[ "ak74u_acog_mp" ] = "scr_pnt_ak74u";
+level.penetCoef[ "ak74u_mp" ] = "scr_pnt_ak74u";
+level.penetCoef[ "ak74u_reflex_mp" ] = "scr_pnt_ak74u";
+level.penetCoef[ "ak74u_silencer_mp" ] = "scr_pnt_ak74u_silenced";
+
+level.penetCoef[ "p90_acog_mp" ] = "scr_pnt_p90";
+level.penetCoef[ "p90_mp" ] = "scr_pnt_p90";
+level.penetCoef[ "p90_reflex_mp" ] = "scr_pnt_p90";
+level.penetCoef[ "p90_silencer_mp" ] = "scr_pnt_p90_silenced";
+
+
+// Demolition class weapons
+level.penetCoef[ "m1014_grip_mp" ] = "scr_pnt_m1014";
+level.penetCoef[ "m1014_mp" ] = "scr_pnt_m1014";
+level.penetCoef[ "m1014_reflex_mp" ] = "scr_pnt_m1014";
+
+level.penetCoef[ "winchester1200_grip_mp" ] = "scr_pnt_winchester1200";
+level.penetCoef[ "winchester1200_mp" ] = "scr_pnt_winchester1200";
+level.penetCoef[ "winchester1200_reflex_mp" ] = "scr_pnt_winchester1200";
+
+
+// Heavy gunner class weapons
+level.penetCoef[ "saw_acog_mp" ] = "scr_pnt_saw";
+level.penetCoef[ "saw_grip_mp" ] = "scr_pnt_saw";
+level.penetCoef[ "saw_mp" ] = "scr_pnt_saw";
+level.penetCoef[ "saw_reflex_mp" ] = "scr_pnt_saw";
+
+level.penetCoef[ "rpd_acog_mp" ] = "scr_pnt_rpd";
+level.penetCoef[ "rpd_grip_mp" ] = "scr_pnt_rpd";
+level.penetCoef[ "rpd_mp" ] = "scr_pnt_rpd";
+level.penetCoef[ "rpd_reflex_mp" ] = "scr_pnt_rpd";
+
+level.penetCoef[ "m60e4_acog_mp" ] = "scr_pnt_m60e4";
+level.penetCoef[ "m60e4_grip_mp" ] = "scr_pnt_m60e4";
+level.penetCoef[ "m60e4_mp" ] = "scr_pnt_m60e4";
+level.penetCoef[ "m60e4_reflex_mp" ] = "scr_pnt_m60e4";
+
+
+// Sniper class weapons
+level.penetCoef[ "dragunov_acog_mp" ] = "scr_pnt_dragunov";
+level.penetCoef[ "dragunov_mp" ] = "scr_pnt_dragunov";
+
+level.penetCoef[ "m40a3_acog_mp" ] = "scr_pnt_m40a3";
+level.penetCoef[ "m40a3_mp" ] = "scr_pnt_m40a3";
+
+level.penetCoef[ "barrett_acog_mp" ] = "scr_pnt_barrett";
+level.penetCoef[ "barrett_mp" ] = "scr_pnt_barrett";
+
+level.penetCoef[ "remington700_acog_mp" ] = "scr_pnt_remington700";
+level.penetCoef[ "remington700_mp" ] = "scr_pnt_remington700";
+
+level.penetCoef[ "m21_acog_mp" ] = "scr_pnt_m21";
+level.penetCoef[ "m21_mp" ] = "scr_pnt_m21";
+
+
+// Handguns
+level.penetCoef[ "beretta_mp" ] = "scr_pnt_beretta";
+level.penetCoef[ "beretta_silencer_mp" ] = "scr_pnt_beretta_silenced";
+
+level.penetCoef[ "colt45_mp" ] = "scr_pnt_colt45";
+level.penetCoef[ "colt45_silencer_mp" ] = "scr_pnt_colt45_silenced";
+
+level.penetCoef[ "usp_mp" ] = "scr_pnt_usp";
+level.penetCoef[ "usp_silencer_mp" ] = "scr_pnt_usp_silenced";
+
+level.penetCoef[ "deserteagle_mp" ] = "scr_pnt_deserteagle";
+level.penetCoef[ "deserteaglegold_mp" ] = "scr_pnt_deserteagle";
+
+
+return;
+}
+
+loadStoppingCoef()
+{
+
+// Load all the weapons with their corresponding dvar controlling it
+level.stoppingCoef = [];
+
+// Assault class weapons
+level.stoppingCoef[ "m16_acog_mp" ] = "scr_stp_m16";
+level.stoppingCoef[ "m16_gl_mp" ] = "scr_stp_m16";
+level.stoppingCoef[ "m16_mp" ] = "scr_stp_m16";
+level.stoppingCoef[ "m16_reflex_mp" ] = "scr_stp_m16";
+level.stoppingCoef[ "m16_silencer_mp" ] = "scr_stp_m16_silenced";
+
+level.stoppingCoef[ "ak47_acog_mp" ] = "scr_stp_ak47";
+level.stoppingCoef[ "ak47_gl_mp" ] = "scr_stp_ak47";
+level.stoppingCoef[ "ak47_mp" ] = "scr_stp_ak47";
+level.stoppingCoef[ "ak47_reflex_mp" ] = "scr_stp_ak47";
+level.stoppingCoef[ "ak47_silencer_mp" ] = "scr_stp_ak47_silenced";
+
+level.stoppingCoef[ "m4_acog_mp" ] = "scr_stp_m4";
+level.stoppingCoef[ "m4_gl_mp" ] = "scr_stp_m4";
+level.stoppingCoef[ "m4_mp" ] = "scr_stp_m4";
+level.stoppingCoef[ "m4_reflex_mp" ] = "scr_stp_m4";
+level.stoppingCoef[ "m4_silencer_mp" ] = "scr_stp_m4_silenced";
+
+level.stoppingCoef[ "g3_acog_mp" ] = "scr_stp_g3";
+level.stoppingCoef[ "g3_gl_mp" ] = "scr_stp_g3";
+level.stoppingCoef[ "g3_mp" ] = "scr_stp_g3";
+level.stoppingCoef[ "g3_reflex_mp" ] = "scr_stp_g3";
+level.stoppingCoef[ "g3_silencer_mp" ] = "scr_stp_g3_silenced";
+
+level.stoppingCoef[ "g36c_acog_mp" ] = "scr_stp_g36c";
+level.stoppingCoef[ "g36c_gl_mp" ] = "scr_stp_g36c";
+level.stoppingCoef[ "g36c_mp" ] = "scr_stp_g36c";
+level.stoppingCoef[ "g36c_reflex_mp" ] = "scr_stp_g36c";
+level.stoppingCoef[ "g36c_silencer_mp" ] = "scr_stp_g36c_silenced";
+
+level.stoppingCoef[ "m14_acog_mp" ] = "scr_stp_m14";
+level.stoppingCoef[ "m14_gl_mp" ] = "scr_stp_m14";
+level.stoppingCoef[ "m14_mp" ] = "scr_stp_m14";
+level.stoppingCoef[ "m14_reflex_mp" ] = "scr_stp_m14";
+level.stoppingCoef[ "m14_silencer_mp" ] = "scr_stp_m14_silenced";
+
+level.stoppingCoef[ "mp44_mp" ] = "scr_stp_mp44";
+
+
+// Special Ops class weapons
+level.stoppingCoef[ "mp5_acog_mp" ] = "scr_stp_mp5";
+level.stoppingCoef[ "mp5_mp" ] = "scr_stp_mp5";
+level.stoppingCoef[ "mp5_reflex_mp" ] = "scr_stp_mp5";
+level.stoppingCoef[ "mp5_silencer_mp" ] = "scr_stp_mp5_silenced";
+
+level.stoppingCoef[ "skorpion_acog_mp" ] = "scr_stp_skorpion";
+level.stoppingCoef[ "skorpion_mp" ] = "scr_stp_skorpion";
+level.stoppingCoef[ "skorpion_reflex_mp" ] = "scr_stp_skorpion";
+level.stoppingCoef[ "skorpion_silencer_mp" ] = "scr_stp_skorpion_silenced";
+
+level.stoppingCoef[ "uzi_acog_mp" ] = "scr_stp_uzi";
+level.stoppingCoef[ "uzi_mp" ] = "scr_stp_uzi";
+level.stoppingCoef[ "uzi_reflex_mp" ] = "scr_stp_uzi";
+level.stoppingCoef[ "uzi_silencer_mp" ] = "scr_stp_uzi_silenced";
+
+level.stoppingCoef[ "ak74u_acog_mp" ] = "scr_stp_ak74u";
+level.stoppingCoef[ "ak74u_mp" ] = "scr_stp_ak74u";
+level.stoppingCoef[ "ak74u_reflex_mp" ] = "scr_stp_ak74u";
+level.stoppingCoef[ "ak74u_silencer_mp" ] = "scr_stp_ak74u_silenced";
+
+level.stoppingCoef[ "p90_acog_mp" ] = "scr_stp_p90";
+level.stoppingCoef[ "p90_mp" ] = "scr_stp_p90";
+level.stoppingCoef[ "p90_reflex_mp" ] = "scr_stp_p90";
+level.stoppingCoef[ "p90_silencer_mp" ] = "scr_stp_p90_silenced";
+
+
+// Demolition class weapons
+level.stoppingCoef[ "m1014_grip_mp" ] = "scr_stp_m1014";
+level.stoppingCoef[ "m1014_mp" ] = "scr_stp_m1014";
+level.stoppingCoef[ "m1014_reflex_mp" ] = "scr_stp_m1014";
+
+level.stoppingCoef[ "winchester1200_grip_mp" ] = "scr_stp_winchester1200";
+level.stoppingCoef[ "winchester1200_mp" ] = "scr_stp_winchester1200";
+level.stoppingCoef[ "winchester1200_reflex_mp" ] = "scr_stp_winchester1200";
+
+
+// Heavy gunner class weapons
+level.stoppingCoef[ "saw_acog_mp" ] = "scr_stp_saw";
+level.stoppingCoef[ "saw_grip_mp" ] = "scr_stp_saw";
+level.stoppingCoef[ "saw_mp" ] = "scr_stp_saw";
+level.stoppingCoef[ "saw_reflex_mp" ] = "scr_stp_saw";
+
+level.stoppingCoef[ "rpd_acog_mp" ] = "scr_stp_saw";
+level.stoppingCoef[ "rpd_grip_mp" ] = "scr_stp_saw";
+level.stoppingCoef[ "rpd_mp" ] = "scr_stp_saw";
+level.stoppingCoef[ "rpd_reflex_mp" ] = "scr_stp_saw";
+
+level.stoppingCoef[ "m60e4_acog_mp" ] = "scr_stp_m60e4";
+level.stoppingCoef[ "m60e4_grip_mp" ] = "scr_stp_m60e4";
+level.stoppingCoef[ "m60e4_mp" ] = "scr_stp_m60e4";
+level.stoppingCoef[ "m60e4_reflex_mp" ] = "scr_stp_m60e4";
+
+
+// Sniper class weapons
+level.stoppingCoef[ "dragunov_acog_mp" ] = "scr_stp_dragunov";
+level.stoppingCoef[ "dragunov_mp" ] = "scr_stp_dragunov";
+
+level.stoppingCoef[ "m40a3_acog_mp" ] = "scr_stp_m40a3";
+level.stoppingCoef[ "m40a3_mp" ] = "scr_stp_m40a3";
+
+level.stoppingCoef[ "barrett_acog_mp" ] = "scr_stp_barrett";
+level.stoppingCoef[ "barrett_mp" ] = "scr_stp_barrett";
+
+level.stoppingCoef[ "remington700_acog_mp" ] = "scr_stp_remington700";
+level.stoppingCoef[ "remington700_mp" ] = "scr_stp_remington700";
+
+level.stoppingCoef[ "m21_acog_mp" ] = "scr_stp_m21";
+level.stoppingCoef[ "m21_mp" ] = "scr_stp_m21";
+
+
+// Handguns
+level.stoppingCoef[ "beretta_mp" ] = "scr_stp_beretta";
+level.stoppingCoef[ "beretta_silencer_mp" ] = "scr_stp_beretta_silenced";
+
+level.stoppingCoef[ "colt45_mp" ] = "scr_stp_colt45";
+level.stoppingCoef[ "colt45_silencer_mp" ] = "scr_stp_colt45_silenced";
+
+level.stoppingCoef[ "usp_mp" ] = "scr_wdr_usp";
+level.stoppingCoef[ "usp_silencer_mp" ] = "scr_stp_usp_silenced";
+
+level.stoppingCoef[ "deserteagle_mp" ] = "scr_stp_deserteagle";
+level.stoppingCoef[ "deserteaglegold_mp" ] = "scr_stp_deserteagle";
+
+
+return;
 }
