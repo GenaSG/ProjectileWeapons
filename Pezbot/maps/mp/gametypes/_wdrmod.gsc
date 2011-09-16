@@ -21,12 +21,24 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                 {
                     penetCoef = 1;
                     penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    stoppingCoef = 0;
+                    stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                    if(stoppingCoef == 1)
+                    {
+                        thread hitShellShock(iDamage);
+                    }
                     iDamage = 0.5 * penetCoef * iDamage/(1+rangeMod*targetDist);
                 }
                 else
                 {
                     penetCoef = 1;
                     penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    stoppingCoef = 0;
+                    stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                    if(stoppingCoef == 1)
+                    {
+                        thread hitShellShock(iDamage);
+                    }
                     iDamage = 0.75 * penetCoef * iDamage/(1+rangeMod*targetDist);
                 }
             }
