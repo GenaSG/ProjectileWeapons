@@ -426,8 +426,8 @@ wdrModTweaks()
 	setDvar( "scr_wdr_uzi", 0.01000 );
 	setDvar( "scr_wdr_uzi_silenced", 0.01000 );
 	
-	setDvar( "scr_wdr_ak74u", 0.00500 );
-	setDvar( "scr_wdr_ak74u_silenced", 0.00500 );
+	setDvar( "scr_wdr_ak74u", 0.00200 );
+	setDvar( "scr_wdr_ak74u_silenced", 0.00200 );
 	
 	setDvar( "scr_wdr_p90", 0.00500 );
 	setDvar( "scr_wdr_p90_silenced", 0.00500 );
@@ -462,7 +462,7 @@ wdrModTweaks()
 	setDvar( "scr_wdr_usp", 0.03333 );
 	setDvar( "scr_wdr_usp_silenced", 0.03333 );
 	
-	setDvar( "scr_wdr_deserteagle", 0.00500 );
+	setDvar( "scr_wdr_deserteagle", 0.02000 );
 	
 }
 
