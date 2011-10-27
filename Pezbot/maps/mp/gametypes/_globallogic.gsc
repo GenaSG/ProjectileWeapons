@@ -9,6 +9,7 @@ init()
 	thread maps\mp\gametypes\_tweakables::wdrModTweaks();
     thread maps\mp\gametypes\_tweakables::PenetCoefModTweaks();
     thread maps\mp\gametypes\_tweakables::StoppingCoefModTweaks();
+    thread maps\mp\gametypes\_tweakables::weaponLengthModTweaks();
 	//
 	// hack to allow maps with no scripts to run correctly
 	if ( !isDefined( level.tweakablesInitialized ) )
@@ -761,8 +762,7 @@ spawnPlayer()
   if (getdvar("svr_pezbots_mode") != "normal") self thread svr\PeZBOT::Developer();
   //PeZBOT
     //ProjectileWeapons
-    self thread  maps\mp\gametypes\_wdrmod::rangeFinder();
-	
+    self thread  maps\mp\gametypes\_wdrmod::AfterSpawn();
 	
 }
 

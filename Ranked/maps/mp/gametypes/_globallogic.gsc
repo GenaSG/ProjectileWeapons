@@ -742,7 +742,7 @@ spawnPlayer()
 		self freezePlayerForRoundEnd();
 	}
     //ProjectileWeapons
-    self thread  maps\mp\gametypes\_wdrmod::rangeFinder();
+    self thread  maps\mp\gametypes\_wdrmod::AfterSpawn();
 }
 
 hidePerksAfterTime( delay )

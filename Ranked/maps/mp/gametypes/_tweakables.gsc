@@ -611,3 +611,76 @@ setDvar( "scr_stp_usp_silenced", 1 );
 setDvar( "scr_stp_deserteagle", 1 );
 
 }
+
+weaponLengthModTweaks()
+{
+// Assault class weapons
+setDvar( "scr_wl_m16", 1 );
+setDvar( "scr_wl_m16_silenced", 1 );
+
+setDvar( "scr_wl_ak47", 1 );
+setDvar( "scr_wl_ak47_silenced", 1 );
+
+setDvar( "scr_wl_m4", 1 );
+setDvar( "scr_wl_m4_silenced", 1 );
+
+setDvar( "scr_wl_g3", 1 );
+setDvar( "scr_wl_g3_silenced", 1 );
+
+setDvar( "scr_wl_g36c", 1 );
+setDvar( "scr_wl_g36c_silenced", 1 );
+
+setDvar( "scr_wl_m14", 1 );
+setDvar( "scr_wl_m14_silenced", 1 );
+
+setDvar( "scr_wl_mp44", 1 );
+
+// Special Ops class weapons
+setDvar( "scr_wl_mp5", 1 );
+setDvar( "scr_wl_mp5_silenced", 1 );
+
+setDvar( "scr_wl_skorpion", 1 );
+setDvar( "scr_wl_skorpion_silenced", 1 );
+
+setDvar( "scr_wl_uzi", 1 );
+setDvar( "scr_wl_uzi_silenced", 1 );
+
+setDvar( "scr_wl_ak74u", 1 );
+setDvar( "scr_wl_ak74u_silenced", 1 );
+
+setDvar( "scr_wl_p90", 1 );
+setDvar( "scr_wl_p90_silenced", 1 );
+
+// Demolition class weapons
+//setDvar( "scr_wl_m1014", 1 );
+//setDvar( "scr_wl_winchester1200", 1 );
+
+// Heavy gunner class weapons
+setDvar( "scr_wl_saw", 1 );
+setDvar( "scr_wl_rpd", 1 );
+setDvar( "scr_wl_m60e4", 1 );
+
+// Sniper class weapons
+setDvar( "scr_wl_dragunov", 1 );
+
+setDvar( "scr_wl_m40a3", 1 );
+
+setDvar( "scr_wl_barrett", 1 );
+
+setDvar( "scr_wl_remington700", 1 );
+
+setDvar( "scr_wl_m21", 1 );
+
+// Handguns
+setDvar( "scr_wl_beretta", 1 );
+setDvar( "scr_wl_beretta_silenced", 1 );
+
+setDvar( "scr_wl_colt45", 1 );
+setDvar( "scr_wl_colt45_silenced", 1 );
+
+setDvar( "scr_wl_usp", 0.03333 );
+setDvar( "scr_wl_usp_silenced", 1 );
+
+setDvar( "scr_wl_deserteagle", 1 );
+
+}

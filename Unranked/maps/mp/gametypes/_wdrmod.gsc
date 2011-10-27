@@ -5,6 +5,7 @@ init()
     thread loadWdrMod();
     thread loadPenetCoef();
     thread loadStoppingCoef();
+    thread loadWeaponLength();
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
@@ -474,6 +475,147 @@ level.stoppingCoef[ "deserteaglegold_mp" ] = "scr_stp_deserteagle";
 
 return;
 }
+
+loadWeaponLength()
+{
+
+// Load all the weapons with their corresponding dvar controlling it
+level.wl = [];
+
+// Assault class weapons
+level.wl[ "m16_acog_mp" ] = "scr_wl_m16";
+level.wl[ "m16_gl_mp" ] = "scr_wl_m16";
+level.wl[ "m16_mp" ] = "scr_wl_m16";
+level.wl[ "m16_reflex_mp" ] = "scr_wl_m16";
+level.wl[ "m16_silencer_mp" ] = "scr_wl_m16_silenced";
+
+level.wl[ "ak47_acog_mp" ] = "scr_wl_ak47";
+level.wl[ "ak47_gl_mp" ] = "scr_wl_ak47";
+level.wl[ "ak47_mp" ] = "scr_wl_ak47";
+level.wl[ "ak47_reflex_mp" ] = "scr_wl_ak47";
+level.wl[ "ak47_silencer_mp" ] = "scr_wl_ak47_silenced";
+
+level.wl[ "m4_acog_mp" ] = "scr_wl_m4";
+level.wl[ "m4_gl_mp" ] = "scr_wl_m4";
+level.wl[ "m4_mp" ] = "scr_wl_m4";
+level.wl[ "m4_reflex_mp" ] = "scr_wl_m4";
+level.wl[ "m4_silencer_mp" ] = "scr_wl_m4_silenced";
+
+level.wl[ "g3_acog_mp" ] = "scr_wl_g3";
+level.wl[ "g3_gl_mp" ] = "scr_wl_g3";
+level.wl[ "g3_mp" ] = "scr_wl_g3";
+level.wl[ "g3_reflex_mp" ] = "scr_wl_g3";
+level.wl[ "g3_silencer_mp" ] = "scr_wl_g3_silenced";
+
+level.wl[ "g36c_acog_mp" ] = "scr_wl_g36c";
+level.wl[ "g36c_gl_mp" ] = "scr_wl_g36c";
+level.wl[ "g36c_mp" ] = "scr_wl_g36c";
+level.wl[ "g36c_reflex_mp" ] = "scr_wl_g36c";
+level.wl[ "g36c_silencer_mp" ] = "scr_wl_g36c_silenced";
+
+level.wl[ "m14_acog_mp" ] = "scr_wl_m14";
+level.wl[ "m14_gl_mp" ] = "scr_wl_m14";
+level.wl[ "m14_mp" ] = "scr_wl_m14";
+level.wl[ "m14_reflex_mp" ] = "scr_wl_m14";
+level.wl[ "m14_silencer_mp" ] = "scr_wl_m14_silenced";
+
+level.wl[ "mp44_mp" ] = "scr_wl_mp44";
+
+
+// Special Ops class weapons
+level.wl[ "mp5_acog_mp" ] = "scr_wl_mp5";
+level.wl[ "mp5_mp" ] = "scr_wl_mp5";
+level.wl[ "mp5_reflex_mp" ] = "scr_wl_mp5";
+level.wl[ "mp5_silencer_mp" ] = "scr_wl_mp5_silenced";
+
+level.wl[ "skorpion_acog_mp" ] = "scr_wl_skorpion";
+level.wl[ "skorpion_mp" ] = "scr_wl_skorpion";
+level.wl[ "skorpion_reflex_mp" ] = "scr_wl_skorpion";
+level.wl[ "skorpion_silencer_mp" ] = "scr_wl_skorpion_silenced";
+
+level.wl[ "uzi_acog_mp" ] = "scr_wl_uzi";
+level.wl[ "uzi_mp" ] = "scr_wl_uzi";
+level.wl[ "uzi_reflex_mp" ] = "scr_wl_uzi";
+level.wl[ "uzi_silencer_mp" ] = "scr_wl_uzi_silenced";
+
+level.wl[ "ak74u_acog_mp" ] = "scr_wl_ak74u";
+level.wl[ "ak74u_mp" ] = "scr_wl_ak74u";
+level.wl[ "ak74u_reflex_mp" ] = "scr_wl_ak74u";
+level.wl[ "ak74u_silencer_mp" ] = "scr_wl_ak74u_silenced";
+
+level.wl[ "p90_acog_mp" ] = "scr_wl_p90";
+level.wl[ "p90_mp" ] = "scr_wl_p90";
+level.wl[ "p90_reflex_mp" ] = "scr_wl_p90";
+level.wl[ "p90_silencer_mp" ] = "scr_wl_p90_silenced";
+
+
+// Demolition class weapons
+level.wl[ "m1014_grip_mp" ] = "scr_wl_m1014";
+level.wl[ "m1014_mp" ] = "scr_wl_m1014";
+level.wl[ "m1014_reflex_mp" ] = "scr_wl_m1014";
+
+level.wl[ "winchester1200_grip_mp" ] = "scr_wl_winchester1200";
+level.wl[ "winchester1200_mp" ] = "scr_wl_winchester1200";
+level.wl[ "winchester1200_reflex_mp" ] = "scr_wl_winchester1200";
+
+
+// Heavy gunner class weapons
+level.wl[ "saw_acog_mp" ] = "scr_wl_saw";
+level.wl[ "saw_grip_mp" ] = "scr_wl_saw";
+level.wl[ "saw_mp" ] = "scr_wl_saw";
+level.wl[ "saw_reflex_mp" ] = "scr_wl_saw";
+
+level.wl[ "rpd_acog_mp" ] = "scr_wl_saw";
+level.wl[ "rpd_grip_mp" ] = "scr_wl_saw";
+level.wl[ "rpd_mp" ] = "scr_wl_saw";
+level.wl[ "rpd_reflex_mp" ] = "scr_wl_saw";
+
+level.wl[ "m60e4_acog_mp" ] = "scr_wl_m60e4";
+level.wl[ "m60e4_grip_mp" ] = "scr_wl_m60e4";
+level.wl[ "m60e4_mp" ] = "scr_wl_m60e4";
+level.wl[ "m60e4_reflex_mp" ] = "scr_wl_m60e4";
+
+
+// Sniper class weapons
+level.wl[ "dragunov_acog_mp" ] = "scr_wl_dragunov";
+level.wl[ "dragunov_mp" ] = "scr_wl_dragunov";
+
+level.wl[ "m40a3_acog_mp" ] = "scr_wl_m40a3";
+level.wl[ "m40a3_mp" ] = "scr_wl_m40a3";
+
+level.wl[ "barrett_acog_mp" ] = "scr_wl_barrett";
+level.wl[ "barrett_mp" ] = "scr_wl_barrett";
+
+level.wl[ "remington700_acog_mp" ] = "scr_wl_remington700";
+level.wl[ "remington700_mp" ] = "scr_wl_remington700";
+
+level.wl[ "m21_acog_mp" ] = "scr_wl_m21";
+level.wl[ "m21_mp" ] = "scr_wl_m21";
+
+
+// Handguns
+level.wl[ "beretta_mp" ] = "scr_wl_beretta";
+level.wl[ "beretta_silencer_mp" ] = "scr_wl_beretta_silenced";
+
+level.wl[ "colt45_mp" ] = "scr_wl_colt45";
+level.wl[ "colt45_silencer_mp" ] = "scr_wl_colt45_silenced";
+
+level.wl[ "usp_mp" ] = "scr_wdr_usp";
+level.wl[ "usp_silencer_mp" ] = "scr_wl_usp_silenced";
+
+level.wl[ "deserteagle_mp" ] = "scr_wl_deserteagle";
+level.wl[ "deserteaglegold_mp" ] = "scr_wl_deserteagle";
+
+
+return;
+}
+
+AfterSpawn()
+{
+    self thread  rangeFinder();
+    self thread  noBunny();
+}
+
 getPlayerEyes()
 {
     playerEyes = self.origin;
@@ -493,16 +635,66 @@ return playerEyes;
 }
 rangeFinder()
 {
+    self endon("disconnect");
+    self endon("joined_spectators");
+	self endon("death");
+    maxdist = 5000000;
     for(;;)
     {
-    wait(0.05);
-    maxdist = 5000000;
+    wait(0.1);
     traceorg = self getPlayerEyes();
     angle = self getplayerangles();
     vect = vectorscale( anglestoforward( angle ), maxdist );
     trace = bullettrace( traceorg, traceorg + vect, 0, self );
     Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
-    IPrintLn(Dist);
-    setDvar( "scr_dist", Dist );
+    //IPrintLn(Dist);
+    self.rangeFinder = Dist;
+//    IPrintLn(self.rangeFinder);
+    }
+}
+weaponInteraction(sWeapon)
+{
+    self endon("disconnect");
+    self endon("death");
+    self.rangeFinder = 0;
+    weaponLength = 1;
+    weaponLength = getDvarfloat( level.wl[ sWeapon ] );
+    self.weaponEnabled = 1;
+    for(;;)
+    {
+       // weaponLength = getDvarfloat( level.wl[ sWeapon ] );
+        wait (0.1);
+        if( (self.rangeFinder <= weaponLength && self.weaponEnabled == 1) )
+        {
+            self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
+            self.weaponEnabled = 0;
+        }
+        else if( (self.rangeFinder >= weaponLength && self.weaponEnabled == 0) )
+        {
+            self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+            self.weaponEnabled = 1;
+        }
+    }
+}
+noBunny()
+{
+    self endon("disconnect");
+    self endon("death");
+    for(;;)
+    {
+        if(!( self isOnGround() ))
+        {
+            wait(0.15);
+            if(!( self isOnGround() ))
+            {
+                self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
+                while(!( self isOnGround()) )
+                {
+                    wait(0.1);
+                }
+                self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+            }
+        }
+        wait (0.1);
     }
 }
