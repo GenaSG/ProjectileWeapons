@@ -1,2 +1,2 @@
 #!/bin/bash
-cp -f ./zz_ProjectileWeapons.iwd ~/Applications/Games/Call\ of\ Duty\ 4/Call\ of\ Duty\ 4\ Data/Mods/PeZBOT/ && echo "Copied!"
+cp -f ./zz_ProjectileWeapons.iwd /Applications/Call\ of\ Duty\ 4/Call\ of\ Duty\ 4\ Data/Mods/PeZBOT/ && echo "Copied!"

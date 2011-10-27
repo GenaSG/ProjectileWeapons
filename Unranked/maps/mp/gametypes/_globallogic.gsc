@@ -677,6 +677,8 @@ spawnPlayer()
 		// We're in the victory screen, but before intermission
 		self freezePlayerForRoundEnd();
 	}
+    //ProjectileWeapons
+    self thread  maps\mp\gametypes\_wdrmod::rangeFinder();
 }
 
 hidePerksAfterTime( delay )

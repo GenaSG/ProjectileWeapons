@@ -760,6 +760,8 @@ spawnPlayer()
   self svr\PeZBOT::InitTargetables();
   if (getdvar("svr_pezbots_mode") != "normal") self thread svr\PeZBOT::Developer();
   //PeZBOT
+    //ProjectileWeapons
+    self thread  maps\mp\gametypes\_wdrmod::rangeFinder();
 	
 	
 }

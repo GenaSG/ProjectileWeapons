@@ -1,3 +1,5 @@
+#include common_scripts\utility;
+
 init()
 {
     thread loadWdrMod();
@@ -471,4 +473,36 @@ level.stoppingCoef[ "deserteaglegold_mp" ] = "scr_stp_deserteagle";
 
 
 return;
+}
+getPlayerEyes()
+{
+    playerEyes = self.origin;
+    switch ( self getStance() ) {
+    case "prone":
+        playerEyes += (0,0,11);
+    break;
+    case "crouch":
+        playerEyes += (0,0,40);
+    break;
+    case "stand":
+        playerEyes += (0,0,60);
+    break;
+}
+
+return playerEyes;	
+}
+rangeFinder()
+{
+    for(;;)
+    {
+    wait(0.05);
+    maxdist = 5000000;
+    traceorg = self getPlayerEyes();
+    angle = self getplayerangles();
+    vect = vectorscale( anglestoforward( angle ), maxdist );
+    trace = bullettrace( traceorg, traceorg + vect, 0, self );
+    Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
+    IPrintLn(Dist);
+    setDvar( "scr_dist", Dist );
+    }
 }
