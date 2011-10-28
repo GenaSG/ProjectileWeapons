@@ -614,6 +614,7 @@ AfterSpawn()
 {
     self thread  rangeFinder();
     self thread  noBunny();
+    self thread  scopeRangeFinder();
 }
 
 getPlayerEyes()
@@ -641,17 +642,50 @@ rangeFinder()
     maxdist = 5000000;
     for(;;)
     {
-    wait(0.1);
-    traceorg = self getPlayerEyes();
-    angle = self getplayerangles();
-    vect = vectorscale( anglestoforward( angle ), maxdist );
-    trace = bullettrace( traceorg, traceorg + vect, 0, self );
-    Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
-    //IPrintLn(Dist);
-    self.rangeFinder = Dist;
-//    IPrintLn(self.rangeFinder);
+        wait(0.1);
+        traceorg = self getPlayerEyes();
+        angle = self getplayerangles();
+        vect = vectorscale( anglestoforward( angle ), maxdist );
+        trace = bullettrace( traceorg, traceorg + vect, 0, self );
+        Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
+        //IPrintLn(Dist);
+        self.rangeFinder = Dist;
+    //    IPrintLn(self.rangeFinder);
     }
 }
+
+scopeRangeFinder()
+{   
+    self endon("disconnect");
+    self endon("death");
+    self.rangeFinder = 10;
+    self.scopeRangeFinder = newClientHudElem(self);
+    self.scopeRangeFinder.alpha = 0;
+    self.scopeRangeFinder.fontScale = 1.4;
+    self.scopeRangeFinder.color = (0,1,0);
+    self.scopeRangeFinder.font = "objective";
+    self.scopeRangeFinder.archived = true;
+    self.scopeRangeFinder.hideWhenInMenu = false;
+    self.scopeRangeFinder.alignX = "right";
+    self.scopeRangeFinder.alignY = "top";
+    self.scopeRangeFinder.horzAlign = "right";
+    self.scopeRangeFinder.vertAlign = "top";
+    self.scopeRangeFinder.x = -10;
+    self.scopeRangeFinder.y = 27;
+    for(;;)
+    {
+        wait(0.05);
+        while((maps\mp\gametypes\_weapons::hasScope( self GetCurrentWeapon() )) && self playerADS() )
+        {   
+            wait(0.05);
+            self.scopeRangeFinder.alpha = 1;
+            self.scopeRangeFinder setValue( self.rangeFinder );
+        }
+        self.scopeRangeFinder.alpha = 0;
+    }
+}
+
+
 weaponInteraction(sWeapon)
 {
     self endon("disconnect");
