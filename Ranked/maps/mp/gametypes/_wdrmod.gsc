@@ -716,17 +716,27 @@ noBunny()
     self endon("death");
     for(;;)
     {
+        if( self UseButtonPressed() )
+        {
+            self AllowJump(false);
+            while(self UseButtonPressed())
+            {
+                wait(0.1);
+            }
+            self AllowJump(true);
+        }
         if(!( self isOnGround() ))
         {
             wait(0.15);
             if(!( self isOnGround() ))
             {
-                self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
+                self disableWeapons();
                 while(!( self isOnGround()) )
                 {
                     wait(0.1);
                 }
-                self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+                
+                self enableWeapons();
             }
         }
         wait (0.1);
