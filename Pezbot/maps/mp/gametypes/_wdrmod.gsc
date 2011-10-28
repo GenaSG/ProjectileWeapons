@@ -639,6 +639,7 @@ rangeFinder()
     self endon("disconnect");
     self endon("joined_spectators");
 	self endon("death");
+    level endon( "game_ended" );
     maxdist = 5000000;
     for(;;)
     {
@@ -657,7 +658,7 @@ rangeFinder()
 scopeRangeFinder()
 {   
     self endon("disconnect");
-    self endon("death");
+    self endon( "game_ended" );
     self.rangeFinder = 10;
     self.scopeRangeFinder = newClientHudElem(self);
     self.scopeRangeFinder.alpha = 0;
