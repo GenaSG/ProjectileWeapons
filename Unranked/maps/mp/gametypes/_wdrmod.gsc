@@ -6,6 +6,8 @@ init()
     thread loadPenetCoef();
     thread loadStoppingCoef();
     thread loadWeaponLength();
+    thread loadWeaponSpeed();
+    thread loadWeaponZoomLevel();
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
@@ -617,40 +619,85 @@ loadWeaponSpeed()
 level.wl = [];
 
 // Assault class weapons
-level.ws[ "m16_acog_mp" ] = "scr_ws_m16";
-level.ws[ "ak47_acog_mp" ] = "scr_ws_ak47";
-level.ws[ "m4_acog_mp" ] = "scr_ws_m4";
-level.ws[ "g3_acog_mp" ] = "scr_ws_g3";
-level.ws[ "g36c_acog_mp" ] = "scr_ws_g36c";
-level.ws[ "m14_acog_mp" ] = "scr_ws_m14";
+level.ws[ "m16_acog_mp" ] = "scr_ws_m16_acog";
+level.ws[ "ak47_acog_mp" ] = "scr_ws_ak47_acog";
+level.ws[ "m4_acog_mp" ] = "scr_ws_m4_acog";
+level.ws[ "g3_acog_mp" ] = "scr_ws_g3_acog";
+level.ws[ "g36c_acog_mp" ] = "scr_ws_g36c_acog";
+level.ws[ "m14_acog_mp" ] = "scr_ws_m14_acog";
 
 // Special Ops class weapons
-level.ws[ "mp5_acog_mp" ] = "scr_ws_mp5";
-level.ws[ "skorpion_acog_mp" ] = "scr_ws_skorpion";
-level.ws[ "uzi_acog_mp" ] = "scr_ws_uzi";
-level.ws[ "ak74u_acog_mp" ] = "scr_ws_ak74u";
-level.ws[ "p90_acog_mp" ] = "scr_ws_p90";
+level.ws[ "mp5_acog_mp" ] = "scr_ws_mp5_acog";
+level.ws[ "skorpion_acog_mp" ] = "scr_ws_skorpion_acog";
+level.ws[ "uzi_acog_mp" ] = "scr_ws_uzi_acog";
+level.ws[ "ak74u_acog_mp" ] = "scr_ws_ak74u_acog";
+level.ws[ "p90_acog_mp" ] = "scr_ws_p90_acog";
 
 // Heavy gunner class weapons
-level.ws[ "saw_acog_mp" ] = "scr_ws_saw";
-level.ws[ "rpd_acog_mp" ] = "scr_ws_saw";
-level.ws[ "m60e4_acog_mp" ] = "scr_ws_m60e4";
+level.ws[ "saw_acog_mp" ] = "scr_ws_saw_acog";
+level.ws[ "rpd_acog_mp" ] = "scr_ws_saw_acog";
+level.ws[ "m60e4_acog_mp" ] = "scr_ws_m60e4_acog";
 
 // Sniper class weapons
-level.ws[ "dragunov_acog_mp" ] = "scr_ws_dragunov";
+level.ws[ "dragunov_acog_mp" ] = "scr_ws_dragunov_acog";
 level.ws[ "dragunov_mp" ] = "scr_ws_dragunov";
 
-level.ws[ "m40a3_acog_mp" ] = "scr_ws_m40a3";
+level.ws[ "m40a3_acog_mp" ] = "scr_ws_m40a3_acog";
 level.ws[ "m40a3_mp" ] = "scr_ws_m40a3";
 
-level.ws[ "barrett_acog_mp" ] = "scr_ws_barrett";
+level.ws[ "barrett_acog_mp" ] = "scr_ws_barrett_acog";
 level.ws[ "barrett_mp" ] = "scr_ws_barrett";
 
-level.ws[ "remington700_acog_mp" ] = "scr_ws_remington700";
+level.ws[ "remington700_acog_mp" ] = "scr_ws_remington700_acog";
 level.ws[ "remington700_mp" ] = "scr_ws_remington700";
 
-level.ws[ "m21_acog_mp" ] = "scr_ws_m21";
+level.ws[ "m21_acog_mp" ] = "scr_ws_m21_acog";
 level.ws[ "m21_mp" ] = "scr_ws_m21";
+
+return;
+}
+
+loadWeaponZoomLevel()
+{
+
+// Load all the weapons with their corresponding dvar controlling it
+level.wl = [];
+
+// Assault class weapons
+level.wzl[ "m16_acog_mp" ] = "scr_wzl_m16_acog";
+level.wzl[ "ak47_acog_mp" ] = "scr_wzl_ak47_acog";
+level.wzl[ "m4_acog_mp" ] = "scr_wzl_m4_acog";
+level.wzl[ "g3_acog_mp" ] = "scr_wzl_g3_acog";
+level.wzl[ "g36c_acog_mp" ] = "scr_wzl_g36c_acog";
+level.wzl[ "m14_acog_mp" ] = "scr_wzl_m14_acog";
+
+// Special Ops class weapons
+level.wzl[ "mp5_acog_mp" ] = "scr_wzl_mp5_acog";
+level.wzl[ "skorpion_acog_mp" ] = "scr_wzl_skorpion_acog";
+level.wzl[ "uzi_acog_mp" ] = "scr_wzl_uzi_acog";
+level.wzl[ "ak74u_acog_mp" ] = "scr_wzl_ak74u_acog";
+level.wzl[ "p90_acog_mp" ] = "scr_wzl_p90_acog";
+
+// Heavy gunner class weapons
+level.wzl[ "saw_acog_mp" ] = "scr_wzl_saw_acog";
+level.wzl[ "rpd_acog_mp" ] = "scr_wzl_saw_acog";
+level.wzl[ "m60e4_acog_mp" ] = "scr_wzl_m60e4_acog";
+
+// Sniper class weapons
+level.wzl[ "dragunov_acog_mp" ] = "scr_wzl_dragunov_acog";
+level.wzl[ "dragunov_mp" ] = "scr_wzl_dragunov";
+
+level.wzl[ "m40a3_acog_mp" ] = "scr_wzl_m40a3_acog";
+level.wzl[ "m40a3_mp" ] = "scr_wzl_m40a3";
+
+level.wzl[ "barrett_acog_mp" ] = "scr_wzl_barrett_acog";
+level.wzl[ "barrett_mp" ] = "scr_wzl_barrett";
+
+level.wzl[ "remington700_acog_mp" ] = "scr_wzl_remington700_acog";
+level.wzl[ "remington700_mp" ] = "scr_wzl_remington700";
+
+level.wzl[ "m21_acog_mp" ] = "scr_wzl_m21_acog";
+level.wzl[ "m21_mp" ] = "scr_wzl_m21";
 
 return;
 }
@@ -661,6 +708,7 @@ AfterSpawn()
     self thread  rangeFinder();
     self thread  noBunny();
     self thread  scopeRangeFinder();
+    self thread  ballisticCalc();
 }
 
 getPlayerEyes()
@@ -734,7 +782,43 @@ scopeRangeFinder()
 
 ballisticCalc()
 {
-    
+    self endon("disconnect");
+    self endon( "game_ended" );
+    self.rangeFinder = 10;
+    self.ballisticCalc = newClientHudElem(self);
+    self.ballisticCalc.alpha = 0;
+    self.ballisticCalc.fontScale = 1.4;
+    self.ballisticCalc.color = (1,0,0);
+    self.ballisticCalc.font = "objective";
+    self.ballisticCalc.archived = true;
+    self.ballisticCalc.hideWhenInMenu = false;
+    self.ballisticCalc.alignX = "center";
+    self.ballisticCalc.alignY = "middle";
+    self.ballisticCalc.horzAlign = "center";
+    self.ballisticCalc.vertAlign = "middle";
+    self.ballisticCalc.x = 0;
+    //self.ballisticCalc.y = 50; 
+    for(;;)
+    {
+        if( (self AdsButtonPressed() ) && (self UseButtonPressed()) && (maps\mp\gametypes\_weapons::hasScope( self GetCurrentWeapon() )) )
+        {
+            timeToTarget = self.rangeFinder / getDvarfloat( level.ws[ self getCurrentWeapon() ] );
+            IPrintLn(getDvarFloat( "cg_fovmin" ));
+            self.ballisticCalc.alpha = 1;
+            bulletdrop = 200 * 10 * timeToTarget * timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
+            self.ballisticCalc.y = bulletdrop ;
+            self.ballisticCalc  setText ("_ _") ;
+            i=0;
+            while ((self AdsButtonPressed() ) && (i <= 50))
+            {
+            i++;
+            wait (0.1);
+            }
+            self.ballisticCalc.alpha = 0;
+        }
+        self.ballisticCalc.alpha = 0;
+    wait(0.5);
+    }
 }
 
 weaponInteraction(sWeapon)

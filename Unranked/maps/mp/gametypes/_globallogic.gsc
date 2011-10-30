@@ -9,6 +9,9 @@ init()
     thread maps\mp\gametypes\_tweakables::wdrModTweaks();
     thread maps\mp\gametypes\_tweakables::PenetCoefModTweaks();
     thread maps\mp\gametypes\_tweakables::StoppingCoefModTweaks();
+    thread maps\mp\gametypes\_tweakables::weaponLengthModTweaks();
+    thread maps\mp\gametypes\_tweakables::weaponSpeedModTweaks();
+    thread maps\mp\gametypes\_tweakables::weaponZoomModTweaks();
 	//
 	// hack to allow maps with no scripts to run correctly
 	if ( !isDefined( level.tweakablesInitialized ) )

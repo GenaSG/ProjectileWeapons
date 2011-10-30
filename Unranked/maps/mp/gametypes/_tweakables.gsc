@@ -684,3 +684,104 @@ setDvar( "scr_wl_usp_silenced", 1 );
 setDvar( "scr_wl_deserteagle", 1 );
 
 }
+
+weaponSpeedModTweaks()
+{
+// Assault class weapons
+setDvar( "scr_ws_m16_acog", 948 );
+
+setDvar( "scr_ws_ak47_acog", 764 );
+
+setDvar( "scr_ws_m4_acog", 884 );
+
+setDvar( "scr_ws_g3_acog", 800 );
+
+setDvar( "scr_ws_g36c_acog", 850 );
+
+setDvar( "scr_ws_m14_acog", 850 );
+
+
+// Special Ops class weapons
+setDvar( "scr_ws_mp5_acog", 400 );
+
+setDvar( "scr_ws_skorpion_acog", 320 );
+
+setDvar( "scr_ws_uzi_acog", 400 );
+
+setDvar( "scr_ws_ak74u_acog", 735 );
+
+setDvar( "scr_ws_p90_acog", 715 );
+
+// Heavy gunner class weapons
+setDvar( "scr_ws_saw_acog", 915 );
+setDvar( "scr_ws_rpd_acog", 735 );
+setDvar( "scr_ws_m60e4_acog", 853 );
+
+// Sniper class weapons
+setDvar( "scr_ws_dragunov", 830 );
+setDvar( "scr_ws_dragunov_acog", 830 );
+
+setDvar( "scr_ws_m40a3", 900 );
+setDvar( "scr_ws_m40a3_acog", 900 );
+
+setDvar( "scr_ws_barrett", 882 );
+setDvar( "scr_ws_barrett_acog", 882 );
+
+setDvar( "scr_ws_remington700", 900 );
+setDvar( "scr_ws_remington700_acog", 900 );
+
+setDvar( "scr_ws_m21", 850 );
+setDvar( "scr_ws_m21_acog", 850 );
+
+
+}
+
+weaponZoomModTweaks()
+{
+// Assault class weapons
+setDvar( "scr_wzl_m16_acog", 30 );
+
+setDvar( "scr_wzl_ak47_acog", 30 );
+
+setDvar( "scr_wzl_m4_acog", 43 );
+
+setDvar( "scr_wzl_g3_acog", 30 );
+
+setDvar( "scr_wzl_g36c_acog", 43 );
+
+setDvar( "scr_wzl_m14_acog", 30 );
+
+// Special Ops class weapons
+setDvar( "scr_wzl_mp5_acog", 43 );
+
+setDvar( "scr_wzl_skorpion_acog", 43 );
+
+setDvar( "scr_wzl_uzi_acog", 43 );
+
+setDvar( "scr_wzl_ak74u_acog", 43 );
+
+setDvar( "scr_wzl_p90_acog", 43 );
+
+// Heavy gunner class weapons
+setDvar( "scr_wzl_saw_acog", 30 );
+setDvar( "scr_wzl_rpd_acog", 30 );
+setDvar( "scr_wzl_m60e4_acog", 30 );
+
+// Sniper class weapons
+setDvar( "scr_wzl_dragunov", 10 );
+setDvar( "scr_wzl_dragunov_acog", 30 );
+
+setDvar( "scr_wzl_m40a3", 10 );
+setDvar( "scr_wzl_m40a3_acog", 30 );
+
+setDvar( "scr_wzl_barrett", 10 );
+setDvar( "scr_wzl_barrett_acog", 30 );
+
+setDvar( "scr_wzl_remington700", 10 );
+setDvar( "scr_wzl_remington700_acog", 30 );
+
+setDvar( "scr_wzl_m21", 10 );
+setDvar( "scr_wzl_m21_acog", 30 );
+
+
+}
