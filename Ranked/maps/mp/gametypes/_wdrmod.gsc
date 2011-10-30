@@ -610,6 +610,52 @@ level.wl[ "deserteaglegold_mp" ] = "scr_wl_deserteagle";
 return;
 }
 
+loadWeaponSpeed()
+{
+
+// Load all the weapons with their corresponding dvar controlling it
+level.wl = [];
+
+// Assault class weapons
+level.ws[ "m16_acog_mp" ] = "scr_ws_m16";
+level.ws[ "ak47_acog_mp" ] = "scr_ws_ak47";
+level.ws[ "m4_acog_mp" ] = "scr_ws_m4";
+level.ws[ "g3_acog_mp" ] = "scr_ws_g3";
+level.ws[ "g36c_acog_mp" ] = "scr_ws_g36c";
+level.ws[ "m14_acog_mp" ] = "scr_ws_m14";
+
+// Special Ops class weapons
+level.ws[ "mp5_acog_mp" ] = "scr_ws_mp5";
+level.ws[ "skorpion_acog_mp" ] = "scr_ws_skorpion";
+level.ws[ "uzi_acog_mp" ] = "scr_ws_uzi";
+level.ws[ "ak74u_acog_mp" ] = "scr_ws_ak74u";
+level.ws[ "p90_acog_mp" ] = "scr_ws_p90";
+
+// Heavy gunner class weapons
+level.ws[ "saw_acog_mp" ] = "scr_ws_saw";
+level.ws[ "rpd_acog_mp" ] = "scr_ws_saw";
+level.ws[ "m60e4_acog_mp" ] = "scr_ws_m60e4";
+
+// Sniper class weapons
+level.ws[ "dragunov_acog_mp" ] = "scr_ws_dragunov";
+level.ws[ "dragunov_mp" ] = "scr_ws_dragunov";
+
+level.ws[ "m40a3_acog_mp" ] = "scr_ws_m40a3";
+level.ws[ "m40a3_mp" ] = "scr_ws_m40a3";
+
+level.ws[ "barrett_acog_mp" ] = "scr_ws_barrett";
+level.ws[ "barrett_mp" ] = "scr_ws_barrett";
+
+level.ws[ "remington700_acog_mp" ] = "scr_ws_remington700";
+level.ws[ "remington700_mp" ] = "scr_ws_remington700";
+
+level.ws[ "m21_acog_mp" ] = "scr_ws_m21";
+level.ws[ "m21_mp" ] = "scr_ws_m21";
+
+return;
+}
+
+
 AfterSpawn()
 {
     self thread  rangeFinder();
@@ -667,12 +713,12 @@ scopeRangeFinder()
     self.scopeRangeFinder.font = "objective";
     self.scopeRangeFinder.archived = true;
     self.scopeRangeFinder.hideWhenInMenu = false;
-    self.scopeRangeFinder.alignX = "right";
+    self.scopeRangeFinder.alignX = "center";
     self.scopeRangeFinder.alignY = "top";
-    self.scopeRangeFinder.horzAlign = "right";
+    self.scopeRangeFinder.horzAlign = "center";
     self.scopeRangeFinder.vertAlign = "top";
-    self.scopeRangeFinder.x = -10;
-    self.scopeRangeFinder.y = 27;
+    self.scopeRangeFinder.x = 0;
+    self.scopeRangeFinder.y = 50;
     for(;;)
     {
         wait(0.05);
@@ -680,12 +726,16 @@ scopeRangeFinder()
         {   
             wait(0.05);
             self.scopeRangeFinder.alpha = 1;
-            self.scopeRangeFinder setValue( self.rangeFinder );
+            self.scopeRangeFinder setValue( int( self.rangeFinder) );
         }
         self.scopeRangeFinder.alpha = 0;
     }
 }
 
+ballisticCalc()
+{
+    
+}
 
 weaponInteraction(sWeapon)
 {
