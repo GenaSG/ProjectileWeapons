@@ -735,18 +735,19 @@ rangeFinder()
 	self endon("death");
     level endon( "game_ended" );
     maxdist = 5000000;
-    for(;;)
-    {
+
         wait(0.1);
         traceorg = self getPlayerEyes();
         angle = self getplayerangles();
         vect = vectorscale( anglestoforward( angle ), maxdist );
         trace = bullettrace( traceorg, traceorg + vect, 0, self );
+        //target coordinates
+        self.traceHitPosition = trace["position"];
+       // IPrintLn(self.traceHitPosition);
         Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
-        //IPrintLn(Dist);
+        //Distance between player and "target"
         self.rangeFinder = Dist;
-    //    IPrintLn(self.rangeFinder);
-    }
+        return Dist;
 }
 
 scopeRangeFinder()
@@ -773,6 +774,7 @@ scopeRangeFinder()
         while((maps\mp\gametypes\_weapons::hasScope( self GetCurrentWeapon() )) && self playerADS() )
         {   
             wait(0.05);
+            rangeFinder();
             self.scopeRangeFinder.alpha = 1;
             self.scopeRangeFinder setValue( int( self.rangeFinder) );
         }
