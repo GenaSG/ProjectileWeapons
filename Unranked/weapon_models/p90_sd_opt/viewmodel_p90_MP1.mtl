@@ -1,0 +1,108 @@
+newmtl mtl_weapon_p90
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_p90_col.dds
+map_Ks ../images/_weapon_p90_spc-r65g65b65&wea_ff8cb4f7.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_laser_sight_a
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_laser_sight_a_col.dds
+map_Ks ../images/_weapon_laser_sight_a_spec-r-_14d7f668.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_mp5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_mp5_c.dds
+map_Ks ../images/_weapon_mp5_s-r-49g-49b-49&we_029a9a7a.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_p90_misc_nocamo
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_p90_col.dds
+map_Ks ../images/_weapon_p90_spc-r65g65b65&wea_ff8cb4f7.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_p90_ironsight
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_p90_col.dds
+map_Ks ../images/_weapon_p90_spc-r65g65b65&wea_ff8cb4f7.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_reflex_sight
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_reflex_sight_col.dds
+map_Ks ../images/_weapon_reflex_sight_spc-rgbl-11.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_reflex_red_dot
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_red_dot_reflexsight.dds
+Ni 1.00
+
+newmtl mtl_weapon_reflex_lens
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ../images/weapon_reflex_lens_col.dds
+Ni 1.00
+
+newmtl mtl_weapon_acog
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Ks ../images/_weapon_acog_spc-r-25g-25b-25_ffe3f99d.dds
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_acog_alpha
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_acog_lens
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+bump -bm 0.09 ../images/$identitynormalmap.dds
+Ni 1.00
+
+newmtl mtl_weapon_acog_reticle
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+
