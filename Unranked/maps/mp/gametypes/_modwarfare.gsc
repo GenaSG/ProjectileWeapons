@@ -143,11 +143,11 @@ init()
 	setDvarDefault( "class_assault_secondary", "beretta" );
 	setDvarDefault( "class_assault_secondary_attachment", "none" );
 	setDvarDefault( "class_assault_perk1", "specialty_null" );
-	setDvarDefault( "class_assault_perk2", "specialty_bulletdamage" );
-	setDvarDefault( "class_assault_perk3", "specialty_longersprint" );
+	setDvarDefault( "class_assault_perk2", "specialty_null" );
+	setDvarDefault( "class_assault_perk3", "specialty_null" );
 	setDvarDefault( "class_assault_grenade", "concussion_grenade" );
 	setDvarDefault( "class_assault_camo", "camo_none" );
-	setDvarDefault( "class_assault_frags", 1, 0, 4 );
+	setDvarDefault( "class_assault_frags", 4, 0, 4 );
 	setDvarDefault( "class_assault_special", 1, 0, 4 );
 
 	// specops class default loadout
@@ -156,60 +156,60 @@ init()
 	setDvarDefault( "class_specops_secondary", "usp" );
 	setDvarDefault( "class_specops_secondary_attachment", "silencer" );
 	setDvarDefault( "class_specops_perk1", "c4_mp" );
-	setDvarDefault( "class_specops_perk2", "specialty_explosivedamage" );
-	setDvarDefault( "class_specops_perk3", "specialty_bulletaccuracy" );
+	setDvarDefault( "class_specops_perk2", "specialty_null" );
+	setDvarDefault( "class_specops_perk3", "specialty_null" );
 	setDvarDefault( "class_specops_grenade", "flash_grenade" );
 	setDvarDefault( "class_specops_camo", "camo_none" );
 	setDvarDefault( "class_specops_frags", 1, 0, 4 );
-	setDvarDefault( "class_specops_special", 1, 0, 4 );
+	setDvarDefault( "class_specops_special", 4, 0, 4 );
 
 	// heavygunner class default loadout
 	setDvarDefault( "class_heavygunner_primary", "saw" );
 	setDvarDefault( "class_heavygunner_primary_attachment", "none" );
 	setDvarDefault( "class_heavygunner_secondary", "usp" );
 	setDvarDefault( "class_heavygunner_secondary_attachment", "none" );
-	setDvarDefault( "class_heavygunner_perk1", "specialty_specialgrenade" );
-	setDvarDefault( "class_heavygunner_perk2", "specialty_armorvest" );
-	setDvarDefault( "class_heavygunner_perk3", "specialty_bulletpenetration" );
+	setDvarDefault( "class_heavygunner_perk1", "specialty_null" );
+	setDvarDefault( "class_heavygunner_perk2", "specialty_null" );
+	setDvarDefault( "class_heavygunner_perk3", "specialty_null" );
 	setDvarDefault( "class_heavygunner_grenade", "concussion_grenade" );
 	setDvarDefault( "class_heavygunner_camo", "camo_none" );
-	setDvarDefault( "class_heavygunner_frags", 1, 0, 4 );
+	setDvarDefault( "class_heavygunner_frags", 4, 0, 4 );
 	setDvarDefault( "class_heavygunner_special", 1, 0, 4 );
 
 	// demolitions class default loadout
 	setDvarDefault( "class_demolitions_primary", "winchester1200" );
 	setDvarDefault( "class_demolitions_primary_attachment", "none" );
 	setDvarDefault( "class_demolitions_secondary", "beretta" );
-	setDvarDefault( "class_demolitions_secondary_attachment", "none" );
+	setDvarDefault( "class_demolitions_secondary_attachment", "silencer" );
 	setDvarDefault( "class_demolitions_perk1", "rpg_mp" );
-	setDvarDefault( "class_demolitions_perk2", "specialty_explosivedamage" );
-	setDvarDefault( "class_demolitions_perk3", "specialty_longersprint" );
+	setDvarDefault( "class_demolitions_perk2", "specialty_null" );
+	setDvarDefault( "class_demolitions_perk3", "specialty_null" );
 	setDvarDefault( "class_demolitions_grenade", "smoke_grenade" );
 	setDvarDefault( "class_demolitions_camo", "camo_none" );
-	setDvarDefault( "class_demolitions_frags", 1, 0, 4 );
-	setDvarDefault( "class_demolitions_special", 1, 0, 4 );
+	setDvarDefault( "class_demolitions_frags", 4, 0, 4 );
+	setDvarDefault( "class_demolitions_special", 4, 0, 4 );
 
 	// sniper class default loadout
 	setDvarDefault( "class_sniper_primary", "m40a3" );
 	setDvarDefault( "class_sniper_primary_attachment", "none" );
 	setDvarDefault( "class_sniper_secondary", "beretta" );
 	setDvarDefault( "class_sniper_secondary_attachment", "silencer" );
-	setDvarDefault( "class_sniper_perk1", "specialty_specialgrenade" );
-	setDvarDefault( "class_sniper_perk2", "specialty_bulletdamage" );
-	setDvarDefault( "class_sniper_perk3", "specialty_bulletpenetration" );
+	setDvarDefault( "class_sniper_perk1", "specialty_null" );
+	setDvarDefault( "class_sniper_perk2", "specialty_null" );
+	setDvarDefault( "class_sniper_perk3", "specialty_null" );
 	setDvarDefault( "class_sniper_grenade", "flash_grenade" );
 	setDvarDefault( "class_sniper_camo", "camo_none" );
 	setDvarDefault( "class_sniper_frags", 1, 0, 4 );
-	setDvarDefault( "class_sniper_special", 1, 0, 4 );
+	setDvarDefault( "class_sniper_special", 4, 0, 4 );
 
 	setDvarDefault( "scr_enable_nightvision", 1, 0, 1 );
 	setDvarDefault( "scr_enable_music", 1, 0, 1 );
 	setDvarDefault( "scr_enable_hiticon", 1, 0, 2 );
 	setDvarDefault( "scr_enable_scoretext", 1, 0, 1 );
 
-	setDvarDefault( "class_assault_movespeed", 0.95, 0.25, 2.0 );
+	setDvarDefault( "class_assault_movespeed", 1.00, 0.25, 2.0 );
 	setDvarDefault( "class_specops_movespeed", 1.00, 0.25, 2.0 );
-	setDvarDefault( "class_heavygunner_movespeed", 0.875, 0.25, 2.0 );
+	setDvarDefault( "class_heavygunner_movespeed", 1.00, 0.25, 2.0 );
 	setDvarDefault( "class_demolitions_movespeed", 1.00, 0.25, 2.0 );
 	setDvarDefault( "class_sniper_movespeed", 1.00, 0.25, 2.0 );
 
@@ -332,6 +332,9 @@ setClassChoice( classType )
 					"attach_allow_assault_reflex", getDvar( "attach_allow_assault_reflex" ), 
 					"attach_allow_assault_silencer", getDvar( "attach_allow_assault_silencer" ), 
 					"attach_allow_assault_acog", getDvar( "attach_allow_assault_acog" ) );
+            self setClientDvars(
+					"attach_allow_pistol_none", 1,
+                    "attach_allow_pistol_silencer", 0 );
 			break;
 		case "specops":
 			self setClientDvars(
@@ -345,6 +348,9 @@ setClassChoice( classType )
 					"attach_allow_smg_reflex", getDvar( "attach_allow_smg_reflex" ), 
 					"attach_allow_smg_silencer", getDvar( "attach_allow_smg_silencer" ), 
 					"attach_allow_smg_acog", getDvar( "attach_allow_smg_acog" ) );
+            self setClientDvars(
+					"attach_allow_pistol_none", 0,
+                    "attach_allow_pistol_silencer", 1 );
 			break;
 		case "heavygunner":
 			self setClientDvars(
@@ -356,6 +362,9 @@ setClassChoice( classType )
 					"attach_allow_lmg_reflex", getDvar( "attach_allow_lmg_reflex" ), 
 					"attach_allow_lmg_grip", getDvar( "attach_allow_lmg_grip" ), 
 					"attach_allow_lmg_acog", getDvar( "attach_allow_lmg_acog" ) );
+            self setClientDvars(
+					"attach_allow_pistol_none", 1,
+                    "attach_allow_pistol_silencer", 0 );
 			break;
 		case "demolitions":
 			self setClientDvars(
@@ -365,6 +374,9 @@ setClassChoice( classType )
 					"attach_allow_shotgun_none", getDvar( "attach_allow_shotgun_none" ), 
 					"attach_allow_shotgun_reflex", getDvar( "attach_allow_shotgun_reflex" ), 
 					"attach_allow_shotgun_grip", getDvar( "attach_allow_shotgun_grip" ) );
+            self setClientDvars(
+					"attach_allow_pistol_none", 0,
+                    "attach_allow_pistol_silencer", 1 );
 			break;
 		case "sniper":
 			self setClientDvars(
@@ -376,6 +388,9 @@ setClassChoice( classType )
 			self setClientDvars(
 					"attach_allow_sniper_none", getDvar( "attach_allow_sniper_none" ), 
 					"attach_allow_sniper_acog", getDvar( "attach_allow_sniper_acog" ) );
+            self setClientDvars(
+					"attach_allow_pistol_none", 0,
+                    "attach_allow_pistol_silencer", 1 );
 			break;
 	}
 }

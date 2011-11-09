@@ -709,6 +709,7 @@ AfterSpawn()
     self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
+    self thread  perksPerClass();
 }
 
 getPlayerEyes()
@@ -877,4 +878,140 @@ noBunny()
         }
         wait (0.1);
     }
+}
+perksPerClass()
+{
+    switch ( self.pers["class"] )
+	{
+		case "assault":
+            self ClearPerks();
+//            self SetPerk( "specialty_parabolic" );
+//            self SetPerk( "specialty_gpsjammer" );
+//            self SetPerk( "specialty_holdbreath" );
+//            self SetPerk( "specialty_quieter" );
+            self SetPerk( "specialty_longersprint" );
+//            self SetPerk( "specialty_detectexplosive" );
+//            self SetPerk( "specialty_explosivedamage" );
+            self SetPerk( "specialty_pistoldeath" );
+//            self SetPerk( "specialty_grenadepulldeath" );
+//            self SetPerk( "specialty_bulletdamage" );
+//            self SetPerk( "specialty_bulletpenetration" );
+//            self SetPerk( "specialty_bulletaccuracy" );
+//            self SetPerk( "specialty_rof" );
+//            self SetPerk( "specialty_fastreload" );
+//            self SetPerk( "specialty_extraammo" );
+            self SetPerk( "specialty_armorvest" );
+//            self SetPerk( "specialty_fraggrenade" );
+//            self SetPerk( "specialty_specialgrenade" );
+
+			self setClientDvars(
+					"scr_hardpoint_allowartillery", 1, 
+					"scr_hardpoint_allowuav", 0, 
+					"scr_hardpoint_allowhelicopter", 1);
+			break;
+		case "specops":
+            self ClearPerks();
+            self SetPerk( "specialty_parabolic" );
+            self SetPerk( "specialty_gpsjammer" );
+//            self SetPerk( "specialty_holdbreath" );
+            self SetPerk( "specialty_quieter" );
+//            self SetPerk( "specialty_longersprint" );
+//            self SetPerk( "specialty_detectexplosive" );
+//            self SetPerk( "specialty_explosivedamage" );
+            self SetPerk( "specialty_pistoldeath" );
+//            self SetPerk( "specialty_grenadepulldeath" );
+//            self SetPerk( "specialty_bulletdamage" );
+//            self SetPerk( "specialty_bulletpenetration" );
+//            self SetPerk( "specialty_bulletaccuracy" );
+//            self SetPerk( "specialty_rof" );
+//            self SetPerk( "specialty_fastreload" );
+//            self SetPerk( "specialty_extraammo" );
+//            self SetPerk( "specialty_armorvest" );
+//            self SetPerk( "specialty_fraggrenade" );
+//            self SetPerk( "specialty_specialgrenade" );
+
+			self setClientDvars(
+					"scr_hardpoint_allowartillery", 0, 
+					"scr_hardpoint_allowuav", 1, 
+					"scr_hardpoint_allowhelicopter", 1);
+			break;
+		case "heavygunner":
+            self ClearPerks();
+//            self SetPerk( "specialty_parabolic" );
+//            self SetPerk( "specialty_gpsjammer" );
+//            self SetPerk( "specialty_holdbreath" );
+//            self SetPerk( "specialty_quieter" );
+            self SetPerk( "specialty_longersprint" );
+//            self SetPerk( "specialty_detectexplosive" );
+//            self SetPerk( "specialty_explosivedamage" );
+            self SetPerk( "specialty_pistoldeath" );
+//            self SetPerk( "specialty_grenadepulldeath" );
+//            self SetPerk( "specialty_bulletdamage" );
+//            self SetPerk( "specialty_bulletpenetration" );
+//            self SetPerk( "specialty_bulletaccuracy" );
+//            self SetPerk( "specialty_rof" );
+            self SetPerk( "specialty_fastreload" );
+//            self SetPerk( "specialty_extraammo" );
+            self SetPerk( "specialty_armorvest" );
+//            self SetPerk( "specialty_fraggrenade" );
+//            self SetPerk( "specialty_specialgrenade" );
+
+			self setClientDvars(
+					"scr_hardpoint_allowartillery", 1, 
+					"scr_hardpoint_allowuav", 0, 
+					"scr_hardpoint_allowhelicopter", 1);
+			break;
+		case "demolitions":
+            self ClearPerks();
+//            self SetPerk( "specialty_parabolic" );
+//            self SetPerk( "specialty_gpsjammer" );
+//            self SetPerk( "specialty_holdbreath" );
+//            self SetPerk( "specialty_quieter" );
+            self SetPerk( "specialty_longersprint" );
+//            self SetPerk( "specialty_detectexplosive" );
+            self SetPerk( "specialty_explosivedamage" );
+            self SetPerk( "specialty_pistoldeath" );
+//            self SetPerk( "specialty_grenadepulldeath" );
+//            self SetPerk( "specialty_bulletdamage" );
+//            self SetPerk( "specialty_bulletpenetration" );
+//            self SetPerk( "specialty_bulletaccuracy" );
+//            self SetPerk( "specialty_rof" );
+            self SetPerk( "specialty_fastreload" );
+//            self SetPerk( "specialty_extraammo" );
+//            self SetPerk( "specialty_armorvest" );
+//            self SetPerk( "specialty_fraggrenade" );
+//            self SetPerk( "specialty_specialgrenade" );
+
+			self setClientDvars(
+					"scr_hardpoint_allowartillery", 1, 
+					"scr_hardpoint_allowuav", 0, 
+					"scr_hardpoint_allowhelicopter", 1);
+			break;
+		case "sniper":
+            self ClearPerks();
+            self SetPerk( "specialty_parabolic" );
+            self SetPerk( "specialty_gpsjammer" );
+            self SetPerk( "specialty_holdbreath" );
+            self SetPerk( "specialty_quieter" );
+//            self SetPerk( "specialty_longersprint" );
+//            self SetPerk( "specialty_detectexplosive" );
+//            self SetPerk( "specialty_explosivedamage" );
+            self SetPerk( "specialty_pistoldeath" );
+//            self SetPerk( "specialty_grenadepulldeath" );
+//            self SetPerk( "specialty_bulletdamage" );
+//            self SetPerk( "specialty_bulletpenetration" );
+//            self SetPerk( "specialty_bulletaccuracy" );
+//            self SetPerk( "specialty_rof" );
+//            self SetPerk( "specialty_fastreload" );
+//            self SetPerk( "specialty_extraammo" );
+//            self SetPerk( "specialty_armorvest" );
+//            self SetPerk( "specialty_fraggrenade" );
+//            self SetPerk( "specialty_specialgrenade" );
+
+			self setClientDvars(
+					"scr_hardpoint_allowartillery", 1, 
+					"scr_hardpoint_allowuav", 1, 
+					"scr_hardpoint_allowhelicopter", 0);
+			break;
+	}
 }
