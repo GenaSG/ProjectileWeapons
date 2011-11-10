@@ -335,6 +335,10 @@ setClassChoice( classType )
             self setClientDvars(
 					"attach_allow_pistol_none", 1,
                     "attach_allow_pistol_silencer", 0 );
+            self setClientDvars(
+					"perk_allow_c4_mp", 1, 
+					"perk_allow_claymore_mp", 0, 
+					"perk_allow_rpg_mp", 0);
 			break;
 		case "specops":
 			self setClientDvars(
@@ -351,6 +355,10 @@ setClassChoice( classType )
             self setClientDvars(
 					"attach_allow_pistol_none", 0,
                     "attach_allow_pistol_silencer", 1 );
+            self setClientDvars(
+					"perk_allow_c4_mp", 1, 
+					"perk_allow_claymore_mp", 0, 
+					"perk_allow_rpg_mp", 0);
 			break;
 		case "heavygunner":
 			self setClientDvars(
@@ -365,6 +373,10 @@ setClassChoice( classType )
             self setClientDvars(
 					"attach_allow_pistol_none", 1,
                     "attach_allow_pistol_silencer", 0 );
+            self setClientDvars(
+					"perk_allow_c4_mp", 0, 
+					"perk_allow_claymore_mp", 1, 
+					"perk_allow_rpg_mp", 0);
 			break;
 		case "demolitions":
 			self setClientDvars(
@@ -377,6 +389,10 @@ setClassChoice( classType )
             self setClientDvars(
 					"attach_allow_pistol_none", 0,
                     "attach_allow_pistol_silencer", 1 );
+            self setClientDvars(
+					"perk_allow_c4_mp", 1, 
+					"perk_allow_claymore_mp", 1, 
+					"perk_allow_rpg_mp", 1);
 			break;
 		case "sniper":
 			self setClientDvars(
@@ -391,6 +407,10 @@ setClassChoice( classType )
             self setClientDvars(
 					"attach_allow_pistol_none", 0,
                     "attach_allow_pistol_silencer", 1 );
+            self setClientDvars(
+					"perk_allow_c4_mp", 0, 
+					"perk_allow_claymore_mp", 1, 
+					"perk_allow_rpg_mp", 0);
 			break;
 	}
 }
