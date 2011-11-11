@@ -702,15 +702,15 @@ setDvar( "scr_ws_m14_acog", 850 );
 
 
 // Special Ops class weapons
-setDvar( "scr_ws_mp5_acog", 400 );
+setDvar( "scr_ws_mp5_acog", 320 );
 
 setDvar( "scr_ws_skorpion_acog", 320 );
 
-setDvar( "scr_ws_uzi_acog", 400 );
+setDvar( "scr_ws_uzi_acog", 320 );
 
-setDvar( "scr_ws_ak74u_acog", 735 );
+setDvar( "scr_ws_ak74u_acog", 320 );
 
-setDvar( "scr_ws_p90_acog", 715 );
+setDvar( "scr_ws_p90_acog", 320 );
 
 // Heavy gunner class weapons
 setDvar( "scr_ws_saw_acog", 915 );
