@@ -705,11 +705,11 @@ return;
 
 AfterSpawn()
 {
-    self thread  rangeFinder();
     self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
     self thread  perksPerClass();
+
 }
 
 getPlayerEyes()
@@ -731,10 +731,7 @@ return playerEyes;
 }
 rangeFinder()
 {
-    self endon("disconnect");
-    self endon("joined_spectators");
-	self endon("death");
-    level endon( "game_ended" );
+
     maxdist = 5000000;
 
         wait(0.1);
@@ -748,13 +745,15 @@ rangeFinder()
         Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
         //Distance between player and "target"
         self.rangeFinder = Dist;
-        return Dist;
+       // return Dist;
 }
 
 scopeRangeFinder()
-{   
-    self endon("disconnect");
-    self endon( "game_ended" );
+{ 
+    if ( isDefined( self.scopeRangeFinder ) )
+    {
+		self.scopeRangeFinder destroy();
+    }    
     self.rangeFinder = 10;
     self.scopeRangeFinder = newClientHudElem(self);
     self.scopeRangeFinder.alpha = 0;
@@ -769,7 +768,7 @@ scopeRangeFinder()
     self.scopeRangeFinder.vertAlign = "top";
     self.scopeRangeFinder.x = 0;
     self.scopeRangeFinder.y = 50;
-    for(;;)
+    while(isAlive(self))
     {
         wait(0.05);
         while((maps\mp\gametypes\_weapons::hasScope( self GetCurrentWeapon() )) && self playerADS() )
@@ -781,12 +780,18 @@ scopeRangeFinder()
         }
         self.scopeRangeFinder.alpha = 0;
     }
+    if ( isDefined( self.scopeRangeFinder ) )
+    {
+		self.scopeRangeFinder destroy();
+    } 
 }
 
 ballisticCalc()
 {
-    self endon("disconnect");
-    self endon( "game_ended" );
+    if ( isDefined( self.ballisticCalc ) )
+    {
+		self.ballisticCalc destroy();
+    }
     self.rangeFinder = 10;
     self.ballisticCalc = newClientHudElem(self);
     self.ballisticCalc.alpha = 0;
@@ -801,7 +806,7 @@ ballisticCalc()
     self.ballisticCalc.vertAlign = "middle";
     self.ballisticCalc.x = 0;
     //self.ballisticCalc.y = 50; 
-    for(;;)
+    while(isAlive(self))
     {
         if( (self AdsButtonPressed() ) && (self UseButtonPressed()) && (maps\mp\gametypes\_weapons::hasScope( self GetCurrentWeapon() )) )
         {
@@ -821,12 +826,17 @@ ballisticCalc()
         self.ballisticCalc.alpha = 0;
     wait(0.5);
     }
+    if ( isDefined( self.ballisticCalc ) )
+    {
+		self.ballisticCalc destroy();
+    } 
+
 }
 
 weaponInteraction(sWeapon)
 {
     self endon("disconnect");
-    self endon("death");
+   self endon( "game_ended" );
     self.rangeFinder = 0;
     weaponLength = 1;
     weaponLength = getDvarfloat( level.wl[ sWeapon ] );
@@ -849,9 +859,7 @@ weaponInteraction(sWeapon)
 }
 noBunny()
 {
-    self endon("disconnect");
-    self endon("death");
-    for(;;)
+    while(isAlive(self))
     {
         if( self UseButtonPressed() )
         {
@@ -878,6 +886,8 @@ noBunny()
         }
         wait (0.1);
     }
+    self enableWeapons();
+
 }
 perksPerClass()
 {
