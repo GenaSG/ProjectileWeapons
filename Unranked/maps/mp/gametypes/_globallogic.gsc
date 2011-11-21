@@ -5046,7 +5046,7 @@ Callback_PlayerLastStand( eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon,
 	self.lastStandParams.sHitLoc = sHitLoc;
 	self.lastStandParams.lastStandStartTime = gettime();
 	
-	mayDoLastStand = mayDoLastStand( sWeapon, sMeansOfDeath, sHitLoc );
+	mayDoLastStand = mayDoLastStand( sWeapon, sMeansOfDeath, sHitLoc, iDamage );
 	/#
 	if ( getdvar("scr_forcelaststand" ) == "1" )
 		mayDoLastStand = true;
@@ -5186,11 +5186,11 @@ lastStandWaittillDeath()
 	self.lastStand = undefined;
 }
 
-mayDoLastStand( sWeapon, sMeansOfDeath, sHitLoc )
+mayDoLastStand( sWeapon, sMeansOfDeath, sHitLoc, iDamage )
 {
 	//if ( sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_FALLING" || sWeapon != "barrett_mp" || sWeapon != "barrett_acog_mp" )
 	//	return false;
-    if (  sWeapon != "barrett_mp" || sWeapon != "barrett_acog_mp"  )
+    if (  idamage >= 100 )
         return false;
 	
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ))
