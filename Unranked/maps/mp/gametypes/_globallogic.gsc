@@ -5188,8 +5188,10 @@ lastStandWaittillDeath()
 
 mayDoLastStand( sWeapon, sMeansOfDeath, sHitLoc )
 {
-	if ( sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_FALLING" || sWeapon != "barrett_mp" || sWeapon != "barrett_acog_mp" )
-		return false;
+	//if ( sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_FALLING" || sWeapon != "barrett_mp" || sWeapon != "barrett_acog_mp" )
+	//	return false;
+    if (  sWeapon != "barrett_mp" || sWeapon != "barrett_acog_mp"  )
+        return false;
 	
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ))
 		return false;
