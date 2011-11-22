@@ -708,7 +708,7 @@ AfterSpawn()
     self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
-    self thread  perksPerClass();
+   // self thread  perksPerClass();
 
 }
 

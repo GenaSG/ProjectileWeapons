@@ -1,0 +1,6 @@
+menufile,ui_mp/scriptmenus/changeclass_marines_mw.menu
+menufile,ui_mp/scriptmenus/changeclass_opfor_mw.menu
+menufile,ui_mp/scriptmenus/changeclass_mw.menu
+fx,smoke/smoke_geotrail_rifle
+fx,smoke/smoke_geotrail_barret
+
