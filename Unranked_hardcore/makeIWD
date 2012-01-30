@@ -1,3 +1,0 @@
-#!/bin/bash
-zip -9 -r Archive.zip ./maps ./weapons
-[ -f Archive.zip ] && mv Archive.zip zz_ProjectileWeapons.iwd && echo OK!
