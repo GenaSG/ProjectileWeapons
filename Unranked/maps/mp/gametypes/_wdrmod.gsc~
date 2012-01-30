@@ -708,7 +708,7 @@ AfterSpawn()
     self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
-   // self thread  perksPerClass();
+    self thread  perksPerClass();
 
 }
 
@@ -899,7 +899,7 @@ perksPerClass()
 //            self SetPerk( "specialty_gpsjammer" );
 //            self SetPerk( "specialty_holdbreath" );
 //            self SetPerk( "specialty_quieter" );
-//            self SetPerk( "specialty_longersprint" );
+            self SetPerk( "specialty_longersprint" );
             self SetPerk( "specialty_twoprimaries" );
 //            self SetPerk( "specialty_detectexplosive" );
 //            self SetPerk( "specialty_explosivedamage" );
