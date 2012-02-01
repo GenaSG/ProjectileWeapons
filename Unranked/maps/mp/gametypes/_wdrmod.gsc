@@ -28,11 +28,19 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
                     stoppingCoef = 0;
                     stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
-                    if(stoppingCoef == 1)
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
+			{
+			stoppingCoef = 2;
+			}
+                    if(stoppingCoef >= 1)
                     {
-                        thread hitShellShock(iDamage);
+                        thread hitShellShock(iDamage * stoppingCoef);
                     }
-                    iDamage = 0.5 * penetCoef * iDamage/(1+rangeMod*targetDist);
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
+			{
+                    	penetCoef = penetCoef * 2;
+			}
+			iDamage = 0.25 * penetCoef * iDamage/(1+rangeMod*targetDist);
                 }
                 else
                 {
@@ -708,7 +716,7 @@ AfterSpawn()
     self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
-    self thread  perksPerClass();
+   // self thread  perksPerClass();
 
 }
 
