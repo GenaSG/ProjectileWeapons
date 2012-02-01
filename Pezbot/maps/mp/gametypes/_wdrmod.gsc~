@@ -57,10 +57,6 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     {
                         thread hitShellShock(iDamage * stoppingCoef);
                     }
-			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
-			{
-                    	penetCoef = 1.3;
-			}
                     iDamage = 0.75 * penetCoef * iDamage/(1+rangeMod*targetDist);
                 }
             }
