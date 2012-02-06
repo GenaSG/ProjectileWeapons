@@ -5,7 +5,7 @@ cp -rf ./Data/* ../../raw/
 cp -f ./Data/PeZBOT.csv ../../zone_source/mod.csv
 cd ../../bin/
 wine linker_pc.exe -language english -compress -cleanup mod
-cd ../Mods/Pezbot_007p_source
+cd ../Mods/Pezbot_007p_source/
 cp ../../zone/english/mod.ff ./
 
 
