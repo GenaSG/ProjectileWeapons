@@ -722,7 +722,11 @@ return;
 
 AfterSpawn()
 {
-    self thread  noBunny();
+   if(!isdefined(self.bIsBot))
+	{
+  	 self thread  noBunny();
+    	}
+    //self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
    // self thread  perksPerClass();
