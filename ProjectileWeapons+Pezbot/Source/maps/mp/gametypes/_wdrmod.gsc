@@ -833,7 +833,7 @@ ballisticCalc()
         {
             timeToTarget = self.rangeFinder / getDvarfloat( level.ws[ self getCurrentWeapon() ] );
             //IPrintLn(getDvarFloat( "cg_fovmin" ));
-            bulletdrop = 150 * 9.8 * timeToTarget * timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
+            bulletdrop = 150 * 10 * timeToTarget * timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
             self.ballisticCalc.y = bulletdrop ;
             self.ballisticCalc  setText ("_ _") ;
             wait(2);
