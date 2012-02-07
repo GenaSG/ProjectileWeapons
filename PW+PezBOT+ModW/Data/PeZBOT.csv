@@ -1,0 +1,17 @@
+rawfile,mp/playeranim.script
+rawfile,mp/playeranimtypes.txt
+weapon,mp/ak47_mp_pezbot_stand_walk
+weapon,mp/ak47_mp_pezbot_stand_run
+weapon,mp/frag_mp_pezbot_stand_grenade
+weapon,mp/ak47_mp_pezbot_crouch_walk
+weapon,mp/ak47_mp_pezbot_climb_up
+fx,smoke/smoke_geotrail_rifle
+fx,smoke/smoke_geotrail_barret
+rawfile,animtrees/multiplayer.atr
+stringtable,weapons/mp/PeZBOT_WeaponDefs.csv
+stringtable,waypoints/PeZBOT_WP_0.csv
+stringtable,waypoints/PeZBOT_WP_1.csv
+stringtable,waypoints/PeZBOT_WP_2.csv
+stringtable,waypoints/PeZBOT_WP_3.csv
+stringtable,waypoints/PeZBOT_WP_4.csv
+sound,PeZBOT,,all_mp
