@@ -20,7 +20,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 			targetDist = distance(eAttacker.origin, self.origin)* 0.0254;
 			//iDamage = iDamage/(1+rangeMod*targetDist);
             //ProjectileWeapons ARMOR
-            if(sHitLoc == "torso_upper" || sHitLoc == "torso_lower")
+            if(sHitLoc == "torso_upper" || sHitLoc == "torso_lower" || sHitLoc == "right_arm_upper" || sHitLoc == "left_arm_upper" || sHitLoc == "right_arm_lower" || sHitLoc == "left_arm_lower" ||  sHitLoc == "right_hand" ||  sHitLoc == "left_hand" ||  sHitLoc == "gun" )
             {
                 if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
                 {
@@ -69,6 +69,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                 time = 5;
                 thread hitShellShock(iDamage);
                 iDamage = 2 * iDamage/(1+rangeMod*targetDist);
+		//self maps\mp\gametypes\_rank::giveRankXP( "headshot", 100 );
             }
             else
             {
@@ -722,7 +723,11 @@ return;
 
 AfterSpawn()
 {
-    self thread  noBunny();
+   if(!isdefined(self.bIsBot))
+	{
+  	 self thread  noBunny();
+    	}
+    //self thread  noBunny();
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
    // self thread  perksPerClass();
@@ -829,7 +834,7 @@ ballisticCalc()
         {
             timeToTarget = self.rangeFinder / getDvarfloat( level.ws[ self getCurrentWeapon() ] );
             //IPrintLn(getDvarFloat( "cg_fovmin" ));
-            bulletdrop = 150 * 9.8 * timeToTarget * timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
+            bulletdrop = 150 * 10 * timeToTarget * timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
             self.ballisticCalc.y = bulletdrop ;
             self.ballisticCalc  setText ("_ _") ;
             wait(2);
