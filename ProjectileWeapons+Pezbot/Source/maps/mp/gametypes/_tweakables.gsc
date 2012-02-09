@@ -688,50 +688,50 @@ setDvar( "scr_wl_deserteagle", 1 );
 weaponSpeedModTweaks()
 {
 // Assault class weapons
-setDvar( "scr_ws_m16_acog", 948 );
+setDvar( "scr_ws_m16_acog", 37323 );
 
-setDvar( "scr_ws_ak47_acog", 764 );
+setDvar( "scr_ws_ak47_acog", 30079 );
 
-setDvar( "scr_ws_m4_acog", 884 );
+setDvar( "scr_ws_m4_acog", 34803 );
 
-setDvar( "scr_ws_g3_acog", 800 );
+setDvar( "scr_ws_g3_acog", 31496 );
 
-setDvar( "scr_ws_g36c_acog", 850 );
+setDvar( "scr_ws_g36c_acog", 33465 );
 
-setDvar( "scr_ws_m14_acog", 850 );
+setDvar( "scr_ws_m14_acog", 33465 );
 
 
 // Special Ops class weapons
-setDvar( "scr_ws_mp5_acog", 320 );
+setDvar( "scr_ws_mp5_acog", 15748 );
 
-setDvar( "scr_ws_skorpion_acog", 320 );
+setDvar( "scr_ws_skorpion_acog", 12589 );
 
-setDvar( "scr_ws_uzi_acog", 320 );
+setDvar( "scr_ws_uzi_acog", 15748 );
 
-setDvar( "scr_ws_ak74u_acog", 320 );
+setDvar( "scr_ws_ak74u_acog", 30079 );
 
-setDvar( "scr_ws_p90_acog", 320 );
+setDvar( "scr_ws_p90_acog", 28150 );
 
 // Heavy gunner class weapons
-setDvar( "scr_ws_saw_acog", 915 );
-setDvar( "scr_ws_rpd_acog", 735 );
-setDvar( "scr_ws_m60e4_acog", 853 );
+setDvar( "scr_ws_saw_acog", 36024 );
+setDvar( "scr_ws_rpd_acog", 28937 );
+setDvar( "scr_ws_m60e4_acog", 33585 );
 
 // Sniper class weapons
-setDvar( "scr_ws_dragunov", 830 );
-setDvar( "scr_ws_dragunov_acog", 830 );
+setDvar( "scr_ws_dragunov", 32677 );
+setDvar( "scr_ws_dragunov_acog", 32677 );
 
-setDvar( "scr_ws_m40a3", 900 );
-setDvar( "scr_ws_m40a3_acog", 900 );
+setDvar( "scr_ws_m40a3", 35433 );
+setDvar( "scr_ws_m40a3_acog", 33585 );
 
-setDvar( "scr_ws_barrett", 882 );
-setDvar( "scr_ws_barrett_acog", 882 );
+setDvar( "scr_ws_barrett", 34724 );
+setDvar( "scr_ws_barrett_acog", 34724 );
 
-setDvar( "scr_ws_remington700", 900 );
-setDvar( "scr_ws_remington700_acog", 900 );
+setDvar( "scr_ws_remington700", 35433 );
+setDvar( "scr_ws_remington700_acog", 35433 );
 
-setDvar( "scr_ws_m21", 850 );
-setDvar( "scr_ws_m21_acog", 850 );
+setDvar( "scr_ws_m21", 33465 );
+setDvar( "scr_ws_m21_acog", 33465 );
 
 
 }

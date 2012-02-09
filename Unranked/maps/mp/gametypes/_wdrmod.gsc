@@ -832,9 +832,10 @@ ballisticCalc()
     {
         if( (self AdsButtonPressed() ) && (self UseButtonPressed()) && (maps\mp\gametypes\_weapons::hasScope( self GetCurrentWeapon() )) )
         {
-            timeToTarget = self.rangeFinder / getDvarfloat( level.ws[ self getCurrentWeapon() ] );
+	    bulletSpeed = 0.0254*getDvarfloat( level.ws[ self getCurrentWeapon() ] ); 
+            timeToTarget = self.rangeFinder/bulletSpeed;
             //IPrintLn(getDvarFloat( "cg_fovmin" ));
-            bulletdrop = 150 * 10 * timeToTarget * timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
+            bulletdrop = 10000*9.8*timeToTarget*timeToTarget/bulletSpeed;
             self.ballisticCalc.y = bulletdrop ;
             self.ballisticCalc  setText ("_ _") ;
             wait(2);
