@@ -223,8 +223,8 @@ iwfx 2
 	spawnDelayMsec 0 0;
 	lifeSpanMsec 2000 0;
 	spawnOrgX 0 0;
-	spawnOrgY 10 -20;
-	spawnOrgZ 10 -20;
+	spawnOrgY 0 0;
+	spawnOrgZ 0 0;
 	spawnOffsetRadius 60 0;
 	spawnOffsetHeight 1 0;
 	spawnAnglePitch 0 0;
