@@ -115,20 +115,20 @@
 		CHOICE_DBUTTON_VIS( 5, "@MPUI_PERK_1", when( dvarBool(loadout_perk1_locked) ) )
 
 		// PERK 2 BUTTON =============================================================
-//		#define CAC_SETUP_ACTION5 \		
-//			play "mouse_click"; \
-//			open "ocd_popup_cac_perk2";		
-//
-//		CHOICE_BUTTON_BG_RAW( 6, "gradient_fadein", 0.5 0.15 0 0.5, when( dvarString(loadout_perk2) == "specialty_null" ); )
-//		CHOICE_BUTTON( 6, "@MPUI_PERK_2", CAC_SETUP_ACTION5 )
-//		
-//		// PERK 3 BUTTON =============================================================
-//		#define CAC_SETUP_ACTION6 \		
-//			play "mouse_click"; \
-//			open "ocd_popup_cac_perk3";		
-//
-//		CHOICE_BUTTON_BG_RAW( 7, "gradient_fadein", 0.5 0.15 0 0.5, when( dvarString(loadout_perk3) == "specialty_null" ); )
-//		CHOICE_BUTTON( 7, "@MPUI_PERK_3", CAC_SETUP_ACTION6 )
+		#define CAC_SETUP_ACTION5 \		
+			play "mouse_click"; \
+			open "ocd_popup_cac_perk2";		
+
+		CHOICE_BUTTON_BG_RAW( 6, "gradient_fadein", 0.5 0.15 0 0.5, when( dvarString(loadout_perk2) == "specialty_null" ); )
+		CHOICE_BUTTON( 6, "@MPUI_PERK_2", CAC_SETUP_ACTION5 )
+		
+		// PERK 3 BUTTON =============================================================
+		#define CAC_SETUP_ACTION6 \		
+			play "mouse_click"; \
+			open "ocd_popup_cac_perk3";		
+
+		CHOICE_BUTTON_BG_RAW( 7, "gradient_fadein", 0.5 0.15 0 0.5, when( dvarString(loadout_perk3) == "specialty_null" ); )
+		CHOICE_BUTTON( 7, "@MPUI_PERK_3", CAC_SETUP_ACTION6 )
 		
 		/* separator bar */ CHOICE_SEPARATOR( CHOICE_SEP_2 )
 
@@ -376,8 +376,9 @@
 		LOCAL_ATTACHMENT_INFO_WINDOW( "loadout_"ptype )\
 		LOCAL_ATTACHMENT_ITEM( 1, stat_slot, "assault", NUM_NONE, "none", ;, ptype, statDvar, 0 )\
 		LOCAL_ATTACHMENT_ITEM( 2, stat_slot, "assault", NUM_GL, "gl", play "mouse_click"; ;, ptype, statDvar, GL_NEW_BITMASK )\
-		LOCAL_ATTACHMENT_ITEM( 3, stat_slot, "assault", NUM_REFLEX, "reflex", ;, ptype, statDvar, REDDOT_NEW_BITMASK )\
-		LOCAL_ATTACHMENT_ITEM( 4, stat_slot, "assault", NUM_ACOG, "acog", ;, ptype, statDvar, ACOG_NEW_BITMASK )\
+		LOCAL_ATTACHMENT_ITEM( 3, stat_slot, "assault", NUM_SUPPRESSOR, "silencer", ;, ptype, statDvar, SILENCER_NEW_BITMASK )\
+		LOCAL_ATTACHMENT_ITEM( 4, stat_slot, "assault", NUM_REFLEX, "reflex", ;, ptype, statDvar, REDDOT_NEW_BITMASK )\
+		LOCAL_ATTACHMENT_ITEM( 5, stat_slot, "assault", NUM_ACOG, "acog", ;, ptype, statDvar, ACOG_NEW_BITMASK )\
 	}\
 	menuDef { /* LMG attachments*/\
 		IMPROVED_POPUP_SETUP_ONOPEN( "ocd_attachment_popup_LMG"suffix, 7, (CHOICE_X( pos )-2), (CHOICE_Y( pos )+44+y_offset), ;, execnow "set "UI_FOCUSFIRST" "REF_ATTACHMENT_NONE"; set ui_inside_popup attachment";, 0 )\
@@ -393,13 +394,16 @@
 		onClose{execnow "set ui_inside_popup 0";} \
 		LOCAL_ATTACHMENT_INFO_WINDOW( "loadout_"ptype )\
 		LOCAL_ATTACHMENT_ITEM( 1, stat_slot, "smg", NUM_NONE, "none", ;, ptype, statDvar, 0 )\
-		LOCAL_ATTACHMENT_ITEM( 2, stat_slot, "smg", NUM_REFLEX, "reflex", ;, ptype, statDvar, REDDOT_NEW_BITMASK )\
+		LOCAL_ATTACHMENT_ITEM( 2, stat_slot, "smg", NUM_SUPPRESSOR, "silencer", ;, ptype, statDvar, SILENCER_NEW_BITMASK )\
+		LOCAL_ATTACHMENT_ITEM( 3, stat_slot, "smg", NUM_REFLEX, "reflex", ;, ptype, statDvar, REDDOT_NEW_BITMASK )\
+		LOCAL_ATTACHMENT_ITEM( 4, stat_slot, "smg", NUM_ACOG, "acog", ;, ptype, statDvar, ACOG_NEW_BITMASK )\
 	}\
 	menuDef { /* shotgun attachments*/\
 		IMPROVED_POPUP_SETUP_ONOPEN( "ocd_attachment_popup_shotgun"suffix, 7, (CHOICE_X( pos )-2), (CHOICE_Y( pos )+44+y_offset), ;, execnow "set "UI_FOCUSFIRST" "REF_ATTACHMENT_NONE"; set ui_inside_popup attachment";, 0 )\
 		onClose{execnow "set ui_inside_popup 0";} \
 		LOCAL_ATTACHMENT_INFO_WINDOW( "loadout_"ptype )\
 		LOCAL_ATTACHMENT_ITEM( 1, stat_slot, "shotgun", NUM_NONE, "none", ;, ptype, statDvar, 0 )\
+		LOCAL_ATTACHMENT_ITEM( 2, stat_slot, "shotgun", NUM_REFLEX, "reflex", ;, ptype, statDvar, REDDOT_NEW_BITMASK )\
 		LOCAL_ATTACHMENT_ITEM( 3, stat_slot, "shotgun", NUM_GRIP, "grip", ;, ptype, statDvar, GRIP_NEW_BITMASK )\
 	}\
 	menuDef	{ /* sniper attachments*/\
@@ -495,8 +499,8 @@
 		LOCAL_SIDEARM_ITEM( 1, "@WEAPON_BERETTA", STAT_PISTOL_M9BERETTA, REF_M9BERETTA, "ui_sidearm_highlighted" )
 		LOCAL_SIDEARM_ITEM( 2, "@WEAPON_USP", STAT_PISTOL_USP, REF_USP, "ui_sidearm_highlighted" )
 		LOCAL_SIDEARM_ITEM( 3, "@WEAPON_COLT1911", STAT_PISTOL_COLT45, REF_COLT45, "ui_sidearm_highlighted" )
-//		LOCAL_SIDEARM_ITEM( 4, "@WEAPON_DESERTEAGLE", STAT_PISTOL_DESERTEAGLE, REF_DESERTEAGLE, "ui_sidearm_highlighted" )
-//		LOCAL_SIDEARM_ITEM( 5, "@WEAPON_DESERTEAGLEGOLD", STAT_PISTOL_DESERTEAGLEGOLD, REF_DESERTEAGLEGOLD, "ui_sidearm_highlighted" )
+		LOCAL_SIDEARM_ITEM( 4, "@WEAPON_DESERTEAGLE", STAT_PISTOL_DESERTEAGLE, REF_DESERTEAGLE, "ui_sidearm_highlighted" )
+		LOCAL_SIDEARM_ITEM( 5, "@WEAPON_DESERTEAGLEGOLD", STAT_PISTOL_DESERTEAGLEGOLD, REF_DESERTEAGLEGOLD, "ui_sidearm_highlighted" )
 	}
 
 	// ====================================================================================================
@@ -653,9 +657,12 @@
 		onClose{ execnow "set ui_inside_popup 0"; }
 		LOCAL_PERK_INFO_WINDOW( "ui_perk_highlighted" )
 		LOCAL_PERK_ITEM( 1, "@PERKS_C4_X_2", "loadout_perk1", REF_C4_X2, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 2, "@PERKS_RPG7_X_2", "loadout_perk1", REF_RPG_X2, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 3, "@PERKS_CLAYMORE_X_2", "loadout_perk1", REF_CLAYMORE_X2, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 4, "@PERKS_BOMB_SQUAD", "loadout_perk1", REF_DETECTEXPLOSIVE, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 2, "@PERKS_SPECIAL_GRENADES_X_3", "loadout_perk1", REF_SPECIALGRENADE_X3, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 3, "@PERKS_RPG7_X_2", "loadout_perk1", REF_RPG_X2, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 4, "@PERKS_CLAYMORE_X_2", "loadout_perk1", REF_CLAYMORE_X2, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 5, "@PERKS_FRAG_X_3", "loadout_perk1", REF_FRAG_X3, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 6, "@PERKS_BANDOLIER", "loadout_perk1", REF_EXTRAAMMO, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 7, "@PERKS_BOMB_SQUAD", "loadout_perk1", REF_DETECTEXPLOSIVE, CAC_SPECIALTY_EQUIPMENT, "ui_perk_highlighted", ; )
 	}
 	
 	// perk2 selection for primary weapon popup menu
@@ -664,12 +671,12 @@
 		IMPROVED_POPUP_SETUP_ONOPEN( "ocd_popup_cac_perk2", 6, (CHOICE_X( 5 )-2), (CHOICE_Y( 5 )+22), ;, execnow "set "UI_FOCUSFIRST" "REF_BULLETDAMAGE"; set ui_inside_popup perk2";, 1 )
 		onClose{ execnow "set ui_inside_popup 0"; }
 		LOCAL_PERK_INFO_WINDOW( "ui_perk_highlighted" )
-		LOCAL_PERK_ITEM( 1, "@PERKS_STOPPING_POWER", "loadout_perk2", REF_BULLETDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 2, "@PERKS_JUGGERNAUT", "loadout_perk2", REF_ARMORVEST, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 3, "@PERKS_SLEIGHT_OF_HAND", "loadout_perk2", REF_FASTRELOAD, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 4, "@PERKS_DOUBLE_TAP", "loadout_perk2", REF_ROF, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 5, "@PERKS_UAV_JAMMER", "loadout_perk2", REF_GPSJAMMER, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 6, "@PERKS_SONIC_BOOM", "loadout_perk2", REF_EXPLOSIVEDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		//LOCAL_PERK_ITEM( 1, "@PERKS_STOPPING_POWER", "loadout_perk2", REF_BULLETDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 1, "@PERKS_JUGGERNAUT", "loadout_perk2", REF_ARMORVEST, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 2, "@PERKS_SLEIGHT_OF_HAND", "loadout_perk2", REF_FASTRELOAD, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 3, "@PERKS_DOUBLE_TAP", "loadout_perk2", REF_ROF, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 4, "@PERKS_UAV_JAMMER", "loadout_perk2", REF_GPSJAMMER, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 5, "@PERKS_SONIC_BOOM", "loadout_perk2", REF_EXPLOSIVEDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
 	}
 				
 	// perk3 selection for primary weapon popup menu
@@ -682,8 +689,8 @@
 		LOCAL_PERK_ITEM( 2, "@PERKS_STEADY_AIM", "loadout_perk3", REF_BULLETACCURACY, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 3, "@PERKS_LAST_STAND", "loadout_perk3", REF_PISTOLDEATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 4, "@PERKS_MARTYRDOM", "loadout_perk3", REF_GRENADEPULLDEATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 5, "@PERKS_DEEP_IMPACT", "loadout_perk3", REF_BULLETPENETRATION, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 6, "@PERKS_IRON_LUNGS", "loadout_perk3", REF_HOLDBREATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 7, "@PERKS_DEAD_SILENCE", "loadout_perk3", REF_QUIETER, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 8, "@PERKS_EAVESDROP", "loadout_perk3", REF_PARABOLIC, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		//LOCAL_PERK_ITEM( 5, "@PERKS_DEEP_IMPACT", "loadout_perk3", REF_BULLETPENETRATION, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 5, "@PERKS_IRON_LUNGS", "loadout_perk3", REF_HOLDBREATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 6, "@PERKS_DEAD_SILENCE", "loadout_perk3", REF_QUIETER, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 7, "@PERKS_EAVESDROP", "loadout_perk3", REF_PARABOLIC, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 	}
