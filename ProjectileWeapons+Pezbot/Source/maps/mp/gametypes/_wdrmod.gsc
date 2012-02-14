@@ -731,6 +731,10 @@ AfterSpawn()
     self thread  scopeRangeFinder();
     self thread  ballisticCalc();
    // self thread  perksPerClass();
+	if( getDvarfloat( "scr_xpboost" ) == 1 )
+		{
+			thread maps\mp\gametypes\_xpboost::init();
+		}
 
 }
 

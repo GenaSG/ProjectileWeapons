@@ -355,6 +355,8 @@ init()
 	registerTweakable( "hud", 		"showobjicons", 	"ui_hud_showobjicons", 						1 ); //*
 	setClientTweakable( "hud", 		"showobjicons" );
 
+	//xpboost var
+	setDvar( "scr_xpboost", 0 );
 	level thread updateUITweakables();
 }
 
@@ -785,3 +787,5 @@ setDvar( "scr_wzl_m21_acog", 30 );
 
 
 }
+
+
