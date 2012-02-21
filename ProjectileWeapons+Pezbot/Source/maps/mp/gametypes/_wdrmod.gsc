@@ -24,44 +24,59 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             {
                 if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
                 {
-                    penetCoef = 1;
+                    penetCoef = 0;
                     penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
                     stoppingCoef = 0;
                     stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
-//			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
-//			{
-//			stoppingCoef =stoppingCoef + 2;
-//			}
-                    if(stoppingCoef >= 1)
-                    {
-                        thread hitShellShock(iDamage * stoppingCoef);
-                    }
-//			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
-//			{
-//                    	penetCoef = penetCoef + 2;
-//			}
-			iDamage = 0.25 * penetCoef * iDamage/(1+rangeMod*targetDist);
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
+			{
+			stoppingCoef =stoppingCoef + 1;
+			}
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
+			{
+                    	penetCoef = penetCoef + 1;
+			}
+			if( penetCoef < 1 )
+			{
+				iDamage = 0;
+			}
+			else if( penetCoef >= 1 && penetCoef < 2)
+			{
+				iDamage = 0.25 * iDamage/(1+rangeMod*targetDist);	
+			} 
+			else if( penetCoef >= 2 && penetCoef < 3)
+			{
+				iDamage = 0.5 * iDamage/(1+rangeMod*targetDist);	
+			} 
+			else if(penetCoef >= 3)
+			{
+				iDamage = iDamage/(1+rangeMod*targetDist);
+			}
+			thread hitShellShock(iDamage * stoppingCoef);
                 }
                 else
                 {
-                    penetCoef = 1;
+                    penetCoef = 0;
                     penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
                     stoppingCoef = 0;
                     stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
-//			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
-//			{
-//			stoppingCoef =stoppingCoef + 2;
-//			}
-
-                    if(stoppingCoef >= 1)
-                    {
-                        thread hitShellShock(iDamage * stoppingCoef);
-                    }
-//			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
-//			{
-//                  	penetCoef = 1.3;
-//			}
-                    iDamage = 0.75 * penetCoef * iDamage/(1+rangeMod*targetDist);
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
+			{
+			stoppingCoef =stoppingCoef + 1;
+			}
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
+			{
+                    	penetCoef = penetCoef + 1;
+			}
+			if( penetCoef < 1 )
+			{
+				iDamage = 0.75 * iDamage/(1+rangeMod*targetDist);
+			}
+			else if( penetCoef >= 1 )
+			{
+				iDamage = iDamage/(1+rangeMod*targetDist);	
+			} 
+			thread hitShellShock(iDamage * stoppingCoef);
                 }
             }
             else if(sHitLoc == "head" || sHitLoc == "helmet")
@@ -69,7 +84,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                 time = 5;
                 thread hitShellShock(iDamage);
                 iDamage = 2 * iDamage/(1+rangeMod*targetDist);
-		//self maps\mp\gametypes\_rank::giveRankXP( "headshot", 100 );
+		//eAttacker maps\mp\gametypes\_rank::giveRankXP( "headshot", 100 );
             }
             else
             {

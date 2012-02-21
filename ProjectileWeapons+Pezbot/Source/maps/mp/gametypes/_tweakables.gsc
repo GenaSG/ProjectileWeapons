@@ -471,146 +471,146 @@ wdrModTweaks()
 PenetCoefModTweaks()
 {
 // Assault class weapons
-setDvar( "scr_pnt_m16", 1.3 );
-setDvar( "scr_pnt_m16_silenced", 1.3 );
+setDvar( "scr_pnt_m16", 1.95 );
+setDvar( "scr_pnt_m16_silenced", 1.95 );
 
-setDvar( "scr_pnt_ak47", 1.3 );
-setDvar( "scr_pnt_ak47_silenced", 1.3 );
+setDvar( "scr_pnt_ak47", 1.65 );
+setDvar( "scr_pnt_ak47_silenced", 1.65 );
 
-setDvar( "scr_pnt_m4", 1.3 );
-setDvar( "scr_pnt_m4_silenced", 1.3 );
+setDvar( "scr_pnt_m4", 1.82 );
+setDvar( "scr_pnt_m4_silenced", 1.82 );
 
-setDvar( "scr_pnt_g3", 1.3 );
-setDvar( "scr_pnt_g3_silenced", 1.3 );
+setDvar( "scr_pnt_g3", 2.12 );
+setDvar( "scr_pnt_g3_silenced", 2.12 );
 
-setDvar( "scr_pnt_g36c", 1.3 );
-setDvar( "scr_pnt_g36c_silenced", 1.3 );
+setDvar( "scr_pnt_g36c", 1.75 );
+setDvar( "scr_pnt_g36c_silenced", 1.75 );
 
-setDvar( "scr_pnt_m14", 1.3 );
-setDvar( "scr_pnt_m14_silenced", 1.3 );
+setDvar( "scr_pnt_m14", 2.26 );
+setDvar( "scr_pnt_m14_silenced", 2.26 );
 
-setDvar( "scr_pnt_mp44", 1.3 );
+setDvar( "scr_pnt_mp44", 1.41 );
 
 // Special Ops class weapons
-setDvar( "scr_pnt_mp5", 1 );
-setDvar( "scr_pnt_mp5_silenced", 1 );
+setDvar( "scr_pnt_mp5", 0.58 );
+setDvar( "scr_pnt_mp5_silenced", 0.58 );
 
-setDvar( "scr_pnt_skorpion", 1 );
-setDvar( "scr_pnt_skorpion_silenced", 1 );
+setDvar( "scr_pnt_skorpion", 0.59 );
+setDvar( "scr_pnt_skorpion_silenced", 0.59 );
 
-setDvar( "scr_pnt_uzi", 1 );
-setDvar( "scr_pnt_uzi_silenced", 1 );
+setDvar( "scr_pnt_uzi", 0.58 );
+setDvar( "scr_pnt_uzi_silenced", 0.58 );
 
-setDvar( "scr_pnt_ak74u", 1.3 );
-setDvar( "scr_pnt_ak74u_silenced", 1.3 );
+setDvar( "scr_pnt_ak74u", 1.57 );
+setDvar( "scr_pnt_ak74u_silenced", 1.57 );
 
-setDvar( "scr_pnt_p90", 1.3 );
-setDvar( "scr_pnt_p90_silenced", 1.3 );
+setDvar( "scr_pnt_p90", 1.45 );
+setDvar( "scr_pnt_p90_silenced", 1.45 );
 
 // Demolition class weapons
 //setDvar( "scr_pnt_m1014", 1 );
 //setDvar( "scr_pnt_winchester1200", 1 );
 
 // Heavy gunner class weapons
-setDvar( "scr_pnt_saw", 1.3 );
-setDvar( "scr_pnt_rpd", 1.3 );
-setDvar( "scr_pnt_m60e4", 1.3 );
+setDvar( "scr_pnt_saw", 1.88 );
+setDvar( "scr_pnt_rpd", 1.59 );
+setDvar( "scr_pnt_m60e4", 2.26 );
 
 // Sniper class weapons
-setDvar( "scr_pnt_dragunov", 1.3 );
+setDvar( "scr_pnt_dragunov", 2.20 );
 
-setDvar( "scr_pnt_m40a3", 1.3 );
+setDvar( "scr_pnt_m40a3", 3.03 );
 
-setDvar( "scr_pnt_barrett", 1.3 );
+setDvar( "scr_pnt_barrett", 4.52 );
 
-setDvar( "scr_pnt_remington700", 1.3 );
+setDvar( "scr_pnt_remington700", 3.03 );
 
-setDvar( "scr_pnt_m21", 1.3 );
+setDvar( "scr_pnt_m21", 2.26 );
 
 // Handguns
-setDvar( "scr_pnt_beretta", 1 );
-setDvar( "scr_pnt_beretta_silenced", 1 );
+setDvar( "scr_pnt_beretta", 0.55 );
+setDvar( "scr_pnt_beretta_silenced", 0.55 );
 
-setDvar( "scr_pnt_colt45", 1 );
-setDvar( "scr_pnt_colt45_silenced", 1 );
+setDvar( "scr_pnt_colt45", 0.46 );
+setDvar( "scr_pnt_colt45_silenced", 0.46 );
 
-setDvar( "scr_pnt_usp", 1 );
-setDvar( "scr_pnt_usp_silenced", 1 );
+setDvar( "scr_pnt_usp", 0.46 );
+setDvar( "scr_pnt_usp_silenced", 0.46 );
 
-setDvar( "scr_pnt_deserteagle", 1 );
+setDvar( "scr_pnt_deserteagle", 0.78 );
 
 }
 
 StoppingCoefModTweaks()
 {
 // Assault class weapons
-setDvar( "scr_stp_m16", 0 );
-setDvar( "scr_stp_m16_silenced", 0 );
+setDvar( "scr_stp_m16", 1.84 );
+setDvar( "scr_stp_m16_silenced", 1.84 );
 
-setDvar( "scr_stp_ak47", 1 );
-setDvar( "scr_stp_ak47_silenced", 1 );
+setDvar( "scr_stp_ak47", 5.50 );
+setDvar( "scr_stp_ak47_silenced", 5.50 );
 
-setDvar( "scr_stp_m4", 0 );
-setDvar( "scr_stp_m4_silenced", 0 );
+setDvar( "scr_stp_m4", 1.71 );
+setDvar( "scr_stp_m4_silenced", 1.71 );
 
-setDvar( "scr_stp_g3", 1 );
-setDvar( "scr_stp_g3_silenced", 1 );
+setDvar( "scr_stp_g3", 7.07 );
+setDvar( "scr_stp_g3_silenced", 7.07 );
 
-setDvar( "scr_stp_g36c", 0 );
-setDvar( "scr_stp_g36c_silenced", 0 );
+setDvar( "scr_stp_g36c", 1.65 );
+setDvar( "scr_stp_g36c_silenced", 1.65 );
 
-setDvar( "scr_stp_m14", 1 );
-setDvar( "scr_stp_m14_silenced", 1 );
+setDvar( "scr_stp_m14", 7.51 );
+setDvar( "scr_stp_m14_silenced", 7.51 );
 
-setDvar( "scr_stp_mp44", 1 );
+setDvar( "scr_stp_mp44", 5.43 );
 
 // Special Ops class weapons
-setDvar( "scr_stp_mp5", 1 );
-setDvar( "scr_stp_mp5_silenced", 1 );
+setDvar( "scr_stp_mp5", 3.78 );
+setDvar( "scr_stp_mp5_silenced", 3.78 );
 
-setDvar( "scr_stp_skorpion", 1 );
-setDvar( "scr_stp_skorpion_silenced", 1 );
+setDvar( "scr_stp_skorpion", 3.86 );
+setDvar( "scr_stp_skorpion_silenced", 3.86 );
 
-setDvar( "scr_stp_uzi", 1 );
-setDvar( "scr_stp_uzi_silenced", 1 );
+setDvar( "scr_stp_uzi", 3.78 );
+setDvar( "scr_stp_uzi_silenced", 3.78 );
 
-setDvar( "scr_stp_ak74u", 0 );
-setDvar( "scr_stp_ak74u_silenced", 0 );
+setDvar( "scr_stp_ak74u", 1.37 );
+setDvar( "scr_stp_ak74u_silenced", 1.37 );
 
-setDvar( "scr_stp_p90", 0 );
-setDvar( "scr_stp_p90_silenced", 0 );
+setDvar( "scr_stp_p90", 1.45 );
+setDvar( "scr_stp_p90_silenced", 1.45 );
 
 // Demolition class weapons
 //setDvar( "scr_stp_m1014", 1 );
 //setDvar( "scr_stp_winchester1200", 1 );
 
 // Heavy gunner class weapons
-setDvar( "scr_stp_saw", 1 );
-setDvar( "scr_stp_rpd", 1 );
-setDvar( "scr_stp_m60e4", 1 );
+setDvar( "scr_stp_saw", 1.77 );
+setDvar( "scr_stp_rpd", 5.29 );
+setDvar( "scr_stp_m60e4", 7.54 );
 
 // Sniper class weapons
-setDvar( "scr_stp_dragunov", 1 );
+setDvar( "scr_stp_dragunov", 7.33 );
 
-setDvar( "scr_stp_m40a3", 1 );
+setDvar( "scr_stp_m40a3", 10.09 );
 
-setDvar( "scr_stp_barrett", 1 );
+setDvar( "scr_stp_barrett", 116.13 );
 
-setDvar( "scr_stp_remington700", 1 );
+setDvar( "scr_stp_remington700", 10.09 );
 
-setDvar( "scr_stp_m21", 1 );
+setDvar( "scr_stp_m21", 7.51 );
 
 // Handguns
-setDvar( "scr_stp_beretta", 1 );
-setDvar( "scr_stp_beretta_silenced", 1 );
+setDvar( "scr_stp_beretta", 3.60 );
+setDvar( "scr_stp_beretta_silenced", 3.60 );
 
-setDvar( "scr_stp_colt45", 1 );
-setDvar( "scr_stp_colt45_silenced", 1 );
+setDvar( "scr_stp_colt45", 7.84 );
+setDvar( "scr_stp_colt45_silenced", 7.84 );
 
-setDvar( "scr_stp_usp", 0.03333 );
-setDvar( "scr_stp_usp_silenced", 1 );
+setDvar( "scr_stp_usp", 7.84 );
+setDvar( "scr_stp_usp_silenced", 7.84 );
 
-setDvar( "scr_stp_deserteagle", 1 );
+setDvar( "scr_stp_deserteagle", 20.25 );
 
 }
 

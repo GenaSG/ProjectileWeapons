@@ -974,7 +974,7 @@ setClass( newClass )
 
 initPerkDvars()
 {
-	level.cac_bulletdamage_data = cac_get_dvar_int( "perk_bulletDamage", "40" );		// increased bullet damage by this %
+	level.cac_bulletdamage_data = cac_get_dvar_int( "perk_bulletDamage", "0" );		// increased bullet damage by this %
 	level.cac_armorvest_data = cac_get_dvar_int( "perk_armorVest", "75" );				// increased health by this %
 	level.cac_explosivedamage_data = cac_get_dvar_int( "perk_explosiveDamage", "25" );	// increased explosive damage by this %
 }
