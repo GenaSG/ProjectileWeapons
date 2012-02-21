@@ -20,7 +20,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 			targetDist = distance(eAttacker.origin, self.origin)* 0.0254;
 			//iDamage = iDamage/(1+rangeMod*targetDist);
             //ProjectileWeapons ARMOR
-            if(sHitLoc == "torso_upper" || sHitLoc == "torso_lower" || sHitLoc == "right_arm_upper" || sHitLoc == "left_arm_upper" || sHitLoc == "right_arm_lower" || sHitLoc == "left_arm_lower" ||  sHitLoc == "right_hand" ||  sHitLoc == "left_hand" ||  sHitLoc == "gun" )
+            if(sHitLoc == "torso_upper" || sHitLoc == "torso_lower" || sHitLoc == "right_arm_upper" || sHitLoc == "left_arm_upper" || sHitLoc == "right_arm_lower" || sHitLoc == "left_arm_lower" ||  sHitLoc == "right_hand" ||  sHitLoc == "left_hand" )
             {
                 if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
                 {
@@ -81,10 +81,27 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             }
             else if(sHitLoc == "head" || sHitLoc == "helmet")
             {
-                time = 5;
-                thread hitShellShock(iDamage);
-                iDamage = 2 * iDamage/(1+rangeMod*targetDist);
-		//eAttacker maps\mp\gametypes\_rank::giveRankXP( "headshot", 100 );
+                    penetCoef = 0;
+                    penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    stoppingCoef = 0;
+                    stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
+			{
+			stoppingCoef =stoppingCoef + 1;
+			}
+			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletpenetration" ) )
+			{
+                    	penetCoef = penetCoef + 1;
+			}
+			if( penetCoef < 1 )
+			{
+				iDamage = 2 * iDamage/(1+rangeMod*targetDist);
+			}
+			else if( penetCoef >= 1 )
+			{
+				iDamage = 4 * iDamage/(1+rangeMod*targetDist);	
+			} 
+			thread hitShellShock(iDamage * stoppingCoef);
             }
             else
             {
