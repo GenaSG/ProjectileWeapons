@@ -871,9 +871,9 @@ ballisticCalc()
 	    bulletSpeed = 0.0254*getDvarfloat( level.ws[ self getCurrentWeapon() ] ); 
             timeToTarget = self.rangeFinder/bulletSpeed;
             //IPrintLn(getDvarFloat( "cg_fovmin" ));
-            bulletdrop = 10000*9.8*timeToTarget*timeToTarget/bulletSpeed;
+            bulletdrop = 10500*9.8*timeToTarget*timeToTarget/bulletSpeed;
             self.ballisticCalc.y = bulletdrop ;
-            self.ballisticCalc  setText ("_ _") ;
+            self.ballisticCalc  setText ("- -") ;
             wait(2);
             self.ballisticCalc.alpha = 1;
             while ((self AdsButtonPressed() ))
