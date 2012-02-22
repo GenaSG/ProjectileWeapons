@@ -123,7 +123,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 hitShellShock(iDamage)
 {
      time = iDamage * 0.1;   
-     self shellShock( "frag_grenade_mp", time );
+     self shellShock( "damage_mp", time );
 }
 
 loadWdrMod()
