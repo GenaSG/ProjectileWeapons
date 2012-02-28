@@ -25,9 +25,9 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                 if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
                 {
                     penetCoef = 0;
-                    penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    penetCoef = (getDvarfloat( level.penetCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
                     stoppingCoef = 0;
-                    stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                    stoppingCoef = (getDvarfloat( level.stoppingCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
 			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
 			{
 			stoppingCoef =stoppingCoef + 1;
@@ -57,9 +57,9 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                 else
                 {
                     penetCoef = 0;
-                    penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    penetCoef = (getDvarfloat( level.penetCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
                     stoppingCoef = 0;
-                    stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                    stoppingCoef = (getDvarfloat( level.stoppingCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
 			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
 			{
 			stoppingCoef =stoppingCoef + 1;
@@ -82,9 +82,9 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             else if(sHitLoc == "head" || sHitLoc == "helmet")
             {
                     penetCoef = 0;
-                    penetCoef = getDvarfloat( level.penetCoef[ sWeapon ] );
+                    penetCoef = (getDvarfloat( level.penetCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
                     stoppingCoef = 0;
-                    stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                    stoppingCoef = (getDvarfloat( level.stoppingCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
 			if( eAttacker maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_bulletdamage" ) )
 			{
 			stoppingCoef =stoppingCoef + 1;
@@ -106,10 +106,10 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             else
             {
                 stoppingCoef = 0;
-                stoppingCoef = getDvarfloat( level.stoppingCoef[ sWeapon ] );
+                stoppingCoef = (getDvarfloat( level.stoppingCoef[ sWeapon ] ))/(1+rangeMod*targetDist);
                 if(stoppingCoef == 1)
                 {
-                    thread hitShellShock(iDamage);
+                    thread hitShellShock(stoppingCoef);
                 }
                 iDamage = iDamage/(1+rangeMod*targetDist);
             }
@@ -120,10 +120,10 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 	return int(iDamage);
 }
 
-hitShellShock(iDamage)
+hitShellShock(stoppingCoef)
 {
-     time = iDamage * 0.1;   
-     self shellShock( "damage_mp", time );
+     time = stoppingCoef * 0.05;   
+     self shellShock( "frag_grenade_mp", time );
 }
 
 loadWdrMod()
