@@ -357,6 +357,7 @@ init()
 
 	//xpboost var
 	setDvar( "scr_xpboost", 0 );
+    setDvar( "cg_fovmin", 1 );
 	level thread updateUITweakables();
 }
 
@@ -741,49 +742,49 @@ setDvar( "scr_ws_m21_acog", 33465 );
 weaponZoomModTweaks()
 {
 // Assault class weapons
-setDvar( "scr_wzl_m16_acog", 30 );
+setDvar( "scr_wzl_m16_acog", 16 );
 
-setDvar( "scr_wzl_ak47_acog", 30 );
+setDvar( "scr_wzl_ak47_acog", 16 );
 
-setDvar( "scr_wzl_m4_acog", 43 );
+setDvar( "scr_wzl_m4_acog", 16 );
 
-setDvar( "scr_wzl_g3_acog", 30 );
+setDvar( "scr_wzl_g3_acog", 16 );
 
-setDvar( "scr_wzl_g36c_acog", 43 );
+setDvar( "scr_wzl_g36c_acog", 16 );
 
-setDvar( "scr_wzl_m14_acog", 30 );
+setDvar( "scr_wzl_m14_acog", 16 );
 
 // Special Ops class weapons
-setDvar( "scr_wzl_mp5_acog", 43 );
+setDvar( "scr_wzl_mp5_acog", 16 );
 
-setDvar( "scr_wzl_skorpion_acog", 43 );
+setDvar( "scr_wzl_skorpion_acog", 16 );
 
-setDvar( "scr_wzl_uzi_acog", 43 );
+setDvar( "scr_wzl_uzi_acog", 16 );
 
-setDvar( "scr_wzl_ak74u_acog", 43 );
+setDvar( "scr_wzl_ak74u_acog", 16 );
 
-setDvar( "scr_wzl_p90_acog", 43 );
+setDvar( "scr_wzl_p90_acog", 16 );
 
 // Heavy gunner class weapons
-setDvar( "scr_wzl_saw_acog", 30 );
-setDvar( "scr_wzl_rpd_acog", 30 );
-setDvar( "scr_wzl_m60e4_acog", 30 );
+setDvar( "scr_wzl_saw_acog", 16 );
+setDvar( "scr_wzl_rpd_acog", 16 );
+setDvar( "scr_wzl_m60e4_acog", 16 );
 
 // Sniper class weapons
-setDvar( "scr_wzl_dragunov", 10 );
-setDvar( "scr_wzl_dragunov_acog", 30 );
+setDvar( "scr_wzl_dragunov", 9 );
+setDvar( "scr_wzl_dragunov_acog", 16 );
 
-setDvar( "scr_wzl_m40a3", 10 );
-setDvar( "scr_wzl_m40a3_acog", 30 );
+setDvar( "scr_wzl_m40a3", 8 );
+setDvar( "scr_wzl_m40a3_acog", 16 );
 
-setDvar( "scr_wzl_barrett", 10 );
-setDvar( "scr_wzl_barrett_acog", 30 );
+setDvar( "scr_wzl_barrett", 5 );
+setDvar( "scr_wzl_barrett_acog", 16 );
 
-setDvar( "scr_wzl_remington700", 10 );
-setDvar( "scr_wzl_remington700_acog", 30 );
+setDvar( "scr_wzl_remington700", 6 );
+setDvar( "scr_wzl_remington700_acog", 16 );
 
-setDvar( "scr_wzl_m21", 10 );
-setDvar( "scr_wzl_m21_acog", 30 );
+setDvar( "scr_wzl_m21", 8 );
+setDvar( "scr_wzl_m21_acog", 16 );
 
 
 }
