@@ -85,7 +85,7 @@ jaggernaut()
     if(self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" ) )
     {
      //   player.health = 2 * maxhealth;
-        self setMoveSpeedScale( 0.84 );
+        self setMoveSpeedScale( 0.9 );
     }
 }
 
