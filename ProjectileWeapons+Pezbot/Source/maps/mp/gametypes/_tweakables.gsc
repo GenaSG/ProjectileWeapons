@@ -357,7 +357,10 @@ init()
 
 	//xpboost var
 	setDvar( "scr_xpboost", 0 );
+    //Min FOV value
     setDvar( "cg_fovmin", 1 );
+    //StoppingCoef for weapons stopping power
+    setDvar( "scr_stoppingcoef", 0.25 );
 	level thread updateUITweakables();
 }
 
