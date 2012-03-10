@@ -52,7 +52,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 			{
 				iDamage = iDamage/(1+rangeMod*targetDist);
 			}
-			thread hitShellShock(iDamage * stoppingCoef);
+			thread hitShellShock(stoppingCoef);
                 }
                 else
                 {
@@ -76,7 +76,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 			{
 				iDamage = iDamage/(1+rangeMod*targetDist);	
 			} 
-			thread hitShellShock(iDamage * stoppingCoef);
+			thread hitShellShock(stoppingCoef);
                 }
             }
             else if(sHitLoc == "head" || sHitLoc == "helmet")
@@ -101,7 +101,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 			{
 				iDamage = 4 * iDamage/(1+rangeMod*targetDist);	
 			} 
-			thread hitShellShock(iDamage * stoppingCoef);
+			thread hitShellShock(stoppingCoef);
             }
             else
             {
@@ -122,7 +122,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 
 hitShellShock(stoppingCoef)
 {
-     time = stoppingCoef * 0.05;   
+     time = stoppingCoef * 0.5;   
      self shellShock( "frag_grenade_mp", time );
 }
 
