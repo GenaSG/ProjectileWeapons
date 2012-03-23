@@ -8,7 +8,10 @@ weapon,mp/ak47_mp_pezbot_climb_up
 fx,smoke/smoke_geotrail_rifle
 fx,smoke/smoke_geotrail_rifle_heavy
 fx,smoke/smoke_geotrail_barret
+material,binocular_overlay
 material,scope_overlay_acog
+material,scope_overlay_acog_low_res
+material,scope_overlay_russian
 rawfile,animtrees/multiplayer.atr
 stringtable,weapons/mp/PeZBOT_WeaponDefs.csv
 stringtable,waypoints/PeZBOT_WP_0.csv
