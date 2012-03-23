@@ -765,14 +765,13 @@ AfterSpawn()
 	{
   	 self thread  noBunny();
     	}
-    //self thread  noBunny();
     self thread  scopeRangeFinder();
     //self thread  ballisticCalc();
    // self thread  perksPerClass();
-	if( getDvarfloat( "scr_xpboost" ) == 1 )
-		{
-			thread maps\mp\gametypes\_xpboost::init();
-		}
+//	if( getDvarfloat( "scr_xpboost" ) == 1 )
+//		{
+//			thread maps\mp\gametypes\_xpboost::init();
+//		}
 
 }
 
@@ -877,9 +876,9 @@ ballisticCalc()
 	    bulletSpeed = 0.0254*getDvarfloat( level.ws[ self getCurrentWeapon() ] ); 
             timeToTarget = self.rangeFinder/bulletSpeed;
             //IPrintLn(getDvarFloat( "cg_fovmin" ));
-            bulletdrop = 10500*9.8*timeToTarget*timeToTarget/bulletSpeed;
+            bulletdrop = 9.8*timeToTarget*timeToTarget;
             self.ballisticCalc.y = bulletdrop ;
-            self.ballisticCalc  setText ("- -") ;
+            self.ballisticCalc  setText ("--") ;
             wait(2);
             self.ballisticCalc.alpha = 1;
             while ((self AdsButtonPressed() ))
