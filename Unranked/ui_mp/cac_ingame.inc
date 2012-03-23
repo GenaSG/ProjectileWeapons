@@ -672,11 +672,11 @@
 		onClose{ execnow "set ui_inside_popup 0"; }
 		LOCAL_PERK_INFO_WINDOW( "ui_perk_highlighted" )
 		LOCAL_PERK_ITEM( 1, "@PERKS_STOPPING_POWER", "loadout_perk2", REF_BULLETDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 1, "@PERKS_JUGGERNAUT", "loadout_perk2", REF_ARMORVEST, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 2, "@PERKS_SLEIGHT_OF_HAND", "loadout_perk2", REF_FASTRELOAD, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 3, "@PERKS_DOUBLE_TAP", "loadout_perk2", REF_ROF, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 4, "@PERKS_UAV_JAMMER", "loadout_perk2", REF_GPSJAMMER, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 5, "@PERKS_SONIC_BOOM", "loadout_perk2", REF_EXPLOSIVEDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 2, "@PERKS_JUGGERNAUT", "loadout_perk2", REF_ARMORVEST, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 3, "@PERKS_SLEIGHT_OF_HAND", "loadout_perk2", REF_FASTRELOAD, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 4, "@PERKS_DOUBLE_TAP", "loadout_perk2", REF_ROF, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 5, "@PERKS_UAV_JAMMER", "loadout_perk2", REF_GPSJAMMER, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 6, "@PERKS_SONIC_BOOM", "loadout_perk2", REF_EXPLOSIVEDAMAGE, CAC_SPECIALTY_WEAPON, "ui_perk_highlighted", ; )
 	}
 				
 	// perk3 selection for primary weapon popup menu
