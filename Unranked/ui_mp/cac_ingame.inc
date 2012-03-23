@@ -691,6 +691,6 @@
 		LOCAL_PERK_ITEM( 4, "@PERKS_MARTYRDOM", "loadout_perk3", REF_GRENADEPULLDEATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 5, "@PERKS_DEEP_IMPACT", "loadout_perk3", REF_BULLETPENETRATION, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 6, "@PERKS_IRON_LUNGS", "loadout_perk3", REF_HOLDBREATH, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
-		LOCAL_PERK_ITEM( 6, "@PERKS_DEAD_SILENCE", "loadout_perk3", REF_QUIETER, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
+		LOCAL_PERK_ITEM( 7, "@PERKS_DEAD_SILENCE", "loadout_perk3", REF_QUIETER, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 		LOCAL_PERK_ITEM( 8, "@PERKS_EAVESDROP", "loadout_perk3", REF_PARABOLIC, CAC_SPECIALTY_ABILITY, "ui_perk_highlighted", ; )
 	}
