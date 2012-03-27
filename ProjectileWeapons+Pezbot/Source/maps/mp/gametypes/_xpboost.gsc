@@ -185,6 +185,7 @@ unlockAttachmentsStart()
 	unlockAttachment[52] = "m14 gl";
 	unlockAttachment[53] = "g3 gl";
 	unlockAttachment[54] = "g36c gl";
+    unlockAttachment[55] = "colt45 silencer";
 
 	for( i = 0; i < unlockAttachment.size; i++ )
 	{
