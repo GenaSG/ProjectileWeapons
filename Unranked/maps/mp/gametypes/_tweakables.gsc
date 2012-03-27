@@ -403,22 +403,22 @@ wdrModTweaks()
 {
 	// Assault class weapons
 	setDvar( "scr_wdr_m16", 0.00182 );
-	setDvar( "scr_wdr_m16_silenced", 0.00182 );
+	setDvar( "scr_wdr_m16_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_ak47", 0.00250 );
-	setDvar( "scr_wdr_ak47_silenced", 0.00250 );
+	setDvar( "scr_wdr_ak47_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_m4", 0.00200 );
-	setDvar( "scr_wdr_m4_silenced", 0.00200 );
+	setDvar( "scr_wdr_m4_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_g3", 0.00200 );
-	setDvar( "scr_wdr_g3_silenced", 0.00200 );
+	setDvar( "scr_wdr_g3_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_g36c", 0.00200 );
-	setDvar( "scr_wdr_g36c_silenced", 0.00200 );
+	setDvar( "scr_wdr_g36c_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_m14", 0.00200 );
-	setDvar( "scr_wdr_m14_silenced", 0.00200 );
+	setDvar( "scr_wdr_m14_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_mp44", 0.00333 );
 	
@@ -433,7 +433,7 @@ wdrModTweaks()
 	setDvar( "scr_wdr_uzi_silenced", 0.01000 );
 	
 	setDvar( "scr_wdr_ak74u", 0.00200 );
-	setDvar( "scr_wdr_ak74u_silenced", 0.00200 );
+	setDvar( "scr_wdr_ak74u_silenced", 0.00500 );
 	
 	setDvar( "scr_wdr_p90", 0.00500 );
 	setDvar( "scr_wdr_p90_silenced", 0.00500 );
@@ -468,7 +468,7 @@ wdrModTweaks()
 	setDvar( "scr_wdr_usp", 0.03333 );
 	setDvar( "scr_wdr_usp_silenced", 0.03333 );
 	
-	setDvar( "scr_wdr_deserteagle", 0.02000 );
+	setDvar( "scr_wdr_deserteagle", 0.00500 );
 	
 }
 
