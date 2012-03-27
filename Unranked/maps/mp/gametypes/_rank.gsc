@@ -19,19 +19,19 @@ init()
 	if ( level.teamBased )
 	{
 		registerScoreInfo( "kill", 10 );
-		registerScoreInfo( "death", -10 );
-		registerScoreInfo( "headshot", 20 );
+		registerScoreInfo( "death", 0 );
+		registerScoreInfo( "headshot", 0 );
 		registerScoreInfo( "assist", 2 );
-		registerScoreInfo( "suicide", -20 );
-		registerScoreInfo( "teamkill", -20 );
+		registerScoreInfo( "suicide", 0 );
+		registerScoreInfo( "teamkill", 0 );
 	}
 	else
 	{
 		registerScoreInfo( "kill", 5 );
-		registerScoreInfo( "death", -5 );
-		registerScoreInfo( "headshot", 10 );
+		registerScoreInfo( "death", 0 );
+		registerScoreInfo( "headshot", 5 );
 		registerScoreInfo( "assist", 0 );
-		registerScoreInfo( "suicide", -10 );
+		registerScoreInfo( "suicide", 0 );
 		registerScoreInfo( "teamkill", 0 );
 	}
 	
