@@ -363,7 +363,7 @@ setup_destructibles()
 	// Make this entity take damage and wait for events
 	//---------------------------------------------------------------------
 	if(	self.classname != "script_vehicle" )
-		self setCanDamage( true );
+		self setCanDamage( false );
 	self thread destructible_think();
 }
 
@@ -373,7 +373,7 @@ damage_mirror( parent, modelName, tagName )
 	self endon( "stop_damage_mirror" );
 	parent endon( "stop_taking_damage" );
 	
-	self setCanDamage( true );
+	self setCanDamage( false );
 	for ( ;; )
 	{
 		self waittill ( "damage", damage, attacker, direction_vec, point, type );
