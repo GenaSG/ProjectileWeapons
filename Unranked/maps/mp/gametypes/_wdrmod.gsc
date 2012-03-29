@@ -8,6 +8,7 @@ init()
     thread loadWeaponLength();
     thread loadWeaponSpeed();
     thread loadWeaponZoomLevel();
+    thread levelcleanup();
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
@@ -765,13 +766,14 @@ AfterSpawn()
 	{
   	 self thread  noBunny();
     	}
+    //self thread  noBunny();
     self thread  scopeRangeFinder();
     //self thread  ballisticCalc();
    // self thread  perksPerClass();
-//	if( getDvarfloat( "scr_xpboost" ) == 1 )
-//		{
-//			thread maps\mp\gametypes\_xpboost::init();
-//		}
+	//if( getDvarfloat( "scr_xpboost" ) == 1 )
+	//	{
+	//		thread maps\mp\gametypes\_xpboost::init();
+	//	}
 
 }
 
@@ -876,9 +878,9 @@ ballisticCalc()
 	    bulletSpeed = 0.0254*getDvarfloat( level.ws[ self getCurrentWeapon() ] ); 
             timeToTarget = self.rangeFinder/bulletSpeed;
             //IPrintLn(getDvarFloat( "cg_fovmin" ));
-            bulletdrop = 9.8*timeToTarget*timeToTarget;
+            bulletdrop = 10500*9.8*timeToTarget*timeToTarget/bulletSpeed;
             self.ballisticCalc.y = bulletdrop ;
-            self.ballisticCalc  setText ("--") ;
+            self.ballisticCalc  setText ("- -") ;
             wait(2);
             self.ballisticCalc.alpha = 1;
             while ((self AdsButtonPressed() ))
@@ -1093,4 +1095,26 @@ perksPerClass()
 					"scr_hardpoint_allowhelicopter", 0);
 			break;
 	}
+}
+levelcleanup()
+{
+    //endon("disconnect");
+    level endon( "game_ended" );
+    for(;;)
+    {
+        grenades = GetEntArray( "grenade","classname" );
+            for(i=0;i<grenades.size;i++)
+            {
+            thread deleteProjectile(grenades[i], 6);
+            }
+        wait (0.1);
+    }
+}
+deleteProjectile(entityname, timeout)
+{
+    wait(timeout);
+    if(isdefined(entityname))
+    {
+        entityname Delete();
+    }
 }

@@ -8,6 +8,7 @@ init()
     thread loadWeaponLength();
     thread loadWeaponSpeed();
     thread loadWeaponZoomLevel();
+    thread levelcleanup();
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
@@ -1094,4 +1095,26 @@ perksPerClass()
 					"scr_hardpoint_allowhelicopter", 0);
 			break;
 	}
+}
+levelcleanup()
+{
+    //endon("disconnect");
+    level endon( "game_ended" );
+    for(;;)
+    {
+        grenades = GetEntArray( "grenade","classname" );
+            for(i=0;i<grenades.size;i++)
+            {
+            thread deleteProjectile(grenades[i], 6);
+            }
+        wait (0.1);
+    }
+}
+deleteProjectile(entityname, timeout)
+{
+    wait(timeout);
+    if(isdefined(entityname))
+    {
+        entityname Delete();
+    }
 }
