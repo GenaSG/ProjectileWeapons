@@ -768,7 +768,7 @@ AfterSpawn()
     	}
     //self thread  noBunny();
     self thread  scopeRangeFinder();
-    self thread  ballisticCalc();
+    //self thread  ballisticCalc();
    // self thread  perksPerClass();
 	if( getDvarfloat( "scr_xpboost" ) == 1 )
 		{
