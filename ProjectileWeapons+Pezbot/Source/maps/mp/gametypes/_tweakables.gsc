@@ -361,6 +361,8 @@ init()
     setDvar( "cg_fovmin", 1 );
     //StoppingCoef for weapons stopping power
     setDvar( "scr_stoppingcoef", 0.25 );
+    //Ballistic calc coef
+    setDvar("scr_ballcalccoef", 145 );
 	level thread updateUITweakables();
 }
 
