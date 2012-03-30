@@ -1105,7 +1105,10 @@ levelcleanup()
         grenades = GetEntArray( "grenade","classname" );
             for(i=0;i<grenades.size;i++)
             {
-            thread deleteProjectile(grenades[i], 6);
+            if(grenades[i].model=="projectile_tag")
+            {
+                thread deleteProjectile(grenades[i], 6);
+            }
             }
         wait (0.1);
     }
