@@ -1107,7 +1107,11 @@ levelcleanup()
             {
             if(grenades[i].model=="projectile_tag")
             {
-                thread deleteProjectile(grenades[i], 6);
+                if(!isDefined(grenades[i].timeout))
+                {
+                    grenades[i].timeout=6;
+                    thread deleteProjectile(grenades[i], grenades[i].timeout);
+                }
             }
             }
         wait (0.1);
