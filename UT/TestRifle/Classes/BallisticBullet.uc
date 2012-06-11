@@ -6,6 +6,7 @@ var byte Bounces;
 var float DamageAtten, BounceFactor, RebounceSpeed;
 var sound ImpactSounds[6];
 var class<xEmitter> HitEffectClass;
+var bool bExplode;
 
 replication
 {
@@ -65,7 +66,7 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
                     (MomentumTransfer * Velocity/speed), MyDamageType );
 			}
         }
-
+	HitOrExplode(Location,Normal(HitLocation-Other.Location));
         Destroy();
     }
 }
@@ -91,7 +92,9 @@ simulated function HitWall( vector HitNormal, actor Wall )
         return;
     	}
 
-	Spawn(HitEffectClass,,, Location, Rotator(HitNormal));
+
+	HitOrExplode(Location,HitNormal);
+	
     SetPhysics(PHYS_Falling);
 	if (Bounces > 0)
     {
@@ -120,29 +123,71 @@ simulated function PhysicsVolumeChange( PhysicsVolume Volume )
     }
 }
 
+function BlowUp(vector HitLocation)
+{
+	HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
+	MakeNoise(1.0);
+}
+
+simulated function Explode(vector HitLocation, vector HitNormal)
+{
+	local PlayerController PC;
+
+	PlaySound(sound'WeaponSounds.BExplosion3',,2.5*TransientSoundVolume);
+    if ( EffectIsRelevant(Location,false) )
+    {
+    	Spawn(class'NewExplosionA',,,HitLocation + HitNormal*20,rotator(HitNormal));
+    	PC = Level.GetLocalPlayerController();
+		if ( (PC.ViewTarget != None) && VSize(PC.ViewTarget.Location - Location) < 5000 )
+	        Spawn(class'ExplosionCrap',,, HitLocation + HitNormal*20, rotator(HitNormal));
+		if ( (ExplosionDecal != None) && (Level.NetMode != NM_DedicatedServer) )
+			Spawn(ExplosionDecal,self,,Location, rotator(-HitNormal));
+    }
+
+	BlowUp(HitLocation);
+	Destroy();
+}
+
+simulated function HitOrExplode(vector HitLocation, vector HitNormal)
+{
+	if (bExplode)
+	{
+		Explode(Location,HitNormal);
+	}
+	else
+	{
+		Spawn(HitEffectClass,,, Location, Rotator(HitNormal));	
+		if ( (ExplosionDecal != None) && (Level.NetMode != NM_DedicatedServer) )
+			Spawn(ExplosionDecal,self,,Location, rotator(-HitNormal));
+	}
+}
+
 defaultproperties
 {
-     Bounces=1
+	Bounces=1
+	bExplode=False
 	HitEffectClass=Class'XEffects.WallSparks'
+	ExplosionDecal=Class'XEffects.BulletDecal'
 	BounceFactor=0.75
 	RebounceSpeed=0.065
-     DamageAtten=5.000000
-     ImpactSounds(0)=Sound'XEffects.Impact4Snd'
-     ImpactSounds(1)=Sound'XEffects.Impact6Snd'
-     ImpactSounds(2)=Sound'XEffects.Impact7Snd'
-     ImpactSounds(3)=Sound'XEffects.Impact3'
-     ImpactSounds(4)=Sound'XEffects.Impact1'
-     ImpactSounds(5)=Sound'XEffects.Impact2'
-     Speed=30000.000000
-     MaxSpeed=50000.000000
-     Damage=30.000000
-     MomentumTransfer=10000.000000
-     MyDamageType=Class'XWeapons.DamTypeFlakChunk'
-     DrawType=DT_StaticMesh
-     CullDistance=3000.000000
-     LifeSpan=2.700000
-     DrawScale=14.000000
-     AmbientGlow=254
-     Style=STY_Alpha
-     bBounce=True
+	DamageAtten=5.000000
+	ImpactSounds(0)=Sound'XEffects.Impact4Snd'
+	ImpactSounds(1)=Sound'XEffects.Impact6Snd'
+	ImpactSounds(2)=Sound'XEffects.Impact7Snd'
+	ImpactSounds(3)=Sound'XEffects.Impact3'
+	ImpactSounds(4)=Sound'XEffects.Impact1'
+	ImpactSounds(5)=Sound'XEffects.Impact2'
+	Speed=30000.000000
+	MaxSpeed=50000.000000
+	Damage=30.000000
+	DamageRadius=200
+	MomentumTransfer=10000.000000
+	MyDamageType=Class'XWeapons.DamTypeFlakChunk'
+	DrawType=DT_StaticMesh
+	CullDistance=3000.000000
+	LifeSpan=2.700000
+	DrawScale=14.000000
+	AmbientGlow=254
+	Style=STY_Alpha
+	bBounce=True
 }
