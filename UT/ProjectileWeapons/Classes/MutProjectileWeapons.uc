@@ -5,9 +5,9 @@ class MutProjectileWeapons extends Mutator
 function string GetInventoryClassOverride(string InventoryClassName)
 {
 	if (InventoryClassName == "XWeapons.AssaultRifle")
-		InventoryClassName = "TestRifle.AssaultRifleProj";
+		InventoryClassName = "ProjectileWeapons.AssaultRifleProj";
 //	if (InventoryClassName == "XWeapons.SniperRifle")
-//		InventoryClassName = "TestRifle.SniperRifleProj";
+//		InventoryClassName = "ProjectileWeapons.SniperRifleProj";
  
 	return Super.GetInventoryClassOverride(InventoryClassName);
 }

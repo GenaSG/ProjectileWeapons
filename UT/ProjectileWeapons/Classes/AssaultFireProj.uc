@@ -22,7 +22,7 @@ defaultproperties
      ShakeOffsetMag=(X=-20.000000)
      ShakeOffsetRate=(X=-1000.000000)
      ShakeOffsetTime=2.000000
-     ProjectileClass=Class'TestRifle.AssaultRifleBullet'
+     ProjectileClass=Class'ProjectileWeapons.AssaultRifleBullet'
      BotRefireRate=0.700000
      FlashEmitterClass=Class'XEffects.AssaultMuzFlash1st'
      Spread=200.000000

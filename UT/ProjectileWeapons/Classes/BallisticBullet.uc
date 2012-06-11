@@ -6,6 +6,7 @@ var byte Bounces;
 var float DamageAtten, BounceFactor, RebounceSpeed;
 var sound ImpactSounds[6];
 var class<xEmitter> HitEffectClass;
+var class<xEmitter> TrailEffect;
 var bool bExplode;
 
 replication
@@ -28,7 +29,7 @@ simulated function PostBeginPlay()
     {
         if ( !PhysicsVolume.bWaterVolume )
         {
-            Trail = Spawn(class'FlakTrail',self);
+            Trail = Spawn(TrailEffect,self);
             Trail.Lifespan = Lifespan;
         }
             
@@ -168,6 +169,7 @@ defaultproperties
 	bExplode=False
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
+	TrailEffect=class'FlakTrail'
 	BounceFactor=0.75
 	RebounceSpeed=0.065
 	DamageAtten=5.000000

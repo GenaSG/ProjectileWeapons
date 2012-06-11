@@ -3,5 +3,5 @@ class AssaultRifleProj extends AssaultRifle;
 //=============================================================================
 defaultproperties
 {
-	FireModeClass(0)=Class'TestRifle.AssaultFireProj'
+	FireModeClass(0)=Class'ProjectileWeapons.AssaultFireProj'
 }
