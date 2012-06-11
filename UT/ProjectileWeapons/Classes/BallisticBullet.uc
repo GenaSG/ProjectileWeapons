@@ -3,10 +3,11 @@ class BallisticBullet extends Projectile;
 
 var xEmitter Trail;
 var byte Bounces;
-var float DamageAtten, BounceFactor, RebounceSpeed;
+var float DamageAtten, BounceFactor, RebounceSpeed, HeadShotHeight, HeadShotDamageFactor;
 var sound ImpactSounds[6];
 var class<xEmitter> HitEffectClass;
 var class<xEmitter> TrailEffect;
+var class<DamageType> HeadDamageType;
 var bool bExplode;
 
 replication
@@ -59,13 +60,14 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
         if ( speed > 200 )
         {
             if ( Role == ROLE_Authority )
-			{
-				if ( Instigator == None || Instigator.Controller == None )
-					Other.SetDelayedDamageInstigatorController( InstigatorController );
-
-                Other.TakeDamage( Max(5, Damage - DamageAtten*FMax(0,(default.LifeSpan - LifeSpan - 1))), Instigator, HitLocation,
-                    (MomentumTransfer * Velocity/speed), MyDamageType );
-			}
+        	{
+           	 if ( Other.IsA('Pawn') && (HitLocation.Z - Other.Location.Z > HeadShotHeight * Other.CollisionHeight)  )
+                Other.TakeDamage(HeadShotDamageFactor * damage, instigator,HitLocation,
+                    (MomentumTransfer * Normal(Velocity)), HeadDamageType );
+            else             
+                Other.TakeDamage(damage, instigator,HitLocation,
+                    (MomentumTransfer * Normal(Velocity)), MyDamageType );
+        	}
         }
 	HitOrExplode(Location,Normal(HitLocation-Other.Location));
         Destroy();
@@ -166,6 +168,9 @@ simulated function HitOrExplode(vector HitLocation, vector HitNormal)
 defaultproperties
 {
 	Bounces=1
+	HeadDamageType=Class'XWeapons.DamTypeSniperHeadShot'
+	HeadShotDamageFactor=2.0
+	HeadShotHeight=0.62
 	bExplode=False
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
