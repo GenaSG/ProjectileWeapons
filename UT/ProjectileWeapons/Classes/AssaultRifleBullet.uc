@@ -6,6 +6,8 @@ defaultproperties
      Bounces=1
 	BounceFactor=0.75
 	RebounceSpeed=0.065
+	bExplode=False
+	bHeadShots=False
      DamageAtten=5.000000
      ImpactSounds(0)=Sound'XEffects.Impact4Snd'
      ImpactSounds(1)=Sound'XEffects.Impact6Snd'

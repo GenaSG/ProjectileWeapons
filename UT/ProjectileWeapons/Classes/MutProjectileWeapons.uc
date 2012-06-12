@@ -6,7 +6,8 @@ function string GetInventoryClassOverride(string InventoryClassName)
 {
 	if (InventoryClassName == "XWeapons.AssaultRifle")
 		InventoryClassName = "ProjectileWeapons.AssaultRifleProj";
- 
+ 	if (InventoryClassName == "UTClassic.ClassicSniperRifle")
+		InventoryClassName = "ProjectileWeapons.SniperRifleProj";
 	return Super.GetInventoryClassOverride(InventoryClassName);
 }
 
@@ -44,7 +45,7 @@ function ModifyPlayer (Pawn Other)
 //=============================================================================
 defaultproperties
 {
-     GroupName="Projectile based assault rifle"
-     FriendlyName="Projectile based assault rifle"
-     Description="Projectile based assault rifle"
+     GroupName="Projectile based rifles"
+     FriendlyName="Projectile based rifles"
+     Description="Projectile based rifles"
 }

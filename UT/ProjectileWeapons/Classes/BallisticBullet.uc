@@ -8,7 +8,7 @@ var sound ImpactSounds[6];
 var class<xEmitter> HitEffectClass;
 var class<xEmitter> TrailEffect;
 var class<DamageType> HeadDamageType;
-var bool bExplode;
+var bool bExplode, bHeadShots;
 
 replication
 {
@@ -61,7 +61,7 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
         {
             if ( Role == ROLE_Authority )
         	{
-           	 if ( Other.IsA('Pawn') && (HitLocation.Z - Other.Location.Z > HeadShotHeight * Other.CollisionHeight)  )
+           	 if ( Other.IsA('Pawn') && (HitLocation.Z - Other.Location.Z > HeadShotHeight * Other.CollisionHeight) && bHeadShots )
                 Other.TakeDamage(HeadShotDamageFactor * damage, instigator,HitLocation,
                     (MomentumTransfer * Normal(Velocity)), HeadDamageType );
             else             
@@ -172,6 +172,7 @@ defaultproperties
 	HeadShotDamageFactor=2.0
 	HeadShotHeight=0.62
 	bExplode=False
+	bHeadShots=True
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
 	TrailEffect=class'FlakTrail'
