@@ -5,51 +5,42 @@ class MutProjectileWeapons extends Mutator
 function string GetInventoryClassOverride(string InventoryClassName)
 {
 	if (InventoryClassName == "XWeapons.AssaultRifle")
-//		InventoryClassName = "ProjectileWeapons.AssaultRifleProj";
-//	if (InventoryClassName == "XWeapons.ClassicSniperRifle")
-		InventoryClassName = "ProjectileWeapons.SniperRifleProj";
+		InventoryClassName = "ProjectileWeapons.AssaultRifleProj";
  
 	return Super.GetInventoryClassOverride(InventoryClassName);
 }
 
-//=============================================================================
-function bool CheckReplacement( Actor Other, out byte bSuperRelevant )
+function Weapon GiveWeapon(Pawn PlayerPawn, string aClassName, optional bool bBringUp)
 {
-    local int i;
-    local WeaponLocker L;
+    local class<Weapon> WeaponClass;
+    local Weapon NewWeapon;
  
-    bSuperRelevant = 0;
+    WeaponClass = class<Weapon>(DynamicLoadObject(aClassName, class'Class'));
  
-    if ( xWeaponBase(Other) != None )
-    {
-        if ( string( xWeaponBase(Other).WeaponType ) ~= "XWeapons.ClassicSniperRifle" )
-        {
-            xWeaponBase(Other).WeaponType = class'ProjectileWeapons.SniperRifleProj';
-            return false;
+    if ( PlayerPawn.FindInventoryType(WeaponClass) != None )
+        return None;
+    newWeapon = Spawn(WeaponClass);
+    if ( newWeapon != None ) {
+        newWeapon.GiveTo(PlayerPawn);
+        newWeapon.AmbientGlow = 0;
+        if ( PlayerPawn.IsA('PlayerPawn') )
+            newWeapon.GotoState('Idle');
+        if ( bBringUp ) {
+            PlayerPawn.Weapon.GotoState('DownWeapon');
+            PlayerPawn.PendingWeapon = None;
+            PlayerPawn.Weapon = newWeapon;
+            PlayerPawn.Weapon.BringUp();
         }
     }
-//    else if ( WeaponPickup(Other) != None )
-//    {
-//        if ( string(Other.Class) ~= "XWeapons.MinigunPickup" )
-//        {
-//            ReplaceWith( Other, "MinigunHEPickup" );
-//            return false;
-//        }
- //   }
-    else if ( WeaponLocker(Other) != None )
-    {
-        L = WeaponLocker(Other);
- 
-        for (i = 0; i < L.Weapons.Length; i++)
-        {
-            if ( string( L.Weapons[i].WeaponClass ) ~= "XWeapons.ClassicSniperRifle" )
-                L.Weapons[i].WeaponClass = class'ProjectileWeapons.SniperRifleProj';
-        }
-    }
- 
-    return true;
+    return newWeapon;
 }
- 
+
+function ModifyPlayer (Pawn Other)
+{
+	GiveWeapon(Other, "ProjectileWeapons.AssaultRifleProj", true);
+	GiveWeapon(Other, "ProjectileWeapons.SniperRifleProj", true);
+}
+
 //=============================================================================
 defaultproperties
 {
