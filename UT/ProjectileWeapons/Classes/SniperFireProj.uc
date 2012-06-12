@@ -4,7 +4,16 @@ function InitEffects()
 {
     Super.InitEffects();
     if ( FlashEmitter != None )
-		Weapon.AttachToBone(FlashEmitter, 'tip');
+		Weapon.AttachToBone(FlashEmitter, 'dummy01');
+}
+
+function FlashMuzzleFlash()
+{
+    local rotator r;
+
+    r.Yaw = 16384;
+    Weapon.SetBoneRotation('dummy01', r, 0, 1.f);
+    Super.FlashMuzzleFlash();
 }
 
 defaultproperties

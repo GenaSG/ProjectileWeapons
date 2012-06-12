@@ -19,7 +19,7 @@ defaultproperties
      MaxSpeed=50000.000000
      Damage=30.000000
      MomentumTransfer=10000.000000
-     MyDamageType=Class'XWeapons.DamTypeMinigunBullet'
+     MyDamageType=Class'XWeapons.DamTypeAssaultBullet'
      DrawType=DT_StaticMesh
      CullDistance=3000.000000
      LifeSpan=2.700000

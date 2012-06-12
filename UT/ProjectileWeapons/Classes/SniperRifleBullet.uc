@@ -29,6 +29,6 @@ defaultproperties
      MyDamageType=Class'UTClassic.DamTypeClassicSniper'
 	HeadShotHeight=0.7
 	bExplode=False
-	HitEffectClass=Class'XEffects.ExploWallHit'
+	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
 }
