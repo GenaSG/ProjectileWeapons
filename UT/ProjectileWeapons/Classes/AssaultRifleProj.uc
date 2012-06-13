@@ -14,5 +14,5 @@ defaultproperties
 	FireModeClass(1)=Class'ProjectileWeapons.AssaultAltFireProj'
 	PickupClass=Class'XWeapons.AssaultRiflePickup'
 	AttachmentClass=Class'XWeapons.AssaultAttachment'
-	InventoryGroup=3
+//	InventoryGroup=3
 }

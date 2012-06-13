@@ -175,7 +175,7 @@ defaultproperties
 	bHeadShots=True
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
-	TrailEffect=class'FlakTrail'
+	TrailEffect=class'LightBulletTracer'
 	BounceFactor=0.75
 	RebounceSpeed=0.065
 	DamageAtten=5.000000
