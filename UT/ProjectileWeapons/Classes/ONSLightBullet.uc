@@ -10,9 +10,9 @@ defaultproperties
 	bHeadShots=False
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
-	TrailEffect=class'ONSLightBulletTracer'
+	TrailEffect=class'LightBulletTracer'
 	BounceFactor=0.5
-	RebounceSpeed=0.1
+	RebounceSpeed=0.5
 	DamageAtten=5.000000
 	ImpactSounds(0)=Sound'XEffects.Impact4Snd'
 	ImpactSounds(1)=Sound'XEffects.Impact6Snd'
@@ -29,7 +29,7 @@ defaultproperties
 	DrawType=DT_StaticMesh
 	CullDistance=3000.000000
 	LifeSpan=2.700000
-	DrawScale=14.000000
+	DrawScale=1.000000
 	AmbientGlow=254
 	Style=STY_Alpha
 	bBounce=True

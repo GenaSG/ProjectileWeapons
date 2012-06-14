@@ -9,6 +9,27 @@ function string GetInventoryClassOverride(string InventoryClassName)
 	return Super.GetInventoryClassOverride(InventoryClassName);
 }
 
+function PostBeginPlay()
+{
+	local ONSVehicleFactory Factory;
+	//Replace old vehicles with new ones
+	if ( Level.Game.IsA('ONSOnslaughtGame') )
+	{
+		foreach AllActors( class 'ONSVehicleFactory', Factory )
+		{
+			if ( Factory.VehicleClass == Class'Onslaught.ONSHoverBike' )
+			{
+				Factory.VehicleClass = Class'ProjectileWeapons.ONSHoverBikeProj';
+			}
+			else if ( Factory.VehicleClass == Class'Onslaught.ONSAttackCraft' )
+			{
+				Factory.VehicleClass = Class'ProjectileWeapons.ONSAttackCraftProj';
+			}
+		}
+	}
+	Super.PostBeginPlay();
+}
+
 
 function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
 {
@@ -36,10 +57,10 @@ function ModifyPlayer(Pawn Other)
     Other.GiveWeapon("ProjectileWeapons.AssaultRifleProj");
     Other.GiveWeapon("ProjectileWeapons.SniperRifleProj");
 	m_wTemp = Weapon(Other.FindInventoryType(class'AssaultRifleProj'));
-    m_wTemp.MaxOutAmmo();       // in UT2004, instead use:  m_wTemp.MaxOutAmmo();
+    m_wTemp.MaxOutAmmo();       
  
     m_wTemp = Weapon(Other.FindInventoryType(class'SniperRifleProj'));
-    m_wTemp.MaxOutAmmo();       // in UT2004, instead use:  m_wTemp.MaxOutAmmo();
+    m_wTemp.MaxOutAmmo();       
  
     Super.ModifyPlayer(Other);
 }

@@ -4,7 +4,7 @@ class MutVehicleArenaProj extends MutVehicleArena
 defaultproperties
 {
      VehicleClassNames(2)="ProjectileWeapons.ONSAttackCraftProj"
-     VehicleClassNames(3)="ProjectileWeapons.ONSAttackCraftProj"
+     VehicleClassNames(3)="ProjectileWeapons.ONSHoverBikeProj"
      GroupName="VehicleArenaProj"
      FriendlyName="Vehicle Arena with New Weapons"
 }
