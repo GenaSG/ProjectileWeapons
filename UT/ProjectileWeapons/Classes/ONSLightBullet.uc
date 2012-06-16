@@ -8,9 +8,9 @@ defaultproperties
 	HeadShotHeight=0.62
 	bExplode=False
 	bHeadShots=False
-	HitEffectClass=Class'XEffects.WallSparks'
+	HitEffectClass=Class'XEffects.SmallExplosion'
 	ExplosionDecal=Class'XEffects.BulletDecal'
-	TrailEffect=class'LightBulletTracer'
+	TrailEffect=class'ONSLightBulletTracer'
 	BounceFactor=0.5
 	RebounceSpeed=0.5
 	DamageAtten=5.000000
@@ -25,7 +25,7 @@ defaultproperties
 	Damage=30.000000
 	DamageRadius=200
 	MomentumTransfer=10000.000000
-	MyDamageType=Class'XWeapons.DamTypeFlakChunk'
+	MyDamageType=Class'XWeapons.DamTypeMinigunBullet'
 	DrawType=DT_StaticMesh
 	CullDistance=3000.000000
 	LifeSpan=2.700000
