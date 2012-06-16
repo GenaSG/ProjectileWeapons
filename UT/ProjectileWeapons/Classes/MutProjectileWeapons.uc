@@ -25,6 +25,10 @@ function PostBeginPlay()
 			{
 				Factory.VehicleClass = Class'ProjectileWeapons.ONSAttackCraftProj';
 			}
+			else if ( Factory.VehicleClass == Class'Onslaught.ONSHoverTank' )
+			{
+				Factory.VehicleClass = Class'ProjectileWeapons.ONSHoverTankProj';
+			}
 		}
 	}
 	Super.PostBeginPlay();
@@ -60,7 +64,15 @@ function ModifyPlayer(Pawn Other)
     m_wTemp.MaxOutAmmo();       
  
     m_wTemp = Weapon(Other.FindInventoryType(class'SniperRifleProj'));
-    m_wTemp.MaxOutAmmo();       
+    m_wTemp.MaxOutAmmo();   
+	if ( Level.Game.IsA('ONSOnslaughtGame') )
+	{
+		Other.GiveWeapon("Onslaught.ONSAVRiL");
+		m_wTemp = Weapon(Other.FindInventoryType(class'Onslaught.ONSAVRiL'));
+		m_wTemp.MaxOutAmmo(); 
+	}
+
+    
  
     Super.ModifyPlayer(Other);
 }

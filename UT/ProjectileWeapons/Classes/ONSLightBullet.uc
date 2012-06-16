@@ -25,7 +25,7 @@ defaultproperties
 	Damage=30.000000
 	DamageRadius=200
 	MomentumTransfer=10000.000000
-	MyDamageType=Class'XWeapons.DamTypeMinigunBullet'
+	MyDamageType=Class'Onslaught.DamTypeONSChainGun'
 	DrawType=DT_StaticMesh
 	CullDistance=3000.000000
 	LifeSpan=2.700000
