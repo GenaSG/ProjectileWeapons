@@ -6,8 +6,8 @@ defaultproperties
 	HeadDamageType=Class'XWeapons.DamTypeSniperHeadShot'
 	HeadShotDamageFactor=2.0
 	HeadShotHeight=0.62
-	bExplode=False
-	bHeadShots=True
+	bExplode=True
+	bHeadShots=False
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
 	TrailEffect=class'ONSHeavyBulletTracer'
@@ -25,7 +25,7 @@ defaultproperties
 	Damage=30.000000
 	DamageRadius=200
 	MomentumTransfer=10000.000000
-	MyDamageType=Class'XWeapons.DamTypeFlakChunk'
+	MyDamageType=Class'Onslaught.DamTypeONSChainGun'
 	DrawType=DT_StaticMesh
 	CullDistance=3000.000000
 	LifeSpan=2.700000

@@ -1,12 +1,14 @@
 class BallisticBullet extends Projectile;
 
 
-var xEmitter Trail;
+var Emitter Trail;
+var xEmitter RecoTrail;
 var byte Bounces;
 var float DamageAtten, BounceFactor, RebounceSpeed, HeadShotHeight, HeadShotDamageFactor;
 var sound ImpactSounds[6];
 var class<xEmitter> HitEffectClass;
-var class<xEmitter> TrailEffect;
+var class<Emitter> TrailEffect;
+var class<xEmitter> RecoTrailEffect;
 var class<DamageType> HeadDamageType;
 var bool bExplode, bHeadShots;
 
@@ -18,7 +20,8 @@ replication
 
 simulated function Destroyed()
 {
-    if (Trail !=None) Trail.mRegen=False;
+    if (Trail !=None) Trail.kill();
+	if (RecoTrail !=None) RecoTrail.mRegen=False;
 	Super.Destroyed();
 }
 
@@ -82,38 +85,48 @@ simulated function Landed( Vector HitNormal )
 
 simulated function HitWall( vector HitNormal, actor Wall )
 {
-	if ( !Wall.bStatic && !Wall.bWorldGeometry 
-		&& ((Mover(Wall) == None) || Mover(Wall).bDamageTriggered) )
-    	{
-        if ( Level.NetMode != NM_Client )
-		{
-			if ( Instigator == None || Instigator.Controller == None )
-				Wall.SetDelayedDamageInstigatorController( InstigatorController );
-            Wall.TakeDamage( Damage, instigator, Location, MomentumTransfer * Normal(Velocity), MyDamageType);
-		}
-        Destroy();
-        return;
-    	}
+		if ( !Wall.bStatic && !Wall.bWorldGeometry && ((Mover(Wall) == None) || Mover(Wall).bDamageTriggered) )
+    		{
+        		if ( Level.NetMode != NM_Client )
+			{
+				if ( Instigator == None || Instigator.Controller == None )
+					Wall.SetDelayedDamageInstigatorController( InstigatorController );
+            				Wall.TakeDamage( Damage, instigator, Location, MomentumTransfer * Normal(Velocity), MyDamageType);
+			}
+        		Destroy();
+        		return;
+    		}	
 
 
 	HitOrExplode(Location,HitNormal);
 	
-    SetPhysics(PHYS_Falling);
+	SetPhysics(PHYS_Falling);
+
 	if (Bounces > 0)
-    {
+	{
 		if ( !Level.bDropDetail && (FRand() < 0.4) )
 			Playsound(ImpactSounds[Rand(6)]);
-
-        Velocity = RebounceSpeed * (Velocity - 2.0*HitNormal*(Velocity dot HitNormal));
-        Bounces = Bounces - 1;
-        return;
-    }
+		if ( !PhysicsVolume.bWaterVolume )
+        	{
+	    		Trail.kill();
+            		RecoTrail = Spawn(RecoTrailEffect,self);
+            		RecoTrail.Lifespan = Lifespan;
+        	}
+        	Velocity = RebounceSpeed * (Velocity - 2.0*HitNormal*(Velocity dot HitNormal));
+        	Bounces = Bounces - 1;
+        	return;
+    	}
 	bBounce = false;
-    if (Trail != None) 
-    {
-        Trail.mRegen=False;
-        Trail.SetPhysics(PHYS_None);
-    }
+	if (RecoTrail != None) 
+		{
+			RecoTrail.mRegen=False;
+			RecoTrail.SetPhysics(PHYS_None);
+		}
+	if (Trail != None) 
+	{
+		Trail.kill();
+		Trail.SetPhysics(PHYS_None);
+	}
 }
 
 simulated function PhysicsVolumeChange( PhysicsVolume Volume )
@@ -121,7 +134,7 @@ simulated function PhysicsVolumeChange( PhysicsVolume Volume )
     if (Volume.bWaterVolume)
     {
         if ( Trail != None )
-            Trail.mRegen=False;
+            Trail.kill();
         Velocity *= 0.65;
     }
 }
@@ -175,6 +188,7 @@ defaultproperties
 	bHeadShots=True
 	HitEffectClass=Class'XEffects.WallSparks'
 	ExplosionDecal=Class'XEffects.BulletDecal'
+	RecoTrailEffect=class'FlakTRail'
 	TrailEffect=class'LightBulletTracer'
 	BounceFactor=0.75
 	RebounceSpeed=0.065

@@ -29,6 +29,10 @@ function PostBeginPlay()
 			{
 				Factory.VehicleClass = Class'ProjectileWeapons.ONSHoverTankProj';
 			}
+			else if ( Factory.VehicleClass == Class'Onslaught.ONSPRV' )
+			{
+				Factory.VehicleClass = Class'ProjectileWeapons.ONSPRVProj';
+			}
 		}
 	}
 	Super.PostBeginPlay();

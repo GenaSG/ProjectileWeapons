@@ -10,11 +10,11 @@ function InitEffects()
 function FlashMuzzleFlash()
 {
     local rotator r;
-    r.Roll = Rand(65536);
+
+    r.Yaw = 16384;
     Weapon.SetBoneRotation('dummy01', r, 0, 1.f);
     Super.FlashMuzzleFlash();
 }
-
 defaultproperties
 {
      ProjPerFire=1

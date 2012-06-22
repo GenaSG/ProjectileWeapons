@@ -11,7 +11,7 @@ defaultproperties
 	HitEffectClass=Class'XEffects.SmallExplosion'
 	ExplosionDecal=Class'XEffects.BulletDecal'
 	TrailEffect=class'ONSLightBulletTracer'
-	BounceFactor=0.5
+	BounceFactor=0.85
 	RebounceSpeed=0.5
 	DamageAtten=5.000000
 	ImpactSounds(0)=Sound'XEffects.Impact4Snd'

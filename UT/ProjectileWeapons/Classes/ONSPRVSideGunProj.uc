@@ -1,17 +1,27 @@
-class ONSTankSecondaryTurretProj extends ONSWeapon;
+class ONSPRVSideGunProj extends ONSWeapon;
 
+simulated function FlashMuzzleFlash()
+{
+	Super.FlashMuzzleFlash();
+
+	if (Role < ROLE_Authority)
+		DualFireOffset *= -1;
+
+}
 
 defaultproperties
 {
+
      FireInterval=0.010000
 	ProjectileClass=Class'ProjectileWeapons.ONSLightBullet'
      Spread=0.0030000
-     YawBone="Object01"
-     PitchBone="Object02"
+     YawBone="SIDEgunBASE"
+     PitchBone="SIDEgunBARREL"
      PitchUpLimit=12500
      PitchDownLimit=59500
-     WeaponFireAttachmentBone="Object02"
-     WeaponFireOffset=85.000000
+     WeaponFireAttachmentBone="Firepoint"
+	GunnerAttachmentBone="SideGunnerLocation"
+//     WeaponFireOffset=85.000000
      DualFireOffset=5.000000
      RotationsPerSecond=2.000000
      bInstantRotation=True
@@ -19,8 +29,9 @@ defaultproperties
      bDoOffsetTrace=True
      bAmbientFireSound=True
      bIsRepeatingFF=True
-     RedSkin=Shader'VMVehicles-TX.HoverTankGroup.HoverTankChassisFinalRED'
-     BlueSkin=Shader'VMVehicles-TX.HoverTankGroup.HoverTankChassisFinalBLUE'
+     RedSkin=Shader'VMVehicles-TX.NEWprvGroup.newPRVredSHAD'
+     BlueSkin=Shader'VMVehicles-TX.NEWprvGroup.newPRVshad'
+	FlashEmitterClass=Class'Onslaught.ONSRVChainGunFireEffect'	
      AmbientEffectEmitterClass=Class'Onslaught.ONSRVChainGunFireEffect'
      FireSoundClass=Sound'ONSVehicleSounds-S.Tank.TankMachineGun01'
      AmbientSoundScaling=1.300000
@@ -34,6 +45,6 @@ defaultproperties
      ShakeOffsetTime=2.000000
      AIInfo(0)=(bInstantHit=False,aimerror=750.000000)
      CullDistance=8000.000000
-     Mesh=SkeletalMesh'ONSWeapons-A.TankMachineGun'
-}
+     Mesh=SkeletalMesh'ONSWeapons-A.PRVsideGun'
 
+}

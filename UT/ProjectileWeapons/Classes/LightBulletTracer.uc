@@ -1,24 +1,37 @@
-class LightBulletTracer extends pclSmoke;
+class LightBulletTracer extends Emitter;
+
 
 defaultproperties
 {
-     mParticleType=PT_Stream
-     mStartParticles=0
-     mMaxParticles=100
-     mLifeRange(0)=0.0410000
-     mLifeRange(1)=0.0410000
-     mRegenRange(0)=30.000000
-     mRegenRange(1)=30.000000
-     mSpawnVecB=(X=0.000000,Z=0.000000)
-     mSizeRange(0)=2.000000
-     mSizeRange(1)=3.000000
-     mGrowthRate=6.000000
-     mColorRange(0)=(B=0,G=220,R=255)
-     mColorRange(1)=(B=0,G=220,R=255)
-     mAttenKa=0.000000
-     mNumTileColumns=1
-     mNumTileRows=1
+     Begin Object Class=TrailEmitter Name=TrailEmitter0
+         TrailShadeType=PTTST_PointLife
+         TrailLocation=PTTL_FollowEmitter
+         MaxPointsPerTrail=150
+         DistanceThreshold=80.000000
+         UseCrossedSheets=True
+         PointLifeTime=0.0800000
+         UseColorScale=True
+         UseSizeScale=True
+         UseRegularSizeScale=False
+         AutomaticInitialSpawning=False
+         ColorScale(0)=(Color=(B=100,G=200,R=255))
+         ColorScale(1)=(RelativeTime=1.000000,Color=(B=100,G=200,R=255))
+         Opacity=0.500000
+         MaxParticles=1
+         SizeScale(0)=(RelativeSize=0.200000)
+         SizeScale(1)=(RelativeTime=1.000000,RelativeSize=1.000000)
+         StartSizeRange=(X=(Min=25.000000,Max=25.000000))
+         InitialParticlesPerSecond=2000.000000
+         Texture=Texture'AW-2004Particles.Weapons.TrailBlur'
+         SecondsBeforeInactive=0.000000
+         LifetimeRange=(Min=500.000000,Max=500.000000)
+     End Object
+
+	Emitters(0)=TrailEmitter'ProjectileWeapons.LightBulletTracer.TrailEmitter0'
+
+     AutoDestroy=True
+     bNoDelete=False
      Physics=PHYS_Trailer
-     Skins(0)=Texture'XEffects.FlakTrailTex'
-     Style=STY_Additive
+     bHardAttach=True
+     bDirectional=True
 }

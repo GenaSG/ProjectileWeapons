@@ -2,11 +2,7 @@ class ONSHoverTankProj extends ONSHoverTank;
 
 function TakeDamage(int Damage, Pawn instigatedBy, Vector Hitlocation, Vector Momentum, class<DamageType> DamageType)
 {
-	if (DamageType == class'DamTypeHoverBikePlasma')
-	{
-		Damage *= 0.80;
-	}
-	if (DamageType != class'DamTypeTankShell' && DamageType != class'DamTypeONSAVRiLRocket' )
+	if (DamageType != class'DamTypeTankShell' && DamageType != class'DamTypeONSAVRiLRocket' && DamageType != class'DamTypeAttackCraftMissle')
 	{
 		Damage = 0;
 	}
