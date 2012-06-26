@@ -1,6 +1,9 @@
 class MutProjectileWeapons extends Mutator
     config(user);
  
+var float SpreadCoef;
+var float WeaponsVars[3];
+
 //=============================================================================
 function string GetInventoryClassOverride(string InventoryClassName)
 {
@@ -12,6 +15,7 @@ function string GetInventoryClassOverride(string InventoryClassName)
 function PostBeginPlay()
 {
 	local ONSVehicleFactory Factory;
+
 	//Replace old vehicles with new ones
 	if ( Level.Game.IsA('ONSOnslaughtGame') )
 	{
@@ -35,12 +39,15 @@ function PostBeginPlay()
 			}
 		}
 	}
+
 	Super.PostBeginPlay();
 }
 
 
+
 function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
 {
+
     local xPickupBase B;
     local Pickup P;
  
@@ -51,12 +58,15 @@ function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
     P = Pickup(Other);
     if ( P != none )
         P.Destroy();
- 
+
+
+
     return true;
 }
 
 function ModifyPlayer(Pawn Other)
 {
+
     local xPawn x;   
 	local Weapon m_wTemp;
  
@@ -64,11 +74,14 @@ function ModifyPlayer(Pawn Other)
  
     Other.GiveWeapon("ProjectileWeapons.AssaultRifleProj");
     Other.GiveWeapon("ProjectileWeapons.SniperRifleProj");
+
+
 	m_wTemp = Weapon(Other.FindInventoryType(class'AssaultRifleProj'));
     m_wTemp.MaxOutAmmo();       
  
     m_wTemp = Weapon(Other.FindInventoryType(class'SniperRifleProj'));
     m_wTemp.MaxOutAmmo();   
+
 	if ( Level.Game.IsA('ONSOnslaughtGame') )
 	{
 		Other.GiveWeapon("Onslaught.ONSAVRiL");
@@ -76,8 +89,6 @@ function ModifyPlayer(Pawn Other)
 		m_wTemp.MaxOutAmmo(); 
 	}
 
-    
- 
     Super.ModifyPlayer(Other);
 }
 

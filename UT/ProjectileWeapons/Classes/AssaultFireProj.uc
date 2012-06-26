@@ -1,14 +1,36 @@
-class AssaultFireProj extends ProjectileFire;
+class AssaultFireProj extends ProjectileFire config(user);
 
-function InitEffects()
+var config float SpreadCoef, VelocityCoef, DamageCoef;
+
+
+simulated function PostBeginPlay()
 {
-    Super.InitEffects();
-    if ( FlashEmitter != None )
-		Weapon.AttachToBone(FlashEmitter, 'tip');
+
+    Super.PostBeginPlay();
+	SpreadCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponSpread();
+	VelocityCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponDamage();
+	DamageCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponSpeed();
+	Spread *= SpreadCoef;
 }
 
-function FlashMuzzleFlash()
+function projectile SpawnProjectile(Vector Start, Rotator Dir)
 {
+	local AssaultRifleBullet p;
+    
+	if( ProjectileClass != None )
+		p = Weapon.Spawn(Class'ProjectileWeapons.AssaultRifleBullet',,, Start, Dir);
+
+	if( p == None )
+		return None;
+
+	p.Damage *= DamageCoef;
+	p.Velocity *= VelocityCoef;
+	return p;
+}
+
+
+function FlashMuzzleFlash()
+{	
     local rotator r;
     r.Roll = Rand(65536);
     Weapon.SetBoneRotation('Bone_Flash', r, 0, 1.f);

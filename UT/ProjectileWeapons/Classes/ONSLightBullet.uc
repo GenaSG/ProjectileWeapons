@@ -20,7 +20,7 @@ defaultproperties
 	ImpactSounds(3)=Sound'XEffects.Impact3'
 	ImpactSounds(4)=Sound'XEffects.Impact1'
 	ImpactSounds(5)=Sound'XEffects.Impact2'
-	Speed=20000.000000
+	Speed=30000.000000
 	MaxSpeed=50000.000000
 	Damage=30.000000
 	DamageRadius=200

@@ -16,7 +16,7 @@ defaultproperties
      Speed=60000.000000
      MaxSpeed=80000.000000
      Damage=60.000000
-     MomentumTransfer=10000.000000
+     MomentumTransfer=75000.000000
      DrawType=DT_StaticMesh
      CullDistance=3000.000000
      LifeSpan=2.700000

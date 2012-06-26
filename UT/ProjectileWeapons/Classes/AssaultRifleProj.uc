@@ -2,7 +2,6 @@ class AssaultRifleProj extends AssaultRifle;
  
 //=============================================================================
 
-
 simulated function float ChargeBar()
 {
 	return 0 ;
