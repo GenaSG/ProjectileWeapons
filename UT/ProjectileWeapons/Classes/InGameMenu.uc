@@ -3,7 +3,7 @@ class InGameMenu extends Weapon
 
 static function float GetWeaponSpread()
 {
-	return 10;
+	return 1;
 }
 
 static function float GetWeaponDamage()
@@ -13,5 +13,5 @@ static function float GetWeaponDamage()
 
 static function float GetWeaponSpeed()
 {
-	return 2;
+	return 5;
 }

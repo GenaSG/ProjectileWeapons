@@ -72,15 +72,16 @@ function ModifyPlayer(Pawn Other)
  
     x = xPawn(Other);
  
-    Other.GiveWeapon("ProjectileWeapons.AssaultRifleProj");
-    Other.GiveWeapon("ProjectileWeapons.SniperRifleProj");
+//    Other.GiveWeapon("ProjectileWeapons.AssaultRifleProj");
+//    Other.GiveWeapon("ProjectileWeapons.SniperRifleProj");
+    Other.GiveWeapon("ProjectileWeapons.APR");
 
 
-	m_wTemp = Weapon(Other.FindInventoryType(class'AssaultRifleProj'));
-    m_wTemp.MaxOutAmmo();       
+//	m_wTemp = Weapon(Other.FindInventoryType(class'AssaultRifleProj'));
+//    m_wTemp.MaxOutAmmo();       
  
-    m_wTemp = Weapon(Other.FindInventoryType(class'SniperRifleProj'));
-    m_wTemp.MaxOutAmmo();   
+//    m_wTemp = Weapon(Other.FindInventoryType(class'SniperRifleProj'));
+//    m_wTemp.MaxOutAmmo();   
 
 	if ( Level.Game.IsA('ONSOnslaughtGame') )
 	{

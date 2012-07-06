@@ -8,8 +8,8 @@ simulated function PostBeginPlay()
 
     Super.PostBeginPlay();
 	SpreadCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponSpread();
-	VelocityCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponDamage();
-	DamageCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponSpeed();
+	VelocityCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponSpeed();
+	DamageCoef=Class'ProjectileWeapons.InGameMenu'.static.GetWeaponDamage();
 	Spread *= SpreadCoef;
 }
 
@@ -22,15 +22,22 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 	if( p == None )
 		return None;
-
+	p.Bounces=0;
 	p.Damage *= DamageCoef;
 	p.Velocity *= VelocityCoef;
 	return p;
 }
 
 
+function InitEffects()
+{
+    Super.InitEffects();
+    if ( FlashEmitter != None )
+		Weapon.AttachToBone(FlashEmitter, 'tip');
+}
+
 function FlashMuzzleFlash()
-{	
+{
     local rotator r;
     r.Roll = Rand(65536);
     Weapon.SetBoneRotation('Bone_Flash', r, 0, 1.f);

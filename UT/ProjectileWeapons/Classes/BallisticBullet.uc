@@ -57,11 +57,8 @@ simulated function PostBeginPlay()
 
 simulated function ProcessTouch (Actor Other, vector HitLocation)
 {
-    if ( (FlakChunk(Other) == None) && ((Physics == PHYS_Falling) || (Other != Instigator)) )
+    if ( (BallisticBullet(Other) == None) && ((Physics == PHYS_Falling) || (Other != Instigator)) )
     {
-        speed = VSize(Velocity);
-        if ( speed > 200 )
-        {
             if ( Role == ROLE_Authority )
         	{
            	 if ( Other.IsA('Pawn') && (HitLocation.Z - Other.Location.Z > HeadShotHeight * Other.CollisionHeight) && bHeadShots )
@@ -71,7 +68,6 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
                 Other.TakeDamage(damage, instigator,HitLocation,
                     (MomentumTransfer * Normal(Velocity)), MyDamageType );
         	}
-        }
 	HitOrExplode(Location,Normal(HitLocation-Other.Location));
         Destroy();
     }
@@ -100,33 +96,6 @@ simulated function HitWall( vector HitNormal, actor Wall )
 
 	HitOrExplode(Location,HitNormal);
 	
-	SetPhysics(PHYS_Falling);
-
-	if (Bounces > 0)
-	{
-		if ( !Level.bDropDetail && (FRand() < 0.4) )
-			Playsound(ImpactSounds[Rand(6)]);
-		if ( !PhysicsVolume.bWaterVolume )
-        	{
-	    		Trail.kill();
-            		RecoTrail = Spawn(RecoTrailEffect,self);
-            		RecoTrail.Lifespan = Lifespan;
-        	}
-        	Velocity = RebounceSpeed * (Velocity - 2.0*HitNormal*(Velocity dot HitNormal));
-        	Bounces = Bounces - 1;
-        	return;
-    	}
-	bBounce = false;
-	if (RecoTrail != None) 
-		{
-			RecoTrail.mRegen=False;
-			RecoTrail.SetPhysics(PHYS_None);
-		}
-	if (Trail != None) 
-	{
-		Trail.kill();
-		Trail.SetPhysics(PHYS_None);
-	}
 }
 
 simulated function PhysicsVolumeChange( PhysicsVolume Volume )
@@ -169,12 +138,23 @@ simulated function HitOrExplode(vector HitLocation, vector HitNormal)
 	if (bExplode)
 	{
 		Explode(Location,HitNormal);
+		if (Trail != None) 
+		{
+			Trail.kill();
+			Trail.SetPhysics(PHYS_None);
+		}
 	}
 	else
 	{
 		Spawn(HitEffectClass,,, Location, Rotator(HitNormal));	
 		if ( (ExplosionDecal != None) && (Level.NetMode != NM_DedicatedServer) )
 			Spawn(ExplosionDecal,self,,Location, rotator(-HitNormal));
+		if (Trail != None) 
+		{
+			Trail.kill();
+			Trail.SetPhysics(PHYS_None);
+		}
+		Destroy();
 	}
 }
 
@@ -199,8 +179,8 @@ defaultproperties
 	ImpactSounds(3)=Sound'XEffects.Impact3'
 	ImpactSounds(4)=Sound'XEffects.Impact1'
 	ImpactSounds(5)=Sound'XEffects.Impact2'
-	Speed=30000.000000
-	MaxSpeed=50000.000000
+	Speed=5000.000000
+	MaxSpeed=0.000000
 	Damage=30.000000
 	DamageRadius=200
 	MomentumTransfer=10000.000000
