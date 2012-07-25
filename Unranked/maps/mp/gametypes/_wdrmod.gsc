@@ -774,8 +774,29 @@ AfterSpawn()
 	//	{
 	//		thread maps\mp\gametypes\_xpboost::init();
 	//	}
+	self thread LaserSight();
 
 }
+
+LaserSight()
+{
+	//Laser Sight(disable crosshair)
+	setDvar("cg_drawCrosshair", 0 );
+	while(isAlive(self) )
+	{
+		CurrWeap = self GetCurrentWeapon();
+		if(  CurrWeap=="dragunov_acog_mp" || CurrWeap=="dragunov_mp" || CurrWeap=="m40a3_acog_mp" || CurrWeap=="m40a3_mp" || CurrWeap=="barrett_acog_mp" || CurrWeap=="barrett_mp" || CurrWeap=="remington700_acog_mp" || CurrWeap=="remington700_mp" || CurrWeap=="m21_acog_mp" || CurrWeap=="m21_mp" || self playerADS() || CurrWeap =="rpg_mp" )
+		{
+			self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
+		}
+		else
+		{
+			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 1);
+		}
+	wait(0.1);
+	}
+}
+
 
 getPlayerEyes()
 {
