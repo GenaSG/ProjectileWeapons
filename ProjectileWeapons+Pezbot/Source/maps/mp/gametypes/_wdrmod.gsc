@@ -769,7 +769,7 @@ AfterSpawn()
     //self thread  noBunny();
     self thread  scopeRangeFinder();
     //self thread  ballisticCalc();
-   // self thread  perksPerClass();
+    self thread  skillPerClass();
 	if( getDvarfloat( "scr_xpboost" ) == 1 )
 		{
 			thread maps\mp\gametypes\_xpboost::init();
@@ -826,6 +826,7 @@ rangeFinder()
         trace = bullettrace( traceorg, traceorg + vect, 0, self );
         //target coordinates
         self.traceHitPosition = trace["position"];
+	self.traceHitEntity = trace["entity"];
        // IPrintLn(self.traceHitPosition);
         Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
         //Distance between player and "target"
@@ -975,147 +976,77 @@ noBunny()
     self enableWeapons();
 
 }
-perksPerClass()
+skillPerClass()
 {
+			while(isAlive(self))
+			{
+				self.TargetPlayer=undefined;
+				self.TargetPlayer = isLookingAtClosestPlayer();
+				if(isDefined(self.TargetPlayer) && self IsLookingAt(self.TargetPlayer))
+				{
+					self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
+					while(self UseButtonPressed() && isAlive(self.TargetPlayer) && self.TargetPlayer.health < 100 && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
+					{
+						self.TargetPlayer.health += 1;
+						//IPrintLn(self.TargetPlayer.health);
+						wait (0.1);
+					}
+					self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+				}
+				wait (0.1);
+			}
+
     switch ( self.pers["class"] )
 	{
 		case "assault":
-            self ClearPerks();
-//            self SetPerk( "specialty_parabolic" );
-//            self SetPerk( "specialty_gpsjammer" );
-//            self SetPerk( "specialty_holdbreath" );
-//            self SetPerk( "specialty_quieter" );
-            self SetPerk( "specialty_longersprint" );
-            self SetPerk( "specialty_twoprimaries" );
-//            self SetPerk( "specialty_detectexplosive" );
-//            self SetPerk( "specialty_explosivedamage" );
-            self SetPerk( "specialty_pistoldeath" );
-//            self SetPerk( "specialty_grenadepulldeath" );
-//            self SetPerk( "specialty_bulletdamage" );
-//            self SetPerk( "specialty_bulletpenetration" );
-//            self SetPerk( "specialty_bulletaccuracy" );
-//            self SetPerk( "specialty_rof" );
-//            self SetPerk( "specialty_fastreload" );
-//            self SetPerk( "specialty_extraammo" );
-            self SetPerk( "specialty_armorvest" );
-//            self SetPerk( "specialty_fraggrenade" );
-//            self SetPerk( "specialty_specialgrenade" );
-
-			self setClientDvars(
-					"scr_hardpoint_allowartillery", 1, 
-					"scr_hardpoint_allowuav", 0, 
-					"scr_hardpoint_allowhelicopter", 1);
 			break;
 		case "specops":
-            self ClearPerks();
-            self SetPerk( "specialty_parabolic" );
-            self SetPerk( "specialty_gpsjammer" );
-//            self SetPerk( "specialty_holdbreath" );
-            self SetPerk( "specialty_quieter" );
-            self SetPerk( "specialty_longersprint" );
-//            self SetPerk( "specialty_twoprimaries" );
-//            self SetPerk( "specialty_detectexplosive" );
-//            self SetPerk( "specialty_explosivedamage" );
-            self SetPerk( "specialty_pistoldeath" );
-//            self SetPerk( "specialty_grenadepulldeath" );
-//            self SetPerk( "specialty_bulletdamage" );
-//            self SetPerk( "specialty_bulletpenetration" );
-//            self SetPerk( "specialty_bulletaccuracy" );
-            self SetPerk( "specialty_rof" );
-//            self SetPerk( "specialty_fastreload" );
-//            self SetPerk( "specialty_extraammo" );
-//            self SetPerk( "specialty_armorvest" );
-//            self SetPerk( "specialty_fraggrenade" );
-//            self SetPerk( "specialty_specialgrenade" );
-
-			self setClientDvars(
-					"scr_hardpoint_allowartillery", 0, 
-					"scr_hardpoint_allowuav", 1, 
-					"scr_hardpoint_allowhelicopter", 1);
 			break;
 		case "heavygunner":
-            self ClearPerks();
-//            self SetPerk( "specialty_parabolic" );
-//            self SetPerk( "specialty_gpsjammer" );
-//            self SetPerk( "specialty_holdbreath" );
-//            self SetPerk( "specialty_quieter" );
-//            self SetPerk( "specialty_longersprint" );
-//            self SetPerk( "specialty_twoprimaries" );
-//            self SetPerk( "specialty_detectexplosive" );
-//            self SetPerk( "specialty_explosivedamage" );
-            self SetPerk( "specialty_pistoldeath" );
-//            self SetPerk( "specialty_grenadepulldeath" );
-//            self SetPerk( "specialty_bulletdamage" );
-//            self SetPerk( "specialty_bulletpenetration" );
-//            self SetPerk( "specialty_bulletaccuracy" );
-            self SetPerk( "specialty_rof" );
-            self SetPerk( "specialty_fastreload" );
-            self SetPerk( "specialty_extraammo" );
-            self SetPerk( "specialty_armorvest" );
-//            self SetPerk( "specialty_fraggrenade" );
-//            self SetPerk( "specialty_specialgrenade" );
-
-			self setClientDvars(
-					"scr_hardpoint_allowartillery", 1, 
-					"scr_hardpoint_allowuav", 0, 
-					"scr_hardpoint_allowhelicopter", 1);
 			break;
 		case "demolitions":
-            self ClearPerks();
-//            self SetPerk( "specialty_parabolic" );
-//            self SetPerk( "specialty_gpsjammer" );
-//            self SetPerk( "specialty_holdbreath" );
-//            self SetPerk( "specialty_quieter" );
-            self SetPerk( "specialty_longersprint" );
-//            self SetPerk( "specialty_twoprimaries" );
-//            self SetPerk( "specialty_detectexplosive" );
-            self SetPerk( "specialty_explosivedamage" );
-            self SetPerk( "specialty_pistoldeath" );
-//            self SetPerk( "specialty_grenadepulldeath" );
-//            self SetPerk( "specialty_bulletdamage" );
-//            self SetPerk( "specialty_bulletpenetration" );
-//            self SetPerk( "specialty_bulletaccuracy" );
-//            self SetPerk( "specialty_rof" );
-            self SetPerk( "specialty_fastreload" );
-            self SetPerk( "specialty_extraammo" );
-//            self SetPerk( "specialty_armorvest" );
-//            self SetPerk( "specialty_fraggrenade" );
-//            self SetPerk( "specialty_specialgrenade" );
-
-			self setClientDvars(
-					"scr_hardpoint_allowartillery", 1, 
-					"scr_hardpoint_allowuav", 0, 
-					"scr_hardpoint_allowhelicopter", 1);
 			break;
 		case "sniper":
-            self ClearPerks();
-            self SetPerk( "specialty_parabolic" );
-            self SetPerk( "specialty_gpsjammer" );
-            self SetPerk( "specialty_holdbreath" );
-            self SetPerk( "specialty_quieter" );
-            self SetPerk( "specialty_longersprint" );
-//            self SetPerk( "specialty_twoprimaries" );
-//            self SetPerk( "specialty_detectexplosive" );
-//            self SetPerk( "specialty_explosivedamage" );
-            self SetPerk( "specialty_pistoldeath" );
-//            self SetPerk( "specialty_grenadepulldeath" );
-            self SetPerk( "specialty_bulletdamage" );
-//            self SetPerk( "specialty_bulletpenetration" );
-//            self SetPerk( "specialty_bulletaccuracy" );
-//            self SetPerk( "specialty_rof" );
-//            self SetPerk( "specialty_fastreload" );
-//            self SetPerk( "specialty_extraammo" );
-//            self SetPerk( "specialty_armorvest" );
-//            self SetPerk( "specialty_fraggrenade" );
-//            self SetPerk( "specialty_specialgrenade" );
-
-			self setClientDvars(
-					"scr_hardpoint_allowartillery", 1, 
-					"scr_hardpoint_allowuav", 1, 
-					"scr_hardpoint_allowhelicopter", 0);
 			break;
 	}
 }
+isLookingAtClosestPlayer()
+{
+	TargetPlayer=undefined;
+	players = getEntArray( "player", "classname" );
+	for(p=0;p<players.size;p++)
+      	{
+		self.DistToPlayer= int( distance(self.origin, players[p].origin ) )*0.0254;
+		if( self.DistToPlayer <= 2 && self IsLookingAt( players[p] ))
+		{
+			TargetPlayer = players[p];
+			break;
+		}	
+	}
+	return TargetPlayer;
+}
+
+IsLookingAt( gameEntity )
+{
+        entityPos = gameEntity.origin;
+        playerPos = self getEye();
+
+        entityPosAngles = vectorToAngles( entityPos - playerPos );
+        entityPosForward = anglesToForward( entityPosAngles );
+
+        playerPosAngles = self getPlayerAngles();
+        playerPosForward = anglesToForward( playerPosAngles );
+
+        newDot = vectorDot( entityPosForward, playerPosForward );
+
+        if ( newDot < 0.72 ) {
+                return false;
+        } else {
+                return true;
+        }
+
+}
+
 levelcleanup()
 {
     //endon("disconnect");
