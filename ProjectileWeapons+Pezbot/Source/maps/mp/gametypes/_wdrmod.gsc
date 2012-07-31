@@ -1,4 +1,5 @@
 #include common_scripts\utility;
+#include maps\mp\gametypes\_hud_util;
 
 init()
 {
@@ -12,6 +13,7 @@ init()
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
+
 	if ( sMeansOfDeath != "MOD_MELEE" ) 
 	{
 		// Check if we support wdr for this weapon
@@ -764,17 +766,17 @@ AfterSpawn()
 {
    if(!isdefined(self.bIsBot))
 	{
+	 self thread whoami();
   	 self thread  noBunny();
     	}
-    //self thread  noBunny();
     self thread  scopeRangeFinder();
     //self thread  ballisticCalc();
-    self thread  skillPerClass();
 	if( getDvarfloat( "scr_xpboost" ) == 1 )
 		{
 			thread maps\mp\gametypes\_xpboost::init();
 		}
 	self thread LaserSight();
+
 
 }
 
@@ -976,37 +978,80 @@ noBunny()
     self enableWeapons();
 
 }
+
+
+whoami()
+{
+	Curr_weapon = self GetCurrentWeapon();
+	if(isSubStr( Curr_weapon, "m16_" ) || isSubStr( Curr_weapon, "ak47_" ) || isSubStr( Curr_weapon, "m4_" ) || isSubStr( Curr_weapon, "g3_" ) || isSubStr( Curr_weapon, "g36c_" ) || isSubStr( Curr_weapon, "m14_" ) || isSubStr( Curr_weapon, "mp44_" ))
+	{
+		self.pers["class"]="assault";	
+	}
+	else if(isSubStr( Curr_weapon, "mp5_" ) || isSubStr( Curr_weapon, "skorpion_" ) || isSubStr( Curr_weapon, "uzi_" ) || isSubStr( Curr_weapon, "ak74u_" ) || isSubStr( Curr_weapon, "p90_" ))
+	{
+		self.pers["class"]="specops";	
+	}
+
+	else if(isSubStr( Curr_weapon, "saw_" ) || isSubStr( Curr_weapon, "rpd_" ) || isSubStr( Curr_weapon, "m60e4_" ))
+	{
+		self.pers["class"]="heavygunner";	
+	}
+	
+	else if(isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ))
+	{
+		self.pers["class"]="sniper";	
+	}
+
+	else if(isSubStr( Curr_weapon, "m1014_" ) || isSubStr( Curr_weapon, "winchester1200_" ))
+	{
+		self.pers["class"]="demolitions";	
+	}
+
+
+	self skillPerClass();
+}
+
+
 skillPerClass()
 {
-			while(isAlive(self))
-			{
-				self.TargetPlayer=undefined;
-				self.TargetPlayer = isLookingAtClosestPlayer();
-				if(isDefined(self.TargetPlayer) && self IsLookingAt(self.TargetPlayer))
-				{
-					self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
-					while(self UseButtonPressed() && isAlive(self.TargetPlayer) && self.TargetPlayer.health < 100 && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
-					{
-						self.TargetPlayer.health += 1;
-						//IPrintLn(self.TargetPlayer.health);
-						wait (0.1);
-					}
-					self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
-				}
-				wait (0.1);
-			}
+
 
     switch ( self.pers["class"] )
 	{
 		case "assault":
+			while(isAlive(self))
+			{
+				self.TargetPlayer=undefined;
+				self.TargetPlayer = isLookingAtClosestPlayer();
+				if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < getDvarInt( "scr_player_maxhealth" ) )
+				{
+					if( self UseButtonPressed() )
+					{
+						self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
+						//Healing
+						while(isAlive(self) && isAlive(self.TargetPlayer) && self UseButtonPressed() && self.TargetPlayer.health < getDvarInt( "scr_player_maxhealth" ) && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
+						{
+							self.TargetPlayer.health += 1;
+							//IPrintLn(self.TargetPlayer.health);
+							wait (0.1);
+						}
+						self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+					}
+				}
+				wait (0.1);
+			}
 			break;
 		case "specops":
+			IPrintLn("specops");
 			break;
 		case "heavygunner":
+			IPrintLn("heavygunner");
 			break;
 		case "demolitions":
+			IPrintLn("demolitions");
 			break;
 		case "sniper":
+			IPrintLn("sniper");
 			break;
 	}
 }
