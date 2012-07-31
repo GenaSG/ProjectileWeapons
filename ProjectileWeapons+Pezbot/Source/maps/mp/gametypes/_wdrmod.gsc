@@ -110,6 +110,15 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     {
                         iDamage = 4 * iDamage/(1+rangeMod*targetDist);	
                     } 
+			if(eAttacker isSniper())
+			{
+				//IPrintLn(self.TargetPlayer.health);
+				score = maps\mp\gametypes\_rank::getScoreInfoValue( "headshot" ) + int(targetDist);
+				eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "headshot", score );
+				eAttacker.pers["score"] += score;
+				eAttacker.score = self.pers["score"];
+				eAttacker notify ( "update_playerscore_hud" );
+			}
                     thread hitShellShock(stoppingCoef);
             }
             else
@@ -1011,6 +1020,19 @@ whoami()
 	self skillPerClass();
 }
 
+isSniper()
+{
+	Curr_weapon = self GetCurrentWeapon();
+	if(isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ))
+	{
+		self.pers["class"]="sniper";
+		return true;	
+	}
+	else
+	{
+		return false;
+	}
+}
 
 skillPerClass()
 {
@@ -1023,19 +1045,28 @@ skillPerClass()
 			{
 				self.TargetPlayer=undefined;
 				self.TargetPlayer = isLookingAtClosestPlayer();
-				if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < getDvarInt( "scr_player_maxhealth" ) )
+				if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < self.maxhealth )
 				{
 					if( self UseButtonPressed() )
 					{
 						self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
 						//Healing
-						while(isAlive(self) && isAlive(self.TargetPlayer) && self UseButtonPressed() && self.TargetPlayer.health < getDvarInt( "scr_player_maxhealth" ) && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
+						while(isAlive(self) && isAlive(self.TargetPlayer) && self UseButtonPressed() && self.TargetPlayer.health <= self.maxhealth && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
 						{
-							self.TargetPlayer.health += 1;
+							self.TargetPlayer.health += 10;
 							//IPrintLn(self.TargetPlayer.health);
-							wait (0.1);
+							self thread maps\mp\gametypes\_rank::giveRankXP( "assist", 1 );
+							self.pers["score"] += 1;
+							self.score = self.pers["score"];
+							self notify ( "update_playerscore_hud" );
+							if( self.TargetPlayer.health >= self.maxhealth )
+							{
+								self.TargetPlayer.health = self.maxhealth;
+							}
+							wait (1);
 						}
 						self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+						
 					}
 				}
 				wait (0.1);
@@ -1051,7 +1082,15 @@ skillPerClass()
 			IPrintLn("demolitions");
 			break;
 		case "sniper":
-			IPrintLn("sniper");
+			while(isAlive(self))
+			{	
+				wait (30);
+				if( getDvarInt( "scr_giveradar") == 0 )
+				{
+					//self give(ammo);
+					self setClientDvars( "scr_giveradar", "1" );
+				}
+			}
 			break;
 	}
 }

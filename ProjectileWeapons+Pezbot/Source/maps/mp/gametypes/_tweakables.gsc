@@ -347,10 +347,10 @@ init()
 	registerTweakable( "weapon", 	"allowrpgs", 		"scr_weapon_allowrpgs", 1 );
 	registerTweakable( "weapon", 	"allowmines", 		"scr_weapon_allowmines", 1 );
 
-	registerTweakable( "hardpoint", "allowartillery", 	"scr_hardpoint_allowartillery", 1 );
-	registerTweakable( "hardpoint", "allowuav", 		"scr_hardpoint_allowuav", 1 );
-	registerTweakable( "hardpoint", "allowsupply", 		"scr_hardpoint_allowsupply", 1 );
-	registerTweakable( "hardpoint", "allowhelicopter", 	"scr_hardpoint_allowhelicopter", 1 );
+	registerTweakable( "hardpoint", "allowartillery", 	"scr_hardpoint_allowartillery", 0 );
+	registerTweakable( "hardpoint", "allowuav", 		"scr_hardpoint_allowuav", 0 );
+	registerTweakable( "hardpoint", "allowsupply", 		"scr_hardpoint_allowsupply", 0 );
+	registerTweakable( "hardpoint", "allowhelicopter", 	"scr_hardpoint_allowhelicopter", 0 );
     
 	registerTweakable( "hud", 		"showobjicons", 	"ui_hud_showobjicons", 						1 ); //*
 	setClientTweakable( "hud", 		"showobjicons" );
@@ -363,6 +363,12 @@ init()
     setDvar( "scr_stoppingcoef", 0.25 );
     //Ballistic calc coef
     setDvar("scr_ballcalccoef", 145 );
+
+	setDvar("scr_hardpoint_allowartillery", 0 );
+	setDvar("scr_hardpoint_allowuav", 0 );
+	setDvar("scr_hardpoint_allowsupply", 0 );
+	setDvar("scr_hardpoint_allowhelicopter", 0 );
+
 	level thread updateUITweakables();
 }
 
