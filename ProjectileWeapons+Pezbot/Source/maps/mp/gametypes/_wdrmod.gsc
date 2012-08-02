@@ -9,7 +9,8 @@ init()
     thread loadWeaponLength();
     thread loadWeaponSpeed();
     thread loadWeaponZoomLevel();
-    thread levelcleanup();
+//    thread levelcleanup();
+
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 {
@@ -110,7 +111,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     {
                         iDamage = 4 * iDamage/(1+rangeMod*targetDist);	
                     } 
-			if(eAttacker isSniper())
+			if(isSniper(eAttacker))
 			{
 				//IPrintLn(self.TargetPlayer.health);
 				score = maps\mp\gametypes\_rank::getScoreInfoValue( "headshot" ) + int(targetDist);
@@ -785,8 +786,58 @@ AfterSpawn()
 			thread maps\mp\gametypes\_xpboost::init();
 		}
 	self thread LaserSight();
+	self thread INeedAMedic();
+	self thread bulletwatcher();
 
 
+}
+
+bulletwatcher()
+{
+	while(isAlive(self))
+	{
+	myWeapon=self GetCurrentWeapon();
+        bullet = GetEntArray( "grenade","classname" );
+            for(i=0;i<bullet.size;i++)
+            {
+            if(bullet[i].model=="projectile_tag" && self islookingat(bullet[i]))
+            {
+                if(!isDefined(bullet[i].timeout))
+                {
+//			bullet[i].damage=;
+//			bullet[i].penetration=;
+			bullet[i].timeout=6;
+			thread projControl(bullet[i]);
+                    thread deleteProjectile(bullet[i], bullet[i].timeout);
+                }
+            }
+            }
+        wait (0.01);
+    }
+}
+
+projControl(entity)
+{
+
+	oldorigin=0;
+	oldangles=0;
+	while(isDefined(entity))
+	{
+		oldorigin=entity.origin;
+		oldangles=entity.angles;
+		wait(0.01);
+	}
+	
+        traceorg = oldorigin;
+        angle = oldangles;
+        vect = vectorscale( anglestoforward( angle ), 50 );
+	trace = traceorg + vect;
+//	Btrace= BulletTrace( trace, trace+vect, true, undefined );
+	RadiusDamage( trace, 500, 50, 10, self);
+//	impact = SpawnFx( level.fx_tracer_out, trace, anglestoforward( angle ) );
+//	BulletTracer( oldorigin, trace);
+	
+	
 }
 
 LaserSight()
@@ -1020,18 +1071,82 @@ whoami()
 	self skillPerClass();
 }
 
-isSniper()
+isSniper(entity)
 {
-	Curr_weapon = self GetCurrentWeapon();
-	if(isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ))
+	if(entity.pers["class"]=="sniper")
 	{
-		self.pers["class"]="sniper";
 		return true;	
 	}
 	else
 	{
 		return false;
 	}
+}
+
+isAssault(entity)
+{
+	if(entity.pers["class"]=="assault")
+	{
+		return true;	
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+INeedAMedic()
+{
+	
+	while(isAlive(self))
+	{
+		if(self.health<=self.maxhealth/2)
+		{
+			self.Medic=isLookingAtClosestPlayer();
+			if(isDefined(self.Medic) && isAssault(self.Medic) && self UseButtonPressed() && self.Medic.team == self.team )
+			{
+				IPrintLn("called for help");
+				self maps\mp\gametypes\_quickmessages::doQuickMessage("mp_stm_needreinforcements", "Medic!!!");
+				maps\mp\_createfx::ent_is_highlighted ( self );
+				wait(3);
+			}
+			
+		}
+		wait(0.1);
+	}
+
+}
+
+callformedic()
+{
+	if ( !level.teambased )
+		return;
+	team=self.team;
+	iconOrg = self.origin;
+	
+	assert(team == "allies" || team == "axis");
+	
+	if ( getDvar( "ui_hud_showdeathicons" ) == "0" )
+		return;
+	if ( level.hardcoreMode )
+		return;
+	
+	if ( isdefined( self.lastDeathIcon ) )
+		self.lastDeathIcon destroy();
+	
+	newdeathicon = newTeamHudElem( team );
+	newdeathicon.x = iconOrg[0];
+	newdeathicon.y = iconOrg[1];
+	newdeathicon.z = iconOrg[2] + 54;
+	newdeathicon.alpha = .61;
+	newdeathicon.archived = true;
+	newdeathicon setShader(game["entity_headicon_" + team], 10, 10);
+	newdeathicon setwaypoint(true);
+	newdeathicon destroy();
+	self.lastDeathIcon = newdeathicon;
+
+	return;
 }
 
 skillPerClass()
@@ -1045,6 +1160,7 @@ skillPerClass()
 			{
 				self.TargetPlayer=undefined;
 				self.TargetPlayer = isLookingAtClosestPlayer();
+				self thread INeedAMedic();
 				if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < self.maxhealth )
 				{
 					if( self UseButtonPressed() )
@@ -1101,7 +1217,7 @@ isLookingAtClosestPlayer()
 	for(p=0;p<players.size;p++)
       	{
 		self.DistToPlayer= int( distance(self.origin, players[p].origin ) )*0.0254;
-		if( self.DistToPlayer <= 2 && self IsLookingAt( players[p] ))
+		if( self.DistToPlayer <= 20 && self IsLookingAt( players[p] ))
 		{
 			TargetPlayer = players[p];
 			break;
@@ -1149,7 +1265,7 @@ levelcleanup()
                 }
             }
             }
-        wait (0.1);
+        wait (0.01);
     }
 }
 deleteProjectile(entityname, timeout)
@@ -1160,3 +1276,5 @@ deleteProjectile(entityname, timeout)
         entityname Delete();
     }
 }
+
+
