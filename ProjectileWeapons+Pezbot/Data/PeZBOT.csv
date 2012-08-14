@@ -5,9 +5,12 @@ weapon,mp/ak47_mp_pezbot_stand_run
 weapon,mp/frag_mp_pezbot_stand_grenade
 weapon,mp/ak47_mp_pezbot_crouch_walk
 weapon,mp/ak47_mp_pezbot_climb_up
-fx,smoke/smoke_geotrail_rifle
-fx,smoke/smoke_geotrail_rifle_heavy
-fx,smoke/smoke_geotrail_barret
+fx,tracers/tracer1_3
+fx,tracers/smoke_geotrail_rifle_heavy
+fx,tracers/smoke_geotrail_rifle
+fx,tracers/no_tracer
+fx,tracers/ricochet
+fx,test/brickblast_25
 material,binocular_overlay
 material,scope_overlay_acog
 material,scope_overlay_acog_low_res

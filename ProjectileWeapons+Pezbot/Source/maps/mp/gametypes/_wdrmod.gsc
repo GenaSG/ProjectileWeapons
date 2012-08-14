@@ -9,7 +9,9 @@ init()
     thread loadWeaponLength();
     thread loadWeaponSpeed();
     thread loadWeaponZoomLevel();
-//    thread levelcleanup();
+    thread levelcleanup();
+    thread maps\mp\_createfx::add_effect("hit", "impacts/default_hit");
+//	brickexp = loadfx("test/brickblast_25");
 
 }
 wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
@@ -776,7 +778,7 @@ AfterSpawn()
 {
    if(!isdefined(self.bIsBot))
 	{
-	 self thread whoami();
+//	 self thread whoami();
   	 self thread  noBunny();
     	}
     self thread  scopeRangeFinder();
@@ -785,60 +787,125 @@ AfterSpawn()
 		{
 			thread maps\mp\gametypes\_xpboost::init();
 		}
-	self thread LaserSight();
-	self thread INeedAMedic();
-	self thread bulletwatcher();
-
-
+//	self thread LaserSight();
+//	self thread INeedAMedic();
+//	self thread bulletwatcher();
+//	self thread test();
 }
 
-bulletwatcher()
+
+test()
 {
 	while(isAlive(self))
 	{
-	myWeapon=self GetCurrentWeapon();
-        bullet = GetEntArray( "grenade","classname" );
-            for(i=0;i<bullet.size;i++)
-            {
-            if(bullet[i].model=="projectile_tag" && self islookingat(bullet[i]))
-            {
-                if(!isDefined(bullet[i].timeout))
-                {
-//			bullet[i].damage=;
-//			bullet[i].penetration=;
-			bullet[i].timeout=6;
-			thread projControl(bullet[i]);
-                    thread deleteProjectile(bullet[i], bullet[i].timeout);
-                }
+		if (self UseButtonPressed())
+		{
+			self thread bulletSpawn(self gettagorigin("tag_inhand"), self getPlayerAngles(), 10000, self, 100, 1, "com_cinderblock" , 1, 1, 2);
+			wait (0.01);
+		}
+		wait(0.01);
+	}
+}
+
+bulletSpawn(origin, angle, speed, owner, damage, penetration, model, effect, tracerprob, lifetime)
+{
+						
+					    vect = vectorscale( anglestoforward( angle ), 50 );
+						trace = origin + vect;						
+						
+						bullet = spawn( "script_model", trace, 3 );
+						bullet setmodel( model );
+						bullet Solid();
+						muzzlevelocity = vectorscale( anglestoforward( angle ), speed );
+						bullet MoveGravity( muzzlevelocity, lifetime );
+						bullet.damage = damage;
+						bullet.angles=angle;
+						bullet.owner = owner;
+						bullet.penetration = penetration;
+						IPrintLn("bullet.origin --"+ bullet.origin);
+						thread projControl(bullet);
+						wait (lifetime);
+						bullet delete();
+						
+						
+}
+
+
+bulletwatcher()
+{
+	player=self;
+	while(isAlive(self))
+	{
+		myWeapon=self GetCurrentWeapon();
+		while(self AttackButtonPressed())
+		{
+        	bullet = GetEntArray( "grenade","classname" );
+           	for(i=0;i<bullet.size;i++)
+           	{
+            		if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && self islookingat(bullet[i]) && !(bullet[i] islookingat(player)))
+            		{
+                		if(!isDefined(bullet[i].timeout) || !isDefined(bullet[i].owner))
+                		{
+							bullet[i].owner=self;
+							bullet[i].timeout=1;
+							thread projControl(bullet[i]);
+                   			thread deleteProjectile(bullet[i], bullet[i].timeout);
+                		}
+           		 	}
+
             }
-            }
-        wait (0.01);
+		wait(0.01);
+		}
+    wait (0.01);
     }
 }
 
 projControl(entity)
 {
 
-	oldorigin=0;
-	oldangles=0;
-	while(isDefined(entity))
-	{
-		oldorigin=entity.origin;
-		oldangles=entity.angles;
-		wait(0.01);
-	}
-	
-        traceorg = oldorigin;
-        angle = oldangles;
-        vect = vectorscale( anglestoforward( angle ), 50 );
-	trace = traceorg + vect;
-//	Btrace= BulletTrace( trace, trace+vect, true, undefined );
-	RadiusDamage( trace, 500, 50, 10, self);
-//	impact = SpawnFx( level.fx_tracer_out, trace, anglestoforward( angle ) );
-//	BulletTracer( oldorigin, trace);
+	oldangles=entity.angles;
+    prevorigin = entity.origin;
+    while(1)
+    {
+       	wait .015;
+       	if (isDefined(entity) && entity.origin == prevorigin )
+	       	break;
+       	prevorigin = entity.origin;
+    }
+//   hit = loadfx("impacts/default_hit");
+//    if(isDefined(hit))
+//     	playfx(hit,entity.origin);
+    entity Delete();
+//     traceorg = prevorigin;
+//     angle = oldangles;
+  //    vect = vectorscale( anglestoforward( angle ), 50 );
+	 // trace = traceorg + vect;
+	 // Btrace= BulletTrace( trace, traceorg, true, undefined );
+	 // effectpos = Btrace["position"];
+	 // vectorafter = vectorscale( anglestoforward( angle ), 500000 );
+	 // BtraceAfter= BulletTrace(Btrace["position"], Btrace["position"]+vectorafter, true, undefined );
+	 // RadiusDamage( BtraceAfter["position"], 30, 50, 10, entity.owner);
+	 // playfx(hit,BtraceAfter["position"]);
+
 	
 	
 }
+
+ismoving(entity)
+{
+
+	oldorigin=entity.origin;
+	wait(0.15);
+	if(entity.origin==oldorigin)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 
 LaserSight()
 {
@@ -1095,24 +1162,31 @@ isAssault(entity)
 	}
 }
 
-
-INeedAMedic()
+WhoNeedsMedic()
 {
-	
 	while(isAlive(self))
 	{
-		if(self.health<=self.maxhealth/2)
-		{
-			self.Medic=isLookingAtClosestPlayer();
-			if(isDefined(self.Medic) && isAssault(self.Medic) && self UseButtonPressed() && self.Medic.team == self.team )
-			{
-				IPrintLn("called for help");
-				self maps\mp\gametypes\_quickmessages::doQuickMessage("mp_stm_needreinforcements", "Medic!!!");
-				maps\mp\_createfx::ent_is_highlighted ( self );
-				wait(3);
+		players = getEntArray( "player", "classname" );
+		for(p=0;p<players.size;p++)
+      		{
+				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p].health<=players[p].maxhealth/2 && isDefined(players[p].healed) == 0)
+					{
+						players[p] thread INeedAMedic(players[p]); 
+					}
+				wait(0.1);
 			}
 			
-		}
+		
+		wait(0.1);
+	}
+}
+
+INeedAMedic(entity)
+{
+	
+	while(isAlive(entity))
+	{
+
 		wait(0.1);
 	}
 
@@ -1156,6 +1230,7 @@ skillPerClass()
     switch ( self.pers["class"] )
 	{
 		case "assault":
+			//self thread WhoNeedsMedic();
 			while(isAlive(self))
 			{
 				self.TargetPlayer=undefined;
@@ -1229,12 +1304,27 @@ isLookingAtClosestPlayer()
 IsLookingAt( gameEntity )
 {
         entityPos = gameEntity.origin;
-        playerPos = self getEye();
+	if(isPlayer(self))  
+	{      
+		playerPos = self getEye();
+	}
+	else
+	{
+		playerPos = self.origin;
+	}
 
         entityPosAngles = vectorToAngles( entityPos - playerPos );
         entityPosForward = anglesToForward( entityPosAngles );
-
-        playerPosAngles = self getPlayerAngles();
+	
+	if(isPlayer(self))  
+	{      
+		playerPosAngles = self getPlayerAngles();
+	}
+	else
+	{
+		playerPosAngles = self.angles;
+	}
+	
         playerPosForward = anglesToForward( playerPosAngles );
 
         newDot = vectorDot( entityPosForward, playerPosForward );
@@ -1260,7 +1350,8 @@ levelcleanup()
             {
                 if(!isDefined(grenades[i].timeout))
                 {
-                    grenades[i].timeout=6;
+                    grenades[i].timeout=1;
+                    thread projControl(grenades[i]);
                     thread deleteProjectile(grenades[i], grenades[i].timeout);
                 }
             }
@@ -1277,4 +1368,15 @@ deleteProjectile(entityname, timeout)
     }
 }
 
+
+getfxarraybyID( fxid )
+{
+	array = [];
+	for( i = 0;i < level.createFXent.size;i ++ )
+	{
+		if( level.createFXent[ i ].v[ "fxid" ] == fxid )
+			array[ array.size ] = level.createFXent[ i ];
+	}
+	return array;
+}
 

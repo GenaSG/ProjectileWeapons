@@ -127,7 +127,7 @@ if(isDefined(entity.script_fightdist)) println("script_fightdist, " + entity.scr
 if(isDefined(entity.script_firefx)) println("script_firefx, " + entity.script_firefx);
 if(isDefined(entity.script_firefxdelay)) println("script_firefxdelay, " + entity.script_firefxdelay);
 if(isDefined(entity.script_firefxsound)) println("script_firefxsound, " + entity.script_firefxsound);
-if(isDefined(entity)) println(", " + entity);
+//if(isDefined(entity)) println(", " + entity);
 if(isDefined(entity.script_firefxtimeout)) println("script_firefxtimeout, " + entity.script_firefxtimeout);
 if(isDefined(entity.script_fireondrones)) println("script_fireondrones, " + entity.script_fireondrones);
 if(isDefined(entity.script_fixednode)) println("script_fixednode, " + entity.script_fixednode);
@@ -227,7 +227,7 @@ if(isDefined(entity.script_percent)) println("script_percent, " + entity.script_
 if(isDefined(entity.script_personality)) println("script_personality, " + entity.script_personality);
 if(isDefined(entity.script_physicsjolt)) println("script_physicsjolt, " + entity.script_physicsjolt);
 if(isDefined(entity.script_pilottalk)) println("script_pilottalk, " + entity.script_pilottalk);
-if(isDefined(entity)) println(", " + entity);
+//if(isDefined(entity)) println(", " + entity);
 if(isDefined(entity.script_plane)) println("script_plane, " + entity.script_plane);
 if(isDefined(entity.script_playerconeradius)) println("script_playerconeradius, " + entity.script_playerconeradius);
 if(isDefined(entity.script_playerseek)) println("script_playerseek, " + entity.script_playerseek);

@@ -1,3 +1,4 @@
 #!/bin/bash
 zip -9 -r Archive.zip ./maps ./weapons ./svr ./images
+[ -f ../projectileweapons.iwd ] && rm -f ../projectileweapons.iwd && echo OK!
 [ -f Archive.zip ] && mv Archive.zip ../projectileweapons.iwd && echo OK!
