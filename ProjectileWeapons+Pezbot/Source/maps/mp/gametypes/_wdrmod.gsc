@@ -115,6 +115,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     } 
 			if(isSniper(eAttacker))
 			{
+				eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Headshot!!!" );
 				//IPrintLn(self.TargetPlayer.health);
 				score = maps\mp\gametypes\_rank::getScoreInfoValue( "headshot" ) + int(targetDist);
 				eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "headshot", score );
@@ -778,7 +779,7 @@ AfterSpawn()
 {
    if(!isdefined(self.bIsBot))
 	{
-//	 self thread whoami();
+	 self thread whoami();
   	 self thread  noBunny();
     	}
     self thread  scopeRangeFinder();
@@ -787,7 +788,7 @@ AfterSpawn()
 		{
 			thread maps\mp\gametypes\_xpboost::init();
 		}
-//	self thread LaserSight();
+	self thread LaserSight();
 //	self thread INeedAMedic();
 //	self thread bulletwatcher();
 //	self thread test();
@@ -909,18 +910,16 @@ ismoving(entity)
 
 LaserSight()
 {
-	//Laser Sight(disable crosshair)
-	setDvar("cg_drawCrosshair", 0 );
-	while(isAlive(self) )
+	while(isAlive(self))
 	{
 		CurrWeap = self GetCurrentWeapon();
-		if(  CurrWeap=="dragunov_acog_mp" || CurrWeap=="dragunov_mp" || CurrWeap=="m40a3_acog_mp" || CurrWeap=="m40a3_mp" || CurrWeap=="barrett_acog_mp" || CurrWeap=="barrett_mp" || CurrWeap=="remington700_acog_mp" || CurrWeap=="remington700_mp" || CurrWeap=="m21_acog_mp" || CurrWeap=="m21_mp" || self playerADS() || CurrWeap =="rpg_mp" )
+		if( CurrWeap !="rpg_mp" && self hasPerk("specialty_bulletaccuracy"))
 		{
-			self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
+			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 1);
 		}
 		else
 		{
-			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 1);
+			self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
 		}
 	wait(0.1);
 	}
@@ -1140,7 +1139,8 @@ whoami()
 
 isSniper(entity)
 {
-	if(entity.pers["class"]=="sniper")
+	Curr_weapon = entity GetCurrentWeapon();
+	if(entity.pers["class"]=="sniper" && (isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ) ))
 	{
 		return true;	
 	}
@@ -1169,7 +1169,7 @@ WhoNeedsMedic()
 		players = getEntArray( "player", "classname" );
 		for(p=0;p<players.size;p++)
       		{
-				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p].health<=players[p].maxhealth/2 && isDefined(players[p].healed) == 0)
+				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p] != self)
 					{
 						players[p] thread INeedAMedic(players[p]); 
 					}
@@ -1186,8 +1186,8 @@ INeedAMedic(entity)
 	
 	while(isAlive(entity))
 	{
-
-		wait(0.1);
+		Print3d( entity gettagorigin("head"), "HEALTH:"+ entity.health + "%", (0, 1, 0), 1, 0.5 );
+		wait(0.02);
 	}
 
 }
@@ -1230,7 +1230,7 @@ skillPerClass()
     switch ( self.pers["class"] )
 	{
 		case "assault":
-			//self thread WhoNeedsMedic();
+			self thread WhoNeedsMedic();
 			while(isAlive(self))
 			{
 				self.TargetPlayer=undefined;
@@ -1274,17 +1274,76 @@ skillPerClass()
 			break;
 		case "sniper":
 			while(isAlive(self))
-			{	
-				wait (30);
-				if( getDvarInt( "scr_giveradar") == 0 )
+			{	if(self playerADS() && self UseButtonPressed())
 				{
-					//self give(ammo);
-					self setClientDvars( "scr_giveradar", "1" );
+					players = getEntArray( "player", "classname" );
+					for(p=0;p<players.size;p++)
+					{
+						if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team != players[p].team && self islookingat(players[p]) && bulletTracePassed( self getPlayerEyes(), players[p] getPlayerEyes(), false, self ) && isSniper(self))
+						{
+							self thread waitForReward(players[p]);
+							players[p].spoted = 1;
+							self thread enemySpoted(players[p]);
+						}
+					wait(0.1);
+					
+					}
 				}
+				wait(0.1);
 			}
 			break;
 	}
 }
+
+waitForReward(enemy)
+{
+	if(!isdefined(enemy.spoted))
+	{
+		for(time=0;time<5;time+=0.02)
+		{
+			if(!isAlive(enemy))
+			{
+				self thread maps\mp\gametypes\_rank::giveRankXP( "assist", 2 );
+				self.pers["score"] += 2;
+				self.score = self.pers["score"];
+				self notify ( "update_playerscore_hud" );
+				return;
+			}
+			wait(0.02);
+		}
+		enemy.spoted = undefined;
+	}
+}
+enemySpoted(enemy)
+{
+	players = getEntArray( "player", "classname" );
+	for(p=0;p<players.size;p++)
+	{
+		if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team )
+		{
+			players[p] thread showEnemy(enemy); 
+		}
+	wait(0.1);
+	}
+}
+
+showEnemy(enemy)
+{
+	for(time=0;time<5;time+=0.02)
+	{
+		if(isAlive(enemy) && isdefined(enemy) && isAlive(self))
+		{
+			
+			Print3d( enemy gettagorigin("head"), "ENEMY", (1, 0, 0), 1, 0.5 );
+			wait(0.02);
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
 isLookingAtClosestPlayer()
 {
 	TargetPlayer=undefined;

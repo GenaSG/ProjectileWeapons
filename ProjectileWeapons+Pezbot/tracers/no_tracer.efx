@@ -2,7 +2,7 @@ iwfx 2
 
 {
 	name "distortion_trail";
-	editorFlags looping useBackCompatVel absVel0;
+	editorFlags looping useBackCompatVel absVel0 boundingSphere;
 	flags spawnRelative spawnOffsetNone runRelToWorld;
 	spawnRange 0 3000;
 	fadeInRange 0 0;
@@ -172,9 +172,9 @@ iwfx 2
 	};
 	lightingFrac 1;
 	collOffset 0 0 0;
-	collRadius 0;
+	collRadius 10;
 	fxOnImpact "";
-	fxOnDeath "";
+	fxOnDeath "tracers/ricochet";
 	sortOrder 0;
 	emission "";
 	emitDist 1 0;
