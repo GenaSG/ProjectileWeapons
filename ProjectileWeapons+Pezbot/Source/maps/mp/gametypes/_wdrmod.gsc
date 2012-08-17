@@ -789,9 +789,6 @@ AfterSpawn()
 			thread maps\mp\gametypes\_xpboost::init();
 		}
 	self thread LaserSight();
-//	self thread INeedAMedic();
-//	self thread bulletwatcher();
-//	self thread test();
 }
 
 
@@ -923,6 +920,7 @@ LaserSight()
 		}
 	wait(0.1);
 	}
+self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
 }
 
 getPlayerEyes()
@@ -1169,7 +1167,7 @@ WhoNeedsMedic()
 		players = getEntArray( "player", "classname" );
 		for(p=0;p<players.size;p++)
       		{
-				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p] != self)
+				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p] != self && level.teamBased)
 					{
 						players[p] thread INeedAMedic(players[p]); 
 					}
@@ -1231,11 +1229,15 @@ skillPerClass()
 	{
 		case "assault":
 			self thread WhoNeedsMedic();
+			
 			while(isAlive(self))
 			{
 				self.TargetPlayer=undefined;
 				self.TargetPlayer = isLookingAtClosestPlayer();
-				self thread INeedAMedic();
+				if ( level.teamBased )
+				{
+
+				}
 				if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < self.maxhealth )
 				{
 					if( self UseButtonPressed() )
@@ -1279,7 +1281,7 @@ skillPerClass()
 					players = getEntArray( "player", "classname" );
 					for(p=0;p<players.size;p++)
 					{
-						if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team != players[p].team && self islookingat(players[p]) && bulletTracePassed( self getPlayerEyes(), players[p] getPlayerEyes(), false, self ) && isSniper(self))
+						if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team != players[p].team && self islookingat(players[p]) && bulletTracePassed( self getPlayerEyes(), players[p] getPlayerEyes(), false, self ) && isSniper(self) && level.teamBased)
 						{
 							self thread waitForReward(players[p]);
 							players[p].spoted = 1;
