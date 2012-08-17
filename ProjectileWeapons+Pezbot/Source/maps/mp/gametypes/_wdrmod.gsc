@@ -9,8 +9,10 @@ init()
     thread loadWeaponLength();
     thread loadWeaponSpeed();
     thread loadWeaponZoomLevel();
-    thread levelcleanup();
-    thread maps\mp\_createfx::add_effect("hit", "impacts/default_hit");
+	thread loadWeaponDamage();
+//    thread levelcleanup();
+    thread maps\mp\_createfx::add_effect("peneteffect", "explosions/default_explosion");
+	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
 //	brickexp = loadfx("test/brickblast_25");
 
 }
@@ -147,6 +149,138 @@ hitShellShock(stoppingCoef)
      time = stoppingCoef * getDvarfloat( "scr_stoppingcoef" );   
      self shellShock( "frag_grenade_mp", time );
 }
+
+loadWeaponDamage()
+{
+	level.damage=[];
+	level.weapon=[];
+	level.weapon[ "m16_acog_mp" ]["damage"] = 30;
+	level.weapon[ "m16_gl_mp" ]["damage"] = 30;
+	level.weapon[ "m16_mp" ]["damage"] = 30;
+	level.weapon[ "m16_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "m16_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "ak47_acog_mp" ]["damage"] = 30;
+	level.weapon[ "ak47_gl_mp" ]["damage"] = 30;
+	level.weapon[ "ak47_mp" ]["damage"] = 30;
+	level.weapon[ "ak47_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "ak47_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "m4_acog_mp" ]["damage"] = 30;
+	level.weapon[ "m4_gl_mp" ]["damage"] = 30;
+	level.weapon[ "m4_mp" ]["damage"] = 30;
+	level.weapon[ "m4_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "m4_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "g3_acog_mp" ]["damage"] = 30;
+	level.weapon[ "g3_gl_mp" ]["damage"] = 30;
+	level.weapon[ "g3_mp" ]["damage"] = 30;
+	level.weapon[ "g3_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "g3_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "g36c_acog_mp" ]["damage"] = 30;
+	level.weapon[ "g36c_gl_mp" ]["damage"] = 30;
+	level.weapon[ "g36c_mp" ]["damage"] = 30;
+	level.weapon[ "g36c_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "g36c_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "m14_acog_mp" ]["damage"] = 30;
+	level.weapon[ "m14_gl_mp" ]["damage"] = 30;
+	level.weapon[ "m14_mp" ]["damage"] = 30;
+	level.weapon[ "m14_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "m14_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "mp44_mp" ]["damage"] = 30;
+
+
+	// Special Ops class weapons
+	level.weapon[ "mp5_acog_mp" ]["damage"] = 30;
+	level.weapon[ "mp5_mp" ]["damage"] = 30;
+	level.weapon[ "mp5_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "mp5_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "skorpion_acog_mp" ]["damage"] = 30;
+	level.weapon[ "skorpion_mp" ]["damage"] = 30;
+	level.weapon[ "skorpion_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "skorpion_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "uzi_acog_mp" ]["damage"] = 30;
+	level.weapon[ "uzi_mp" ]["damage"] = 30;
+	level.weapon[ "uzi_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "uzi_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "ak74u_acog_mp" ]["damage"] = 30;
+	level.weapon[ "ak74u_mp" ]["damage"] = 30;
+	level.weapon[ "ak74u_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "ak74u_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "p90_acog_mp" ]["damage"] = 30;
+	level.weapon[ "p90_mp" ]["damage"] = 30;
+	level.weapon[ "p90_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "p90_silencer_mp" ]["damage"] = 30;
+
+
+	// Demolition class weapons
+	level.weapon[ "m1014_grip_mp" ]["damage"] = 30;
+	level.weapon[ "m1014_mp" ]["damage"] = 30;
+	level.weapon[ "m1014_reflex_mp" ]["damage"] = 30;
+
+	level.weapon[ "winchester1200_grip_mp" ]["damage"] = 30;
+	level.weapon[ "winchester1200_mp" ]["damage"] = 30;
+	level.weapon[ "winchester1200_reflex_mp" ]["damage"] = 30;
+
+
+	// Heavy gunner class weapons
+	level.weapon[ "saw_acog_mp" ]["damage"] = 30;
+	level.weapon[ "saw_grip_mp" ]["damage"] = 30;
+	level.weapon[ "saw_mp" ]["damage"] = 30;
+	level.weapon[ "saw_reflex_mp" ]["damage"] = 30;
+
+	level.weapon[ "rpd_acog_mp" ]["damage"] = 30;
+	level.weapon[ "rpd_grip_mp" ]["damage"] = 30;
+	level.weapon[ "rpd_mp" ]["damage"] = 30;
+	level.weapon[ "rpd_reflex_mp" ]["damage"] = 30;
+
+	level.weapon[ "m60e4_acog_mp" ]["damage"] = 30;
+	level.weapon[ "m60e4_grip_mp" ]["damage"] = 30;
+	level.weapon[ "m60e4_mp" ]["damage"] = 30;
+	level.weapon[ "m60e4_reflex_mp" ]["damage"] = 30;
+
+
+	// Sniper class weapons
+	level.weapon[ "dragunov_acog_mp" ]["damage"] = 30;
+	level.weapon[ "dragunov_mp" ]["damage"] = 30;
+
+	level.weapon[ "m40a3_acog_mp" ]["damage"] = 30;
+	level.weapon[ "m40a3_mp" ]["damage"] = 30;
+
+	level.weapon[ "barrett_acog_mp" ]["damage"] = 30;
+	level.weapon[ "barrett_mp" ]["damage"] = 30;
+
+	level.weapon[ "remington700_acog_mp" ]["damage"] = 30;
+	level.weapon[ "remington700_mp" ]["damage"] = 30;
+
+	level.weapon[ "m21_acog_mp" ]["damage"] = 30;
+	level.weapon[ "m21_mp" ]["damage"] = 30;
+
+
+	// Handguns
+	level.weapon[ "beretta_mp" ]["damage"] = 30;
+	level.weapon[ "beretta_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "colt45_mp" ]["damage"] = 30;
+	level.weapon[ "colt45_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "usp_mp" ]["damage"] = 30;
+	level.weapon[ "usp_silencer_mp" ]["damage"] = 30;
+
+	level.weapon[ "deserteagle_mp" ]["damage"] = 30;
+	level.weapon[ "deserteaglegold_mp" ]["damage"] = 30;
+
+
+	return;
+}
+
 
 loadWdrMod()
 {
@@ -688,7 +822,7 @@ loadWeaponSpeed()
 {
 
 // Load all the weapons with their corresponding dvar controlling it
-level.wl = [];
+level.ws = [];
 
 // Assault class weapons
 level.ws[ "m16_acog_mp" ] = "scr_ws_m16_acog";
@@ -733,7 +867,7 @@ loadWeaponZoomLevel()
 {
 
 // Load all the weapons with their corresponding dvar controlling it
-level.wl = [];
+level.wzl = [];
 
 // Assault class weapons
 level.wzl[ "m16_acog_mp" ] = "scr_wzl_m16_acog";
@@ -788,6 +922,7 @@ AfterSpawn()
 		{
 			thread maps\mp\gametypes\_xpboost::init();
 		}
+	self thread bulletwatcher();
 	self thread LaserSight();
 }
 
@@ -834,59 +969,61 @@ bulletwatcher()
 	player=self;
 	while(isAlive(self))
 	{
-		myWeapon=self GetCurrentWeapon();
-		while(self AttackButtonPressed())
+		self waittill("weapon_fired");
+		bullet = GetEntArray( "grenade","classname" );
+		for(i=0;i<bullet.size;i++)
 		{
-        	bullet = GetEntArray( "grenade","classname" );
-           	for(i=0;i<bullet.size;i++)
-           	{
-            		if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && self islookingat(bullet[i]) && !(bullet[i] islookingat(player)))
-            		{
-                		if(!isDefined(bullet[i].timeout) || !isDefined(bullet[i].owner))
-                		{
-							bullet[i].owner=self;
-							bullet[i].timeout=1;
-							thread projControl(bullet[i]);
-                   			thread deleteProjectile(bullet[i], bullet[i].timeout);
-                		}
-           		 	}
-
-            }
-		wait(0.01);
+			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && int( distance(self.origin, bullet[i].origin ) )*0.0254 <= 2)
+			{
+				if(!isDefined(bullet[i].timeout) && !isDefined(bullet[i].owner))
+				{
+					bullet[i].owner=self;
+					if(self hasPerk("specialty_bulletpenetration"))
+					{
+						bullet[i].penetration = 1;
+					}
+					else
+					{
+						bullet[i].penetration = 0;
+					}
+					bullet[i].damage = level.weapon[ self getCurrentWeapon() ]["damage"];
+					bullet[i].timeout = 1;
+					thread projControl(bullet[i]);
+					thread deleteProjectile(bullet[i], bullet[i].timeout);
+				}
+			}
 		}
-    wait (0.01);
-    }
+		wait(0.00001);
+	}
 }
 
 projControl(entity)
 {
-
+	finalBulletDamage=0;
 	oldangles=entity.angles;
-    prevorigin = entity.origin;
-    while(1)
-    {
-       	wait .015;
-       	if (isDefined(entity) && entity.origin == prevorigin )
-	       	break;
-       	prevorigin = entity.origin;
-    }
-//   hit = loadfx("impacts/default_hit");
-//    if(isDefined(hit))
-//     	playfx(hit,entity.origin);
-    entity Delete();
-//     traceorg = prevorigin;
-//     angle = oldangles;
-  //    vect = vectorscale( anglestoforward( angle ), 50 );
-	 // trace = traceorg + vect;
-	 // Btrace= BulletTrace( trace, traceorg, true, undefined );
-	 // effectpos = Btrace["position"];
-	 // vectorafter = vectorscale( anglestoforward( angle ), 500000 );
-	 // BtraceAfter= BulletTrace(Btrace["position"], Btrace["position"]+vectorafter, true, undefined );
-	 // RadiusDamage( BtraceAfter["position"], 30, 50, 10, entity.owner);
-	 // playfx(hit,BtraceAfter["position"]);
-
-	
-	
+	prevorigin = entity.origin;
+	while(1)
+	{
+		wait .015;
+		if (isDefined(entity) && entity.origin == prevorigin )
+		break;
+		prevorigin = entity.origin;
+	}
+	if(entity.penetration==1)
+	{
+		peneteffect = loadfx("explosions/default_explosion");
+		traceorg = prevorigin;
+		angle = oldangles;
+		vect = vectorscale( anglestoforward( angle ), entity.damage );
+		trace = traceorg + vect;
+		Btrace= BulletTrace( trace, traceorg, true, undefined );
+		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
+		RadiusDamage( Btrace["position"], finalBulletDamage, finalBulletDamage, 0, entity.owner);
+		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+	}
+	hit = loadfx("tracers/ricochet");
+	playfx(hit,prevorigin, anglestoforward(oldangles));
+	entity Delete();
 }
 
 ismoving(entity)
