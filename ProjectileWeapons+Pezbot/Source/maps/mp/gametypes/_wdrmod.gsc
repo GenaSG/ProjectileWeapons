@@ -11,7 +11,7 @@ init()
     thread loadWeaponZoomLevel();
 	thread loadWeaponDamage();
 //    thread levelcleanup();
-    thread maps\mp\_createfx::add_effect("peneteffect", "explosions/default_explosion");
+    thread maps\mp\_createfx::add_effect("peneteffect", "impacts/20mm_default_impact");
 	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
 //	brickexp = loadfx("test/brickblast_25");
 
@@ -154,43 +154,43 @@ loadWeaponDamage()
 {
 	level.damage=[];
 	level.weapon=[];
-	level.weapon[ "m16_acog_mp" ]["damage"] = 30;
-	level.weapon[ "m16_gl_mp" ]["damage"] = 30;
-	level.weapon[ "m16_mp" ]["damage"] = 30;
-	level.weapon[ "m16_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "m16_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "m16_acog_mp" ]["damage"] = 34.29;
+	level.weapon[ "m16_gl_mp" ]["damage"] = 34.29;
+	level.weapon[ "m16_mp" ]["damage"] = 34.29;
+	level.weapon[ "m16_reflex_mp" ]["damage"] = 34.29;
+	level.weapon[ "m16_silencer_mp" ]["damage"] = 26.67;
 
-	level.weapon[ "ak47_acog_mp" ]["damage"] = 30;
-	level.weapon[ "ak47_gl_mp" ]["damage"] = 30;
-	level.weapon[ "ak47_mp" ]["damage"] = 30;
-	level.weapon[ "ak47_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "ak47_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "ak47_acog_mp" ]["damage"] = 40;
+	level.weapon[ "ak47_gl_mp" ]["damage"] = 40;
+	level.weapon[ "ak47_mp" ]["damage"] = 40;
+	level.weapon[ "ak47_reflex_mp" ]["damage"] = 40;
+	level.weapon[ "ak47_silencer_mp" ]["damage"] = 40;
 
-	level.weapon[ "m4_acog_mp" ]["damage"] = 30;
-	level.weapon[ "m4_gl_mp" ]["damage"] = 30;
-	level.weapon[ "m4_mp" ]["damage"] = 30;
-	level.weapon[ "m4_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "m4_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "m4_acog_mp" ]["damage"] = 32.00;
+	level.weapon[ "m4_gl_mp" ]["damage"] = 32.00;
+	level.weapon[ "m4_mp" ]["damage"] = 32.00;
+	level.weapon[ "m4_reflex_mp" ]["damage"] = 32.00;
+	level.weapon[ "m4_silencer_mp" ]["damage"] = 26.67;
 
-	level.weapon[ "g3_acog_mp" ]["damage"] = 30;
-	level.weapon[ "g3_gl_mp" ]["damage"] = 30;
-	level.weapon[ "g3_mp" ]["damage"] = 30;
-	level.weapon[ "g3_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "g3_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "g3_acog_mp" ]["damage"] = 48.00;
+	level.weapon[ "g3_gl_mp" ]["damage"] = 48.00;
+	level.weapon[ "g3_mp" ]["damage"] = 48.00;
+	level.weapon[ "g3_reflex_mp" ]["damage"] = 48.00;
+	level.weapon[ "g3_silencer_mp" ]["damage"] = 48.00;
 
-	level.weapon[ "g36c_acog_mp" ]["damage"] = 30;
-	level.weapon[ "g36c_gl_mp" ]["damage"] = 30;
-	level.weapon[ "g36c_mp" ]["damage"] = 30;
-	level.weapon[ "g36c_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "g36c_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "g36c_acog_mp" ]["damage"] = 32.00;
+	level.weapon[ "g36c_gl_mp" ]["damage"] = 32.00;
+	level.weapon[ "g36c_mp" ]["damage"] = 32.00;
+	level.weapon[ "g36c_reflex_mp" ]["damage"] = 32.00;
+	level.weapon[ "g36c_silencer_mp" ]["damage"] = 26.67;
 
-	level.weapon[ "m14_acog_mp" ]["damage"] = 30;
-	level.weapon[ "m14_gl_mp" ]["damage"] = 30;
-	level.weapon[ "m14_mp" ]["damage"] = 30;
-	level.weapon[ "m14_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "m14_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "m14_acog_mp" ]["damage"] = 68.57;
+	level.weapon[ "m14_gl_mp" ]["damage"] = 68.57;
+	level.weapon[ "m14_mp" ]["damage"] = 68.57;
+	level.weapon[ "m14_reflex_mp" ]["damage"] = 68.57;
+	level.weapon[ "m14_silencer_mp" ]["damage"] = 68.57;
 
-	level.weapon[ "mp44_mp" ]["damage"] = 30;
+	level.weapon[ "mp44_mp" ]["damage"] = 48.00;
 
 
 	// Special Ops class weapons
@@ -199,25 +199,25 @@ loadWeaponDamage()
 	level.weapon[ "mp5_reflex_mp" ]["damage"] = 30;
 	level.weapon[ "mp5_silencer_mp" ]["damage"] = 30;
 
-	level.weapon[ "skorpion_acog_mp" ]["damage"] = 30;
-	level.weapon[ "skorpion_mp" ]["damage"] = 30;
-	level.weapon[ "skorpion_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "skorpion_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "skorpion_acog_mp" ]["damage"] = 25.26;
+	level.weapon[ "skorpion_mp" ]["damage"] = 25.26;
+	level.weapon[ "skorpion_reflex_mp" ]["damage"] = 25.26;
+	level.weapon[ "skorpion_silencer_mp" ]["damage"] = 25.26;
 
-	level.weapon[ "uzi_acog_mp" ]["damage"] = 30;
-	level.weapon[ "uzi_mp" ]["damage"] = 30;
-	level.weapon[ "uzi_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "uzi_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "uzi_acog_mp" ]["damage"] = 26.67;
+	level.weapon[ "uzi_mp" ]["damage"] = 26.67;
+	level.weapon[ "uzi_reflex_mp" ]["damage"] = 26.67;
+	level.weapon[ "uzi_silencer_mp" ]["damage"] = 26.67;
 
-	level.weapon[ "ak74u_acog_mp" ]["damage"] = 30;
-	level.weapon[ "ak74u_mp" ]["damage"] = 30;
-	level.weapon[ "ak74u_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "ak74u_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "ak74u_acog_mp" ]["damage"] = 32;
+	level.weapon[ "ak74u_mp" ]["damage"] = 32;
+	level.weapon[ "ak74u_reflex_mp" ]["damage"] = 32;
+	level.weapon[ "ak74u_silencer_mp" ]["damage"] = 26.67;
 
-	level.weapon[ "p90_acog_mp" ]["damage"] = 30;
-	level.weapon[ "p90_mp" ]["damage"] = 30;
-	level.weapon[ "p90_reflex_mp" ]["damage"] = 30;
-	level.weapon[ "p90_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "p90_acog_mp" ]["damage"] = 26.67;
+	level.weapon[ "p90_mp" ]["damage"] = 26.67;
+	level.weapon[ "p90_reflex_mp" ]["damage"] = 26.67;
+	level.weapon[ "p90_silencer_mp" ]["damage"] = 26.67;
 
 
 	// Demolition class weapons
@@ -231,51 +231,51 @@ loadWeaponDamage()
 
 
 	// Heavy gunner class weapons
-	level.weapon[ "saw_acog_mp" ]["damage"] = 30;
-	level.weapon[ "saw_grip_mp" ]["damage"] = 30;
-	level.weapon[ "saw_mp" ]["damage"] = 30;
-	level.weapon[ "saw_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "saw_acog_mp" ]["damage"] = 24.00;
+	level.weapon[ "saw_grip_mp" ]["damage"] = 24.00;
+	level.weapon[ "saw_mp" ]["damage"] = 24.00;
+	level.weapon[ "saw_reflex_mp" ]["damage"] = 24.00;
 
-	level.weapon[ "rpd_acog_mp" ]["damage"] = 30;
-	level.weapon[ "rpd_grip_mp" ]["damage"] = 30;
-	level.weapon[ "rpd_mp" ]["damage"] = 30;
-	level.weapon[ "rpd_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "rpd_acog_mp" ]["damage"] = 32.00;
+	level.weapon[ "rpd_grip_mp" ]["damage"] = 32.00;
+	level.weapon[ "rpd_mp" ]["damage"] = 32.00;
+	level.weapon[ "rpd_reflex_mp" ]["damage"] = 32.00;
 
-	level.weapon[ "m60e4_acog_mp" ]["damage"] = 30;
-	level.weapon[ "m60e4_grip_mp" ]["damage"] = 30;
-	level.weapon[ "m60e4_mp" ]["damage"] = 30;
-	level.weapon[ "m60e4_reflex_mp" ]["damage"] = 30;
+	level.weapon[ "m60e4_acog_mp" ]["damage"] = 43.64;
+	level.weapon[ "m60e4_grip_mp" ]["damage"] = 43.64;
+	level.weapon[ "m60e4_mp" ]["damage"] = 43.64;
+	level.weapon[ "m60e4_reflex_mp" ]["damage"] = 43.64;
 
 
 	// Sniper class weapons
-	level.weapon[ "dragunov_acog_mp" ]["damage"] = 30;
-	level.weapon[ "dragunov_mp" ]["damage"] = 30;
+	level.weapon[ "dragunov_acog_mp" ]["damage"] = 68.57;
+	level.weapon[ "dragunov_mp" ]["damage"] = 68.57;
 
-	level.weapon[ "m40a3_acog_mp" ]["damage"] = 30;
-	level.weapon[ "m40a3_mp" ]["damage"] = 30;
+	level.weapon[ "m40a3_acog_mp" ]["damage"] = 120.00;
+	level.weapon[ "m40a3_mp" ]["damage"] = 120.00;
 
-	level.weapon[ "barrett_acog_mp" ]["damage"] = 30;
-	level.weapon[ "barrett_mp" ]["damage"] = 30;
+	level.weapon[ "barrett_acog_mp" ]["damage"] = 400;
+	level.weapon[ "barrett_mp" ]["damage"] = 400;
 
-	level.weapon[ "remington700_acog_mp" ]["damage"] = 30;
-	level.weapon[ "remington700_mp" ]["damage"] = 30;
+	level.weapon[ "remington700_acog_mp" ]["damage"] = 120;
+	level.weapon[ "remington700_mp" ]["damage"] = 120;
 
-	level.weapon[ "m21_acog_mp" ]["damage"] = 30;
-	level.weapon[ "m21_mp" ]["damage"] = 30;
+	level.weapon[ "m21_acog_mp" ]["damage"] = 68.57;
+	level.weapon[ "m21_mp" ]["damage"] = 68.57;
 
 
 	// Handguns
-	level.weapon[ "beretta_mp" ]["damage"] = 30;
-	level.weapon[ "beretta_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "beretta_mp" ]["damage"] = 40;
+	level.weapon[ "beretta_silencer_mp" ]["damage"] = 40;
 
-	level.weapon[ "colt45_mp" ]["damage"] = 30;
-	level.weapon[ "colt45_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "colt45_mp" ]["damage"] = 53.33;
+	level.weapon[ "colt45_silencer_mp" ]["damage"] = 53.33;
 
-	level.weapon[ "usp_mp" ]["damage"] = 30;
-	level.weapon[ "usp_silencer_mp" ]["damage"] = 30;
+	level.weapon[ "usp_mp" ]["damage"] = 53.33;
+	level.weapon[ "usp_silencer_mp" ]["damage"] = 53.33;
 
-	level.weapon[ "deserteagle_mp" ]["damage"] = 30;
-	level.weapon[ "deserteaglegold_mp" ]["damage"] = 30;
+	level.weapon[ "deserteagle_mp" ]["damage"] = 60;
+	level.weapon[ "deserteaglegold_mp" ]["damage"] = 60;
 
 
 	return;
@@ -986,7 +986,12 @@ bulletwatcher()
 					{
 						bullet[i].penetration = 0;
 					}
-					bullet[i].damage = level.weapon[ self getCurrentWeapon() ]["damage"];
+					if(isDefined(level.weapon[ self getCurrentWeapon() ]["damage"]))
+					{
+						bullet[i].damage = level.weapon[ self getCurrentWeapon() ]["damage"];
+					}
+					bullet[i].pointoforigin = self.origin;
+					bullet[i].weaponoforigin = self getCurrentWeapon();
 					bullet[i].timeout = 1;
 					thread projControl(bullet[i]);
 					thread deleteProjectile(bullet[i], bullet[i].timeout);
@@ -1011,12 +1016,15 @@ projControl(entity)
 	}
 	if(entity.penetration==1)
 	{
-		peneteffect = loadfx("explosions/default_explosion");
+		peneteffect = loadfx("impacts/20mm_default_impact");
 		traceorg = prevorigin;
 		angle = oldangles;
 		vect = vectorscale( anglestoforward( angle ), entity.damage );
 		trace = traceorg + vect;
 		Btrace= BulletTrace( trace, traceorg, true, undefined );
+		rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
+		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
+		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
 		RadiusDamage( Btrace["position"], finalBulletDamage, finalBulletDamage, 0, entity.owner);
 		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
