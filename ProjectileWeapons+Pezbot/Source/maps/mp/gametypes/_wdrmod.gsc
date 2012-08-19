@@ -10,7 +10,7 @@ init()
     thread loadWeaponSpeed();
     thread loadWeaponZoomLevel();
 	thread loadWeaponDamage();
-//    thread levelcleanup();
+    thread levelcleanup();
     thread maps\mp\_createfx::add_effect("peneteffect", "impacts/20mm_default_impact");
 	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
 //	brickexp = loadfx("test/brickblast_25");
@@ -913,7 +913,7 @@ AfterSpawn()
 {
    if(!isdefined(self.bIsBot))
 	{
-	 self thread whoami();
+//	 self thread whoami();
   	 self thread  noBunny();
     	}
     self thread  scopeRangeFinder();
@@ -978,7 +978,7 @@ bulletwatcher()
 				if(!isDefined(bullet[i].timeout) && !isDefined(bullet[i].owner))
 				{
 					bullet[i].owner=self;
-					if(self hasPerk("specialty_bulletpenetration"))
+					if(isdefined(self) && self hasPerk("specialty_bulletpenetration"))
 					{
 						bullet[i].penetration = 1;
 					}
@@ -986,7 +986,7 @@ bulletwatcher()
 					{
 						bullet[i].penetration = 0;
 					}
-					if(isDefined(level.weapon[ self getCurrentWeapon() ]["damage"]))
+					if(isDefined(self) && isDefined(level.weapon[ self getCurrentWeapon() ]["damage"]))
 					{
 						bullet[i].damage = level.weapon[ self getCurrentWeapon() ]["damage"];
 					}
@@ -1026,8 +1026,12 @@ projControl(entity)
 		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
 		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
-		RadiusDamage( Btrace["position"], finalBulletDamage, finalBulletDamage, 0, entity.owner);
 		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		vectafter = vectorscale( anglestoforward( angle ), 400 );
+		traceafter = Btrace["position"] + vectafter;
+		Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
+		RadiusDamage( Btraceafter["position"], 40, finalBulletDamage, finalBulletDamage/2, entity.owner);
+
 	}
 	hit = loadfx("tracers/ricochet");
 	playfx(hit,prevorigin, anglestoforward(oldangles));
@@ -1251,33 +1255,35 @@ noBunny()
 
 whoami()
 {
+	
 	Curr_weapon = self GetCurrentWeapon();
 	if(isSubStr( Curr_weapon, "m16_" ) || isSubStr( Curr_weapon, "ak47_" ) || isSubStr( Curr_weapon, "m4_" ) || isSubStr( Curr_weapon, "g3_" ) || isSubStr( Curr_weapon, "g36c_" ) || isSubStr( Curr_weapon, "m14_" ) || isSubStr( Curr_weapon, "mp44_" ))
 	{
-		self.pers["class"]="assault";	
+		self.pers["class"]="assault";
 	}
 	else if(isSubStr( Curr_weapon, "mp5_" ) || isSubStr( Curr_weapon, "skorpion_" ) || isSubStr( Curr_weapon, "uzi_" ) || isSubStr( Curr_weapon, "ak74u_" ) || isSubStr( Curr_weapon, "p90_" ))
 	{
-		self.pers["class"]="specops";	
+		self.pers["class"]="specops";
 	}
 
 	else if(isSubStr( Curr_weapon, "saw_" ) || isSubStr( Curr_weapon, "rpd_" ) || isSubStr( Curr_weapon, "m60e4_" ))
 	{
-		self.pers["class"]="heavygunner";	
+		self.pers["class"]="heavygunner";
 	}
-	
+
 	else if(isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ))
 	{
-		self.pers["class"]="sniper";	
+		self.pers["class"]="sniper";
 	}
 
 	else if(isSubStr( Curr_weapon, "m1014_" ) || isSubStr( Curr_weapon, "winchester1200_" ))
 	{
-		self.pers["class"]="demolitions";	
+		self.pers["class"]="demolitions";
 	}
 
 
 	self skillPerClass();
+	
 }
 
 isSniper(entity)
@@ -1369,7 +1375,6 @@ callformedic()
 skillPerClass()
 {
 
-
     switch ( self.pers["class"] )
 	{
 		case "assault":
@@ -1381,43 +1386,39 @@ skillPerClass()
 				self.TargetPlayer = isLookingAtClosestPlayer();
 				if ( level.teamBased )
 				{
-
-				}
-				if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < self.maxhealth )
-				{
-					if( self UseButtonPressed() )
+					if(isDefined(self.TargetPlayer) && self.TargetPlayer.health < self.maxhealth )
 					{
-						self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
-						//Healing
-						while(isAlive(self) && isAlive(self.TargetPlayer) && self UseButtonPressed() && self.TargetPlayer.health <= self.maxhealth && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
+						if( self UseButtonPressed() )
 						{
-							self.TargetPlayer.health += 10;
-							//IPrintLn(self.TargetPlayer.health);
-							self thread maps\mp\gametypes\_rank::giveRankXP( "assist", 1 );
-							self.pers["score"] += 1;
-							self.score = self.pers["score"];
-							self notify ( "update_playerscore_hud" );
-							if( self.TargetPlayer.health >= self.maxhealth )
+							self thread maps\mp\gametypes\_gameobjects::_disableWeapon();
+							//Healing
+							while(isAlive(self) && isAlive(self.TargetPlayer) && self UseButtonPressed() && self.TargetPlayer.health <= self.maxhealth && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
 							{
-								self.TargetPlayer.health = self.maxhealth;
+								self.TargetPlayer.health += 10;
+								//IPrintLn(self.TargetPlayer.health);
+								self thread maps\mp\gametypes\_rank::giveRankXP( "assist", 1 );
+								self.pers["score"] += 1;
+								self.score = self.pers["score"];
+								self notify ( "update_playerscore_hud" );
+								if( self.TargetPlayer.health >= self.maxhealth )
+								{
+									self.TargetPlayer.health = self.maxhealth;
+								}
+								wait (1);
 							}
-							wait (1);
-						}
-						self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
+							self thread maps\mp\gametypes\_gameobjects::_enableWeapon();
 						
+						}
 					}
+					wait (0.1);
 				}
-				wait (0.1);
 			}
 			break;
 		case "specops":
-			IPrintLn("specops");
 			break;
 		case "heavygunner":
-			IPrintLn("heavygunner");
 			break;
 		case "demolitions":
-			IPrintLn("demolitions");
 			break;
 		case "sniper":
 			while(isAlive(self))
@@ -1433,7 +1434,7 @@ skillPerClass()
 							self thread enemySpoted(players[p]);
 						}
 					wait(0.1);
-					
+
 					}
 				}
 				wait(0.1);
@@ -1557,7 +1558,7 @@ levelcleanup()
                 if(!isDefined(grenades[i].timeout))
                 {
                     grenades[i].timeout=1;
-                    thread projControl(grenades[i]);
+                    //thread projControl(grenades[i]);
                     thread deleteProjectile(grenades[i], grenades[i].timeout);
                 }
             }
