@@ -13,6 +13,7 @@ init()
     thread levelcleanup();
     thread maps\mp\_createfx::add_effect("peneteffect", "impacts/20mm_default_impact");
 	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
+	thread maps\mp\_createfx::add_effect("laserDot", "tracers/laserdot");
 //	brickexp = loadfx("test/brickblast_25");
 
 }
@@ -978,13 +979,16 @@ bulletwatcher()
 				if(!isDefined(bullet[i].timeout) && !isDefined(bullet[i].owner))
 				{
 					bullet[i].owner=self;
-					if(isdefined(self) && self hasPerk("specialty_bulletpenetration"))
+					if (isdefined(self))
 					{
-						bullet[i].penetration = 1;
-					}
-					else
-					{
-						bullet[i].penetration = 0;
+						if( self hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(self GetCurrentWeapon()) || isSubStr( self GetCurrentWeapon(), "barrett_" ))
+						{
+							bullet[i].penetration = 1;
+						}
+						else
+						{
+							bullet[i].penetration = 0;
+						}
 					}
 					if(isDefined(self) && isDefined(level.weapon[ self getCurrentWeapon() ]["damage"]))
 					{
@@ -1057,12 +1061,13 @@ ismoving(entity)
 
 LaserSight()
 {
+	laserDot=loadfx("tracers/laserdot");
 	while(isAlive(self))
 	{
 		CurrWeap = self GetCurrentWeapon();
 		if( CurrWeap !="rpg_mp" && self hasPerk("specialty_bulletaccuracy"))
 		{
-			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 1);
+			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 0);
 		}
 		else
 		{
@@ -1256,7 +1261,6 @@ noBunny()
 
 whoami()
 {
-	IPrintLn(level.teamBased);
 	Curr_weapon = self GetCurrentWeapon();
 	if(isSubStr( Curr_weapon, "m16_" ) || isSubStr( Curr_weapon, "ak47_" ) || isSubStr( Curr_weapon, "m4_" ) || isSubStr( Curr_weapon, "g3_" ) || isSubStr( Curr_weapon, "g36c_" ) || isSubStr( Curr_weapon, "m14_" ) || isSubStr( Curr_weapon, "mp44_" ))
 	{
