@@ -1031,7 +1031,13 @@ projControl(entity)
 		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
 		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
-		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		if (isDefined(Btrace["entity"])) {
+			wait(0);
+		}
+		else
+		{
+			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		}
 		vectafter = vectorscale( anglestoforward( angle ), 400 );
 		traceafter = Btrace["position"] + vectafter;
 		Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
