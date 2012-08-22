@@ -1,8 +1,8 @@
 iwfx 2
 
 {
-	name "distortion_trail";
-	editorFlags looping useBackCompatVel absVel0 boundingSphere;
+	name "distortion trail";
+	editorFlags looping useBackCompatVel absVel0;
 	flags spawnRelative spawnOffsetNone runRelToWorld;
 	spawnRange 0 3000;
 	fadeInRange 0 0;
@@ -99,27 +99,26 @@ iwfx 2
 			1 0
 		}
 	};
-	rotGraph 0
+	rotGraph 1110
 	{
 		{
-			0 -0.5
-			1 -0.5
+			0 0.5
+			1 0
 		}
 		{
 			0 0.5
-			1 0.5
+			1 0
 		}
 	};
-	sizeGraph0 3
+	sizeGraph0 20
 	{
 		{
-			0 1
+			0 0
 			1 1
 		}
 		{
-			0 0.194805
-			0.720588 0.545455
-			1 0
+			0 0
+			1 1
 		}
 	};
 	sizeGraph1 2
@@ -147,8 +146,8 @@ iwfx 2
 	colorGraph 1
 	{
 		{
-			0 0.865285 0.875648 0.880829
-			1 0.870466 0.880829 0.88601
+			0 0.709804 0.709804 0.709804
+			1 0.627451 0.627451 0.627451
 		}
 		{
 			0 0.658824 0.658824 0.658824
@@ -163,18 +162,14 @@ iwfx 2
 		}
 		{
 			0 1
-			0.0901163 0.741627
-			0.25 0.478469
-			0.508721 0.23445
-			0.732558 0.076555
 			1 0
 		}
 	};
-	lightingFrac 1;
+	lightingFrac 0;
 	collOffset 0 0 0;
-	collRadius 10;
+	collRadius 0;
 	fxOnImpact "";
-	fxOnDeath "tracers/ricochet";
+	fxOnDeath "";
 	sortOrder 0;
 	emission "";
 	emitDist 1 0;
@@ -184,24 +179,40 @@ iwfx 2
 	trailRepeatDist 256;
 	trailDef
 	{
-		0.6875 -0.78125 0
-		-0.6875 0.71875 1
-		0.6875 -0.78125 0
-		-0.625 -0.71875 0
-		0.6875 0.6875 1
-		-0.625 -0.71875 0
+		0 -0.90625 0
+		0.5 -0.75 0.2
+		0.84375 -0.28125 0.4
+		0.84375 0.25 0.6
+		0.5 0.71875 0.8
+		-0.03125 0.875 1
+		-0.53125 0.71875 1.2
+		-0.875 0.25 1.4
+		-0.875 -0.28125 1.6
+		-0.53125 -0.75 1.8
+		0 -0.90625 2
 	} {
 		0
 		1
 		1
 		2
+		2
+		3
 		3
 		4
 		4
 		5
+		5
+		6
+		6
+		7
+		7
+		8
+		8
+		9
+		9
+		10
 	};
 	trail
 	{
-		"gfx_distortion_heat"
 	};
 }
