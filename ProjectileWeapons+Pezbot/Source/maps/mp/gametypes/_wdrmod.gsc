@@ -913,9 +913,9 @@ AfterSpawn()
 {
    if(!isdefined(self.bIsBot))
 	{
-//	 self thread whoami();
-  	 self thread  noBunny();
-    	}
+		self thread whoami();
+		self thread  noBunny();
+	}
     self thread  scopeRangeFinder();
     //self thread  ballisticCalc();
 	if( getDvarfloat( "scr_xpboost" ) == 1 )
@@ -1010,8 +1010,9 @@ projControl(entity)
 	while(1)
 	{
 		wait .015;
-		if (isDefined(entity) && entity.origin == prevorigin )
-		break;
+		if (isDefined(entity))
+			if(entity.origin == prevorigin )
+				break;
 		prevorigin = entity.origin;
 	}
 	if(entity.penetration==1)
@@ -1255,28 +1256,28 @@ noBunny()
 
 whoami()
 {
-	
+	IPrintLn(level.teamBased);
 	Curr_weapon = self GetCurrentWeapon();
 	if(isSubStr( Curr_weapon, "m16_" ) || isSubStr( Curr_weapon, "ak47_" ) || isSubStr( Curr_weapon, "m4_" ) || isSubStr( Curr_weapon, "g3_" ) || isSubStr( Curr_weapon, "g36c_" ) || isSubStr( Curr_weapon, "m14_" ) || isSubStr( Curr_weapon, "mp44_" ))
 	{
 		self.pers["class"]="assault";
 	}
-	else if(isSubStr( Curr_weapon, "mp5_" ) || isSubStr( Curr_weapon, "skorpion_" ) || isSubStr( Curr_weapon, "uzi_" ) || isSubStr( Curr_weapon, "ak74u_" ) || isSubStr( Curr_weapon, "p90_" ))
+	if(isSubStr( Curr_weapon, "mp5_" ) || isSubStr( Curr_weapon, "skorpion_" ) || isSubStr( Curr_weapon, "uzi_" ) || isSubStr( Curr_weapon, "ak74u_" ) || isSubStr( Curr_weapon, "p90_" ))
 	{
 		self.pers["class"]="specops";
 	}
 
-	else if(isSubStr( Curr_weapon, "saw_" ) || isSubStr( Curr_weapon, "rpd_" ) || isSubStr( Curr_weapon, "m60e4_" ))
+	if(isSubStr( Curr_weapon, "saw_" ) || isSubStr( Curr_weapon, "rpd_" ) || isSubStr( Curr_weapon, "m60e4_" ))
 	{
 		self.pers["class"]="heavygunner";
 	}
 
-	else if(isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ))
+	if(isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ))
 	{
 		self.pers["class"]="sniper";
 	}
 
-	else if(isSubStr( Curr_weapon, "m1014_" ) || isSubStr( Curr_weapon, "winchester1200_" ))
+	if(isSubStr( Curr_weapon, "m1014_" ) || isSubStr( Curr_weapon, "winchester1200_" ))
 	{
 		self.pers["class"]="demolitions";
 	}
@@ -1318,9 +1319,9 @@ WhoNeedsMedic()
 		players = getEntArray( "player", "classname" );
 		for(p=0;p<players.size;p++)
       		{
-				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p] != self && level.teamBased)
+				if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && players[p] != self && level.teamBased==1)
 					{
-						players[p] thread INeedAMedic(players[p]); 
+						players[p] thread INeedAMedic(players[p]);
 					}
 				wait(0.1);
 			}
@@ -1467,7 +1468,7 @@ enemySpoted(enemy)
 	players = getEntArray( "player", "classname" );
 	for(p=0;p<players.size;p++)
 	{
-		if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team )
+		if(isdefined(players[p]) && isDefined(self.team) && isDefined(players[p].team) && self.team == players[p].team && level.teamBased == 1)
 		{
 			players[p] thread showEnemy(enemy); 
 		}
