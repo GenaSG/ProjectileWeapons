@@ -13,7 +13,7 @@ init()
     thread levelcleanup();
     thread maps\mp\_createfx::add_effect("peneteffect", "impacts/20mm_default_impact");
 	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
-	thread maps\mp\_createfx::add_effect("laserDot", "tracers/laserdot");
+//	thread maps\mp\_createfx::add_effect("laserDot", "tracers/laserdot");
 //	brickexp = loadfx("test/brickblast_25");
 
 }
