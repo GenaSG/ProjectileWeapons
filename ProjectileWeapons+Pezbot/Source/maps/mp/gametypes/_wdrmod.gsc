@@ -914,7 +914,7 @@ AfterSpawn()
 {
    if(!isdefined(self.bIsBot))
 	{
-		self thread whoami();
+//		self thread whoami();
 		self thread  noBunny();
 	}
     self thread  scopeRangeFinder();
@@ -923,8 +923,9 @@ AfterSpawn()
 		{
 			thread maps\mp\gametypes\_xpboost::init();
 		}
-	self thread bulletwatcher();
+//	self thread bulletwatcher();
 	self thread LaserSight();
+//	self thread test();
 }
 
 
@@ -934,7 +935,7 @@ test()
 	{
 		if (self UseButtonPressed())
 		{
-			self thread bulletSpawn(self gettagorigin("tag_inhand"), self getPlayerAngles(), 10000, self, 100, 1, "com_cinderblock" , 1, 1, 2);
+			self thread bulletSpawn(self gettagorigin("tag_inhand"), self getPlayerAngles(), 10000, self, 100, 1, "projectile_tag" , 1, 1, 2);
 			wait (0.01);
 		}
 		wait(0.01);
@@ -981,7 +982,7 @@ bulletwatcher()
 					bullet[i].owner=self;
 					if (isdefined(self))
 					{
-						if( self hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(self GetCurrentWeapon()) || isSubStr( self GetCurrentWeapon(), "barrett_" ))
+						if( self hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(self GetCurrentWeapon()) || self GetCurrentWeapon()=="barrett_acog_mp" || self GetCurrentWeapon()=="barrett_mp")
 						{
 							bullet[i].penetration = 1;
 						}
@@ -1011,6 +1012,25 @@ projControl(entity)
 	finalBulletDamage=0;
 	oldangles=entity.angles;
 	prevorigin = entity.origin;
+	entity.owner = entity getowner();
+	if (isDefined(entity.owner)) {
+		
+			if( entity.owner hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(entity.owner GetCurrentWeapon()) || entity.owner GetCurrentWeapon()=="barrett_acog_mp" || entity.owner GetCurrentWeapon()=="barrett_mp")
+			{
+				entity.penetration = 1;
+			}
+			else
+			{
+				entity.penetration = 0;
+			}
+			if(isDefined(entity.owner) && isDefined(level.weapon[ entity.owner getCurrentWeapon() ]["damage"]))
+			{
+				entity.damage = level.weapon[ entity.owner getCurrentWeapon() ]["damage"];
+			}
+			entity.pointoforigin = entity.owner.origin;
+			entity.weaponoforigin = entity.owner getCurrentWeapon();
+	}
+
 	while(1)
 	{
 		wait .015;
@@ -1031,22 +1051,33 @@ projControl(entity)
 		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
 		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
-		if (isDefined(Btrace["entity"])) {
-			wait(0);
-		}
-		else
-		{
+		if (!isDefined(Btrace["entity"])) {
 			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
 		}
 		vectafter = vectorscale( anglestoforward( angle ), 400 );
 		traceafter = Btrace["position"] + vectafter;
 		Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
-		RadiusDamage( Btraceafter["position"], 40, finalBulletDamage, finalBulletDamage/2, entity.owner);
+		RadiusDamage( Btraceafter["position"], 40, finalBulletDamage, finalBulletDamage, entity.owner);
 
 	}
 	hit = loadfx("tracers/ricochet");
 	playfx(hit,prevorigin, anglestoforward(oldangles));
 	entity Delete();
+}
+
+getowner()
+{
+	vect = vectorscale( anglestoforward( self.angles ), 800 );
+	trace = self.origin - vect;
+	Btrace= BulletTrace( self.origin, trace, true, undefined );
+	if (isDefined(Btrace["entity"]))
+	{
+		return Btrace["entity"];
+	}
+	else
+	{
+		return undefined;
+	}
 }
 
 ismoving(entity)
@@ -1067,7 +1098,6 @@ ismoving(entity)
 
 LaserSight()
 {
-	laserDot=loadfx("tracers/laserdot");
 	while(isAlive(self))
 	{
 		CurrWeap = self GetCurrentWeapon();
@@ -1569,12 +1599,15 @@ levelcleanup()
                 if(!isDefined(grenades[i].timeout))
                 {
                     grenades[i].timeout=1;
-                    //thread projControl(grenades[i]);
+					if (!isDefined(grenades[i]).owner) {
+						thread projControl(grenades[i]);
+					}
+                    
                     thread deleteProjectile(grenades[i], grenades[i].timeout);
                 }
             }
             }
-        wait (0.01);
+        wait (0.001);
     }
 }
 deleteProjectile(entityname, timeout)
