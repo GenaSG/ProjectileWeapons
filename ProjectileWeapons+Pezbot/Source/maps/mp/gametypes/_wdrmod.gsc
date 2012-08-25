@@ -1044,20 +1044,23 @@ projControl(entity)
 		peneteffect = loadfx("impacts/20mm_default_impact");
 		traceorg = prevorigin;
 		angle = oldangles;
-		vect = vectorscale( anglestoforward( angle ), entity.damage );
+		vect = vectorscale( anglestoforward( angle ), 40 );
 		trace = traceorg + vect;
-		Btrace= BulletTrace( trace, traceorg, true, undefined );
+		Btrace= BulletTrace( trace, traceorg, false, undefined );
 		rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
 		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
 		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
-		if (!isDefined(Btrace["entity"])) {
-			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		if (finalBulletDamage>=0) {
+			if (!isDefined(Btrace["entity"])) {
+				playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+			}
+			vectafter = vectorscale( anglestoforward( angle ), 400 );
+			traceafter = Btrace["position"] + vectafter;
+			Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
+			RadiusDamage( Btraceafter["position"], 40, finalBulletDamage, finalBulletDamage, entity.owner);
 		}
-		vectafter = vectorscale( anglestoforward( angle ), 400 );
-		traceafter = Btrace["position"] + vectafter;
-		Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
-		RadiusDamage( Btraceafter["position"], 40, finalBulletDamage, finalBulletDamage, entity.owner);
+		
 
 	}
 	hit = loadfx("tracers/ricochet");
