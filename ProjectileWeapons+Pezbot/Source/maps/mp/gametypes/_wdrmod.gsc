@@ -155,6 +155,7 @@ loadWeaponDamage()
 {
 	level.damage=[];
 	level.weapon=[];
+	level.class=[];
 	level.weapon[ "m16_acog_mp" ]["damage"] = 34.29;
 	level.weapon[ "m16_gl_mp" ]["damage"] = 34.29;
 	level.weapon[ "m16_mp" ]["damage"] = 34.29;
@@ -277,7 +278,7 @@ loadWeaponDamage()
 
 	level.weapon[ "deserteagle_mp" ]["damage"] = 60;
 	level.weapon[ "deserteaglegold_mp" ]["damage"] = 60;
-
+	
 
 	return;
 }
@@ -925,8 +926,23 @@ AfterSpawn()
 		}
 //	self thread bulletwatcher();
 	self thread LaserSight();
-//	self thread test();
+//	self thread meleeControl();
 }
+
+meleeControl()
+{
+	while (isAlive(self)) {
+		TargetPlayer = isLookingAtClosestPlayer(2);
+		if (isDefined(TargetPlayer) && isAlive(TargetPlayer) && TargetPlayer.team != self.team && level.teamBased == 1 && !(TargetPlayer islookingat(self)) && self MeleeButtonPressed()) {
+			TargetPlayer.health = TargetPlayer.health /2;
+			IPrintLn("Stabbed");
+			wait(0.8);
+		
+		}
+		wait(0.1);
+	}
+}
+
 
 
 test()
@@ -1333,7 +1349,7 @@ whoami()
 isSniper(entity)
 {
 	Curr_weapon = entity GetCurrentWeapon();
-	if(entity.pers["class"]=="sniper" && (isSubStr( Curr_weapon, "dragunov_" ) || isSubStr( Curr_weapon, "m40a3_" ) || isSubStr( Curr_weapon, "barrett_" ) || isSubStr( Curr_weapon, "remington700_" ) || isSubStr( Curr_weapon, "m21_" ) ))
+	if(Curr_weapon=="dragunov_mp" || Curr_weapon=="dragunov_acog_mp" || Curr_weapon=="m40a3_mp" || Curr_weapon=="m40a3_acog_mp" ||Curr_weapon=="barrett_mp" || Curr_weapon=="barrett_acog_mp" || Curr_weapon=="remington700_mp" || Curr_weapon=="remington700_acog_mp" || Curr_weapon == "m21_mp" ||  Curr_weapon == "m21_acog_mp" )
 	{
 		return true;	
 	}
@@ -1536,14 +1552,14 @@ showEnemy(enemy)
 	}
 }
 
-isLookingAtClosestPlayer()
+isLookingAtClosestPlayer(distance)
 {
 	TargetPlayer=undefined;
 	players = getEntArray( "player", "classname" );
 	for(p=0;p<players.size;p++)
       	{
 		self.DistToPlayer= int( distance(self.origin, players[p].origin ) )*0.0254;
-		if( self.DistToPlayer <= 20 && self IsLookingAt( players[p] ))
+		if( self.DistToPlayer <= distance && self IsLookingAt( players[p] ))
 		{
 			TargetPlayer = players[p];
 			break;
