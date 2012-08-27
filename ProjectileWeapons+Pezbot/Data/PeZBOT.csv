@@ -10,6 +10,7 @@ fx,tracers/smoke_geotrail_rifle_heavy
 fx,tracers/smoke_geotrail_rifle
 fx,tracers/no_tracer
 fx,tracers/ricochet
+fx,tracers/laserdot
 fx,test/brickblast_25
 material,binocular_overlay
 material,scope_overlay_acog
