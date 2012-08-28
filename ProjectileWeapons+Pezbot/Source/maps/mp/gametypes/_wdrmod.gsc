@@ -1068,11 +1068,11 @@ projControl(entity)
 		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
 		if (finalBulletDamage>=0 )  {
-			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
 			vectafter = vectorscale( anglestoforward( angle ), 400 );
 			traceafter = Btrace["position"] + vectafter;
 			Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
 			if (isDefined(Btraceafter["position"]) && Btraceafter["position"]!=Btrace["position"]) {
+				playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
 				if ( isDefined(Btraceafter["entity"])) {
 					RadiusDamage( Btraceafter["entity"].origin, 40, finalBulletDamage, finalBulletDamage, entity.owner);
 				}
