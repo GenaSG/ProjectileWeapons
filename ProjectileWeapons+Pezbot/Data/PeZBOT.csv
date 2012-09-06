@@ -5,6 +5,7 @@ weapon,mp/ak47_mp_pezbot_stand_run
 weapon,mp/frag_mp_pezbot_stand_grenade
 weapon,mp/ak47_mp_pezbot_crouch_walk
 weapon,mp/ak47_mp_pezbot_climb_up
+weapon,mp/m4_rds_silencer_mp
 fx,tracers/tracer1_3
 fx,tracers/smoke_geotrail_rifle_heavy
 fx,tracers/smoke_geotrail_rifle
@@ -12,6 +13,10 @@ fx,tracers/no_tracer
 fx,tracers/ricochet
 fx,tracers/laserdot
 fx,test/brickblast_25
+xmodel,weapon_m4grunt_sp_silencer
+xmodel,viewmodel_m4_and_silencer
+xanim,viewmodel_M4silencer_ADS_down
+xanim,viewmodel_M4silencer_ADS_up
 material,binocular_overlay
 material,scope_overlay_acog
 material,scope_overlay_acog_low_res
