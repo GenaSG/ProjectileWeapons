@@ -25,7 +25,7 @@ init()
 	level.ps3 = (getdvar("ps3Game") == "true");
 	level.onlineGame = true;
 	level.console = (level.xenon || level.ps3); 
-	
+
 	//PEZBOT
 	level.rankedMatch = true;//( level.onlineGame && getDvarInt( "sv_pure" ) );
 	/#
@@ -180,25 +180,8 @@ SetupCallbacks()
 // unfortunately, it can only be used with things that aren't time critical.
 WaitTillSlowProcessAllowed()
 {
-	// wait only a few frames if necessary
-	// if we wait too long, we might get too many threads at once and run out of variables
-	// i'm trying to avoid using a loop because i don't want any extra variables
-	if ( level.lastSlowProcessFrame == gettime() )
-	{
+	while ( level.lastSlowProcessFrame == gettime() )
 		wait .05;
-		if ( level.lastSlowProcessFrame == gettime() )
-		{
-		wait .05;
-			if ( level.lastSlowProcessFrame == gettime() )
-			{
-				wait .05;
-				if ( level.lastSlowProcessFrame == gettime() )
-				{
-					wait .05;
-				}
-			}
-		}
-	}
 	
 	level.lastSlowProcessFrame = gettime();
 }
@@ -684,7 +667,8 @@ spawnPlayer()
 	}
 	else
 	{
-	  //PeZBOT
+
+		//PeZBOT
 	  if(!isdefined(self.bIsBot))
 	  {
 		  self freezeControls( false );
@@ -1043,7 +1027,7 @@ spawnIntermission()
 	self setSpawnVariables();
 	
 	self clearLowerMessage();
-	
+
 	//PeZBOT
 	if(!isdefined(self.bIsBot))
 	{
@@ -3557,10 +3541,10 @@ Callback_StartGameType()
 	level.prematchPeriodEnd = 0;
 	
 	level.intermission = false;
-	
+/*
   //pezbot precache
 	svr\PeZBOT::precache();
-	
+*/
 	
 	if ( !isDefined( game["gamestarted"] ) )
 	{
@@ -3954,9 +3938,9 @@ Callback_StartGameType()
 	/#
 	thread maps\mp\gametypes\_dev::init();
 	#/
-	
+
 	thread svr\PeZBot::init();
-	
+
 	thread startGame();
 	level thread updateGameTypeDvars();
 }
@@ -4189,11 +4173,11 @@ Callback_PlayerConnect()
 	
 	if ( level.teambased )
 		self updateScores();
-		
+
   //PeZBOT
   self svr\PeZBOT::Connected();
   //PeZBOT
-	
+
 	// When joining a game in progress, if the game is at the post game state (scoreboard) the connecting player should spawn into intermission
 	if ( game["state"] == "postgame" )
 	{
@@ -4860,7 +4844,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 	if ( game["state"] == "postgame" )
 		return;
 	
-	
+
 	//PeZBOT
 	if(isDefined(self.bIsBot) && self.bIsBot == true)
 	{
@@ -4875,7 +4859,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 	}
 	//PeZBOT
 	
-	
+
 	prof_begin( "PlayerKilled pre constants" );
 	
 	deathTimeOffset = 0;
@@ -5273,7 +5257,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 	}
 	
 	prof_end( "PlayerKilled post constants" );
-	
+
   //PeZBOT
   if(isDefined(self.bIsBot) && self.bIsBot)
   {
@@ -5286,7 +5270,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
     kick(self getentitynumber());
   }
   //PeZBOT
-	
+
 	
 	if ( game["state"] != "playing" )
 	{

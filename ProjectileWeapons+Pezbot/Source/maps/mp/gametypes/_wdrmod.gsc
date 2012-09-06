@@ -1626,7 +1626,7 @@ levelcleanup()
                 if(!isDefined(grenades[i].timeout))
                 {
                     grenades[i].timeout=1;
-					if (!isDefined(grenades[i]).owner) {
+					if (!isDefined(grenades[i].owner)) {
 						thread projControl(grenades[i]);
 					}
                     
