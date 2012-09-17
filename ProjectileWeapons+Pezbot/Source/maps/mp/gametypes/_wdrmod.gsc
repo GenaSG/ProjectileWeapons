@@ -13,7 +13,7 @@ init()
     thread levelcleanup();
     thread maps\mp\_createfx::add_effect("peneteffect", "impacts/20mm_default_impact");
 	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
-//	thread maps\mp\_createfx::add_effect("laserDot", "tracers/laserdot");
+	thread maps\mp\_createfx::add_effect("laserDot", "tracers/laserdot");
 //	brickexp = loadfx("test/brickblast_25");
 
 }
@@ -1125,20 +1125,49 @@ ismoving(entity)
 
 LaserSight()
 {
+	self setClientDvars("cg_laserRadius",0.2, "cg_laserRangePlayer", 100,"cg_laserRange", 100);
 	while(isAlive(self))
 	{
 		CurrWeap = self GetCurrentWeapon();
-		if( CurrWeap !="rpg_mp" && self hasPerk("specialty_bulletaccuracy"))
+		if( CurrWeap !="rpg_mp" && self hasPerk("specialty_bulletaccuracy") && !self playerADS())
 		{
-			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 0);
+			self setClientDvars("cg_laserforceon",1, "cg_laserlight", 0, "cg_drawCrosshair", 1);
+			
 		}
 		else
 		{
-			self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
+			self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0, "cg_drawCrosshair", 0);
 		}
 	wait(0.1);
 	}
-self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
+	self setClientDvars("cg_laserforceon",0, "cg_laserlight", 0);
+}
+laserDot()
+{
+	laserDot=loadfx("tracers/laserdot");
+	while (isAlive(self)) {
+		laserDotPosition = rangeFinder();
+		playfx(laserDot,laserDotPosition["position"],vectortoangles( laserDotPosition[ "normal" ] ));
+		IPrintLn(laserDotPosition["position"]);
+		wait(0.1);
+	}
+}
+drawCrosshair()
+{
+	crossHair = newHudElem();
+//	crossHair.location = 0;
+	crossHair.alignX = "center";
+	crossHair.alignY = "middle";
+	crossHair.horzAlign = "fullscreen";
+    crossHair.vertAlign = "fullscreen";
+	crossHair.foreground = 1;
+	crossHair.fontScale = 2;
+	crossHair.sort = 20;
+	crossHair.alpha = 0;
+	crossHair.x = 0;
+	crossHair.y = 0;
+	crossHair setText("+");
+	return crossHair;
 }
 
 getPlayerEyes()
@@ -1175,7 +1204,7 @@ rangeFinder()
         Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
         //Distance between player and "target"
         self.rangeFinder = Dist;
-       // return Dist;
+        return trace;
 }
 
 scopeRangeFinder()
