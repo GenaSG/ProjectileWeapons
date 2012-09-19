@@ -458,7 +458,7 @@ wdrModTweaks()
 	// Sniper class weapons
 	setDvar( "scr_wdr_dragunov", 0.00125 );
 	
-	setDvar( "scr_wdr_m40a3", 0.00109 );
+	setDvar( "scr_wdr_m40a3", 0.00083 );
 	
 	setDvar( "scr_wdr_barrett", 0.00056 );
 	
