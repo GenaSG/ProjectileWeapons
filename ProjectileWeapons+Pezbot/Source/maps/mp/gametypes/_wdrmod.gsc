@@ -1029,7 +1029,7 @@ projControl(entity)
 	oldangles=entity.angles;
 	prevorigin = entity.origin;
 	entity.owner = entity getowner();
-	if (isDefined(entity.owner)) {
+	if (isDefined(entity.owner) && isAlive(entity.owner)) {
 		
 			if( entity.owner hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(entity.owner GetCurrentWeapon()) || entity.owner GetCurrentWeapon()=="barrett_acog_mp" || entity.owner GetCurrentWeapon()=="barrett_mp")
 			{
@@ -1039,7 +1039,7 @@ projControl(entity)
 			{
 				entity.penetration = 0;
 			}
-			if(isDefined(entity.owner) && isDefined(level.weapon[ entity.owner getCurrentWeapon() ]["damage"]))
+			if(isDefined(entity.owner) && isAlive(entity.owner) && isDefined(level.weapon[ entity.owner getCurrentWeapon() ]["damage"]))
 			{
 				entity.damage = level.weapon[ entity.owner getCurrentWeapon() ]["damage"];
 			}
@@ -1055,40 +1055,57 @@ projControl(entity)
 				break;
 		prevorigin = entity.origin;
 	}
-	if(entity.penetration==1)
+	//make tracer forward from projectile origin
+	TracerBackOrigin = prevorigin;	//stopped projectile origin
+	TracerBackAngles = oldangles;	//projectile angles
+	VectorBack = vectorscale( anglestoforward( TracerBackAngles ), 2 ); //vector 2 inches forward
+	BackTracer = TracerBackOrigin + VectorBack;
+	TracerForward = BulletTrace( TracerBackOrigin, BackTracer, true, undefined );
+
+	//if is defined penetration then do penetration calculation
+	if(isdefined(entity.penetration) && entity.penetration==1)
 	{
 		peneteffect = loadfx("impacts/20mm_default_impact");
+		ricochet = loadfx("tracers/ricochet");
 		traceorg = prevorigin;
 		angle = oldangles;
 		vect = vectorscale( anglestoforward( angle ), 40 );
 		trace = traceorg + vect;
-		Btrace= BulletTrace( trace, traceorg, false, undefined );
+		//if hit position is player then do tracer behind player so there will be no double damage effect, if not - do normal penetration calculation
+		if (isDefined(TracerForward["entity"])) { //Check for entity hit
+			Btrace= BulletTrace( trace, traceorg, true, undefined );
+			
+		}
+		else
+		{
+			Btrace= BulletTrace( trace, traceorg, false, undefined );
+			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+			playfx(ricochet,Btrace["position"],anglestoforward( angle ));
+		}
+		
 		rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
 		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
 		entity.damage = entity.damage/(1+rangeMod*targetDist);
 		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
-		if (finalBulletDamage>=0 )  {
+		if (finalBulletDamage>=0)  {
 			vectafter = vectorscale( anglestoforward( angle ), 400 );
 			traceafter = Btrace["position"] + vectafter;
 			Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
-			if (isDefined(Btraceafter["position"]) && Btraceafter["position"]!=Btrace["position"]) {
-				playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
 				if ( isDefined(Btraceafter["entity"])) {
 					RadiusDamage( Btraceafter["entity"].origin, 40, finalBulletDamage, finalBulletDamage, entity.owner);
 				}
 				else
 				{
-					RadiusDamage( Btraceafter["position"], 40, finalBulletDamage, finalBulletDamage, entity.owner);
+					playfx(peneteffect,Btraceafter["position"],anglestoforward(vectortoangles( Btraceafter[ "normal" ] )));
 				}
-				
-			}
 			
 		}
 		
-
+		
 	}
-	hit = loadfx("tracers/ricochet");
-	playfx(hit,prevorigin, anglestoforward(oldangles));
+		
+
+	//playfx(hit,prevorigin, anglestoforward(oldangles));
 	entity Delete();
 }
 
