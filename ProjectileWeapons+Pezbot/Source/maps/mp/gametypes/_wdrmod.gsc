@@ -1080,7 +1080,7 @@ projControl(entity)
 		{
 			Btrace= BulletTrace( trace, traceorg, false, undefined );
 			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
-			playfx(ricochet,Btrace["position"],anglestoforward( angle ));
+			//playfx(ricochet,Btrace["position"],anglestoforward( angle ));
 		}
 		
 		rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
@@ -1094,10 +1094,12 @@ projControl(entity)
 				if ( isDefined(Btraceafter["entity"])) {
 					RadiusDamage( Btraceafter["entity"].origin, 40, finalBulletDamage, finalBulletDamage, entity.owner);
 				}
+			/*
 				else
 				{
 					playfx(peneteffect,Btraceafter["position"],anglestoforward(vectortoangles( Btraceafter[ "normal" ] )));
 				}
+			 */
 			
 		}
 		
