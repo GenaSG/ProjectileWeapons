@@ -1065,50 +1065,59 @@ projControl(entity)
 	//if is defined penetration then do penetration calculation
 	if(isdefined(entity.penetration) && entity.penetration==1)
 	{
-		peneteffect = loadfx("impacts/20mm_default_impact");
-		ricochet = loadfx("tracers/ricochet");
-		traceorg = prevorigin;
-		angle = oldangles;
-		vect = vectorscale( anglestoforward( angle ), 40 );
-		trace = traceorg + vect;
-		//if hit position is player then do tracer behind player so there will be no double damage effect, if not - do normal penetration calculation
-		if (isDefined(TracerForward["entity"])) { //Check for entity hit
-			Btrace= BulletTrace( trace, traceorg, true, undefined );
-			
-		}
-		else
-		{
-			Btrace= BulletTrace( trace, traceorg, false, undefined );
-			playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
-			//playfx(ricochet,Btrace["position"],anglestoforward( angle ));
-		}
-		
-		rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
-		targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
-		entity.damage = entity.damage/(1+rangeMod*targetDist);
-		finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
-		if (finalBulletDamage>=0)  {
-			vectafter = vectorscale( anglestoforward( angle ), 400 );
-			traceafter = Btrace["position"] + vectafter;
-			Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
-				if ( isDefined(Btraceafter["entity"])) {
-					RadiusDamage( Btraceafter["entity"].origin, 40, finalBulletDamage, finalBulletDamage, entity.owner);
-				}
-			/*
-				else
-				{
-					playfx(peneteffect,Btraceafter["position"],anglestoforward(vectortoangles( Btraceafter[ "normal" ] )));
-				}
-			 */
-			
-		}
-		
+		self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
 		
 	}
+	else
+	{
+		self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
+	}
 		
+	if (isDefined(entity)) {
+		entity Delete();
+	}
+	
+}
 
-	//playfx(hit,prevorigin, anglestoforward(oldangles));
-	entity Delete();
+DoPenetration(entity,TracerForward, angles, PenetrationDistance)
+{
+	peneteffect = loadfx("impacts/20mm_default_impact");
+	ricochet = loadfx("tracers/ricochet");
+	traceorg = TracerForward["position"];
+	angle = angles;
+	vect = vectorscale( anglestoforward( angle ), 40 );
+	trace = traceorg + vect;
+	//if hit position is player then do tracer behind player so there will be no double damage effect, if not - do normal penetration calculation
+	if (isDefined(TracerForward["entity"])) { //Check for entity hit
+		Btrace= BulletTrace( trace, traceorg, true, undefined );
+		
+	}
+	else
+	{
+		Btrace= BulletTrace( trace, traceorg, false, undefined );
+		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		//playfx(ricochet,Btrace["position"],anglestoforward( angle ));
+	}
+	
+	rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
+	targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
+	entity.damage = entity.damage/(1+rangeMod*targetDist);
+	finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
+	if (finalBulletDamage>=0)  {
+		vectafter = vectorscale( anglestoforward( angle ), PenetrationDistance );
+		traceafter = Btrace["position"] + vectafter;
+		Btraceafter= BulletTrace( Btrace["position"], traceafter, true, undefined );
+		if ( isDefined(Btraceafter["entity"])) {
+			RadiusDamage( Btraceafter["entity"].origin, 40, finalBulletDamage, finalBulletDamage, entity.owner);
+		}
+		/*
+		 else
+		 {
+		 playfx(peneteffect,Btraceafter["position"],anglestoforward(vectortoangles( Btraceafter[ "normal" ] )));
+		 }
+		 */
+		
+	}
 }
 
 getowner()
