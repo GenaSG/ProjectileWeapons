@@ -116,16 +116,16 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     {
                         iDamage = 4 * iDamage/(1+rangeMod*targetDist);	
                     } 
-			if(isSniper(eAttacker))
-			{
-				eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Headshot!!!" );
-				//IPrintLn(self.TargetPlayer.health);
-				score = maps\mp\gametypes\_rank::getScoreInfoValue( "headshot" ) + int(targetDist);
-				eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "headshot", score );
-				eAttacker.pers["score"] += score;
-				eAttacker.score = self.pers["score"];
-				eAttacker notify ( "update_playerscore_hud" );
-			}
+				if(isSniper(eAttacker))
+				{
+					eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Headshot!!!" );
+					//IPrintLn(self.TargetPlayer.health);
+					score = maps\mp\gametypes\_rank::getScoreInfoValue( "headshot" ) + int(targetDist);
+					eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "headshot", score );
+					eAttacker.pers["score"] += score;
+					eAttacker.score = self.pers["score"];
+					eAttacker notify ( "update_playerscore_hud" );
+				}
                     thread hitShellShock(stoppingCoef);
             }
             else
@@ -140,6 +140,25 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
             }
         }
 
+	}
+	
+	
+	if ( sMeansOfDeath == "MOD_MELEE" )
+	{
+		if (self islookingat(eAttacker)) {
+			iDamage = iDamage/4;
+
+		}
+		else
+		{
+			eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Knifed!" );
+			score = maps\mp\gametypes\_rank::getScoreInfoValue( "kill" ) + 20;
+			eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "kill", score );
+			eAttacker.pers["score"] += score;
+			eAttacker.score = self.pers["score"];
+			eAttacker notify ( "update_playerscore_hud" );
+		}
+		
 	}
 	
 	return int(iDamage);

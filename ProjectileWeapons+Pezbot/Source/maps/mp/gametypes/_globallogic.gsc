@@ -4499,14 +4499,19 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 		self.attackerData = [];
 	}
 
-	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) &&  sMeansOfDeath != "MOD_MELEE" )
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
         iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
-	}	
+	}
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
 		sMeansOfDeath = "MOD_RIFLE_BULLET";
+        iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
+	}
+	
+	else if( sMeansOfDeath == "MOD_MELEE" )
+	{
         iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
 	}
 	
@@ -4882,7 +4887,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 		self.lastStandParams = undefined;
 	}
 
-	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) )
+	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) &&  sMeansOfDeath != "MOD_MELEE")
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
 		iDamage = 10 * iDamage;
