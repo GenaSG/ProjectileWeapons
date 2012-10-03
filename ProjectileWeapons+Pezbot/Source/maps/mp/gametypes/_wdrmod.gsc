@@ -119,7 +119,6 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 				if(isSniper(eAttacker))
 				{
 					eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Headshot!!!" );
-					//IPrintLn(self.TargetPlayer.health);
 					score = maps\mp\gametypes\_rank::getScoreInfoValue( "headshot" ) + int(targetDist);
 					eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "headshot", score );
 					eAttacker.pers["score"] += score;
@@ -175,6 +174,8 @@ loadWeaponDamage()
 	level.damage=[];
 	level.weapon=[];
 	level.class=[];
+	
+	level.weapon[ "rpg_mp" ]["damage"] = 1000;
 	level.weapon[ "m16_acog_mp" ]["damage"] = 34.29;
 	level.weapon[ "m16_gl_mp" ]["damage"] = 34.29;
 	level.weapon[ "m16_mp" ]["damage"] = 34.29;
@@ -943,7 +944,7 @@ AfterSpawn()
 		{
 			thread maps\mp\gametypes\_xpboost::init();
 		}
-//	self thread bulletwatcher();
+	self thread bulletwatcher();
 	self thread LaserSight();
 //	self thread meleeControl();
 }
@@ -1010,11 +1011,15 @@ bulletwatcher()
 		bullet = GetEntArray( "grenade","classname" );
 		for(i=0;i<bullet.size;i++)
 		{
-			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && int( distance(self.origin, bullet[i].origin ) )*0.0254 <= 2)
+			if (!isDefined(bullet[i].owner)) {
+				bullet[i].owner = getowner(bullet[i]);
+				//IPrintLn(bullet[i].owner.name);
+			}
+			
+			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && bullet.owner == self)
 			{
-				if(!isDefined(bullet[i].timeout) && !isDefined(bullet[i].owner))
+				if(!isDefined(bullet[i].timeout))
 				{
-					bullet[i].owner=self;
 					if (isdefined(self))
 					{
 						if( self hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(self GetCurrentWeapon()) || self GetCurrentWeapon()=="barrett_acog_mp" || self GetCurrentWeapon()=="barrett_mp")
@@ -1047,25 +1052,6 @@ projControl(entity)
 	finalBulletDamage=0;
 	oldangles=entity.angles;
 	prevorigin = entity.origin;
-	entity.owner = entity getowner();
-	if (isDefined(entity.owner) && isAlive(entity.owner)) {
-		
-			if( entity.owner hasPerk("specialty_bulletpenetration") && ! maps\mp\gametypes\_weapons::isPistol(entity.owner GetCurrentWeapon()) || entity.owner GetCurrentWeapon()=="barrett_acog_mp" || entity.owner GetCurrentWeapon()=="barrett_mp")
-			{
-				entity.penetration = 1;
-			}
-			else
-			{
-				entity.penetration = 0;
-			}
-			if(isDefined(entity.owner) && isAlive(entity.owner) && isDefined(level.weapon[ entity.owner getCurrentWeapon() ]["damage"]))
-			{
-				entity.damage = level.weapon[ entity.owner getCurrentWeapon() ]["damage"];
-			}
-			entity.pointoforigin = entity.owner.origin;
-			entity.weaponoforigin = entity.owner getCurrentWeapon();
-	}
-
 	while(1)
 	{
 		wait .015;
@@ -1074,6 +1060,7 @@ projControl(entity)
 				break;
 		prevorigin = entity.origin;
 	}
+	
 	//make tracer forward from projectile origin
 	TracerBackOrigin = prevorigin;	//stopped projectile origin
 	TracerBackAngles = oldangles;	//projectile angles
@@ -1087,15 +1074,43 @@ projControl(entity)
 		self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
 		
 	}
-	else
+	if(isdefined(entity.penetration) && entity.penetration==0 && entity.weaponoforigin != "rpg_mp")
 	{
 		self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
 	}
-		
+	
+	if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
+		self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
+	}
+	//IPrintLn(entity.weaponoforigin);
 	if (isDefined(entity)) {
 		entity Delete();
 	}
 	
+}
+
+ExplodeThroughWall(entity,TracerForward, angles)
+{
+	peneteffect = loadfx("impacts/20mm_default_impact");
+	ricochet = loadfx("tracers/ricochet");
+	traceorg = TracerForward["position"];
+	angle = angles;
+	vect = vectorscale( anglestoforward( angle ), 40 );
+	trace = traceorg + vect;
+	playfx(peneteffect,TracerForward["position"],anglestoforward( vectortoangles( TracerForward[ "normal" ])  ));
+	RadiusDamage( TracerForward["position"], 300, entity.damage, entity.damage/4, entity.owner);
+	//if hit position is player then do tracer behind player so there will be no double damage effect, if not - do normal penetration calculation
+	if (isDefined(TracerForward["entity"])) { //Check for entity hit
+		Btrace= BulletTrace( trace, traceorg, true, undefined );
+		
+	}
+	else
+	{
+		Btrace= BulletTrace( trace, traceorg, false, undefined );
+		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		//playfx(ricochet,Btrace["position"],anglestoforward( angle ));
+	}
+	RadiusDamage( Btrace["position"], 300, entity.damage, entity.damage/4, entity.owner);
 }
 
 DoPenetration(entity,TracerForward, angles, PenetrationDistance)
@@ -1139,11 +1154,11 @@ DoPenetration(entity,TracerForward, angles, PenetrationDistance)
 	}
 }
 
-getowner()
+getowner(bullet)
 {
-	vect = vectorscale( anglestoforward( self.angles ), 800 );
-	trace = self.origin - vect;
-	Btrace= BulletTrace( self.origin, trace, true, undefined );
+	vect = vectorscale( anglestoforward( bullet.angles ), 800 );
+	trace = bullet.origin - vect;
+	Btrace= BulletTrace( bullet.origin, trace, true, undefined );
 	if (isDefined(Btrace["entity"]))
 	{
 		return Btrace["entity"];
@@ -1702,10 +1717,6 @@ levelcleanup()
                 if(!isDefined(grenades[i].timeout))
                 {
                     grenades[i].timeout=1;
-					if (!isDefined(grenades[i].owner)) {
-						thread projControl(grenades[i]);
-					}
-                    
                     thread deleteProjectile(grenades[i], grenades[i].timeout);
                 }
             }
