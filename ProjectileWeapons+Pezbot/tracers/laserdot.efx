@@ -261,7 +261,7 @@ iwfx 2
 	trailSplitDist 0;
 	trailScrollTime 0;
 	trailRepeatDist 0;
-	billboardSprite
+	orientedSprite
 	{
 		"gfx_spotlight_lensflare"
 	};
