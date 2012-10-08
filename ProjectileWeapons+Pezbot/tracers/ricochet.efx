@@ -2,8 +2,8 @@ iwfx 2
 
 {
 	name "glow";
-	editorFlags useRandAlpha useRandSize0 useRandRotDelta modColorByAlpha useRandVel0 useRandVel1 useBackCompatVel absVel1 boundingSphere useItemClip;
-	flags spawnRelative spawnOffsetNone runRelToSpawn useCollision;
+	editorFlags useRandAlpha useRandSize0 useRandRotDelta modColorByAlpha useRandVel1 useBackCompatVel absVel1 boundingSphere useItemClip;
+	flags spawnRelative spawnOffsetNone runRelToEffect useCollision;
 	spawnRange 0 0;
 	fadeInRange 0 0;
 	fadeOutRange 0 0;
@@ -66,7 +66,7 @@ iwfx 2
 			1 0
 		}
 	};
-	velGraph1X 1320
+	velGraph1X 0
 	{
 		{
 			0 -0.00717703
@@ -91,7 +91,7 @@ iwfx 2
 			1 0.5
 		}
 	};
-	velGraph1Y 1320
+	velGraph1Y 0
 	{
 		{
 			0 0.5
@@ -130,7 +130,7 @@ iwfx 2
 			1 0.5
 		}
 	};
-	velGraph1Z 1320
+	velGraph1Z 0
 	{
 		{
 			0 0.5
