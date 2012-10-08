@@ -159,8 +159,33 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 		}
 		
 	}
+	if (sMeansOfDeath == "MOD_FALLING") {
+		if (iDamage<=25 && self.health > iDamage) {
+			self thread HealthRegen(iDamage);
+		}
+		
+		else if(iDamage>=25 && self.health > iDamage)
+		{
+			
+			self thread HealthRegen(25);
+		}
+		
+	}
 	
 	return int(iDamage);
+}
+
+HealthRegen(DamageTaken)
+{
+	wait(3);
+	for (HealthRegened = 0; HealthRegened < DamageTaken; HealthRegened++) {
+		if (!isalive(self)) {
+			break;
+		}
+		self.health +=1;
+		wait(0.5);
+		IPrintLn("Health " + self.health);
+	}
 }
 
 hitShellShock(stoppingCoef)
@@ -946,23 +971,7 @@ AfterSpawn()
 		}
 	self thread bulletwatcher();
 	self thread LaserSight();
-//	self thread meleeControl();
 }
-
-meleeControl()
-{
-	while (isAlive(self)) {
-		TargetPlayer = isLookingAtClosestPlayer(2);
-		if (isDefined(TargetPlayer) && isAlive(TargetPlayer) && TargetPlayer.team != self.team && level.teamBased == 1 && !(TargetPlayer islookingat(self)) && self MeleeButtonPressed()) {
-			TargetPlayer.health = TargetPlayer.health /2;
-			IPrintLn("Stabbed");
-			wait(0.8);
-		
-		}
-		wait(0.1);
-	}
-}
-
 
 
 test()
@@ -1013,7 +1022,6 @@ bulletwatcher()
 		{
 			if (!isDefined(bullet[i].owner)) {
 				bullet[i].owner = getowner(bullet[i]);
-				//IPrintLn(bullet[i].owner.name);
 			}
 			
 			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && bullet.owner == self)
