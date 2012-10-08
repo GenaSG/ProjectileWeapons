@@ -180,12 +180,12 @@ HealthRegen(DamageTaken)
 	wait(3);
 	for (HealthRegened = 0; HealthRegened < DamageTaken; HealthRegened++) {
 		if (!isalive(self)) {
-			break;
+			return false;
 		}
 		self.health +=1;
 		wait(0.5);
-		IPrintLn("Health " + self.health);
 	}
+	return true;
 }
 
 hitShellShock(stoppingCoef)
@@ -1024,7 +1024,7 @@ bulletwatcher()
 				bullet[i].owner = getowner(bullet[i]);
 			}
 			
-			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && bullet.owner == self)
+			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && isDefined(bullet[i].owner) &&  bullet[i].owner == self)
 			{
 				if(!isDefined(bullet[i].timeout))
 				{
@@ -1060,19 +1060,23 @@ projControl(entity)
 	finalBulletDamage=0;
 	oldangles=entity.angles;
 	prevorigin = entity.origin;
+	TraceEndPosition=(0,0,0);
+	TraceVector = vectorscale( anglestoforward( oldangles ), 40 ); //vector 40 inches forward
 	while(1)
 	{
 		wait .015;
-		if (isDefined(entity))
-			if(entity.origin == prevorigin )
+		if (isDefined(entity)){
+			TraceEndPosition = entity.origin + TraceVector;
+			if(!BulletTracePassed(entity.origin, TraceEndPosition, true, undefined )){
+				prevorigin = entity.origin;
 				break;
-		prevorigin = entity.origin;
+			}
+		}
 	}
-	
 	//make tracer forward from projectile origin
 	TracerBackOrigin = prevorigin;	//stopped projectile origin
 	TracerBackAngles = oldangles;	//projectile angles
-	VectorBack = vectorscale( anglestoforward( TracerBackAngles ), 2 ); //vector 2 inches forward
+	VectorBack = vectorscale( anglestoforward( TracerBackAngles ), 40 ); //vector 2 inches forward
 	BackTracer = TracerBackOrigin + VectorBack;
 	TracerForward = BulletTrace( TracerBackOrigin, BackTracer, true, undefined );
 
@@ -1090,7 +1094,6 @@ projControl(entity)
 	if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
 		self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
 	}
-	//IPrintLn(entity.weaponoforigin);
 	if (isDefined(entity)) {
 		entity Delete();
 	}
@@ -1218,7 +1221,6 @@ laserDot()
 	while (isAlive(self)) {
 		laserDotPosition = rangeFinder();
 		playfx(laserDot,laserDotPosition["position"],vectortoangles( laserDotPosition[ "normal" ] ));
-		IPrintLn(laserDotPosition["position"]);
 		wait(0.1);
 	}
 }
@@ -1269,8 +1271,7 @@ rangeFinder()
         trace = bullettrace( traceorg, traceorg + vect, 0, self );
         //target coordinates
         self.traceHitPosition = trace["position"];
-	self.traceHitEntity = trace["entity"];
-       // IPrintLn(self.traceHitPosition);
+		self.traceHitEntity = trace["entity"];
         Dist = int( distance(traceorg, trace["position"] ) )*0.0254;
         //Distance between player and "target"
         self.rangeFinder = Dist;
@@ -1341,7 +1342,6 @@ ballisticCalc()
         {
 	    bulletSpeed = 0.0254*getDvarfloat( level.ws[ self getCurrentWeapon() ] ); 
             timeToTarget = self.rangeFinder/bulletSpeed;
-            //IPrintLn(getDvarFloat( "cg_fovmin" ));
             bulletdrop = getDvarFloat( "scr_ballcalccoef" )*9.8*timeToTarget*timeToTarget/getDvarfloat( level.wzl[ self getCurrentWeapon() ] );
             self.ballisticCalc.y = bulletdrop ;
             self.ballisticCalc  setText ("- -") ;
@@ -1562,7 +1562,6 @@ skillPerClass()
 							while(isAlive(self) && isAlive(self.TargetPlayer) && self UseButtonPressed() && self.TargetPlayer.health <= self.maxhealth && int( distance(self.origin, self.TargetPlayer.origin ) )*0.0254 <= 2 )
 							{
 								self.TargetPlayer.health += 10;
-								//IPrintLn(self.TargetPlayer.health);
 								self thread maps\mp\gametypes\_rank::giveRankXP( "assist", 1 );
 								self.pers["score"] += 1;
 								self.score = self.pers["score"];
