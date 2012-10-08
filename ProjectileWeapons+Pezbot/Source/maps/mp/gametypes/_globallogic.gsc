@@ -4519,7 +4519,6 @@ Callback_PlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 		self iPrintLn("Damage " + iDamage);
 		iDamage = maps\mp\gametypes\_wdrmod::wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
 	}
-	iPrintLn(sMeansOfDeath);
 	// explosive barrel/car detection
 	if ( sWeapon == "none" && isDefined( eInflictor ) )
 	{
