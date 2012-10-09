@@ -971,6 +971,20 @@ AfterSpawn()
 		}
 	self thread bulletwatcher();
 	self thread LaserSight();
+	self thread SpawnProtection();
+}
+
+SpawnProtection()
+{
+	spawnorigin = self.origin;
+	timer = 0;
+	oldhealth = self.health;
+	while (isAlive(self) && timer <= 3 && distance (spawnorigin,self.origin) <=80) {
+		self.health = 1000;
+		timer +=0.1;
+		wait 0.1;
+	}
+	self.health = oldhealth;
 }
 
 
