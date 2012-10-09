@@ -11,9 +11,11 @@ init()
     thread loadWeaponZoomLevel();
 	thread loadWeaponDamage();
     thread levelcleanup();
-    thread maps\mp\_createfx::add_effect("peneteffect", "impacts/20mm_default_impact");
+    thread maps\mp\_createfx::add_effect("peneteffect", "explosions/grenadeexp_default");
+	thread maps\mp\_createfx::add_effect("explodeeffect", "impacts/20mm_default_impact");
 	thread maps\mp\_createfx::add_effect("hit", "tracers/ricochet");
 	thread maps\mp\_createfx::add_effect("laserDot", "tracers/laserdot");
+	
 //	brickexp = loadfx("test/brickblast_25");
 
 }
@@ -1116,14 +1118,11 @@ projControl(entity)
 
 ExplodeThroughWall(entity,TracerForward, angles)
 {
-	peneteffect = loadfx("impacts/20mm_default_impact");
-	ricochet = loadfx("tracers/ricochet");
+	explodeeffect = loadfx("explosions/grenadeexp_default");
 	traceorg = TracerForward["position"];
 	angle = angles;
 	vect = vectorscale( anglestoforward( angle ), 40 );
 	trace = traceorg + vect;
-	playfx(peneteffect,TracerForward["position"],anglestoforward( vectortoangles( TracerForward[ "normal" ])  ));
-	RadiusDamage( TracerForward["position"], 300, entity.damage, entity.damage/4, entity.owner);
 	//if hit position is player then do tracer behind player so there will be no double damage effect, if not - do normal penetration calculation
 	if (isDefined(TracerForward["entity"])) { //Check for entity hit
 		Btrace= BulletTrace( trace, traceorg, true, undefined );
@@ -1132,7 +1131,7 @@ ExplodeThroughWall(entity,TracerForward, angles)
 	else
 	{
 		Btrace= BulletTrace( trace, traceorg, false, undefined );
-		playfx(peneteffect,Btrace["position"],anglestoforward( angle ));
+		playfx(explodeeffect,Btrace["position"],anglestoforward( angle ));
 		//playfx(ricochet,Btrace["position"],anglestoforward( angle ));
 	}
 	RadiusDamage( Btrace["position"], 300, entity.damage, entity.damage/4, entity.owner);
