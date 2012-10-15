@@ -974,6 +974,10 @@ AfterSpawn()
 	self thread bulletwatcher();
 	self thread LaserSight();
 	self thread SpawnProtection();
+	if (getDvarfloat( "scr_test" ) == 1) {
+		self thread test();
+	}
+	
 }
 
 SpawnProtection()
@@ -996,11 +1000,39 @@ test()
 	{
 		if (self UseButtonPressed())
 		{
-			self thread bulletSpawn(self gettagorigin("tag_inhand"), self getPlayerAngles(), 10000, self, 100, 1, "projectile_tag" , 1, 1, 2);
-			wait (0.01);
+			self thread hitscanBullet(self GetPlayerAngles(),self getPlayerEyes());
 		}
-		wait(0.01);
+		wait(WeaponFireTime(self GetCurrentWeapon()));
 	}
+}
+
+hitscanBullet(angles,startposition)
+{
+	peneteffect = loadfx("impacts/20mm_default_impact");
+	timescale = 0.015;
+	timer = 0;
+	bulletSpeed = 10000;
+	newangles = angles;
+	destScale = 0;
+	tracerlength = bulletSpeed * timescale;
+	tracervector = vectorscale(anglesToForward( newangles ), tracerlength);
+	oldorigin = startposition;
+	while (true) {
+		gravity = 385 * timer*timer;
+		timer +=timescale;
+		neworigin = oldorigin + tracervector - (0,0,gravity);
+		if (!BulletTracePassed(oldorigin,neworigin,true,self)) {
+			break;
+		}
+		playfx(peneteffect,oldorigin,anglestoforward(newangles));
+		oldorigin = neworigin;
+		wait(timescale);
+	}
+	hitTracer = BulletTrace(oldorigin,neworigin,true,undefined);
+	
+	playfx(peneteffect,hitTracer["position"],anglestoforward(VectorToangles(hitTracer["normal"])));
+	
+	
 }
 
 bulletSpawn(origin, angle, speed, owner, damage, penetration, model, effect, tracerprob, lifetime)
@@ -1110,6 +1142,16 @@ projControl(entity)
 	if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
 		self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
 	}
+	while (true) {
+		if (isdefined(entity) && ismoving(entity)) {
+			wait(0.015);
+		}
+		else
+		{
+			break;
+		}
+		wait(0.015);
+	}
 	if (isDefined(entity)) {
 		entity Delete();
 	}
@@ -1195,17 +1237,23 @@ getowner(bullet)
 
 ismoving(entity)
 {
-
-	oldorigin=entity.origin;
-	wait(0.15);
-	if(entity.origin==oldorigin)
-	{
-		return false;
+	oldorigin=[];
+	if (isDefined(entity)) {
+		oldorigin=entity.origin;
 	}
-	else
-	{
-		return true;
+	
+	wait(0.015);
+	if (isDefined(entity)) {
+		if(entity.origin==oldorigin)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
+	
 }
 
 
