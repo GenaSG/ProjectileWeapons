@@ -146,18 +146,14 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 	
 	if ( sMeansOfDeath == "MOD_MELEE" )
 	{
-		if (self islookingat(eAttacker)) {
-			iDamage = iDamage/4;
-
+		if (level.teamBased==1) {
+			if (eAttacker.team != self.team) {
+				iDamage=DoMelee(eAttacker,iDamage);
+			}
 		}
 		else
 		{
-			eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Knifed!" );
-			score = maps\mp\gametypes\_rank::getScoreInfoValue( "kill" ) + 20;
-			eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "kill", score );
-			eAttacker.pers["score"] += score;
-			eAttacker.score = self.pers["score"];
-			eAttacker notify ( "update_playerscore_hud" );
+			iDamage=DoMelee(eAttacker,iDamage);
 		}
 		
 	}
@@ -175,6 +171,25 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 	}
 	
 	return int(iDamage);
+}
+
+DoMelee(eAttacker,iDamage)
+{
+	if (self islookingat(eAttacker)) {
+		iDamage = iDamage/4;
+		return iDamage;
+		
+	}
+	else
+	{
+		eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Knifed!" );
+		score = maps\mp\gametypes\_rank::getScoreInfoValue( "kill" ) + 20;
+		eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "kill", score );
+		eAttacker.pers["score"] += score;
+		eAttacker.score = self.pers["score"];
+		eAttacker notify ( "update_playerscore_hud" );
+		return iDamage;
+	}
 }
 
 HealthRegen(DamageTaken)
@@ -1142,16 +1157,7 @@ projControl(entity)
 	if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
 		self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
 	}
-	while (true) {
-		if (isdefined(entity) && ismoving(entity)) {
-			wait(0.015);
-		}
-		else
-		{
-			break;
-		}
-		wait(0.015);
-	}
+	wait(0.02);
 	if (isDefined(entity)) {
 		entity Delete();
 	}
