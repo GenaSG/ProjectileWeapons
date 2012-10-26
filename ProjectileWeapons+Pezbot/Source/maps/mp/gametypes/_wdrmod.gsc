@@ -975,6 +975,7 @@ return;
 
 AfterSpawn()
 {
+	self.maxhealth = self.health;
    if(!isdefined(self.bIsBot))
 	{
 //		self thread whoami();
@@ -989,10 +990,65 @@ AfterSpawn()
 	self thread bulletwatcher();
 	self thread LaserSight();
 	self thread SpawnProtection();
+	self thread Medic();
 	if (getDvarfloat( "scr_test" ) == 1) {
 		self thread test();
+		
 	}
 	
+}
+
+Medic()
+{
+	if (level.teamBased==1) {
+		maxhealth = self.maxhealth;
+		healthToAdd = maxhealth/5;
+		while(isAlive(self))
+		{
+			PlayerToHeal = self getPlayerToHeal();
+			if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team && PlayerToHeal.health < maxhealth && self UseButtonPressed())
+			{
+				if (isDefined(self) && isAlive(self)) {
+					self disableWeapons();
+				}
+				self maps\mp\gametypes\_hud_message::hintMessage( "Healing" );
+				while(isDefined(self) && isDefined(PlayerToHeal) && isAlive(PlayerToHeal) && isAlive(self) && self UseButtonPressed() && distance(self getPlayerEyes(),PlayerToHeal  getPlayerEyes())< 60 && PlayerToHeal.health < maxhealth && PlayerToHeal != self && self islookingat(PlayerToHeal))
+				{
+					PlayerToHeal.health = PlayerToHeal.health + int(healthToAdd);
+			
+					self thread maps\mp\gametypes\_rank::giveRankXP( "assist", 1 );
+					self.pers["score"] += 1;
+					self.score = self.pers["score"];
+					self notify ( "update_playerscore_hud" );
+				
+					if (PlayerToHeal.health >= maxhealth) {
+						PlayerToHeal.health = maxhealth;
+						break;
+					}
+					wait(0.4);
+				}
+				if (isDefined(self) && isAlive(self)) {
+					self enableWeapons();
+				}
+			}
+			wait(0.1);
+		}
+	}
+}
+
+getPlayerToHeal()
+{
+	position = self getPlayerEyes();
+	tracervector = vectorscale(anglesToForward( self.angles ), 60);
+	endposition = position + tracervector;
+	visualTracer = bullettrace(position,endposition,true,self);
+	if (isDefined(visualTracer["entity"]) && isPlayer(visualTracer["entity"])) {
+		return visualTracer["entity"];
+	}
+	else
+	{
+		return undefined;
+	}
 }
 
 SpawnProtection()
