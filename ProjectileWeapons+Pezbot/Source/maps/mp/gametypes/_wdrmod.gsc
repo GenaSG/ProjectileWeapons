@@ -991,6 +991,7 @@ AfterSpawn()
 	self thread LaserSight();
 	self thread SpawnProtection();
 	self thread Medic();
+	self thread MedicGUI();
 	self thread HealthGUI();
 	if (getDvarfloat( "scr_test" ) == 1) {
 		self thread test();
@@ -1052,12 +1053,12 @@ Medic()
 		while(isAlive(self))
 		{
 			PlayerToHeal = self getPlayerToHeal();
-			if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team && PlayerToHeal.health < maxhealth && self UseButtonPressed())
+			if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team && PlayerToHeal.health < maxhealth && self UseButtonPressed() && distance(self getPlayerEyes(),PlayerToHeal  getPlayerEyes())< 60)
 			{
 				if (isDefined(self) && isAlive(self)) {
 					self disableWeapons();
 				}
-				self maps\mp\gametypes\_hud_message::hintMessage( "Healing" );
+				//self maps\mp\gametypes\_hud_message::hintMessage( "Healing" );
 				while(isDefined(self) && isDefined(PlayerToHeal) && isAlive(PlayerToHeal) && isAlive(self) && self UseButtonPressed() && distance(self getPlayerEyes(),PlayerToHeal  getPlayerEyes())< 60 && PlayerToHeal.health < maxhealth && PlayerToHeal != self && self islookingat(PlayerToHeal))
 				{
 					PlayerToHeal.health = PlayerToHeal.health + int(healthToAdd);
@@ -1082,10 +1083,49 @@ Medic()
 	}
 }
 
+MedicGUI()
+{
+if (level.teamBased==1) {
+	self.MedicGUI = 10;
+	self.MedicGUI = newClientHudElem(self);
+	self.MedicGUI.alpha = 0;
+	self.MedicGUI.fontScale = 1.4;
+	self.MedicGUI.color = (1,1,0);
+	self.MedicGUI.font = "objective";
+	self.MedicGUI.foreground = 1;
+	self.MedicGUI.archived = true;
+	self.MedicGUI.hideWhenInMenu = false;
+	self.MedicGUI.alignX = "center";
+	self.MedicGUI.alignY = "middle";
+	self.MedicGUI.horzAlign = "center";
+	self.MedicGUI.vertAlign = "middle";
+	self.MedicGUI.x = 0;
+	self.MedicGUI.y = 150;
+	
+	while (isAlive(self)) {
+		PlayerToHeal = getPlayerToHeal();
+		if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team) {
+			self.MedicGUI.alpha = 0.6;
+			self.MedicGUI  setText (PlayerToHeal.name + ": " + PlayerToHeal.health/self.maxhealth*100) ;
+		}
+		else
+		{
+			self.MedicGUI.alpha = 0;
+		}
+		wait(0.1);
+	}
+	if ( isDefined( self.MedicGUI ) )
+	{
+		self.MedicGUI destroy();
+	}
+
+}
+}
+
 getPlayerToHeal()
 {
 	position = self getPlayerEyes();
-	tracervector = vectorscale(anglesToForward( self.angles ), 60);
+	tracervector = vectorscale(anglesToForward( self.angles ), 200);
 	endposition = position + tracervector;
 	visualTracer = bullettrace(position,endposition,true,self);
 	if (isDefined(visualTracer["entity"]) && isPlayer(visualTracer["entity"])) {
