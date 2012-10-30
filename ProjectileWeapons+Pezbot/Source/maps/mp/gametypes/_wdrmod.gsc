@@ -1004,41 +1004,42 @@ AfterSpawn()
 HealthGUI()
 {
 	if (!level.hardcoreMode) {
-		while (!ismoving(self)) {
+		while (self.protected || !ismoving(self)) {
 			wait(0.1);
 		}
 		if ( isDefined( self.HealthGUI ) )
 		{
 			self.HealthGUI destroy();
 		}
-		self.HealthGUI = 10;
-		self.HealthGUI = newClientHudElem(self);
-		self.HealthGUI.alpha = 0.7;
-		self.HealthGUI.fontScale = 1.4;
-		self.HealthGUI.color = (0,1,0);
-		self.HealthGUI.font = "objective";
-		self.HealthGUI.foreground = 1;
-		self.HealthGUI.archived = true;
-		self.HealthGUI.hideWhenInMenu = false;
-		self.HealthGUI.alignX = "center";
-		self.HealthGUI.alignY = "middle";
-		self.HealthGUI.horzAlign = "left";
-		self.HealthGUI.vertAlign = "bottom";
-		self.HealthGUI.x = 70;
-		self.HealthGUI.y = -65;
 		while (isAlive(self)) {
-			while (self.health > self.maxhealth) {
-				wait(0.1);
-			}
+			
+			self.HealthGUI = 10;
+			self.HealthGUI = newClientHudElem(self);
+			self.HealthGUI.fontScale = 1.4;
+			self.HealthGUI.font = "objective";
+			self.HealthGUI.foreground = 1;
+			self.HealthGUI.archived = true;
+			self.HealthGUI.hideWhenInMenu = false;
+			self.HealthGUI.alignX = "center";
+			self.HealthGUI.alignY = "middle";
 			self.HealthGUI.horzAlign = "left";
+			self.HealthGUI.vertAlign = "bottom";
 			self.HealthGUI.x = 70;
+			self.HealthGUI.y = -65;
+		//Health watcher- health can't be larger then maxhealth
+			if (self.health >= self.maxhealth) {
+				self.health = self.maxhealth;
+			}
 			self.healthprocent = self.health/self.maxhealth*100;
 			self.HealthGUI.alpha = 1 - self.healthprocent/200;
 			self.HealthGUI.color = (1,self.healthprocent/100,0);
 			self.HealthGUI  setText ("Health: " + self.healthprocent) ;
 			wait(0.1);
+			if ( isDefined( self.HealthGUI ) )
+			{
+				self.HealthGUI destroy();
+			}
 		}
-		
 		if ( isDefined( self.HealthGUI ) )
 		{
 			self.HealthGUI destroy();
@@ -1085,23 +1086,22 @@ Medic()
 
 MedicGUI()
 {
-	self.MedicGUI = 10;
-	self.MedicGUI = newClientHudElem(self);
-	self.MedicGUI.alpha = 0;
-	self.MedicGUI.fontScale = 1.4;
-	self.MedicGUI.color = (1,1,0);
-	self.MedicGUI.font = "objective";
-	self.MedicGUI.foreground = 1;
-	self.MedicGUI.archived = true;
-	self.MedicGUI.hideWhenInMenu = false;
-	self.MedicGUI.alignX = "center";
-	self.MedicGUI.alignY = "middle";
-	self.MedicGUI.horzAlign = "center";
-	self.MedicGUI.vertAlign = "middle";
-	self.MedicGUI.x = 0;
-	self.MedicGUI.y = 150;
-	
 	while (isAlive(self)) {
+		self.MedicGUI = 10;
+		self.MedicGUI = newClientHudElem(self);
+		self.MedicGUI.alpha = 0;
+		self.MedicGUI.fontScale = 1.4;
+		self.MedicGUI.color = (1,1,0);
+		self.MedicGUI.font = "objective";
+		self.MedicGUI.foreground = 1;
+		self.MedicGUI.archived = true;
+		self.MedicGUI.hideWhenInMenu = false;
+		self.MedicGUI.alignX = "center";
+		self.MedicGUI.alignY = "middle";
+		self.MedicGUI.horzAlign = "center";
+		self.MedicGUI.vertAlign = "middle";
+		self.MedicGUI.x = 0;
+		self.MedicGUI.y = 150;
 		PlayerToHeal = getPlayerToHeal();
 		if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team) {
 			self.MedicGUI.alpha = 0.6;
@@ -1118,6 +1118,10 @@ MedicGUI()
 			self.MedicGUI.alpha = 0;
 		}
 		wait(0.1);
+		if ( isDefined( self.MedicGUI ) )
+		{
+			self.MedicGUI destroy();
+		}
 	}
 	if ( isDefined( self.MedicGUI ) )
 	{
@@ -1150,28 +1154,34 @@ SpawnProtection()
 	spawnorigin = self.origin;
 	timer = 0;
 	oldhealth = self.health;
-	self.SpawnProtection = 10;
-	self.SpawnProtection = newClientHudElem(self);
-	self.SpawnProtection.alpha = 1;
-	self.SpawnProtection.fontScale = 1.4;
-	self.SpawnProtection.color = (0,1,0);
-	self.SpawnProtection.font = "objective";
-	self.SpawnProtection.foreground = 1;
-	self.SpawnProtection.archived = true;
-	self.SpawnProtection.hideWhenInMenu = false;
-	self.SpawnProtection.alignX = "center";
-	self.SpawnProtection.alignY = "middle";
-	self.SpawnProtection.horzAlign = "center";
-	self.SpawnProtection.vertAlign = "bottom";
-	self.SpawnProtection.x = 0;
-	self.SpawnProtection.y = -65;
 	while (isAlive(self) && timer <= 3 && distance (spawnorigin,self.origin) <=80) {
+		self.SpawnProtection = 10;
+		self.SpawnProtection = newClientHudElem(self);
+		self.SpawnProtection.alpha = 1;
+		self.SpawnProtection.fontScale = 1.4;
+		self.SpawnProtection.font = "objective";
+		self.SpawnProtection.foreground = 1;
+		self.SpawnProtection.archived = true;
+		self.SpawnProtection.hideWhenInMenu = false;
+		self.SpawnProtection.alignX = "center";
+		self.SpawnProtection.alignY = "middle";
+		self.SpawnProtection.horzAlign = "center";
+		self.SpawnProtection.vertAlign = "bottom";
+		self.SpawnProtection.x = 0;
+		self.SpawnProtection.y = -65;
+	
 		self.health = 1000;
+		self.protected = true;
 		self.SpawnProtection.color = (0,1,0);
 		self.SpawnProtection  setText ("Spawn Protection") ;
 		timer +=0.1;
 		wait 0.1;
+		if ( isDefined( self.SpawnProtection ) )
+		{
+			self.SpawnProtection destroy();
+		}
 	}
+	self.protected = false;
 	if ( isDefined( self.SpawnProtection ) )
 	{
 		self.SpawnProtection destroy();
