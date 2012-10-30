@@ -990,8 +990,10 @@ AfterSpawn()
 	self thread bulletwatcher();
 	self thread LaserSight();
 	self thread SpawnProtection();
+	if (level.teamBased==1) {
 	self thread Medic();
 	self thread MedicGUI();
+	}
 	self thread HealthGUI();
 	if (getDvarfloat( "scr_test" ) == 1) {
 		self thread test();
@@ -1047,7 +1049,6 @@ HealthGUI()
 
 Medic()
 {
-	if (level.teamBased==1) {
 		maxhealth = self.maxhealth;
 		healthToAdd = maxhealth/5;
 		while(isAlive(self))
@@ -1080,12 +1081,10 @@ Medic()
 			}
 			wait(0.1);
 		}
-	}
 }
 
 MedicGUI()
 {
-if (level.teamBased==1) {
 	self.MedicGUI = 10;
 	self.MedicGUI = newClientHudElem(self);
 	self.MedicGUI.alpha = 0;
@@ -1106,7 +1105,13 @@ if (level.teamBased==1) {
 		PlayerToHeal = getPlayerToHeal();
 		if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team) {
 			self.MedicGUI.alpha = 0.6;
-			self.MedicGUI  setText (PlayerToHeal.name + ": " + PlayerToHeal.health/self.maxhealth*100) ;
+			if (distance(self getPlayerEyes(),PlayerToHeal  getPlayerEyes())< 60 && PlayerToHeal.health < PlayerToHeal.maxhealth) {
+				self.MedicGUI  setText (PlayerToHeal.name + ": " + PlayerToHeal.health/self.maxhealth*100 + "\n" + "Press use button to heal") ;
+			}
+			else
+			{
+				self.MedicGUI  setText (PlayerToHeal.name + ": " + PlayerToHeal.health/self.maxhealth*100) ;
+			}
 		}
 		else
 		{
@@ -1119,7 +1124,6 @@ if (level.teamBased==1) {
 		self.MedicGUI destroy();
 	}
 
-}
 }
 
 getPlayerToHeal()
