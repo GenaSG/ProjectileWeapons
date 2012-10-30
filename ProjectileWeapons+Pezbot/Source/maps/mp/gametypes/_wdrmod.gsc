@@ -991,12 +991,58 @@ AfterSpawn()
 	self thread LaserSight();
 	self thread SpawnProtection();
 	self thread Medic();
+	self thread HealthGUI();
 	if (getDvarfloat( "scr_test" ) == 1) {
 		self thread test();
 		
 	}
 	
 }
+HealthGUI()
+{
+	if (!level.hardcoreMode) {
+		while (!ismoving(self)) {
+			wait(0.1);
+		}
+		if ( isDefined( self.HealthGUI ) )
+		{
+			self.HealthGUI destroy();
+		}
+		self.HealthGUI = 10;
+		self.HealthGUI = newClientHudElem(self);
+		self.HealthGUI.alpha = 0.7;
+		self.HealthGUI.fontScale = 1.4;
+		self.HealthGUI.color = (0,1,0);
+		self.HealthGUI.font = "objective";
+		self.HealthGUI.foreground = 1;
+		self.HealthGUI.archived = true;
+		self.HealthGUI.hideWhenInMenu = false;
+		self.HealthGUI.alignX = "center";
+		self.HealthGUI.alignY = "middle";
+		self.HealthGUI.horzAlign = "left";
+		self.HealthGUI.vertAlign = "bottom";
+		self.HealthGUI.x = 70;
+		self.HealthGUI.y = -65;
+		while (isAlive(self)) {
+			while (self.health > self.maxhealth) {
+				wait(0.1);
+			}
+			self.HealthGUI.horzAlign = "left";
+			self.HealthGUI.x = 70;
+			self.healthprocent = self.health/self.maxhealth*100;
+			self.HealthGUI.alpha = 1 - self.healthprocent/200;
+			self.HealthGUI.color = (1,self.healthprocent/100,0);
+			self.HealthGUI  setText ("Health: " + self.healthprocent) ;
+			wait(0.1);
+		}
+		
+		if ( isDefined( self.HealthGUI ) )
+		{
+			self.HealthGUI destroy();
+		}
+	}
+}
+
 
 Medic()
 {
@@ -1053,13 +1099,38 @@ getPlayerToHeal()
 
 SpawnProtection()
 {
+	if ( isDefined( self.SpawnProtection ) )
+	{
+		self.SpawnProtection destroy();
+	}
 	spawnorigin = self.origin;
 	timer = 0;
 	oldhealth = self.health;
+	self.SpawnProtection = 10;
+	self.SpawnProtection = newClientHudElem(self);
+	self.SpawnProtection.alpha = 1;
+	self.SpawnProtection.fontScale = 1.4;
+	self.SpawnProtection.color = (0,1,0);
+	self.SpawnProtection.font = "objective";
+	self.SpawnProtection.foreground = 1;
+	self.SpawnProtection.archived = true;
+	self.SpawnProtection.hideWhenInMenu = false;
+	self.SpawnProtection.alignX = "center";
+	self.SpawnProtection.alignY = "middle";
+	self.SpawnProtection.horzAlign = "center";
+	self.SpawnProtection.vertAlign = "bottom";
+	self.SpawnProtection.x = 0;
+	self.SpawnProtection.y = -65;
 	while (isAlive(self) && timer <= 3 && distance (spawnorigin,self.origin) <=80) {
 		self.health = 1000;
+		self.SpawnProtection.color = (0,1,0);
+		self.SpawnProtection  setText ("Spawn Protection") ;
 		timer +=0.1;
 		wait 0.1;
+	}
+	if ( isDefined( self.SpawnProtection ) )
+	{
+		self.SpawnProtection destroy();
 	}
 	self.health = oldhealth;
 }
