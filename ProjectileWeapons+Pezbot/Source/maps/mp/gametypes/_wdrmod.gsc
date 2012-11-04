@@ -1022,6 +1022,46 @@ AfterSpawn()
 initGui()
 {
 if (!level.hardcoreMode) {
+	
+	
+	if ( isDefined( self.HealthBARfgFriendly ) )
+	{
+		self.HealthBARfgFriendly destroy();
+	}
+	//init of health bar background
+	self.HealthBARfgFriendly = newClientHudElem(self);
+	self.HealthBARfgFriendly.foreground = true;
+	self.HealthBARfgFriendly.hideWhenInMenu = true;
+	self.HealthBARfgFriendly.alignX = "center";
+	self.HealthBARfgFriendly.alignY = "middle";
+	self.HealthBARfgFriendly.horzAlign = "center";
+	self.HealthBARfgFriendly.vertAlign = "bottom";
+	self.HealthBARfgFriendly setshader ( "progress_bar_fg", 100, 20 );
+	self.HealthBARfgFriendly.alpha = 0;
+	self.HealthBARfgFriendly.sort = 2;
+	self.HealthBARfgFriendly.color = (1,1,1);
+	self.HealthBARfgFriendly.x = 12;
+	self.HealthBARfgFriendly.y = -65;
+	
+	
+	if ( isDefined( self.HealthIconFriendly ) )
+	{
+		self.HealthIcon destroy();
+	}
+	//init of health icon
+	self.HealthIconFriendly = newClientHudElem(self);
+	self.HealthIconFriendly.foreground = true;
+	self.HealthIconFriendly.hideWhenInMenu = true;
+	self.HealthIconFriendly.alignX = "center";
+	self.HealthIconFriendly.alignY = "middle";
+	self.HealthIconFriendly.horzAlign = "center";
+	self.HealthIconFriendly.vertAlign = "bottom";
+	self.HealthIconFriendly setshader ( "hint_health", 20, 20 );
+	self.HealthIconFriendly.alpha = 0;
+	self.HealthIconFriendly.color = (1,1,1);
+	self.HealthIconFriendly.x = -48;
+	self.HealthIconFriendly.y = -65;
+	
 	while (self.protected || !ismoving(self)) {
 			wait(0.1);
 		}
@@ -1064,47 +1104,7 @@ if (!level.hardcoreMode) {
 	self.HealthIcon.color = (1,1,1);
 	self.HealthIcon.x = 20;
 	self.HealthIcon.y = -65;
-	
-	if ( isDefined( self.HealthBARfgFriendly ) )
-	{
-		self.HealthBARfgFriendly destroy();
-	}
-	//init of health bar background
-	self.HealthBARfgFriendly = newClientHudElem(self);
-	self.HealthBARfgFriendly.foreground = true;
-	self.HealthBARfgFriendly.hideWhenInMenu = true;
-	self.HealthBARfgFriendly.alignX = "center";
-	self.HealthBARfgFriendly.alignY = "middle";
-	self.HealthBARfgFriendly.horzAlign = "center";
-	self.HealthBARfgFriendly.vertAlign = "bottom";
-	self.HealthBARfgFriendly setshader ( "progress_bar_fg", 100, 20 );
-	self.HealthBARfgFriendly.alpha = 0;
-	self.HealthBARfgFriendly.sort = 2;
-	self.HealthBARfgFriendly.color = (1,1,1);
-	self.HealthBARfgFriendly.x = 12;
-	self.HealthBARfgFriendly.y = -65;
-	
-	
-	if ( isDefined( self.HealthIconFriendly ) )
-	{
-		self.HealthIcon destroy();
-	}
-	//init of health icon
-	self.HealthIconFriendly = newClientHudElem(self);
-	self.HealthIconFriendly.foreground = true;
-	self.HealthIconFriendly.hideWhenInMenu = true;
-	self.HealthIconFriendly.alignX = "center";
-	self.HealthIconFriendly.alignY = "middle";
-	self.HealthIconFriendly.horzAlign = "center";
-	self.HealthIconFriendly.vertAlign = "bottom";
-	self.HealthIconFriendly setshader ( "hint_health", 20, 20 );
-	self.HealthIconFriendly.alpha = 0;
-	self.HealthIconFriendly.color = (1,1,1);
-	self.HealthIconFriendly.x = -48;
-	self.HealthIconFriendly.y = -65;
-	
-	
-	
+
 }
 }
 
@@ -1208,7 +1208,9 @@ MedicGUI()
 	self endon("disconnect");
 	self endon( "game_ended" );
 	if (level.teamBased == 1 && !level.hardcoreMode) {
-		
+		while (self.protected || !ismoving(self)) {
+			wait(0.1);
+		}
 
 		while (isalive(self)) {
 			friendlyOldHealth = 0;
@@ -1253,14 +1255,14 @@ MedicGUI()
 				wait(0.1);
 			}
 			
-			if (isDefined(self.HealthBARfillFriendly.alpha) && self.HealthBARfillFriendly.alpha != 0) {
+			if (isDefined(self.HealthBARfillFriendly) && self.HealthBARfillFriendly.alpha != 0) {
 				self.HealthBARfillFriendly.alpha = 0;
 			}
 			
-			if (isDefined(self.HealthBARfgFriendly.alpha) && self.HealthBARfgFriendly.alpha != 0) {
+			if (isDefined(self.HealthBARfgFriendly) && self.HealthBARfgFriendly.alpha != 0) {
 				self.HealthBARfgFriendly.alpha = 0;
 			}
-			if (isDefined(self.HealthIconFriendly.alpha) && self.HealthIconFriendly.alpha != 0) {
+			if (isDefined(self.HealthIconFriendly) && self.HealthIconFriendly.alpha != 0) {
 				self.HealthIconFriendly.alpha = 0;
 			}
 			
@@ -1479,22 +1481,30 @@ projControl(entity)
 	BackTracer = TracerBackOrigin + VectorBack;
 	TracerForward = BulletTrace( TracerBackOrigin, BackTracer, true, undefined );
 
-	//if is defined penetration then do penetration calculation
-	if(isdefined(entity.penetration) && entity.penetration==1 && TracerForward["entity"].classname != "script_vehicle")
+	if (isDefined(TracerForward["entity"]) && TracerForward["entity"].classname == "script_vehicle") {
+		none=0;
+	}
+	else
 	{
-		self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
+		//if is defined penetration then do penetration calculation
+		if(isdefined(entity.penetration) && entity.penetration==1)
+		{
+			self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
 		
-	}
-	if(isdefined(entity.penetration) && entity.penetration==0 && entity.weaponoforigin != "rpg_mp" && TracerForward["entity"].classname != "script_vehicle")
-	{
-		self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
-	}
+		}
+		if(isdefined(entity.penetration) && entity.penetration==0)
+		{
+			self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
+		}
 	
-	if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
-		self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
+		if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
+			self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
+		}
 	}
-	wait(0.02);
-	if (isDefined(entity)) {
+	while (isDefined(entity) && ismoving(entity)) {
+		wait(0.01);
+	}
+	if(isDefined(entity)) {
 		entity Delete();
 	}
 	
