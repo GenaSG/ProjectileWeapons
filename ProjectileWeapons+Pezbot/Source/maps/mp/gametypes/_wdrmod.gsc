@@ -1213,7 +1213,7 @@ MedicGUI()
 		while (isalive(self)) {
 			friendlyOldHealth = 0;
 			PlayerToHeal = getPlayerToHeal();
-			while (isDefined(PlayerToHeal) && !PlayerToHeal.protected && !self.protected) {
+			while (isDefined(PlayerToHeal) && !PlayerToHeal.protected && !self.protected && PlayerToHeal.team == self.team) {
 				
 				if (self.HealthBARfgFriendly.alpha != 1) {
 					self.HealthBARfgFriendly.alpha = 1;
@@ -1480,12 +1480,12 @@ projControl(entity)
 	TracerForward = BulletTrace( TracerBackOrigin, BackTracer, true, undefined );
 
 	//if is defined penetration then do penetration calculation
-	if(isdefined(entity.penetration) && entity.penetration==1)
+	if(isdefined(entity.penetration) && entity.penetration==1 && TracerForward["entity"].classname != "script_vehicle")
 	{
 		self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
 		
 	}
-	if(isdefined(entity.penetration) && entity.penetration==0 && entity.weaponoforigin != "rpg_mp")
+	if(isdefined(entity.penetration) && entity.penetration==0 && entity.weaponoforigin != "rpg_mp" && TracerForward["entity"].classname != "script_vehicle")
 	{
 		self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
 	}
