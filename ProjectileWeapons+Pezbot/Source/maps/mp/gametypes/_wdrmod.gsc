@@ -1007,7 +1007,7 @@ AfterSpawn()
 	self thread SpawnProtection();
 	if (level.teamBased==1) {
 	self thread Medic();
-	self initGui();
+	self thread initGui();
 //	self thread MedicGUI();
 	}
 	self thread HealthGUI();
@@ -1041,6 +1041,7 @@ if (!level.hardcoreMode) {
 	self.HealthBARfg.vertAlign = "bottom";
 	self.HealthBARfg setshader ( "progress_bar_fg", 100, 20 );
 	self.HealthBARfg.alpha = 1;
+	self.HealthBARfg.sort = 2;
 	self.HealthBARfg.color = (1,1,1);
 	self.HealthBARfg.x = 82;
 	self.HealthBARfg.y = -65;
@@ -1079,7 +1080,7 @@ HealthGUI()
 			if (self.health >= self.maxhealth) {
 				self.health = self.maxhealth;
 			}
-			if (self.oldhealth != self.health && isDefined(self.HealthBARfg)) {
+			if (self.oldhealth != self.health) {
 				
 				healthBarLength = 96 * self.health/self.maxhealth;
 				healthProcent = self.health/self.maxhealth*100;
@@ -1097,6 +1098,7 @@ HealthGUI()
 				self.HealthBARfill.horzAlign = "left";
 				self.HealthBARfill.vertAlign = "bottom";
 				self.HealthBARfill setshader ( "progress_bar_fill", int(healthBarLength), 16 );
+				self.HealthBARfill.alpha.sort = 1;
 				self.HealthBARfill.alpha = 1 - healthProcent/200;
 				self.HealthBARfill.color = (1,healthProcent/100,0);
 				self.HealthBARfill.x = 82-barOffset;
@@ -1160,56 +1162,26 @@ Medic()
 
 MedicGUI()
 {
-	
+	if (level.teamBased == 1) {
 		if ( isDefined( self.MedicGUI ) )
 		{
 			self.MedicGUI destroy();
 		}
-		self.MedicGUI = 10;
-		self.MedicGUI = newClientHudElem(self);
-		self.MedicGUI.elemType = "timer";
-		self.MedicGUI.alpha = 0.6;
-		self.MedicGUI.fontScale = 1.4;
-		self.MedicGUI.color = (1,1,0);
-		self.MedicGUI.font = "objective";
-		self.MedicGUI.foreground = 1;
-		self.MedicGUI.archived = true;
-		self.MedicGUI.hideWhenInMenu = true;
-		self.MedicGUI.alignX = "center";
-		self.MedicGUI.alignY = "middle";
-		self.MedicGUI.horzAlign = "center";
-		self.MedicGUI.vertAlign = "middle";
-		self.MedicGUI.x = 0;
-		self.MedicGUI.y = 150;
-//		self.MedicGUI setParent( level.uiParent );
-		OldguiMessage = "";
-		while (isAlive(self)) {
-		PlayerToHeal = getPlayerToHeal();
-		if (isDefined(PlayerToHeal) && PlayerToHeal.team == self.team) {
-			if (distance(self getPlayerEyes(),PlayerToHeal  getPlayerEyes())< 80 && PlayerToHeal.health < PlayerToHeal.maxhealth) {
-				guiMessage = PlayerToHeal.name + ": " + PlayerToHeal.health/self.maxhealth*100 + "\n" + "Press use button to heal";
-			}
-			else
-			{
-				guiMessage = PlayerToHeal.name + ": " + PlayerToHeal.health/self.maxhealth*100;
-			}
-		}
-		else
+		level.HealthIcon3d = newTeamHudElem( self.team );
+        level.HealthIcon3d.x = self.origin[0];
+        level.HealthIcon3d.y = self.origin[1];
+        level.HealthIcon3d.z = self.origin[2] + 54;
+        level.HealthIcon3d.alpha = .61;
+        level.HealthIcon3d.archived = true;
+		level.HealthIcon3d setShader("hint_health", 14, 14);
+        level.HealthIcon3d setwaypoint(true);
+		
+		/*
+		if ( isDefined( self.MedicGUI ) )
 		{
-			guiMessage = "";
-		}
-			
-		if (OldguiMessage != guiMessage) {
-			self.MedicGUI  setText (guiMessage);
-		}
-		OldguiMessage=guiMessage;
-		wait(0.5);
+			self.MedicGUI destroy();
+		}*/
 	}
-	if ( isDefined( self.MedicGUI ) )
-	{
-		self.MedicGUI destroy();
-	}
-
 }
 
 getPlayerToHeal()
