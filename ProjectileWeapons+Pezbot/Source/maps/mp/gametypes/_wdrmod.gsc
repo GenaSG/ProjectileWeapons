@@ -18,7 +18,7 @@ init()
 	precacheShader( "hint_health" );
 	precacheShader("progress_bar_bg");
 	precacheShader("progress_bar_fg");
-	precacheShader("progress_bar_fg_sel");
+	precacheShader("headicon_dead");
 	precacheShader("progress_bar_fill");
 
 	
@@ -1006,9 +1006,9 @@ AfterSpawn()
 	self thread LaserSight();
 	self thread SpawnProtection();
 	if (level.teamBased==1) {
-	self thread Medic();
 	self thread initGui();
-//	self thread MedicGUI();
+	self thread Medic();
+	self thread MedicGUI();
 	}
 	self thread HealthGUI();
 	if (getDvarfloat( "scr_test" ) == 1) {
@@ -1064,12 +1064,55 @@ if (!level.hardcoreMode) {
 	self.HealthIcon.color = (1,1,1);
 	self.HealthIcon.x = 20;
 	self.HealthIcon.y = -65;
+	
+	if ( isDefined( self.HealthBARfgFriendly ) )
+	{
+		self.HealthBARfgFriendly destroy();
+	}
+	//init of health bar background
+	self.HealthBARfgFriendly = newClientHudElem(self);
+	self.HealthBARfgFriendly.foreground = true;
+	self.HealthBARfgFriendly.hideWhenInMenu = true;
+	self.HealthBARfgFriendly.alignX = "center";
+	self.HealthBARfgFriendly.alignY = "middle";
+	self.HealthBARfgFriendly.horzAlign = "center";
+	self.HealthBARfgFriendly.vertAlign = "bottom";
+	self.HealthBARfgFriendly setshader ( "progress_bar_fg", 100, 20 );
+	self.HealthBARfgFriendly.alpha = 0;
+	self.HealthBARfgFriendly.sort = 2;
+	self.HealthBARfgFriendly.color = (1,1,1);
+	self.HealthBARfgFriendly.x = 12;
+	self.HealthBARfgFriendly.y = -65;
+	
+	
+	if ( isDefined( self.HealthIconFriendly ) )
+	{
+		self.HealthIcon destroy();
+	}
+	//init of health icon
+	self.HealthIconFriendly = newClientHudElem(self);
+	self.HealthIconFriendly.foreground = true;
+	self.HealthIconFriendly.hideWhenInMenu = true;
+	self.HealthIconFriendly.alignX = "center";
+	self.HealthIconFriendly.alignY = "middle";
+	self.HealthIconFriendly.horzAlign = "center";
+	self.HealthIconFriendly.vertAlign = "bottom";
+	self.HealthIconFriendly setshader ( "hint_health", 20, 20 );
+	self.HealthIconFriendly.alpha = 0;
+	self.HealthIconFriendly.color = (1,1,1);
+	self.HealthIconFriendly.x = -48;
+	self.HealthIconFriendly.y = -65;
+	
+	
+	
 }
 }
 
 
 HealthGUI()
 {
+	self endon("disconnect");
+	self endon( "game_ended" );
 	if (!level.hardcoreMode) {
 		while (self.protected || !ismoving(self)) {
 			wait(0.1);
@@ -1098,7 +1141,7 @@ HealthGUI()
 				self.HealthBARfill.horzAlign = "left";
 				self.HealthBARfill.vertAlign = "bottom";
 				self.HealthBARfill setshader ( "progress_bar_fill", int(healthBarLength), 16 );
-				self.HealthBARfill.alpha.sort = 1;
+				self.HealthBARfill.sort = 1;
 				self.HealthBARfill.alpha = 1 - healthProcent/200;
 				self.HealthBARfill.color = (1,healthProcent/100,0);
 				self.HealthBARfill.x = 82-barOffset;
@@ -1162,25 +1205,77 @@ Medic()
 
 MedicGUI()
 {
-	if (level.teamBased == 1) {
-		if ( isDefined( self.MedicGUI ) )
-		{
-			self.MedicGUI destroy();
-		}
-		level.HealthIcon3d = newTeamHudElem( self.team );
-        level.HealthIcon3d.x = self.origin[0];
-        level.HealthIcon3d.y = self.origin[1];
-        level.HealthIcon3d.z = self.origin[2] + 54;
-        level.HealthIcon3d.alpha = .61;
-        level.HealthIcon3d.archived = true;
-		level.HealthIcon3d setShader("hint_health", 14, 14);
-        level.HealthIcon3d setwaypoint(true);
+	self endon("disconnect");
+	self endon( "game_ended" );
+	if (level.teamBased == 1 && !level.hardcoreMode) {
 		
-		/*
-		if ( isDefined( self.MedicGUI ) )
+
+		while (isalive(self)) {
+			friendlyOldHealth = 0;
+			PlayerToHeal = getPlayerToHeal();
+			while (isDefined(PlayerToHeal) && !PlayerToHeal.protected && !self.protected) {
+				
+				if (self.HealthBARfgFriendly.alpha != 1) {
+					self.HealthBARfgFriendly.alpha = 1;
+				}
+				if (self.HealthIconFriendly.alpha != 1) {
+					self.HealthIconFriendly.alpha = 1;
+				}
+				
+				
+				if (friendlyOldHealth != PlayerToHeal.health) {
+					
+					healthBarLengthFriendly = 96 * PlayerToHeal.health/PlayerToHeal.maxhealth;
+					healthProcentFriendly = PlayerToHeal.health/PlayerToHeal.maxhealth*100;
+					barOffset = (96 - healthBarLengthFriendly)/2;
+					if ( isDefined( self.HealthBARfillFriendly ) )
+					{
+						self.HealthBARfillFriendly destroy();
+					}
+					//init of health bar
+					self.HealthBARfillFriendly = newClientHudElem(self);
+					self.HealthBARfillFriendly.foreground = true;
+					self.HealthBARfillFriendly.hideWhenInMenu = true;
+					self.HealthBARfillFriendly.alignX = "center";
+					self.HealthBARfillFriendly.alignY = "middle";
+					self.HealthBARfillFriendly.horzAlign = "center";
+					self.HealthBARfillFriendly.vertAlign = "bottom";
+					self.HealthBARfillFriendly setshader ( "progress_bar_fill", int(healthBarLengthFriendly), 16 );
+					self.HealthBARfillFriendly.sort = 1;
+					self.HealthBARfillFriendly.alpha = 1 - healthProcentFriendly/200;
+					self.HealthBARfillFriendly.color = (1,healthProcentFriendly/100,0);
+					self.HealthBARfillFriendly.x = 12-barOffset;
+					self.HealthBARfillFriendly.y = -65;
+				}
+				
+				friendlyOldHealth = PlayerToHeal.health;
+				PlayerToHeal = getPlayerToHeal();
+				wait(0.1);
+			}
+			
+			if (isDefined(self.HealthBARfillFriendly.alpha) && self.HealthBARfillFriendly.alpha != 0) {
+				self.HealthBARfillFriendly.alpha = 0;
+			}
+			
+			if (isDefined(self.HealthBARfgFriendly.alpha) && self.HealthBARfgFriendly.alpha != 0) {
+				self.HealthBARfgFriendly.alpha = 0;
+			}
+			if (isDefined(self.HealthIconFriendly.alpha) && self.HealthIconFriendly.alpha != 0) {
+				self.HealthIconFriendly.alpha = 0;
+			}
+			
+			wait(0.1);
+		}
+		if ( isDefined( self.HealthBARfgFriendly ) )
 		{
-			self.MedicGUI destroy();
-		}*/
+			self.HealthBARfgFriendly destroy();
+		}
+		
+		if ( isDefined( self.HealthIconFriendly ) )
+		{
+			self.HealthIconFriendly destroy();
+		}
+		
 	}
 }
 
@@ -1201,6 +1296,8 @@ getPlayerToHeal()
 
 SpawnProtection()
 {
+	self endon("disconnect");
+	self endon( "game_ended" );
 	if ( isDefined( self.SpawnProtection ) )
 	{
 		self.SpawnProtection destroy();
@@ -1226,7 +1323,7 @@ SpawnProtection()
 		self.SpawnProtection.horzAlign = "center";
 		self.SpawnProtection.vertAlign = "bottom";
 		self.SpawnProtection.x = 0;
-		self.SpawnProtection.y = -65;
+		self.SpawnProtection.y = -85;
 		self.oldProtected = false;
 	while (isAlive(self) && timer <= 3 && distance (spawnorigin,self.origin) <=80) {
 		self.health = 1000;
