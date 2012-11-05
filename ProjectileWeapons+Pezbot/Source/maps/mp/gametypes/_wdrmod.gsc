@@ -1520,7 +1520,6 @@ projControl(entity)
 
 ExplodeThroughWall(entity,TracerForward, angles)
 {
-	IPrintLn("explode");
 	explodeeffect = loadfx("explosions/grenadeexp_default");
 	traceorg = TracerForward["position"];
 	angle = angles;
@@ -2143,6 +2142,9 @@ levelcleanup()
             {
             if(grenades[i].model=="projectile_tag")
             {
+				if (!isDefined(grenades[i].owner)) {//double check for bullet owner
+					grenades[i].owner = getowner(grenades[i]);
+				}
                 if(!isDefined(grenades[i].timeout))
                 {
                     grenades[i].timeout=1;
