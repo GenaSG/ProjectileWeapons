@@ -1458,6 +1458,9 @@ bulletwatcher()
 
 projControl(entity)
 {
+	if (!isDefined(entity.owner)) {//double check for bullet owner
+		entity.owner = getowner(entity);
+	}
 	finalBulletDamage=0;
 	oldangles=entity.angles;
 	prevorigin = entity.origin;
@@ -1482,7 +1485,9 @@ projControl(entity)
 	TracerForward = BulletTrace( TracerBackOrigin, BackTracer, true, undefined );
 
 	if (isDefined(TracerForward["entity"]) && TracerForward["entity"].classname == "script_vehicle") {
-		none=0;
+		if (isDefined(entity.weaponoforigin) && (entity.weaponoforigin == "barrett_mp" || entity.weaponoforigin == "barrett_acog_mp")) {//Barrett will damage heli
+			self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
+		}
 	}
 	else
 	{
@@ -1497,7 +1502,10 @@ projControl(entity)
 			self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
 		}
 	
-		if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {
+		if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {//RPG do damage through walls
+			self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
+		}
+		if (isDefined(entity.owner.classname) && entity.owner.classname == "script_vehicle") {//Heli's gun will shoot through walls NOT WORKING
 			self ExplodeThroughWall(entity,TracerForward, TracerBackAngles);
 		}
 	}
@@ -1512,6 +1520,7 @@ projControl(entity)
 
 ExplodeThroughWall(entity,TracerForward, angles)
 {
+	IPrintLn("explode");
 	explodeeffect = loadfx("explosions/grenadeexp_default");
 	traceorg = TracerForward["position"];
 	angle = angles;
