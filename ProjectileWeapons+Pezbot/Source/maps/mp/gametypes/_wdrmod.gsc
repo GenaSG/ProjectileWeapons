@@ -1008,6 +1008,7 @@ AfterSpawn()
 	self thread bulletwatcher();
 	self thread LaserSight();
 	self thread SpawnProtection();
+	self thread Hints();
 	if (level.teamBased==1) {
 	self thread initGui();
 	self thread Medic();
@@ -1021,11 +1022,36 @@ AfterSpawn()
 	
 }
 
+Hints()
+{
+	level waittill("prematch_over");
+	if (level.teamBased==1) {
+		self IPrintLnBold("You can heal teammates by approaching them and holding Use Button");
+		wait(1);
+	}
+	self IPrintLnBold("Approach an enemy from behind to score one-hit melee kill");
+	
+}
+
 
 initGui()
 {
 if (!level.hardcoreMode) {
 	
+	
+	//init of health bar background
+	self.notifyMessage = newClientHudElem(self);
+	self.notifyMessage.foreground = true;
+	self.notifyMessage.hideWhenInMenu = true;
+	self.notifyMessage.alignX = "center";
+	self.notifyMessage.alignY = "middle";
+	self.notifyMessage.horzAlign = "center";
+	self.notifyMessage.vertAlign = "middle";
+	self.notifyMessage.alpha = 0;
+	self.notifyMessage.sort = 2;
+	self.notifyMessage.color = (1,1,1);
+	self.notifyMessage.x = 0;
+	self.notifyMessage.y = 0;
 	
 	if ( isDefined( self.HealthBARfgFriendly ) )
 	{
@@ -1285,6 +1311,12 @@ MedicGUI()
 }
 
 getPlayerToHeal()
+{
+	PlayerToHeal = isLookingAtEntity();
+	return PlayerToHeal;
+}
+
+isLookingAtEntity()
 {
 	position = self getPlayerEyes();
 	tracervector = vectorscale(anglesToForward( self.angles ), 200);
