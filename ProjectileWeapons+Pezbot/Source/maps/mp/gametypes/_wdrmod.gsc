@@ -184,7 +184,10 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 		}
 		
 	}
-	
+	if (sMeansOfDeath == "MOD_EXPLOSIVE" && self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" )) {
+		iDamage = iDamage * 0.25;
+	}
+
 	return int(iDamage);
 }
 
@@ -1497,7 +1500,7 @@ projControl(entity)
 			self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
 		
 		}
-		if(isdefined(entity.penetration) && entity.penetration==0)
+		else
 		{
 			self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
 		}
