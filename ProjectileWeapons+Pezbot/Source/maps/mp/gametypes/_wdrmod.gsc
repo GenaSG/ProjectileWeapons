@@ -1009,8 +1009,8 @@ AfterSpawn()
 	self thread LaserSight();
 	self thread SpawnProtection();
 	self thread Hints();
-	if (level.teamBased==1) {
 	self thread initGui();
+	if (level.teamBased==1) {
 	self thread Medic();
 	self thread MedicGUI();
 	}
@@ -1053,6 +1053,7 @@ if (!level.hardcoreMode) {
 	self.notifyMessage.x = 0;
 	self.notifyMessage.y = 0;
 	
+if (level.teamBased==1) {
 	if ( isDefined( self.HealthBARfgFriendly ) )
 	{
 		self.HealthBARfgFriendly destroy();
@@ -1090,6 +1091,7 @@ if (!level.hardcoreMode) {
 	self.HealthIconFriendly.color = (1,1,1);
 	self.HealthIconFriendly.x = -48;
 	self.HealthIconFriendly.y = -65;
+}
 	
 	while (self.protected || !ismoving(self)) {
 			wait(0.1);
