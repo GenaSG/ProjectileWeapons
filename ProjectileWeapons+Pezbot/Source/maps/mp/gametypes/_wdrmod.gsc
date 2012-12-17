@@ -34,7 +34,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 		if ( isDefined( level.wdr[ sWeapon ] ) )
 		{
 			rangeMod = getDvarfloat( level.wdr[ sWeapon ] );
-			targetDist = distance(eAttacker.origin, self.origin)* 0.0254;
+			targetDist = distance(eAttacker getPlayerEyes(), self getPlayerEyes())* 0.0254;
 			//iDamage = iDamage/(1+rangeMod*targetDist);
             //ProjectileWeapons ARMOR
             if(sHitLoc == "torso_upper" || sHitLoc == "torso_lower" || sHitLoc == "right_arm_upper" || sHitLoc == "left_arm_upper" || sHitLoc == "right_arm_lower" || sHitLoc == "left_arm_lower" ||  sHitLoc == "right_hand" ||  sHitLoc == "left_hand" )
@@ -118,11 +118,11 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
                     }
                     if( penetCoef < 1 )
                     {
-                        iDamage = 2 * iDamage/(1+rangeMod*targetDist);
+                        iDamage = iDamage/(1+rangeMod*targetDist);
                     }
                         else if( penetCoef >= 1 )
                     {
-                        iDamage = 4 * iDamage/(1+rangeMod*targetDist);	
+                        iDamage = 2 * iDamage/(1+rangeMod*targetDist);
                     } 
 				if(isSniper(eAttacker) && level.teamBased != 1)
 				{
@@ -187,19 +187,16 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 	if (sMeansOfDeath == "MOD_EXPLOSIVE" && self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" )) {
 		iDamage = iDamage * 0.25;
 	}
+	if (eAttacker !=self && isPlayer(eAttacker)) {
+		eAttacker IPrintLn("Damage: "+ iDamage);
+	}
 
 	return int(iDamage);
 }
 
 DoMelee(eAttacker,iDamage)
 {
-	if (self islookingat(eAttacker)) {
-		iDamage = iDamage/4;
-		return iDamage;
-		
-	}
-	else
-	{
+	if (self fromBehind(eAttacker)) {
 		eAttacker maps\mp\gametypes\_hud_message::hintMessage( "Knifed!" );
 		score = maps\mp\gametypes\_rank::getScoreInfoValue( "kill" ) + 20;
 		eAttacker thread maps\mp\gametypes\_rank::giveRankXP( "kill", score );
@@ -207,6 +204,27 @@ DoMelee(eAttacker,iDamage)
 		eAttacker.score = self.pers["score"];
 		eAttacker notify ( "update_playerscore_hud" );
 		return iDamage;
+	}
+	else
+	{
+		iDamage = iDamage/4;
+		return iDamage;
+	}
+}
+
+fromBehind(eAttacker)
+{
+	attacker_vector=vectorscale(anglesToForward(eAttacker.angles),5);
+	attacker_point = self.origin + attacker_vector;
+	self_vector=vectorscale(anglesToForward(self.angles),5);
+	self_point = self.origin + self_vector;
+	pointDist = distance(attacker_point,self_point);
+	if (pointDist <= sqrt(50)) {
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -1149,7 +1167,7 @@ Medic()
 					self disableWeapons();
 				}
 				//self maps\mp\gametypes\_hud_message::hintMessage( "Healing" );
-				while(isDefined(self) && isDefined(PlayerToHeal) && isAlive(PlayerToHeal) && isAlive(self) && self UseButtonPressed() && distance(self getPlayerEyes(),PlayerToHeal  getPlayerEyes())< 60 && PlayerToHeal.health < maxhealth && PlayerToHeal != self && self islookingat(PlayerToHeal))
+				while(isDefined(self) && isDefined(PlayerToHeal) && isAlive(PlayerToHeal) && isAlive(self) && self UseButtonPressed() && distance(self.origin,PlayerToHeal.origin)< 60 && PlayerToHeal.health < maxhealth && PlayerToHeal != self && self islookingat(PlayerToHeal))
 				{
 					PlayerToHeal.health = PlayerToHeal.health + int(healthToAdd);
 			
@@ -1439,12 +1457,18 @@ projControl(entity)
 		//if is defined penetration then do penetration calculation
 		if(isdefined(entity.penetration) && entity.penetration==1)
 		{
-			self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
+			if (entity.weaponoforigin != "rpg_mp") {
+				self DoPenetration(entity,TracerForward, TracerBackAngles, 400);
+			}
+			
 		
 		}
 		else
 		{
-			self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
+			if (entity.weaponoforigin != "rpg_mp") {
+				self DoPenetration(entity,TracerForward, TracerBackAngles, 80);
+			}
+			
 		}
 	
 		if (isDefined(entity.weaponoforigin) && entity.weaponoforigin == "rpg_mp") {//RPG do damage through walls
@@ -1505,8 +1529,9 @@ DoPenetration(entity,TracerForward, angles, PenetrationDistance)
 	}
 	
 	rangeMod = getDvarfloat( level.wdr[ entity.weaponoforigin ] );
-	targetDist = distance(entity.origin, entity.pointoforigin)* 0.0254;
+	targetDist = distance(entity.origin, entity.owner getPlayerEyes())* 0.0254;
 	entity.damage = entity.damage/(1+rangeMod*targetDist);
+	//self IPrintLn(entity.damage);
 	finalBulletDamage = entity.damage - distance(traceorg, Btrace["position"] );
 	if (finalBulletDamage>=0)  {
 		vectafter = vectorscale( anglestoforward( angle ), PenetrationDistance );

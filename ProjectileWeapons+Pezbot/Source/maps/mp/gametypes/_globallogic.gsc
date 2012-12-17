@@ -4897,7 +4897,8 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 	if ( isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) &&  sMeansOfDeath != "MOD_MELEE")
 	{
 		sMeansOfDeath = "MOD_HEAD_SHOT";
-		iDamage = 10 * iDamage;
+//		iDamage = maps\mp\gametypes\_wdrmod::wdrmod( Attacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath );
+		//iDamage = 10 * iDamage;
 	}	
 	else if( !isHeadShot( sWeapon, sHitLoc, sMeansOfDeath ) && sMeansOfDeath != "MOD_MELEE" )
 	{
