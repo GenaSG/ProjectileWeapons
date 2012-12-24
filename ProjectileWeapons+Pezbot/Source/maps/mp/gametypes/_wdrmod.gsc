@@ -20,7 +20,7 @@ init()
 	precacheShader("progress_bar_fg");
 	precacheShader("headicon_dead");
 	precacheShader("progress_bar_fill");
-	precacheModel("projectile_tag");
+
 	
 //	brickexp = loadfx("test/brickblast_25");
 
@@ -187,7 +187,7 @@ wdrmod( eAttacker, iDamage, sWeapon, sHitLoc, sMeansOfDeath )
 	if (sMeansOfDeath == "MOD_EXPLOSIVE" && self maps\mp\gametypes\_class::cac_hasSpecialty( "specialty_armorvest" )) {
 		iDamage = iDamage * 0.25;
 	}
-	if (isDefined(eAttacker) && eAttacker !=self && isPlayer(eAttacker)) {
+	if (eAttacker !=self && isPlayer(eAttacker)) {
 		eAttacker IPrintLn("Damage: "+ iDamage);
 	}
 
@@ -1033,10 +1033,10 @@ AfterSpawn()
 	self thread MedicGUI();
 	}
 	self thread HealthGUI();
-//	if (getDvarfloat( "scr_test" ) == 1) {
+	if (getDvarfloat( "scr_test" ) == 1) {
 		self thread test();
 		
-//	}
+	}
 	
 }
 
@@ -1310,38 +1310,15 @@ SpawnProtection()
 }
 
 
-
 test()
 {
-	if (!isDefined(self.mover)) {
-		self.mover = spawn("script_origin", self.origin);
-		self.mover setmodel("projectile_tag");
-		self.mover.team = self.team;
-		//self thread moverUpdate(self.mover);
-	}
-	self thread SoundControl();
 	while(isAlive(self))
 	{
-		self waittill("weapon_fired");
-		level notify("gun_shot", self);
-		wait 0.000001;
-		
-	}
-	
-}
-
-SoundControl()
-{
-	while (isAlive(self)) {
-		level waittill("gun_shot", entity);
-		//self PlaySoundToPlayer( "frag_out", self );
-		if (entity != self) {
-			dist = distance(self.origin,entity.origin);
-			wait dist/12000;
-			IPrintLn(entity.name);
+		if (self UseButtonPressed())
+		{
+			self thread hitscanBullet(self GetPlayerAngles(),self getPlayerEyes());
 		}
-		
-		
+		wait(WeaponFireTime(self GetCurrentWeapon()));
 	}
 }
 
@@ -1350,40 +1327,28 @@ hitscanBullet(angles,startposition)
 	peneteffect = loadfx("impacts/20mm_default_impact");
 	timescale = 0.015;
 	timer = 0;
-	bulletSpeed = 30000;
+	bulletSpeed = 10000;
 	newangles = angles;
 	destScale = 0;
-	tracerlength = 800;
+	tracerlength = bulletSpeed * timescale;
 	tracervector = vectorscale(anglesToForward( newangles ), tracerlength);
 	oldorigin = startposition;
-	starttime = GetTime();
 	while (true) {
-		//gravity = 385 * timer*timer;
-		gravity = 0;
+		gravity = 385 * timer*timer;
 		timer +=timescale;
 		neworigin = oldorigin + tracervector - (0,0,gravity);
 		if (!BulletTracePassed(oldorigin,neworigin,true,self)) {
 			break;
 		}
-		thread playEffect(peneteffect,oldorigin,anglestoforward(newangles));
+		playfx(peneteffect,oldorigin,anglestoforward(newangles));
 		oldorigin = neworigin;
-		//while (GetTime()<GetTime()+timescale) {
-			wait 0.00001;
-		//}
+		wait(timescale);
 	}
-	endtime = GetTime() - starttime;
-	self IPrintLn(endtime);
-	self IPrintLn(timer);
 	hitTracer = BulletTrace(oldorigin,neworigin,true,undefined);
 	
 	playfx(peneteffect,hitTracer["position"],anglestoforward(VectorToangles(hitTracer["normal"])));
 	
 	
-}
-
-playEffect(peneteffect,oldorigin,angles)
-{
-	playfx(peneteffect,oldorigin,angles);
 }
 
 bulletSpawn(origin, angle, speed, owner, damage, penetration, model, effect, tracerprob, lifetime)
@@ -1416,14 +1381,14 @@ bulletwatcher()
 	while(isAlive(self))
 	{
 		self waittill("weapon_fired");
-		bullet = GetEntArray( "rocket","classname" );
+		bullet = GetEntArray( "grenade","classname" );
 		for(i=0;i<bullet.size;i++)
 		{
 			if (!isDefined(bullet[i].owner)) {
 				bullet[i].owner = getowner(bullet[i]);
 			}
 			
-			if(isdefined(bullet[i]) && isDefined(bullet[i].owner) &&  bullet[i].owner == self)
+			if(isdefined(bullet[i]) && bullet[i].model=="projectile_tag" && isDefined(bullet[i].owner) &&  bullet[i].owner == self)
 			{
 				if(!isDefined(bullet[i].timeout))
 				{
@@ -1469,6 +1434,7 @@ projControl(entity)
 		wait .015;
 		if (isDefined(entity)){
 			TraceEndPosition = entity.origin + TraceVector;
+			PhysicsExplosionSphere( entity.origin, 10, 8, 1 );
 			if(!BulletTracePassed(entity.origin, TraceEndPosition, true, undefined )){
 				prevorigin = entity.origin;
 				break;
