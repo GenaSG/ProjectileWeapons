@@ -25,6 +25,7 @@ event ModeDoFire()
 		Spread = Default.Spread;
 	else
 		Spread = FMin(Spread+0.02,0.12);
+	Spread=0;	
 	LastFireTime = Level.TimeSeconds;
 	Super.ModeDoFire();
 }

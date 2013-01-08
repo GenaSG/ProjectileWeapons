@@ -4,6 +4,12 @@
 class AssaultRifleTest extends AssaultRifle
     config(user);
 
+simulated event ClientStartFire(int Mode)
+{
+	Super.ClientStartFire(Mode);
+	
+}
+
 defaultproperties
 {
 
