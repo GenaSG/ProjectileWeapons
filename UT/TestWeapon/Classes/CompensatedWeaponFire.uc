@@ -5,9 +5,6 @@ var PlayerController LocalPlayer;
 var float Ping;
 var projectile Bullet;
 
-var() float HeadShotDamageMult;
-var() class<DamageType> DamageTypeHeadShot;
-var name FireAnims[3];
 
 
 function PostBeginPlay()
@@ -39,15 +36,17 @@ function DoTrace(Vector Start, Rotator Dir)
 				  Weapon.Hand * Weapon.EffectOffset.Y * Y +
 				  Weapon.EffectOffset.Z * Z);
 	
-    X = Vector(Dir);
+
 	Ping = Instigator.PlayerReplicationInfo.ping;
 	if (Ping > 0) {
 		TracerRange=Ping*Speed/1000;
+		X = Vector(Dir+Instigator.RotationRate*Ping);
 	}
 	else
 	{
 		TracerRange=1;
 	}
+	X = Vector(Dir);
 	Start=Start + Instigator.Velocity*Ping/1000;
     End = Start + TracerRange * X;
     Other = Weapon.Trace(HitLocation, HitNormal, End, Start, true);
@@ -59,7 +58,7 @@ function DoTrace(Vector Start, Rotator Dir)
 	Bullet=SpawnProjectile(HitLocation,Dir);
 	Bullet.Velocity=Vector(Dir)*Speed;
 	Bullet.Damage=DamageMax;
-	//Bullet.HeadShotDamageMult=2;
+
 }
 
 
@@ -79,31 +78,7 @@ defaultproperties
 	AmmoClass=class'ClassicSniperAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeClassicSniper'
-    DamageTypeHeadShot=class'DamTypeClassicHeadShot'
     DamageMin=60
     DamageMax=60
-    FireSound=Sound'NewWeaponSounds.NewSniperShot'
-    FireForce="NewSniperShot"  // jdf
-    TraceRange=17000
-    FireRate=1.33
-	FireAnimRate=1.5
-	
-    FlashEmitterClass=class'XEffects.AssaultMuzFlash1st'
-	
-    BotRefireRate=0.4
-    AimError=850
-	WarnTargetPct=+0.5
-	
-    HeadShotDamageMult=2.0
-	
-    ShakeOffsetMag=(X=-15.0,Y=0.0,Z=10.0)
-    ShakeOffsetRate=(X=-4000.0,Y=0.0,Z=4000.0)
-    ShakeOffsetTime=1.6
-    ShakeRotMag=(X=0.0,Y=0.0,Z=0.0)
-    ShakeRotRate=(X=0.0,Y=0.0,Z=0.0)
-    ShakeRotTime=2
-	
-    FireAnims(0)=Fire1
-    FireAnims(1)=Fire2
-    FireAnims(2)=Fire3
+
 }

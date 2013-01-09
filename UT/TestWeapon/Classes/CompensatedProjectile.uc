@@ -3,12 +3,13 @@ class CompensatedProjectile extends Projectile;
 
 var xEmitter Trail;
 var byte Bounces;
-var float DamageAtten;
+var float DamageAtten,HeadShotHeight;
 var sound ImpactSounds[6];
 var() float HeadShotDamageMult;
 var() class<DamageType> DamageTypeHeadShot;
-var SniperWallHitEffect S;
 var vector StartSpeed;
+var bool bHeadShots;
+var class<xEmitter> HitEffectClass;
 
 replication
 {
@@ -56,65 +57,26 @@ simulated function PostBeginPlay()
 simulated function ProcessTouch (Actor Other, vector HitLocation)
 {
 	local vector X;
-	local Pawn HeadShotPawn;
 	X = Normal(Velocity);
 	if ( Other != None && (Other != Instigator) )
     {
         if ( !Other.bWorldGeometry )
         {
-            if (Vehicle(Other) != None)
-                HeadShotPawn = Vehicle(Other).CheckForHeadShot(HitLocation, X, 1.0);
-			
-            if (HeadShotPawn != None)
-                HeadShotPawn.TakeDamage(Damage * HeadShotDamageMult, Instigator, HitLocation, MomentumTransfer*X, DamageTypeHeadShot);
- 			else if ( (Pawn(Other) != None) && Pawn(Other).IsHeadShot(HitLocation, X, 1.0))
-                Other.TakeDamage(Damage * HeadShotDamageMult, Instigator, HitLocation, MomentumTransfer*X, DamageTypeHeadShot);
-            else
-                Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer*X, MyDamageType);
-        }
-		/*
-        else
-			HitLocation = HitLocation + 2.0 * HitNormal;
-    }
-    else
-    {
-        HitLocation = End;
-        HitNormal = Normal(Start - End);
-    }
-	
-    if ( (HitNormal != Vect(0,0,0)) && (HitScanBlockingVolume(Other) == None) )
-    {
-		S = Weapon.Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-1 * HitNormal));
-		if ( S != None )
-			S.FireStart = Start;
-	}
-	*/
-/*
-    if ( (FlakChunk(Other) == None) && ((Physics == PHYS_Falling) || (Other != Instigator)) )
-    {
-        speed = VSize(Velocity);
-        if ( speed > 200 )
-        {
-            if ( Role == ROLE_Authority )
-			{
-				if ( Instigator == None || Instigator.Controller == None )
-					Other.SetDelayedDamageInstigatorController( InstigatorController );
-				
-                Other.TakeDamage( Max(5, Damage - DamageAtten*FMax(0,(default.LifeSpan - LifeSpan - 1))), Instigator, HitLocation,
-								 (MomentumTransfer * Velocity/speed), MyDamageType );
-			}
-        }*/
+
+           	 if ( Other.IsA('Pawn') && (HitLocation.Z - Other.Location.Z > HeadShotHeight * Other.CollisionHeight) && bHeadShots )
+                Other.TakeDamage(HeadShotDamageMult * damage, instigator,HitLocation,
+                    (MomentumTransfer * Normal(Velocity)), DamageTypeHeadShot );
+            else             
+                Other.TakeDamage(damage, instigator,HitLocation,
+                    (MomentumTransfer * Normal(Velocity)), MyDamageType );
+        
+		}
         Destroy();
     }
 }
 
 simulated function Landed( Vector HitNormal )
 {
-/*
-	if (VSize(Velocity) > VSize(StartSpeed/2)) {
-		S = Spawn(class'SniperWallHitEffect',,, Location, rotator(-1 * HitNormal));
-	}
-*/
 	Destroy();
 }
 
@@ -123,7 +85,7 @@ simulated function HitWall( vector HitNormal, actor Wall )
 	local projectile Rico;
 	Velocity = Velocity*0.65;
 	if (VSize(Velocity) > VSize(StartSpeed/2)) {
-		S = Spawn(class'SniperWallHitEffect',,, Location, rotator(-1 * HitNormal));
+		Spawn(HitEffectClass,,, Location, rotator(-1 * HitNormal));
 	}
     if ( !Wall.bStatic && !Wall.bWorldGeometry
 		&& ((Mover(Wall) == None) || Mover(Wall).bDamageTriggered) )
@@ -138,7 +100,7 @@ simulated function HitWall( vector HitNormal, actor Wall )
         return;
     }
 	
-	if (Bounces > 0)
+	if (Bounces > 0 && (Velocity dot HitNormal) <0.5)
     {
 		Rico=Spawn(class'FlakChunk',,,Location,rotator(-1 * HitNormal));
         Rico.Velocity = 0.65 * (Velocity - 2.0*HitNormal*(Velocity dot HitNormal));
@@ -170,8 +132,13 @@ simulated function PhysicsVolumeChange( PhysicsVolume Volume )
 
 defaultproperties
 {
+	HitEffectClass=class'SniperWallHitEffect'
+	HeadShotDamageMult=2.0
+	DamageTypeHeadShot=class'DamTypeClassicHeadShot'
+	HeadShotHeight=0.62
     Style=STY_Alpha
     ScaleGlow=1.0
+	bHeadShots=true
     DrawType=DT_StaticMesh
     StaticMesh=StaticMesh'WeaponStaticMesh.FlakChunk'
     MyDamageType=class'DamTypeFlakChunk'
@@ -180,13 +147,13 @@ defaultproperties
     MaxSpeed=2700.000000
     Damage=13
     DamageAtten=5.0 // damage reduced per second from when the chunk was fired
-    MomentumTransfer=10000
+    MomentumTransfer=1
     LifeSpan=2.7
     bBounce=true
     Bounces=1
     NetPriority=2.500000
     AmbientGlow=254
-    DrawScale=14.0
+    DrawScale=1.0
     CullDistance=+3000.0
 	ImpactSounds(0)=sound'XEffects.Impact4Snd'
 	ImpactSounds(1)=sound'XEffects.Impact6Snd'
