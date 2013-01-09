@@ -1,9 +1,8 @@
-class ClientWeaponFire extends InstantFire;
+class CompensatedWeaponFire extends InstantFire;
 
 var float Speed;
 var PlayerController LocalPlayer;
 var float Ping;
-var array<GameInfo.PlayerResponseLine>  Players;
 var projectile Bullet;
 
 var() float HeadShotDamageMult;
@@ -22,11 +21,10 @@ event ModeDoFire()
 	Super.ModeDoFire();
 }
 
-simulated function DoTrace(Vector Start, Rotator Dir)
+function DoTrace(Vector Start, Rotator Dir)
 {
     local Vector X,Y,Z, End, HitLocation, HitNormal, ArcEnd;
     local Actor Other;
-    local Pawn HeadShotPawn;
 	local int TracerRange;
 	
     Weapon.GetViewAxes(X, Y, Z);
@@ -53,29 +51,15 @@ simulated function DoTrace(Vector Start, Rotator Dir)
 	Start=Start + Instigator.Velocity*Ping/1000;
     End = Start + TracerRange * X;
     Other = Weapon.Trace(HitLocation, HitNormal, End, Start, true);
-    if ( Other != None && (Other != Instigator) )
-    {
-        if ( !Other.bWorldGeometry )
-        {
-            if (Vehicle(Other) != None)
-                HeadShotPawn = Vehicle(Other).CheckForHeadShot(HitLocation, X, 1.0);
-			
-            if (HeadShotPawn != None)
-                HeadShotPawn.TakeDamage(DamageMax * HeadShotDamageMult, Instigator, HitLocation, Momentum*X, DamageTypeHeadShot);
- 			else if ( (Pawn(Other) != None) && Pawn(Other).IsHeadShot(HitLocation, X, 1.0))
-                Other.TakeDamage(DamageMax * HeadShotDamageMult, Instigator, HitLocation, Momentum*X, DamageTypeHeadShot);
-            else
-                Other.TakeDamage(DamageMax, Instigator, HitLocation, Momentum*X, DamageType);
-        }
-        else
-			HitLocation = HitLocation + 2.0 * HitNormal;
-    }
-    else
-    {
-        HitLocation = End;
+
+	if (Other==None) {
+		HitLocation = End;
         HitNormal = Normal(Start - End);
-    }
-	SpawnProjectile(HitLocation,Dir);
+	}
+	Bullet=SpawnProjectile(HitLocation,Dir);
+	Bullet.Velocity=Vector(Dir)*Speed;
+	Bullet.Damage=DamageMax;
+	//Bullet.HeadShotDamageMult=2;
 }
 
 
@@ -83,22 +67,13 @@ function projectile SpawnProjectile(Vector Start, rotator Dir)
 {
 	local projectile B;
 	B=Weapon.Spawn(ProjectileClass,Instigator.Controller,,Start,Dir);
-	B.Velocity=Vector(Dir)*Speed;
-	B.Damage=DamageMax;
 	return B;
 }
 
-function projectile ServerSpawnProjectile(projectile B)
-{
-	local projectile P;
-	Spawn(ProjectileClass,Instigator.Controller,,B.Location,B.Rotation);
-	B.Destroy();
-	return P;
-}
 defaultproperties
 {
 	Speed=20000
-	ProjectileClass=class'ClientProjectile';
+	ProjectileClass=class'CompensatedProjectile';
 	
 	
 	AmmoClass=class'ClassicSniperAmmo'

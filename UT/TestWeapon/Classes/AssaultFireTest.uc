@@ -1,4 +1,4 @@
-class AssaultFireTest extends ClientWeaponFire;
+class AssaultFireTest extends CompensatedWeaponFire;
 
 var float LastFireTime;
 var float ClickTime;
@@ -15,7 +15,6 @@ function FlashMuzzleFlash()
     local rotator r;
     r.Roll = Rand(65536);
     Weapon.SetBoneRotation('Bone_Flash', r, 0, 1.f);
-	//ClientDoFireEffect();
     Super.FlashMuzzleFlash();
 }
 
@@ -25,7 +24,6 @@ event ModeDoFire()
 		Spread = Default.Spread;
 	else
 		Spread = FMin(Spread+0.02,0.12);
-	Spread=0;	
 	LastFireTime = Level.TimeSeconds;
 	Super.ModeDoFire();
 }
@@ -45,12 +43,44 @@ simulated function bool AllowFire()
     }
 }
 
+simulated function DoTrace(Vector Start, Rotator Dir)
+{
+	Super.DoTrace(Start,Dir);
+	Bullet.Damage=DamageMax;
+	Bullet.MyDamageType=DamageType;
+}
+
+function StartBerserk()
+{
+    DamageMin = default.DamageMin * 1.33;
+    DamageMax = default.DamageMax * 1.33;
+}
+
+function StopBerserk()
+{
+    DamageMin = default.DamageMin;
+    DamageMax = default.DamageMax;
+}
+
+function StartSuperBerserk()
+{
+    FireRate = default.FireRate * 1.5/Level.GRI.WeaponBerserk;
+    FireAnimRate = default.FireAnimRate * 0.667 * Level.GRI.WeaponBerserk;
+    DamageMin = default.DamageMin * 1.5;
+    DamageMax = default.DamageMax * 1.5;
+    if (AssaultRifle(Weapon) != None && AssaultRifle(Weapon).bDualMode)
+    	FireRate *= 0.55;
+}
+
 defaultproperties
 {
     AmmoClass=class'AssaultAmmo'
     AmmoPerFire=1
-
+    DamageType=class'DamTypeAssaultBullet'
+    DamageMin=7
+    DamageMax=7
     bPawnRapidFireAnim=true
+    Momentum=0.0
 
     FireAnim=Fire
     FireEndAnim=None
@@ -62,7 +92,7 @@ defaultproperties
     FireSound=Sound'WeaponSounds.AssaultRifle.AssaultRifleFire'
     FireForce="AssaultRifleFire"   // jdf
 
-	Spread=0
+	Spread=0.020
     SpreadStyle=SS_Random
     PreFireTime=0.0
     FireRate=0.16
