@@ -20,16 +20,18 @@ function FlashMuzzleFlash()
     Super.FlashMuzzleFlash();
 }
 
+
 function DoTrace(Vector Start, Rotator Dir)
 {
 	Super.DoTrace(Start,Dir);
 	Bullet.Damage=DamageMax;
 	Bullet.MyDamageType=DamageType;
 	Bullet.Velocity=Vector(Dir)*Speed;
+	CompensatedProjectile(Bullet).HitEffectClass=Class'XEffects.SmallExplosion';
 }
 
 
-function PlayFiring()
+simulated function PlayFiring()
 {
 	Weapon.PlayAnim(FireAnims[Rand(3)], FireAnimRate, TweenTime);
     Weapon.PlayOwnedSound(FireSound,SLOT_Interact,TransientSoundVolume,,,Default.FireAnimRate/FireAnimRate,false);

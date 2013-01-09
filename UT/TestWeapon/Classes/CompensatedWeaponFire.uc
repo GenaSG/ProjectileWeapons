@@ -7,47 +7,23 @@ var projectile Bullet;
 
 
 
-function PostBeginPlay()
+simulated function DoTrace(Vector Start, Rotator Dir)
 {
-	Super.PostBeginPlay();
-}
-
-
-event ModeDoFire()
-{
-	Super.ModeDoFire();
-}
-
-function DoTrace(Vector Start, Rotator Dir)
-{
-    local Vector X,Y,Z, End, HitLocation, HitNormal, ArcEnd;
+    local vector X,End, HitLocation, HitNormal;
     local Actor Other;
 	local int TracerRange;
-	
-    Weapon.GetViewAxes(X, Y, Z);
-    if ( Weapon.WeaponCentered() )
-        ArcEnd = (Instigator.Location +
-				  Weapon.EffectOffset.X * X +
-				  1.5 * Weapon.EffectOffset.Z * Z);
-	else
-        ArcEnd = (Instigator.Location +
-				  Instigator.CalcDrawOffset(Weapon) +
-				  Weapon.EffectOffset.X * X +
-				  Weapon.Hand * Weapon.EffectOffset.Y * Y +
-				  Weapon.EffectOffset.Z * Z);
-	
 
 	Ping = Instigator.PlayerReplicationInfo.ping;
 	if (Ping > 0) {
-		TracerRange=Ping*Speed/1000;
-		X = Vector(Dir+Instigator.RotationRate*Ping);
+		TracerRange=Ping*Speed/2000;
+		X = Vector(Dir+Instigator.RotationRate*Ping/2000);
 	}
 	else
 	{
+		X = Vector(Dir);
 		TracerRange=1;
 	}
-	X = Vector(Dir);
-	Start=Start + Instigator.Velocity*Ping/1000;
+	Start=Start + Instigator.Velocity*Ping/2000;
     End = Start + TracerRange * X;
     Other = Weapon.Trace(HitLocation, HitNormal, End, Start, true);
 
