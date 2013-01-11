@@ -9,7 +9,6 @@ var() float HeadShotDamageMult;
 var() class<DamageType> DamageTypeHeadShot;
 var vector StartSpeed;
 var bool bHeadShots;
-var class<xEmitter> HitEffectClass;
 
 replication
 {
@@ -85,7 +84,7 @@ simulated function HitWall( vector HitNormal, actor Wall )
 	local projectile Rico;
 	Velocity = Velocity*0.65;
 	if (VSize(Velocity) > VSize(StartSpeed/2)) {
-		Spawn(HitEffectClass,,, Location, rotator(-1 * HitNormal));
+		Spawn(class'SniperWallHitEffect',,, Location, rotator(-1 * HitNormal));
 	}
     if ( !Wall.bStatic && !Wall.bWorldGeometry
 		&& ((Mover(Wall) == None) || Mover(Wall).bDamageTriggered) )
@@ -132,7 +131,6 @@ simulated function PhysicsVolumeChange( PhysicsVolume Volume )
 
 defaultproperties
 {
-	HitEffectClass=class'SniperWallHitEffect'
 	HeadShotDamageMult=2.0
 	DamageTypeHeadShot=class'DamTypeClassicHeadShot'
 	HeadShotHeight=0.62

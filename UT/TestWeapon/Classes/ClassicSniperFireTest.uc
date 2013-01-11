@@ -27,7 +27,6 @@ function DoTrace(Vector Start, Rotator Dir)
 	Bullet.Damage=DamageMax;
 	Bullet.MyDamageType=DamageType;
 	Bullet.Velocity=Vector(Dir)*Speed;
-	CompensatedProjectile(Bullet).HitEffectClass=Class'XEffects.SmallExplosion';
 }
 
 
