@@ -16,14 +16,15 @@ simulated function DoTrace(Vector Start, Rotator Dir)
 	Ping = Instigator.PlayerReplicationInfo.ping;
 	if (Ping > 0) {
 		TracerRange=Ping*Speed/2000;
-		X = Vector(Dir+Instigator.RotationRate*Ping/2000);
+	//	X = Vector(Dir+Instigator.RotationRate*Ping/2000);
 	}
 	else
 	{
-		X = Vector(Dir);
+	//	X = Vector(Dir);
 		TracerRange=1;
 	}
-	Start=Start + Instigator.Velocity*Ping/2000;
+	X = Vector(Dir);
+	//Start=Start + Instigator.Velocity*Ping/2000;
     End = Start + TracerRange * X;
     Other = Weapon.Trace(HitLocation, HitNormal, End, Start, true);
 

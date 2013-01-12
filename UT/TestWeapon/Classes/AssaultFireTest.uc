@@ -20,10 +20,10 @@ function FlashMuzzleFlash()
 
 event ModeDoFire()
 {
-	if ( Level.TimeSeconds - LastFireTime > 0.5 )
+//	if ( Level.TimeSeconds - LastFireTime > Default.FireRate*3 )
 		Spread = Default.Spread;
-	else
-		Spread = FMin(Spread+0.02,0.12);
+//	else
+//		Spread = FMin(Spread+0.02,0.12);
 	LastFireTime = Level.TimeSeconds;
 	Super.ModeDoFire();
 }
@@ -77,8 +77,8 @@ defaultproperties
     AmmoClass=class'AssaultAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeAssaultBullet'
-    DamageMin=7
-    DamageMax=7
+    DamageMin=30
+    DamageMax=30
     bPawnRapidFireAnim=true
     Momentum=0.0
 
@@ -92,7 +92,7 @@ defaultproperties
     FireSound=Sound'WeaponSounds.AssaultRifle.AssaultRifleFire'
     FireForce="AssaultRifleFire"   // jdf
 
-	Spread=0.020
+	Spread=0.02
     SpreadStyle=SS_Random
     PreFireTime=0.0
     FireRate=0.16
