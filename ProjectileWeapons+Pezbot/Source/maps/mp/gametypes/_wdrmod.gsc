@@ -20,6 +20,7 @@ init()
 	precacheShader("progress_bar_fg");
 	precacheShader("headicon_dead");
 	precacheShader("progress_bar_fill");
+	maps\mp\gametypes\_projectileweapons::init();
 
 	
 //	brickexp = loadfx("test/brickblast_25");
@@ -1314,11 +1315,12 @@ test()
 {
 	while(isAlive(self))
 	{
-		if (self UseButtonPressed())
-		{
-			self thread hitscanBullet(self GetPlayerAngles(),self getPlayerEyes());
-		}
-		wait(WeaponFireTime(self GetCurrentWeapon()));
+//		if (self UseButtonPressed())
+//		{
+		self waittill("weapon_fired");
+		maps\mp\gametypes\_projectileweapons::beginFire();
+//		}
+		wait(0.1);
 	}
 }
 
