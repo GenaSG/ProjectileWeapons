@@ -1,21 +1,26 @@
-
-class CompensatedProjectile extends Projectile;
+//=============================================================================
+// FlakChunk.
+//=============================================================================
+class ClientProjectile extends Projectile;
 
 var xEmitter Trail;
 var byte Bounces;
-var float DamageAtten,HeadShotHeight;
+var float DamageAtten;
 var sound ImpactSounds[6];
-var() float HeadShotDamageMult;
-var() class<DamageType> DamageTypeHeadShot;
-var vector StartSpeed;
-var bool bHeadShots;
 
 replication
 {
     reliable if (bNetInitial && Role == ROLE_Authority)
         Bounces;
+	reliable if (Role<ROLE_Authority)
+		TestFunction;
 }
-
+function TestFunction()
+{
+	if (Role==ROLE_Authority) {
+		Spawn(class'SniperWallHitEffect',,, Location, (-1 * Rotation));
+	}
+}
 simulated function Destroyed()
 {
     if (Trail !=None) Trail.mRegen=False;
@@ -25,7 +30,7 @@ simulated function Destroyed()
 simulated function PostBeginPlay()
 {
     local float r;
-	StartSpeed=Velocity;
+	
     if ( Level.NetMode != NM_DedicatedServer )
     {
         if ( !PhysicsVolume.bWaterVolume )
@@ -35,7 +40,7 @@ simulated function PostBeginPlay()
         }
 		
     }
-	SetPhysics(PHYS_Falling);
+	TestFunction();
     Velocity = Vector(Rotation) * (Speed);
     if (PhysicsVolume.bWaterVolume)
         Velocity *= 0.65;
@@ -55,37 +60,32 @@ simulated function PostBeginPlay()
 
 simulated function ProcessTouch (Actor Other, vector HitLocation)
 {
-	local vector X;
-	X = Normal(Velocity);
-	if ( Other != None && (Other != Instigator) )
+    if ( (FlakChunk(Other) == None) && ((Physics == PHYS_Falling) || (Other != Instigator)) )
     {
-        if ( !Other.bWorldGeometry )
+        speed = VSize(Velocity);
+        if ( speed > 200 )
         {
-
-           	 if ( Other.IsA('Pawn') && (HitLocation.Z - Other.Location.Z > HeadShotHeight * Other.CollisionHeight) && bHeadShots )
-                Other.TakeDamage(HeadShotDamageMult * damage, instigator,HitLocation,
-                    (MomentumTransfer * Normal(Velocity)), DamageTypeHeadShot );
-            else             
-                Other.TakeDamage(damage, instigator,HitLocation,
-                    (MomentumTransfer * Normal(Velocity)), MyDamageType );
-        
-		}
+            if ( Role == ROLE_Authority )
+			{
+				if ( Instigator == None || Instigator.Controller == None )
+					Other.SetDelayedDamageInstigatorController( InstigatorController );
+				
+                Other.TakeDamage( Max(5, Damage - DamageAtten*FMax(0,(default.LifeSpan - LifeSpan - 1))), Instigator, HitLocation,
+								 (MomentumTransfer * Velocity/speed), MyDamageType );
+			}
+        }
         Destroy();
     }
 }
 
 simulated function Landed( Vector HitNormal )
 {
-	Destroy();
+    SetPhysics(PHYS_None);
+    LifeSpan = 1.0;
 }
 
 simulated function HitWall( vector HitNormal, actor Wall )
 {
-	local projectile Rico;
-	Velocity = Velocity*0.65;
-	if (VSize(Velocity) > VSize(StartSpeed/2)) {
-		Spawn(class'SniperWallHitEffect',,, Location, rotator(-1 * HitNormal));
-	}
     if ( !Wall.bStatic && !Wall.bWorldGeometry
 		&& ((Mover(Wall) == None) || Mover(Wall).bDamageTriggered) )
     {
@@ -99,25 +99,25 @@ simulated function HitWall( vector HitNormal, actor Wall )
         return;
     }
 	
-	if (Bounces > 0 && (Velocity dot HitNormal) <0.5)
+    SetPhysics(PHYS_Falling);
+	if (Bounces > 0)
     {
-		Rico=Spawn(class'FlakChunk',,,Location,rotator(-1 * HitNormal));
-        Rico.Velocity = 0.65 * (Velocity - 2.0*HitNormal*(Velocity dot HitNormal));
-		Rico.SetPhysics(PHYS_Falling);
-		Rico.LifeSpan=0.5;
-		Destroy();
+		if ( !Level.bDropDetail && (FRand() < 0.4) )
+			Playsound(ImpactSounds[Rand(6)]);
+		
+        Velocity = 0.65 * (Velocity - 2.0*HitNormal*(Velocity dot HitNormal));
+        Bounces = Bounces - 1;
         return;
     }
-
-	bBounce = true;
+	bBounce = false;
     if (Trail != None)
     {
         Trail.mRegen=False;
         Trail.SetPhysics(PHYS_None);
+        //Trail.mRegenRange[0] = 0.0;//trail.mRegenRange[0] * 0.6;
+        //Trail.mRegenRange[1] = 0.0;//trail.mRegenRange[1] * 0.6;
     }
-		Destroy();
 }
-
 
 simulated function PhysicsVolumeChange( PhysicsVolume Volume )
 {
@@ -131,27 +131,23 @@ simulated function PhysicsVolumeChange( PhysicsVolume Volume )
 
 defaultproperties
 {
-	HeadShotDamageMult=2.0
-	DamageTypeHeadShot=class'DamTypeClassicHeadShot'
-	HeadShotHeight=0.62
     Style=STY_Alpha
     ScaleGlow=1.0
-	bHeadShots=true
     DrawType=DT_StaticMesh
     StaticMesh=StaticMesh'WeaponStaticMesh.FlakChunk'
     MyDamageType=class'DamTypeFlakChunk'
 	FluidSurfaceShootStrengthMod=1.f
-    speed=2500.000000
-    MaxSpeed=2700.000000
+    speed=20000
+    MaxSpeed=20000
     Damage=13
     DamageAtten=5.0 // damage reduced per second from when the chunk was fired
-    MomentumTransfer=1
+    MomentumTransfer=10000
     LifeSpan=2.7
     bBounce=true
     Bounces=1
     NetPriority=2.500000
     AmbientGlow=254
-    DrawScale=1.0
+    DrawScale=14.0
     CullDistance=+3000.0
 	ImpactSounds(0)=sound'XEffects.Impact4Snd'
 	ImpactSounds(1)=sound'XEffects.Impact6Snd'

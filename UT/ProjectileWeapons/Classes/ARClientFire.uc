@@ -1,4 +1,4 @@
-class AssaultFireTest extends CompensatedWeaponFire;
+class ARClientFire extends ClientWeaponFire;
 
 var float LastFireTime;
 var float ClickTime;
@@ -43,12 +43,6 @@ simulated function bool AllowFire()
     }
 }
 
-simulated function DoTrace(Vector Start, Rotator Dir)
-{
-	Super.DoTrace(Start,Dir);
-	Bullet.Damage=DamageMax;
-	Bullet.MyDamageType=DamageType;
-}
 
 function StartBerserk()
 {

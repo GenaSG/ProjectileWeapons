@@ -43,14 +43,34 @@ function PostBeginPlay()
 	Super.PostBeginPlay();
 }
 
+ 
 
 */
+
+simulated function BeginPlay()
+{
+	local xPickupBase P;
+	local Pickup L;
+	
+	foreach AllActors(class'xPickupBase', P)
+	{
+		P.bHidden = true;
+		if (P.myEmitter != None)
+			P.myEmitter.Destroy();
+	}
+	foreach AllActors(class'Pickup', L)
+	if ( L.IsA('WeaponLocker') )
+		L.GotoState('Disabled');
+	
+	Super.BeginPlay();
+}
+
 function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
 {
 
     local xPickupBase B;
     local Pickup P;
-	if (Other.Class != class'ShieldPack') {
+	//if (Other.Class != class'ShieldPack') {
 		B = xPickupBase(Other);
 		if ( B != none )
 			B.bHidden = true;
@@ -58,7 +78,7 @@ function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
 		P = Pickup(Other);
 		if ( P != none )
 			P.Destroy();
-	}
+	//}
 
 
 

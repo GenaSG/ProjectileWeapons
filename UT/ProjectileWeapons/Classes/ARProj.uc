@@ -13,7 +13,7 @@ simulated event ClientStartFire(int Mode)
 defaultproperties
 {
 
-    ItemName="Assault Rifle"
+    ItemName="Assault Rifle Proj"
 
 
     FireModeClass(0)=ARProjFire

@@ -4,7 +4,7 @@ class SRProj extends ClassicSniperRifle
 defaultproperties
 {
 
-    ItemName="Sniper Rifle TEST"
+    ItemName="Sniper Rifle Proj"
     FireModeClass(0)=SRProjFire
 }
 
