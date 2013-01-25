@@ -50,9 +50,10 @@ defaultproperties
     FireSound=Sound'NewWeaponSounds.NewSniperShot'
     FireForce="NewSniperShot"  // jdf
     TraceRange=17000
-    FireRate=1.33
+    FireRate=0.6
 	FireAnimRate=1.5
-
+	Spread=0.002
+	SpreadStyle=SS_Random
     FlashEmitterClass=class'XEffects.AssaultMuzFlash1st'
 
     BotRefireRate=0.4
@@ -64,8 +65,8 @@ defaultproperties
     ShakeOffsetMag=(X=-15.0,Y=0.0,Z=10.0)
     ShakeOffsetRate=(X=-4000.0,Y=0.0,Z=4000.0)
     ShakeOffsetTime=1.6
-    ShakeRotMag=(X=0.0,Y=0.0,Z=0.0)
-    ShakeRotRate=(X=0.0,Y=0.0,Z=0.0)
+    ShakeRotMag=(X=-15.0,Y=0.0,Z=10.0)
+    ShakeRotRate=(X=-4000.0,Y=0.0,Z=4000.0)
     ShakeRotTime=2
 
     FireAnims(0)=Fire1

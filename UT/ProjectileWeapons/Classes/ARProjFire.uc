@@ -17,17 +17,22 @@ function FlashMuzzleFlash()
     Weapon.SetBoneRotation('Bone_Flash', r, 0, 1.f);
     Super.FlashMuzzleFlash();
 }
-
+/*
 event ModeDoFire()
 {
-//	if ( Level.TimeSeconds - LastFireTime > Default.FireRate*3 )
+	if ( Level.TimeSeconds - LastFireTime > Default.FireRate*2 )
 		Spread = Default.Spread;
-//	else
-//		Spread = FMin(Spread+0.02,0.12);
+	else
+	{
+		Spread = Spread+0.4*Default.Spread;
+	if (Spread > 3*Default.Spread) {
+		Spread=3*Default.Spread;
+	}
+	}
 	LastFireTime = Level.TimeSeconds;
 	Super.ModeDoFire();
 }
-
+*/
 simulated function bool AllowFire()
 {
     if (Super.AllowFire())
@@ -77,8 +82,8 @@ defaultproperties
     AmmoClass=class'AssaultAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeAssaultBullet'
-    DamageMin=30
-    DamageMax=30
+    DamageMin=20
+    DamageMax=20
     bPawnRapidFireAnim=true
     Momentum=0.0
 
@@ -93,9 +98,8 @@ defaultproperties
     FireForce="AssaultRifleFire"   // jdf
 
 	Spread=0.02
-    SpreadStyle=SS_Random
     PreFireTime=0.0
-    FireRate=0.16
+    FireRate=0.1
     bModeExclusive=true
 
     BotRefireRate=0.99

@@ -2,10 +2,41 @@ class CompensatedWeaponFire extends InstantFire;
 
 var float Speed;
 var PlayerController LocalPlayer;
-var float Ping;
+var float Ping, LastFireTime;
+var int ShotCount;
 var projectile Bullet;
 
 
+
+
+function DoFireEffect()
+{
+    local Vector StartTrace;
+    local Rotator R, Aim;
+	
+    Instigator.MakeNoise(1.0);
+	
+    // the to-hit trace always starts right in front of the eye
+    StartTrace = Instigator.Location + Instigator.EyePosition();
+    Aim = AdjustAim(StartTrace, AimError);
+	
+	if ( Level.TimeSeconds - LastFireTime > Default.FireRate*2 ){
+		Spread = Default.Spread;
+		ShotCount=0;
+	}
+	else
+	{
+		ShotCount++;
+		Spread = Spread*ShotCount;
+		if (Spread > 5*Default.Spread) {
+			Spread=5*Default.Spread;
+		}
+		
+	}
+	R = rotator(vector(Aim) + VRand()*FRand()*Spread);
+    DoTrace(StartTrace, R);
+	LastFireTime = Level.TimeSeconds;
+}
 
 simulated function DoTrace(Vector Start, Rotator Dir)
 {
@@ -57,5 +88,11 @@ defaultproperties
     DamageType=class'DamTypeClassicSniper'
     DamageMin=60
     DamageMax=60
+	ShakeOffsetMag=(X=-15.0,Y=0.0,Z=10.0)
+    ShakeOffsetRate=(X=-4000.0,Y=0.0,Z=4000.0)
+    ShakeOffsetTime=1.6
+    ShakeRotMag=(X=-15.0,Y=0.0,Z=10.0)
+    ShakeRotRate=(X=-4000.0,Y=0.0,Z=4000.0)
+    ShakeRotTime=2
 
 }

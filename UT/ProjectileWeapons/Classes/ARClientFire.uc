@@ -10,6 +10,38 @@ function InitEffects()
 		Weapon.AttachToBone(FlashEmitter, 'tip');
 }
 
+
+simulated function ClientTraceHit(vector Start,rotator Dir)
+{
+	local vector End,HitLocation,HitNormal;
+	local actor Other;
+	//Start=Location;
+	End=Start+40000*vector(Dir);
+	Other=Trace(HitLocation, HitNormal, End, Start, true);
+	//Spawn(class'ClientProjectile',Instigator.Controller,,Start,Rotation);
+	if (Other.Role<ROLE_Authority) {
+		//Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-HitNormal));
+		ServerTraceHit(Other,Start,HitLocation,HitNormal);
+	}
+}
+
+simulated function ServerTraceHit(actor Other,vector Start,vector Hit_Location,vector Hit_Normal)
+{
+	local vector HitLocation,HitNormal;
+	local actor Target;
+	Other.TakeDamage(40, instigator,Hit_Location,
+					 (-1000 * Hit_Normal), class'DamTypeClassicSniper' );
+	/*
+	 Target=Trace(HitLocation, HitNormal, Other.Location, Start, true);
+	 if (Target.Role==ROLE_Authority) {
+	 Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-HitNormal));
+	 }
+	 */
+	
+}
+
+
+
 function FlashMuzzleFlash()
 {
     local rotator r;
@@ -17,17 +49,22 @@ function FlashMuzzleFlash()
     Weapon.SetBoneRotation('Bone_Flash', r, 0, 1.f);
     Super.FlashMuzzleFlash();
 }
-
-event ModeDoFire()
-{
-//	if ( Level.TimeSeconds - LastFireTime > Default.FireRate*3 )
-		Spread = Default.Spread;
-//	else
-//		Spread = FMin(Spread+0.02,0.12);
-	LastFireTime = Level.TimeSeconds;
-	Super.ModeDoFire();
-}
-
+/*
+ event ModeDoFire()
+ {
+ if ( Level.TimeSeconds - LastFireTime > Default.FireRate*2 )
+ Spread = Default.Spread;
+ else
+ {
+ Spread = Spread+0.4*Default.Spread;
+ if (Spread > 3*Default.Spread) {
+ Spread=3*Default.Spread;
+ }
+ }
+ LastFireTime = Level.TimeSeconds;
+ Super.ModeDoFire();
+ }
+ */
 simulated function bool AllowFire()
 {
     if (Super.AllowFire())
@@ -43,6 +80,12 @@ simulated function bool AllowFire()
     }
 }
 
+simulated function DoTrace(Vector Start, Rotator Dir)
+{
+	Super.DoTrace(Start,Dir);
+	//Bullet.Damage=DamageMax;
+	//Bullet.MyDamageType=DamageType;
+}
 
 function StartBerserk()
 {
@@ -71,34 +114,34 @@ defaultproperties
     AmmoClass=class'AssaultAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeAssaultBullet'
-    DamageMin=30
-    DamageMax=30
+    DamageMin=20
+    DamageMax=20
     bPawnRapidFireAnim=true
     Momentum=0.0
-
+	
     FireAnim=Fire
     FireEndAnim=None
     FireLoopAnim=None
     FireAnimRate=1.0
-
+	
     FlashEmitterClass=class'XEffects.AssaultMuzFlash1st'
-
+	
     FireSound=Sound'WeaponSounds.AssaultRifle.AssaultRifleFire'
     FireForce="AssaultRifleFire"   // jdf
-
+	
 	Spread=0.02
-    SpreadStyle=SS_Random
+    SpreadStyle=SS_Line
     PreFireTime=0.0
-    FireRate=0.16
+    FireRate=0.1
     bModeExclusive=true
-
+	
     BotRefireRate=0.99
     AimError=800
-
+	
     ShakeOffsetMag=(X=1.0,Y=1.0,Z=1.0)
     ShakeOffsetRate=(X=1000.0,Y=1000.0,Z=1000.0)
     ShakeOffsetTime=2
     ShakeRotMag=(X=50.0,Y=50.0,Z=50.0)
     ShakeRotRate=(X=10000.0,Y=10000.0,Z=10000.0)
     ShakeRotTime=2
-}
+	}

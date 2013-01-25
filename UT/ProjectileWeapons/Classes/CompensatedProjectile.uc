@@ -133,7 +133,7 @@ defaultproperties
 {
 	HeadShotDamageMult=2.0
 	DamageTypeHeadShot=class'DamTypeClassicHeadShot'
-	HeadShotHeight=0.62
+	HeadShotHeight=0.75
     Style=STY_Alpha
     ScaleGlow=1.0
 	bHeadShots=true

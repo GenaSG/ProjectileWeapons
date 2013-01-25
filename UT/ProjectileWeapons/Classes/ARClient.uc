@@ -2,21 +2,16 @@
 // Assault Rifle
 //=============================================================================
 class ARClient extends AssaultRifle
-    config(user);
-var float FireRate;
-
+config(user);
 replication
 {
-	// functions called by server on client
-    reliable if( Role==ROLE_Authority )
-		ClientFire;
-	
-    // functions called by client on server
-    reliable if( Role<ROLE_Authority )
-         ServerFire;
+	reliable if (Role==ROLE_Authority)
+		ClientTraceHit;
+	reliable if (Role<ROLE_Authority)
+		ServerTraceHit;
 }
 
-
+//// client only ////
 simulated event ClientStartFire(int Mode)
 {
     if ( Pawn(Owner).Controller.IsInState('GameEnded') || Pawn(Owner).Controller.IsInState('RoundEnded') )
@@ -24,10 +19,10 @@ simulated event ClientStartFire(int Mode)
     if (Role < ROLE_Authority)
     {
         if (StartFire(Mode))
-        {
-			ClientFire(Mode);
-			//StartFire(Mode);
-            //ServerStartFire(Mode);
+		{
+			ClientTraceHit();
+			//FireMode[0].ClientTraceHit(Location,Rotation);
+            ServerStartFire(Mode);
         }
     }
     else
@@ -35,52 +30,44 @@ simulated event ClientStartFire(int Mode)
         StartFire(Mode);
     }
 }
-simulated function Timer()
+simulated function ClientTraceHit()
 {
-	Super.Timer();
-		StopFire(0);
+	local vector Start,End,HitLocation,HitNormal;
+	local actor Other;
+	local ClientProjectile CP;
+	Start=Location;
+	End=Start+40000*vector(Rotation);
+	Other=Trace(HitLocation, HitNormal, End, Start, true);
+	CP=Spawn(class'ClientProjectile',Instigator.Controller,,Start,Rotation);
+	CP.Test(self);
+//	if (Other.Role<ROLE_Authority) {
+		//Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-HitNormal));
+//		ServerTraceHit(Other,Start,HitLocation,HitNormal);
+//	}
 }
 
-simulated function ClientFire(int Mode)
+simulated function ServerTraceHit(actor Other,vector Start,vector Hit_Location,vector Hit_Normal)
 {
-	local vector End, HitLocation, HitNormal, Start;
-    local Actor Other;
-	local Rotator Aim;
-	local projectile B;
-	Start = Instigator.Location + Instigator.EyePosition();
-	Aim = Rotation;
-	
-	End = Start + 40000 * Vector(Aim);
-	settimer(FireRate,false);
-	B=Spawn(class'ClientProjectile',,,Start,Aim);
+	local vector HitLocation,HitNormal;
+	local actor Target;
+	Other.TakeDamage(40, instigator,Hit_Location,
+					 (-1000 * Hit_Normal), class'DamTypeClassicSniper' );
 	/*
-	Other = Trace(HitLocation, HitNormal, End, Start, true);
-	if (Other.Role<ROLE_Authority) {
-		Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-1 * HitNormal));
-		ServerFire(Other,HitLocation,HitNormal);
+	Target=Trace(HitLocation, HitNormal, Other.Location, Start, true);
+	if (Target.Role==ROLE_Authority) {
+		Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-HitNormal));
 	}
-	*/
-}
-event ServerFire(Actor Target,vector HitLocation,vector Hitnormal)
-{
-	local vector End, HitLoc, HitNorm, Start;
-	local Actor Other;
-	Start = Instigator.Location + Instigator.EyePosition();
-	Other = Trace(HitLoc, HitNorm,Target.Location, Start, true);
-	if (Other==Target&& Other.Role==ROLE_Authority) {
-		Target.TakeDamage(40, Instigator, HitLocation, HitNormal, class'DamTypeAssaultBullet');
-		Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-1 * HitNormal));
-	}
-
+*/
 	
 }
 
 
 defaultproperties
 {
-
-    ItemName="Assault Rifle Client"
-	FireRate=0.16
+	
+    ItemName="Assault Rifle Proj"
+	
+	
     FireModeClass(0)=ARClientFire
- 
-}
+	
+	}
