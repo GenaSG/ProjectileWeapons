@@ -1,7 +1,7 @@
-class ClientProjectile extends Projectile;
+class CP extends Projectile;
 
 var xEmitter Trail;
-var ARClient Actors_Gun;
+var CSAR Actors_Gun;
 
 simulated function Destroyed()
 {
@@ -74,7 +74,7 @@ simulated function Landed( Vector HitNormal )
     Destroy();
 }
 
-simulated function SetOwnerWeapon(ARClient Gun)
+simulated function SetOwnerWeapon(CSAR Gun)
 {
 	Actors_Gun=Gun;
 	

@@ -11,35 +11,6 @@ function InitEffects()
 }
 
 
-simulated function ClientTraceHit(vector Start,rotator Dir)
-{
-	local vector End,HitLocation,HitNormal;
-	local actor Other;
-	//Start=Location;
-	End=Start+40000*vector(Dir);
-	Other=Trace(HitLocation, HitNormal, End, Start, true);
-	//Spawn(class'ClientProjectile',Instigator.Controller,,Start,Rotation);
-	if (Other.Role<ROLE_Authority) {
-		//Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-HitNormal));
-		ServerTraceHit(Other,Start,HitLocation,HitNormal);
-	}
-}
-
-simulated function ServerTraceHit(actor Other,vector Start,vector Hit_Location,vector Hit_Normal)
-{
-	local vector HitLocation,HitNormal;
-	local actor Target;
-	Other.TakeDamage(40, instigator,Hit_Location,
-					 (-1000 * Hit_Normal), class'DamTypeClassicSniper' );
-	/*
-	 Target=Trace(HitLocation, HitNormal, Other.Location, Start, true);
-	 if (Target.Role==ROLE_Authority) {
-	 Spawn(class'SniperWallHitEffect',,, HitLocation, rotator(-HitNormal));
-	 }
-	 */
-	
-}
-
 
 
 function FlashMuzzleFlash()
