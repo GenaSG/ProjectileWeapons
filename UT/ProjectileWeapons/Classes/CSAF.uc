@@ -1,4 +1,4 @@
-class CSAF extends CSWF;
+class CSAF extends PWWeaponFire;
 
 var float LastFireTime;
 var float ClickTime;
@@ -45,12 +45,10 @@ simulated function bool AllowFire()
 
 function StartBerserk()
 {
-
 }
 
 function StopBerserk()
 {
-
 }
 
 function StartSuperBerserk()
@@ -62,22 +60,22 @@ defaultproperties
     AmmoClass=class'AssaultAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeAssaultBullet'
-    DamageMin=7
-    DamageMax=7
+    DamageMin=5
+    DamageMax=100
     bPawnRapidFireAnim=true
-    Momentum=10.0
-
-    FireAnim=None
+    Momentum=0.0
+	
+    FireAnim=Fire
     FireEndAnim=None
     FireLoopAnim=None
-    FireAnimRate=2
+    FireAnimRate=1
 
     FlashEmitterClass=class'XEffects.AssaultMuzFlash1st'
 
     FireSound=Sound'WeaponSounds.AssaultRifle.AssaultRifleFire'
     FireForce="AssaultRifleFire"   // jdf
 
-	Spread=0.020
+	Spread=100
     SpreadStyle=SS_Random
     PreFireTime=0.0
     FireRate=0.16
@@ -86,5 +84,10 @@ defaultproperties
     BotRefireRate=0.99
     AimError=800
 
-
+    ShakeOffsetMag=(X=1.0,Y=1.0,Z=1.0)
+    ShakeOffsetRate=(X=1000.0,Y=1000.0,Z=1000.0)
+    ShakeOffsetTime=2
+    ShakeRotMag=(X=50.0,Y=50.0,Z=50.0)
+    ShakeRotRate=(X=10000.0,Y=10000.0,Z=10000.0)
+    ShakeRotTime=2
 }
