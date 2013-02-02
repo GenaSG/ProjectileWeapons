@@ -111,7 +111,7 @@ simulated function HitWall( vector HitNormal, actor Wall )
 {
 	local projectile Rico;
 	local float VectorDot;
-	VectorDot=Velocity dot HitNormal;
+	VectorDot=Normal(Vector(Rotation)) dot HitNormal;
 	Spawn(class'SniperWallHitEffect',,, Location, rotator(-1 * HitNormal));
     if ( !Wall.bStatic && !Wall.bWorldGeometry
 		&& ((Mover(Wall) == None) || Mover(Wall).bDamageTriggered) )
@@ -126,7 +126,7 @@ simulated function HitWall( vector HitNormal, actor Wall )
         return;
     }
 	
-	if ((Bounces > 0) && (VectorDot> 0))
+	if ((Bounces > 0) && (VectorDot> 0.8))
     {
 		Rico=Spawn(class'FlakChunk',,,Location,rotator(-1 * HitNormal));
 		Rico.Damage=DamageMin*0.65;

@@ -1,4 +1,4 @@
-class CSAF extends PWWeaponFire;
+class PWAssaultFire extends PWWeaponFire;
 
 var float LastFireTime;
 var float ClickTime;
@@ -18,15 +18,6 @@ function FlashMuzzleFlash()
     Super.FlashMuzzleFlash();
 }
 
-event ModeDoFire()
-{
-	if ( Level.TimeSeconds - LastFireTime > 0.5 )
-		Spread = Default.Spread;
-	else
-		Spread = FMin(Spread+0.02,0.12);
-	LastFireTime = Level.TimeSeconds;
-	Super.ModeDoFire();
-}
 
 simulated function bool AllowFire()
 {
@@ -57,11 +48,11 @@ function StartSuperBerserk()
 
 defaultproperties
 {
-    AmmoClass=class'AssaultAmmo'
+    AmmoClass=class'MinigunAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeAssaultBullet'
     DamageMin=5
-    DamageMax=100
+    DamageMax=15
     bPawnRapidFireAnim=true
     Momentum=0.0
 	
@@ -75,10 +66,10 @@ defaultproperties
     FireSound=Sound'WeaponSounds.AssaultRifle.AssaultRifleFire'
     FireForce="AssaultRifleFire"   // jdf
 
-	Spread=100
+	Spread=1
     SpreadStyle=SS_Random
     PreFireTime=0.0
-    FireRate=0.16
+    FireRate=0.1
     bModeExclusive=true
 
     BotRefireRate=0.99

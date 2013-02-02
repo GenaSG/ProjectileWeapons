@@ -1,9 +1,10 @@
 class PWWeaponFire extends WeaponFire;
 
 var class<DamageType> DamageType,DamageTypeHeadShot;
-var int DamageMin, DamageMax, MaxDamageRange, MinDamageRange, Speed;
+var int DamageMin, DamageMax, MaxDamageRange, MinDamageRange, Speed, WeaponMaxAngle;
 var float TraceRange;
 var float Momentum;
+var rotator OldRotation;
 
 
 event ModeDoFire()
@@ -73,22 +74,21 @@ function ClientFire()
 {
 	local vector Start;
 	
-	local Coords C;
 	local rotator Dir;
 	if (!AllowFire())
         return;
-	C=PWWeapon(Weapon).GetBoneCoords('tip');
-	Start=C.Origin;
-	Start=Weapon.GetEffectStart();
-	if (Bot(Instigator.Controller)!=none) {
-		Dir = rotator(vector(AdjustAim(Start, AimError)));
-	}
-	else
-	{
+	Start=Weapon.Location;
+//	if (Bot(Instigator.Controller)!=none) {
+//		Dir = rotator(vector(AdjustAim(Start, AimError)));
+//	}
+//	else
+//	{
 		
-		Dir=PWWeapon(Weapon).GetBoneRotation( 'tip' );
-	}
-	
+		//Dir=PWWeapon(Weapon).GetBoneRotation( 'tip' );
+		Dir=AdjustAim(Start, AimError) + Weapon.PlayerViewPivot;
+//		Dir=PWWeapon(Weapon).Rotation + Weapon.PlayerViewPivot;
+//	}
+	Dir=Rotator(vector(Dir) + VRand()*Spread/325);
 	SpawnBullet(Start, Dir);
 	FireAnimRate=default.FireAnimRate+default.FireAnimRate*FRand();
 	PlayFiring();
@@ -107,17 +107,62 @@ function SpawnBullet(Vector Start, Rotator Dir)
 	CP.DamageTypeHeadShot=DamageTypeHeadShot;
 	CP.MyDamageType=DamageType;
 	CP.Velocity=Vector(Dir) * (Speed);
-	CP.SetOwnerWeapon(CSAR(Weapon));
+	CP.SetOwnerWeapon(PWWeapon(Weapon));
+}
+simulated function PostBeginPlay()
+{
+	Super.PostBeginPlay();
+	SetTimer(0.01,true);
 }
 
+
+simulated function Timer()
+{
+	Super.Timer();
+	FreeAim();
+	
+}
+
+simulated function FreeAim()
+{
+	local rotator NewRotation, CurrentRotation;
+	if (!PWWeapon(Weapon).bADS) {
+		CurrentRotation=Weapon.Rotation;
+		NewRotation=CurrentRotation-OldRotation;
+		//Zero Crossing compensation
+		if (CurrentRotation.Pitch>=32768 && OldRotation.Pitch<=32768) {
+			NewRotation.Pitch=-1*((65536-CurrentRotation.Pitch) + OldRotation.Pitch);
+		}
+		if (CurrentRotation.Pitch<=32768 && OldRotation.Pitch>=32768) {
+			NewRotation.Pitch=((65536-OldRotation.Pitch) + CurrentRotation.Pitch);
+		}
+		//
+		Weapon.PlayerViewPivot+=NewRotation;
+		//Weapon Pivot Angles Shouldn't be bigger then Max Allowed angles
+		if (Weapon.PlayerViewPivot.Pitch >= WeaponMaxAngle) {
+			Weapon.PlayerViewPivot.Pitch=WeaponMaxAngle;
+		}
+		if (Weapon.PlayerViewPivot.Pitch <= -WeaponMaxAngle) {
+			Weapon.PlayerViewPivot.Pitch=-WeaponMaxAngle;
+		}
+		if (Weapon.PlayerViewPivot.Yaw >= WeaponMaxAngle) {
+			Weapon.PlayerViewPivot.Yaw=WeaponMaxAngle;
+		}
+		if (Weapon.PlayerViewPivot.Yaw <= -WeaponMaxAngle) {
+			Weapon.PlayerViewPivot.Yaw=-WeaponMaxAngle;
+		}
+	}
+	OldRotation=Weapon.Rotation;
+}
 
 defaultproperties
 {
 	DamageTypeHeadShot=class'DamTypeClassicHeadShot'
-    DamageType=class'DamTypeAssaultBullet
+    DamageType=class'DamTypeAssaultBullet'
+	WeaponMaxAngle=500
 	DamageMin=5
 	DamageMax=40
-	Spread=100
+	Spread=1
 	MaxDamageRange=500
 	MinDamageRange=2000
 	Speed=20000
