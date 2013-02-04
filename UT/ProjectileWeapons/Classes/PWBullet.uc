@@ -21,6 +21,8 @@ simulated function Destroyed()
 simulated function PostBeginPlay()
 {
     local float r;
+	local PlayerController PC;
+	local vector Dir,LinePos,LineDir, OldLocation;
     if ( Level.NetMode != NM_DedicatedServer )
     {
         if ( !PhysicsVolume.bWaterVolume )
@@ -46,6 +48,25 @@ simulated function PostBeginPlay()
     SetRotation(RotRand());
 	
     Super.PostBeginPlay();
+	
+	// see if local player controller near bullet, but missed
+	PC = Level.GetLocalPlayerController();
+	if ( (PC != None) && (PC.Pawn != None) )
+	{
+		Dir = Normal(Velocity);
+		LinePos = (Location + (Dir dot (PC.Pawn.Location - Location)) * Dir);
+		LineDir = PC.Pawn.Location - LinePos;
+		if ( VSize(LineDir) < 150 )
+		{
+			OldLocation = Location;
+			SetLocation(LinePos);
+			if ( FRand() < 0.5 )
+				PlaySound(sound'Impact3Snd',,,,80);
+			else
+				PlaySound(sound'Impact7Snd',,,,80);
+			SetLocation(OldLocation);
+		}
+	}
 }
 
 simulated function Timer()
