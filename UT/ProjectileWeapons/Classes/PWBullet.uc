@@ -4,7 +4,7 @@ var xEmitter Trail;
 var byte Bounces;
 var PWWeapon Actors_Gun;
 var int DamageMin, DamageMax, MaxDamageRange, MinDamageRange;
-var vector Start,StartSpeed;
+var vector Start;
 var sound ImpactSounds[6];
 var() float HeadShotDamageMult,HeadShotHeight;
 var() class<DamageType> DamageTypeHeadShot;
@@ -21,7 +21,6 @@ simulated function Destroyed()
 simulated function PostBeginPlay()
 {
     local float r;
-	StartSpeed=Velocity;
     if ( Level.NetMode != NM_DedicatedServer )
     {
         if ( !PhysicsVolume.bWaterVolume )
@@ -49,11 +48,17 @@ simulated function PostBeginPlay()
     Super.PostBeginPlay();
 }
 
+simulated function Timer()
+{
+	Super.Timer();
+	
+}
+
 simulated function ProcessTouch (Actor Other, vector HitLocation)
 {
-	local int Damage, DamageDiff,DistanceDiff;
-	local vector LocationDiff,Distance;
-	Distance=Start-Location;
+	local int Damage, DamageDiff,DistanceDiff,Distance;
+	local vector LocationDiff;
+	Distance=VSize(Start-Location);
 	if (Other==self || Other==Instigator) {
 		return;
 	}
@@ -64,14 +69,14 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
         if ( !Other.bWorldGeometry )
         {
 			
-			if (VSize(Distance) <= MaxDamageRange) {
+			if (Distance <= MaxDamageRange) {
 				Damage=DamageMax;
 			}
-			else if ((VSize(Distance)>MaxDamageRange) && (VSize(Distance)<MinDamageRange) )
+			else if ((Distance>MaxDamageRange) && (Distance<MinDamageRange) )
 			{
 				DamageDiff=DamageMax-DamageMin;
 				DistanceDiff=MinDamageRange-MaxDamageRange;
-				Damage=DamageMax-DamageDiff * (VSize(Distance)-MaxDamageRange)/DistanceDiff;
+				Damage=DamageMax-DamageDiff * (Distance-MaxDamageRange)/DistanceDiff;
 				
 			}
 			else

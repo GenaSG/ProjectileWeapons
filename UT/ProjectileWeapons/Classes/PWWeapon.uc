@@ -6,6 +6,7 @@ class PWWeapon extends Weapon
 var() class<DamageType> DamageType;
 var bool bADS,bADSZoom;
 var(FirstPerson) vector ADSPlayerViewOffset;
+var int	CenteredPitch;
 
 replication
 {
@@ -105,8 +106,6 @@ simulated event RenderOverlays( Canvas Canvas )
 		PlayerViewOffset = Default.PlayerViewOffset;
 	if ( Hand == 0 )
 		PlayerViewOffset = default.ADSPlayerViewOffset;
-	else
-		PlayerViewOffset.Y *= Hand;
 	
     SetLocation( Instigator.Location + Instigator.CalcDrawOffset(self) );
     if ( Hand == 0 )
@@ -114,7 +113,9 @@ simulated event RenderOverlays( Canvas Canvas )
 		CenteredRotation = Instigator.GetViewRotation();
 		CenteredRotation.Yaw += CenteredYaw;
 		CenteredRotation.Roll = CenteredRoll;
+		CenteredRotation.Pitch += CenteredPitch;
 	    SetRotation(CenteredRotation);
+
     }
     else
 	    SetRotation( Instigator.GetViewRotation() );
@@ -124,8 +125,8 @@ simulated event RenderOverlays( Canvas Canvas )
     bDrawingFirstPerson = true;
     Canvas.DrawActor(self, false, false, DisplayFOV);
     bDrawingFirstPerson = false;
-	if ( Hand == 0 )
-		PlayerViewOffset.Y = 0;
+	//if ( Hand == 0 )
+	//	PlayerViewOffset.Y = 0;
 	
 }
 
@@ -182,7 +183,6 @@ simulated function ClientStopFire(int mode)
         FireMode[mode].bIsFiring = false;
         if( PlayerController(Instigator.Controller) != None )
 			ADSOff();
-		//PlayerController(Instigator.Controller).SetWeaponHand("Right");
     }
     else
     {
@@ -198,7 +198,7 @@ simulated function ServerTraceHit(actor Other,vector Start,vector Hit_Location,v
 	End=Hit_Location+Other.Location;
 	Target=Trace(HitLocation, HitNormal, End, Start, true);
 	if (Target==Other) {
-		Other.TakeDamage(Damage, instigator,HitLocation,
+		Target.TakeDamage(Damage, instigator,HitLocation,
 						 (Damage * HitNormal), DamageType );
 	}
 	
@@ -208,5 +208,6 @@ simulated function ServerTraceHit(actor Other,vector Start,vector Hit_Location,v
 defaultproperties
 {
 	DamageType=class'DamTypeClassicSniper'
-	ADSPlayerViewOffset=(X=-13,Y=-9.75,Z=-1)
+	ADSPlayerViewOffset=(X=-13,Y=-9.75,Z=-2)
+	CenteredPitch=0
 }

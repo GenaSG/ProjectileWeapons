@@ -60,7 +60,8 @@ defaultproperties
     FireEndAnim=None
     FireLoopAnim=None
     FireAnimRate=1
-
+	BulletSpawnOffset=(X=0,Y=0,Z=0)
+	ADSBulletSpawnOffset=(X=0,Y=-12.75,Z=0)
     FlashEmitterClass=class'XEffects.AssaultMuzFlash1st'
 
     FireSound=Sound'WeaponSounds.AssaultRifle.AssaultRifleFire'
@@ -73,7 +74,7 @@ defaultproperties
     bModeExclusive=true
 
     BotRefireRate=0.99
-    AimError=800
+    AimError=0
 
     ShakeOffsetMag=(X=1.0,Y=1.0,Z=1.0)
     ShakeOffsetRate=(X=1000.0,Y=1000.0,Z=1000.0)

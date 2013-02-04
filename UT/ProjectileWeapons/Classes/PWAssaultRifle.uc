@@ -143,10 +143,9 @@ defaultproperties
 	
     DrawScale=0.8
     PlayerViewOffset=(X=4,Y=5.5,Z=-6)
-	ADSPlayerViewOffset=(X=-13,Y=-9.75,Z=-1)
+	ADSPlayerViewOffset=(X=-13,Y=-9.65,Z=-2)
 	ADSZoomLevel=10
     SmallViewOffset=(X=13,Y=12,Z=-10)
-    PlayerViewPivot=(Pitch=0,Roll=0,Yaw=0)
 	
     PutDownAnim=PutDown
     IdleAnim=Idle
