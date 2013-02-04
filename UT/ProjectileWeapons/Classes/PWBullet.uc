@@ -21,8 +21,6 @@ simulated function Destroyed()
 simulated function PostBeginPlay()
 {
     local float r;
-	local PlayerController PC;
-	local vector Dir,LinePos,LineDir, OldLocation;
     if ( Level.NetMode != NM_DedicatedServer )
     {
         if ( !PhysicsVolume.bWaterVolume )
@@ -34,6 +32,7 @@ simulated function PostBeginPlay()
     }
 	SetPhysics(PHYS_Falling);
     Velocity = Vector(Rotation) * (Speed);
+	SetTimer(0.001,true);
     if (PhysicsVolume.bWaterVolume)
         Velocity *= 0.65;
 	
@@ -48,31 +47,35 @@ simulated function PostBeginPlay()
     SetRotation(RotRand());
 	
     Super.PostBeginPlay();
+
 	
-	// see if local player controller near bullet, but missed
-	PC = Level.GetLocalPlayerController();
-	if ( (PC != None) && (PC.Pawn != None) )
-	{
-		Dir = Normal(Velocity);
-		LinePos = (Location + (Dir dot (PC.Pawn.Location - Location)) * Dir);
-		LineDir = PC.Pawn.Location - LinePos;
-		if ( VSize(LineDir) < 150 )
-		{
-			OldLocation = Location;
-			SetLocation(LinePos);
-			if ( FRand() < 0.5 )
-				PlaySound(sound'Impact3Snd',,,,80);
-			else
-				PlaySound(sound'Impact7Snd',,,,80);
-			SetLocation(OldLocation);
-		}
-	}
 }
 
 simulated function Timer()
 {
 	Super.Timer();
-	
+	FlyBy();
+}
+
+simulated function FlyBy()
+{
+	local PlayerController PC;
+	if (VSize(Velocity) <= 16000) {
+		return;
+	}
+	// see if local player controller near bullet, but missed
+	PC = Level.GetLocalPlayerController();
+	if ( (PC != None) && (PC.Pawn != None) )
+	{
+		if ( VSize(PC.Pawn.Location-Location) < 150 )
+		{
+			if ( FRand() < 0.5 )
+				PlaySound(sound'Impact3Snd',, 2.5*TransientSoundVolume,,200);
+			else
+				PlaySound(sound'Impact7Snd',, 2.5*TransientSoundVolume,,200);
+		}
+	}
+
 }
 
 simulated function ProcessTouch (Actor Other, vector HitLocation)
