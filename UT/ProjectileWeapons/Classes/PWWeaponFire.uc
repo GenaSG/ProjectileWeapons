@@ -79,11 +79,11 @@ function ClientFire()
 	local rotator Dir;
 	if (!AllowFire())
         return;
-	if (PWWeapon(Weapon).Hand == 0) {
+	if (PWWeapon(Weapon).bADS) {
 		Start=Instigator.Location + Instigator.EyePosition();
 		Start.Z=PWWeapon(Weapon).Location.Z;
 	}
-	if (PWWeapon(Weapon).Hand == 1) {
+	else {
 		Start=PWWeapon(Weapon).Location;
 	}
 	Dir=AdjustAim(Start, AimError) + Weapon.PlayerViewPivot;
@@ -163,7 +163,7 @@ simulated function FreeAim()
 		NewRotation.Pitch=((65536-OldRotation.Pitch) + CurrentRotation.Pitch);
 	}
 	//
-	if (PWWeapon(Weapon).Hand != 0) {
+	if (!PWWeapon(Weapon).bADS) {
 		WeaponAngles=WeaponHipMaxAngle;
 		}
 	else

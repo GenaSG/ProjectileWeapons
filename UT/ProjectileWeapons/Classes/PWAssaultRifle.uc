@@ -155,11 +155,11 @@ defaultproperties
 	ChargeColor=(R=255,G=255,B=255,A=255)
 	
     AttachmentClass=class'AssaultAttachment'
-    SelectSound=Sound'NewWeaponSounds.newsniper_load'
+    SelectSound=Sound'WeaponSounds.AssaultRifle.SwitchToAssaultRifle'
 	zoomed=false
-	SelectForce="NewSniperLoad"
+	SelectForce="SwitchToAssaultRifle"
 	
-    bSniping=true
+    bSniping=false
 	AIRating=+0.69
 	CurrentRating=+0.69
 	
@@ -176,7 +176,7 @@ defaultproperties
 	CustomCrosshairTextureName="Crosshairs.Hud.Crosshair_Cross1"
 	CustomCrosshairColor=(r=185,g=170,b=255,a=255)
 	
-	Priority=12
+	Priority=3
 	
 	CenteredOffsetY=0
 	CenteredYaw=0

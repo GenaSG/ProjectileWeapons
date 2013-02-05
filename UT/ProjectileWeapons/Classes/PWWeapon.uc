@@ -4,14 +4,21 @@
 class PWWeapon extends Weapon
     abstract;
 var() class<DamageType> DamageType;
-var bool bADS,bADSZoom;
+var bool bADS,bADSZoom,bADSZoomed;
 var(FirstPerson) vector ADSPlayerViewOffset;
 var int	CenteredPitch;
+var float ZoomLevel;
+var ADS ADS;
 
 replication
 {
 	reliable if (Role<ROLE_Authority)
 		ServerTraceHit;
+}
+simulated function PostBeginPlay()
+{	
+	Super.PostBeginPlay();
+	PlayerController(Instigator.Controller).SetWeaponHand("Right");
 }
 
 simulated event RenderOverlays( Canvas Canvas )
@@ -129,27 +136,29 @@ simulated event RenderOverlays( Canvas Canvas )
 	//	PlayerViewOffset.Y = 0;
 	
 }
-
+/*
 simulated function ClientStartFire(int mode)
 {
     if (mode == 1)
     {
         FireMode[mode].bIsFiring = true;
         if( Instigator.Controller.IsA( 'PlayerController' ) )
-			ADSOn();
+			ADS.ADSOn();
     }
     else
     {
         Super.ClientStartFire(mode);
     }
 }
-
+ */
+/*
 simulated function ADSOn()
 {	
 	if (!bADS) {
 		PlayerController(Instigator.Controller).SetWeaponHand("Center");
-		if (bADSZoom) {
-			PlayerController(Instigator.Controller).ToggleZoom();
+		if (bADSZoom && !bADSZoomed) {
+			PlayerController(Instigator.Controller).SetFOV(ZoomLevel);
+			bADSZoomed=true;
 		}
 		bADS=true;
 	}
@@ -162,11 +171,11 @@ simulated function ADSOn()
 simulated function ADSOff()
 {
 	
-	
 	if (bADS) {
 		PlayerController(Instigator.Controller).SetWeaponHand("Right");
-		if (bADSZoom) {
-			PlayerController(Instigator.Controller).StopZoom();
+		if (bADSZoom && bADSZoomed) {
+			PlayerController(Instigator.Controller).ResetFOV();
+			bADSZoomed=false;
 		}
 		bADS=false;
 	}
@@ -174,22 +183,22 @@ simulated function ADSOff()
 		return;
 	
 }
-
-
+*/
+/*
 simulated function ClientStopFire(int mode)
 {
     if (mode == 1)
     {
         FireMode[mode].bIsFiring = false;
         if( PlayerController(Instigator.Controller) != None )
-			ADSOff();
+			ADS.StopADS();
     }
     else
     {
         Super.ClientStopFire(mode);
     }
 }
-
+*/
 
 simulated function ServerTraceHit(actor Other,vector Start,vector Hit_Location,vector Hit_Normal,int Damage, class<DamageType> DamageType)
 {
@@ -210,4 +219,5 @@ defaultproperties
 	DamageType=class'DamTypeClassicSniper'
 	ADSPlayerViewOffset=(X=-13,Y=-9.75,Z=-2)
 	CenteredPitch=0
+	ZoomLevel=40
 }
