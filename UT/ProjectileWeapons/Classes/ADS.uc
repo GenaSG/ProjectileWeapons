@@ -53,8 +53,8 @@ defaultproperties
 	bADS=false
 	bADSZoom=true
 	bADSZoomed=false
-	ADSInTime=1
-	ADSOutTime=1
+	ADSInTime=0.1
+	ADSOutTime=0.1
     FireAnim=Idle
 	ZoomLevel=20
 }

@@ -2,7 +2,7 @@ class PWWeaponFire extends WeaponFire;
 
 var class<DamageType> DamageType,DamageTypeHeadShot;
 var int DamageMin, DamageMax, MaxDamageRange, MinDamageRange, Speed, WeaponHipMaxAngle,WeaponADSMaxAngle, RecoilMult,BulletToss;
-var float Momentum;
+var float Momentum,WeaponMovementSmoove;
 var rotator OldRotation;
 var vector BulletSpawnOffset, ADSBulletSpawnOffset;
 
@@ -81,14 +81,14 @@ function ClientFire()
         return;
 	if (PWWeapon(Weapon).bADS) {
 		Start=Instigator.Location + Instigator.EyePosition();
-		Start.Z=PWWeapon(Weapon).Location.Z;
+//		Start.Z=PWWeapon(Weapon).Location.Z;
 	}
 	else {
 		Start=PWWeapon(Weapon).Location;
 	}
 	Dir=AdjustAim(Start, AimError) + Weapon.PlayerViewPivot;
 	Dir=Rotator(vector(Dir) + VRand()*Spread/325);
-	Dir.Pitch+=BulletToss;
+//	Dir.Pitch+=BulletToss;
 	SpawnBullet(Start, Dir);
 	FireAnimRate=default.FireAnimRate+default.FireAnimRate*FRand();
 	PlayFiring();
@@ -170,7 +170,7 @@ simulated function FreeAim()
 	{
 		WeaponAngles=WeaponADSMaxAngle;
 	}
-	Weapon.PlayerViewPivot+=NewRotation;
+	Weapon.PlayerViewPivot+=NewRotation/WeaponMovementSmoove;
 	//Weapon Pivot Angles Shouldn't be bigger then Max Allowed angles
 	if (Weapon.PlayerViewPivot.Pitch >= WeaponAngles) {
 		Weapon.PlayerViewPivot.Pitch=WeaponAngles;
@@ -191,6 +191,7 @@ simulated function FreeAim()
 defaultproperties
 {
 	DamageTypeHeadShot=class'DamTypeClassicHeadShot'
+	WeaponMovementSmoove=3
     DamageType=class'DamTypeAssaultBullet'
 	BulletSpawnOffset=(X=0,Y=0,Z=0)
 	ADSBulletSpawnOffset=(X=0,Y=0,Z=0)

@@ -51,10 +51,13 @@ defaultproperties
     AmmoClass=class'MinigunAmmo'
     AmmoPerFire=1
     DamageType=class'DamTypeAssaultBullet'
-    DamageMin=5
-    DamageMax=15
+	DamageTypeHeadShot=class'DamTypeAssaultBullet'
+    DamageMin=4
+    DamageMax=10
     bPawnRapidFireAnim=true
     Momentum=0.0
+	WeaponHipMaxAngle=250
+	WeaponADSMaxAngle=50
 	
     FireAnim=Fire
     FireEndAnim=None
@@ -70,7 +73,7 @@ defaultproperties
 	Spread=1
     SpreadStyle=SS_Random
     PreFireTime=0.0
-    FireRate=0.1
+    FireRate=0.16
     bModeExclusive=true
 
     BotRefireRate=0.99
